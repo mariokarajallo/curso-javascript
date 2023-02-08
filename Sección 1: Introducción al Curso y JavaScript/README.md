@@ -2,6 +2,7 @@
 
 ## **Sección 1: Introducción al Curso y JavaScript**
 - [1. Introducción al curso y JavaScript](#1-introducción-al-curso-y-javaScript)
+- [2. Variable en JavaScript](#2-variable-en-javascript)
 
 
 
@@ -65,3 +66,5 @@ Espacio o fabulación dentro de funciones.
 ### Plugins **ESLint para solucionar errores de código**
 
 Es una herramienta que crea un ambiente de desarrollo mas profesional. Ayuda a corregir y detectar errores en la codificación.
+
+# 2. **Variable en JavaScript**
