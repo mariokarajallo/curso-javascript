@@ -3,6 +3,7 @@
 ## **Sección 1: Introducción al Curso y JavaScript**
 - [1. Introducción al curso y JavaScript](#1-introducción-al-curso-y-javaScript)
 - [2. Variable en JavaScript](#2-variable-en-javascript)
+- [3. Strings o Cadenas de Texto y sus Métodos](#3-strings-o-cadenas-de-texto-y-sus-métodos)
 
 
 
@@ -153,4 +154,6 @@ las variables con CONST `deben inicializar con un VALOR`.
 ```jsx
 const precio = 500;
 ```
+
+# 3. **Strings o Cadenas de Texto y sus Métodos**
 
