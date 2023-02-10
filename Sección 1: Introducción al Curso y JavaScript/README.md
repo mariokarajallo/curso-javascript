@@ -4,6 +4,7 @@
 - [1. Introducción al curso y JavaScript](#1-introducción-al-curso-y-javaScript)
 - [2. Variable en JavaScript](#2-variable-en-javascript)
 - [3. Strings o Cadenas de Texto y sus Métodos](#3-strings-o-cadenas-de-texto-y-sus-métodos)
+- [4. Números en JavaScripts](#4-números-en-javascripts)
 
 
 
@@ -341,3 +342,4 @@ const precio=6000;
 console.log(precio);
 console.log(precio.toString());
 ```
+# 4. **Números en JavaScripts**
