@@ -5,6 +5,7 @@
 - [2. Variable en JavaScript](#2-variable-en-javascript)
 - [3. Strings o Cadenas de Texto y sus Métodos](#3-strings-o-cadenas-de-texto-y-sus-métodos)
 - [4. Números en JavaScripts](#4-números-en-javascripts)
+- [5. Operadores en JavaScript](#5-operadores-en-javascript)
 
 
 
@@ -498,3 +499,6 @@ console.log(Number.isInteger(numero3) ); // devuelve true o false
 // Convertir String a numero
 console.log(numero4.toString());
 ```
+
+# 5. **Operadores en JavaScript**
+
