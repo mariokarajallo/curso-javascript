@@ -7,6 +7,7 @@
 - [4. Números en JavaScripts](#4-números-en-javascripts)
 - [5. Operadores en JavaScript](#5-operadores-en-javascript)
 - [6. Booleans en JavaScript](#6-booleans-en-javascript)
+- [7. Objetos en JavaScript](#7-objetos-en-javascript)
 
 
 
@@ -667,3 +668,4 @@ if(boolean1) {
 // operador ternario
 console.log( boolean1  ? 'Si es true' : 'No no es true' )
 ```
+
