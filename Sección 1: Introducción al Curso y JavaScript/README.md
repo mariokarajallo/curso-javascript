@@ -6,6 +6,7 @@
 - [3. Strings o Cadenas de Texto y sus Métodos](#3-strings-o-cadenas-de-texto-y-sus-métodos)
 - [4. Números en JavaScripts](#4-números-en-javascripts)
 - [5. Operadores en JavaScript](#5-operadores-en-javascript)
+- [6. Booleans en JavaScript](#6-booleans-en-javascript)
 
 
 
