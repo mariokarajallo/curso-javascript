@@ -8,6 +8,7 @@
 - [5. Operadores en JavaScript](#5-operadores-en-javascript)
 - [6. Booleans en JavaScript](#6-booleans-en-javascript)
 - [7. Objetos en JavaScript](#7-objetos-en-javascript)
+- [8. Arrays o Arreglos en JavaScript](#8-arrays-o-arreglos-en-javascript)
 
 
 
@@ -1081,3 +1082,4 @@ console.log(Object.entries(producto));
 ```
 
 Y con eso tenemos un buen conocimiento de `Objectos` en JavaScript, los estaremos retomando más adelante pero primero hay que conocer otros conceptos como `Arreglos` y `Funciones` para poderle sacar más provecho.
+
