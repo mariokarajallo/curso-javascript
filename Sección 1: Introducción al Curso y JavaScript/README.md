@@ -9,6 +9,7 @@
 - [6. Booleans en JavaScript](#6-booleans-en-javascript)
 - [7. Objetos en JavaScript](#7-objetos-en-javascript)
 - [8. Arrays o Arreglos en JavaScript](#8-arrays-o-arreglos-en-javascript)
+- [9. Funciones en JavaScript](#9-funciones-en-javascript)
 
 
 
