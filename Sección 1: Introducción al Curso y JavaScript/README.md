@@ -11,7 +11,7 @@
 - [8. Arrays o Arreglos en JavaScript](#8-arrays-o-arreglos-en-javascript)
 - [9. Funciones en JavaScript](#9-funciones-en-javascript)
 - [10. Estructuras de Control](#10-estructuras-de-control)
-
+- [11. Iteradores en JavaScript](#11-iteradores-en-javascript)
 
 
 # 1. **Introducción al curso y JavaScript**
