@@ -12,6 +12,7 @@
 - [9. Funciones en JavaScript](#9-funciones-en-javascript)
 - [10. Estructuras de Control](#10-estructuras-de-control)
 - [11. Iteradores en JavaScript](#11-iteradores-en-javascript)
+- [12. Array Methods](#12-array-methods)
 
 
 
@@ -2366,3 +2367,7 @@ for (let [llave, valor] of Object.entries(automovil){
 ```
 
 Y con eso terminamos lo que son los `iteradores`, veamos una serie de `Array Methods`, que son similares a estos iteradores y sus usos. ya vamos terminando toda la parte de básicos de JavaScript para movernos al `DOM` pero vamos viendo una sección más!
+
+# 12. **Array Methods**
+
+
