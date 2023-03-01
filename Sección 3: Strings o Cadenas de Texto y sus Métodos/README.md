@@ -1,4 +1,4 @@
-# Sección 2: **Strings o Cadenas de Texto y sus Métodos**
+# Sección 3: **Strings o Cadenas de Texto y sus Métodos**
 
 ## 3.1 Crear Strings en JavaScript
 
