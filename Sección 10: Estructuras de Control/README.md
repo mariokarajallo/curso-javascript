@@ -1,5 +1,6 @@
 # Sección 10: **Estructuras de Control**
 
+
 ## 10.2 Creando un If
 
 De momento todo nuestro código se ejecuta de arriba hacia abajo salvo cuando llamamos una función. Algunas veces vas a desear que tu código se ejecute basado en una condición.
