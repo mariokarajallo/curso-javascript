@@ -88,4 +88,67 @@ console.log(ccj);
 // que podemos crear funciones que se podrían atar o utilizar unicamente con determinados objetos...
 ```
 
+## 17.3 Creando un Prototype
+
+Como están atados a los objetos, los prototypes se utilizan como métodos. Y expandiendo los prototypes desde la consola podemos saber que funciones tenemos disponible para nuestro objeto.
+
+<img src="./img/section-17-4.png"/>
+
+```jsx
+//creamos el constructor del objeto para CLIENTE
+function Cliente(nombre, saldo) {
+    this.nombre = nombre;
+    this.saldo = saldo;
+}
+
+// Obtener Tipo de Cliente
+// sintaxis -> funcions.prototype.nuevometodo/funcion
+// Con prototypes tienes que utilizar function
+
+// difencia entre arrow function y function nomarl
+// function buscara en el mismo objeto en el objeto actual
+// mientras que un arrow function irá hacia la ventana global marcandote un undefined
+// podrias usar arrow function siempre y cuando no hagas referencia a un "this."
+
+Cliente.prototype.tipoCliente = function()  { 
+    let tipo;
+    if(this.saldo > 10000) {
+        tipo = 'Gold';
+    } else if(this.saldo > 5000) {
+        tipo = 'Platinum';
+    } else {
+        tipo  = 'Normal';
+    }
+    return tipo;
+}
+
+// Otro Prototipo para el nombre completo
+// podemos haceerr referencia a otros prototypes dentro del mismo objeto
+Cliente.prototype.nombreClienteSaldo = function()  {
+    return `Nombre: ${this.nombre}, Saldo ${this.saldo}, Tipo Cliente:  ${this.tipoCliente()} `;
+}
+
+Cliente.prototype.retiraSaldo = function(retiro)  {
+    this.saldo -= retiro;
+}
+
+// Instanciarlo
+const pedro = new Cliente('Pedro', 6000);
+
+// Acceder a los prototypes
+console.log ( pedro.tipoCliente() );
+
+// Un prototype que accede a otros prototypes
+console.log ( pedro.nombreClienteSaldo() );
+
+// reescribir un valor
+pedro.retiraSaldo(2000);
+
+// comprobar saldo
+console.log ( pedro.nombreClienteSaldo());
+```
+
+<img src="./img/section-17-5.png"/>
+
+
 
