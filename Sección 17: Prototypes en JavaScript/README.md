@@ -150,5 +150,130 @@ console.log ( pedro.nombreClienteSaldo());
 
 <img src="./img/section-17-5.png"/>
 
+## 17.4 Heredar un Prototype
 
+En la programación orientada a objetos existen las `herencias.` Veamos como Heredar prototypes y constructores hacia otros tipos de objetos.
+
+```jsx
+function Cliente(nombre, saldo) {
+    this.nombre = nombre;
+    this.saldo = saldo;
+}
+
+// Obtener Tipo de Cliente
+// Con prototypes tienes que utilizar function, function buscara en el mismo objeto mientras que un
+// arrow function irá hacia la ventana global marcandote un undefined
+Cliente.prototype.tipoCliente = function()  { 
+    let tipo;
+    if(this.saldo > 10000) {
+        tipo = 'Gold';
+    } else if(this.saldo > 5000) {
+        tipo = 'Platinum';
+    } else {
+        tipo  = 'Normal';
+    }
+    return tipo;
+}
+
+// Otro Prototipo para el nombre completo
+Cliente.prototype.nombreClienteSaldo = function()  {
+    return `Nombre: ${this.nombre}, Saldo ${this.saldo}, Tipo Cliente:  ${this.tipoCliente()} `;
+}
+
+Cliente.prototype.retiraSaldo = function(retiro)  {
+    this.saldo -= retiro;
+}
+
+// Instanciarlo
+const pedro = new Cliente('Pedro', 6000);
+
+// Acceder a los prototypes
+console.log ( pedro.tipoCliente() );
+
+// Un prototype que accede a otros prototypes
+console.log ( pedro.nombreClienteSaldo() );
+
+// reescribir un valor
+pedro.retiraSaldo(2000);
+
+// comprobar saldo
+console.log ( pedro.nombreClienteSaldo());
+
+// NUEVO: Heredar Prototypes
+
+// Crear 2 objetos nuevos...
+// podriamos heredar las propiedades de la funcion cliente para no tener tanto codigo repetido nombre, saldo, 
+function Persona(nombre, saldo, telefono) {
+    // this.nombre = nombre;
+    // this.saldo = saldo;
+
+    // eliminamos (lo de arriba) las propiedades y atributos que vamos a heredar 
+// utilizamos un metodo llamado call, que manda llamar las propiedades de una funcion 
+		// mandamos llamar las propiedades del Objeto cliente que es donde vamos a heredar sus propiedades
+    Cliente.call(this, nombre, saldo);
+    this.telefono = telefono; // como no existe en cliente, se agrega como una propiedad nueva
+}
+```
+
+<img src="./img/section-17-6.png"/>
+
+```jsx
+
+function Cliente(nombre, saldo) {
+    this.nombre = nombre;
+    this.saldo = saldo;
+}
+
+//creamos un nuevo proto
+Cliente.prototype.tipoCliente = function()  { 
+    let tipo;
+    if(this.saldo > 10000) {
+        tipo = 'Gold';
+    } else if(this.saldo > 5000) {
+        tipo = 'Platinum';
+    } else {
+        tipo  = 'Normal';
+    }
+    return tipo;
+}
+
+//creamos un nuevo proto
+Cliente.prototype.nombreClienteSaldo = function()  {
+    return `Nombre: ${this.nombre}, Saldo ${this.saldo}, Tipo Cliente:  ${this.tipoCliente()} `;
+}
+
+//creamos un nuevo proto
+Cliente.prototype.retiraSaldo = function(retiro)  {
+    this.saldo -= retiro;
+}
+
+// creamos una nueva funcion
+function Persona(nombre, saldo, telefono) {
+		// herada propiedades de una funcion
+    Cliente.call(this, nombre, saldo);
+    this.telefono = telefono;
+
+// Heredar las funciónes ( Antes de Instanciar los objetos )
+
+// pasamos todo el prototype de cliente al prototype de persona
+// Object.create -> copia el prototype para asignar a otra funcion
+Persona.prototype = Object.create( Cliente.prototype );
+
+// Heredar el constructor(funciones/metodos de un prototype)  del objeto de Cliente
+Persona.prototype.constructor = Cliente;
+
+// Instanciarlo
+const juan = new Persona('Juan', 6000, 1120192);
+console.log(juan);
+
+// Crear Prototype solo para el objeto Persona... no estara disponible para Cliente
+// solamente heredamos las funciones y los atributos de cliente  en persona pero no al revez
+Persona.prototype.mostrarTelefono = function() {
+    return `El teléfono de este cliente es: ${this.telefono}`
+}
+console.log ( juan.nombreClienteSaldo() );
+console.log ( juan.mostrarTelefono() );
+```
+
+El objeto de cliente en nuestro ejemplo, en programación orientada a objetos, se le conoce como `GOD Object`: (objeto todopoderoso) es decir, un nuevo objeto principal sobre el cual se van heredando  las demás funciones.
 
