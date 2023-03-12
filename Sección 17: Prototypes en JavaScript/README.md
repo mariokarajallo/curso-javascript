@@ -1,2 +1,53 @@
 # Sección 17: **Prototypes en JavaScript**
 
+## 22.1 Veamos que es el Proto y crear un tipo de objeto Nuevo
+
+En este capítulo estaremos viendo que son los prototypes y como utilizarlos. 
+
+Los prototypes están muy relacionados con los objetos, de hecho el prototype está disponible en todos los objetos.
+
+Cada `proto` son funciones que puedes pasar a un tipo de objeto. 
+
+<img src="./img/section-17-1.png"/>
+
+Previamente, habíamos visto 2 formas de crear objetos.
+
+## Object Literal
+
+- (la más común, pero también es la menos dinámica ni reutilizables)
+    - Podemos ver todos los tipos de `proto` que están disponibles para el mismo tipo de objeto
+    - Recuerda que los `Object literal` no te permite creer objetos dinámicos, ni reutilizables.
+        
+<img src="./img/section-17-2.png"/>
+        
+
+```jsx
+// Object literal, que es algo asi:
+// Esta forma aunque es la más común, también es menos dinamica..
+const cliente = {
+    nombre: 'Juan',
+    saldo: 500
+}
+```
+
+## Object Constructor
+
+- (es menos común, pero te permite crear objeto reutilizable y dinámicos)
+    - puedo creer múltiples instancias.
+        
+<img src="./img/section-17-3.png"/>
+        
+
+```jsx
+// Si necesitas añadir o crear un objeto reutilizable tienes que utilizar un constructor de función
+
+// En JavaScript hoy en día tenemos clases, pero previamente la programación orientada a objetos era de la siguiente forma:
+function Cliente(nombre, saldo) {
+    this.nombre = nombre;
+    this.saldo = saldo;
+}
+
+const juan = new Cliente('Juan', 400);
+
+console.log(juan); // Puedes ver que si expandimos juan en la consola tenemos algo llamado el Prototype...
+```
