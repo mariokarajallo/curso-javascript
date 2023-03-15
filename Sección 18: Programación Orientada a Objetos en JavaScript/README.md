@@ -96,3 +96,59 @@ juan.bienvenida(); // No va a funcionar
 // las propiedades estaticas se mandan llamar directamente desde las clases...
 console.log( Cliente.bienvenida() ); // Esto si va a funcionar
 ```
+
+## 18.3 Heredar una clase
+
+De la misma forma que puedes heredar un `constructor` con `Prototoypes` y sus `métodos`, también puedes `heredar` una `clase`, es una de la característica que hay en POO (programación orientada a objetos)
+
+```jsx
+class Cliente { 
+    constructor( nombre, saldo ) {
+        this.nombre = nombre;
+        this.saldo = saldo;
+    }
+    imprimirSaldo() {
+        return `Hola ${this.nombre}, tu saldo es: ${this.saldo}`;
+    }
+
+    retiraSaldo(retiro) {
+        this.saldo -= retiro;
+    }
+    static bienvenida(){
+        return `Bienvenido al cajero`;
+    }
+}
+
+// Queremos crear una CLASE nueva que HEREDE los mismos atributos y propiedades de OTRA CLASE
+// Herencia - > se crea el nombre de la clase y se extiende con el nombre de la clase que queremos heredar
+class Empresa extends Cliente {
+    constructor(nombre, saldo, telefono, tipo) {
+        // Va hacia el constructor del padre, y busca los atributos que necesita heredar
+        super(nombre, saldo);
+        // otros atributos se declaran fuera
+        this.telefono = telefono;
+        this.tipo = tipo;
+    }
+
+		// Reescribir un método...
+		// si el padre tiene el mismo nombre de metodo tambien en el hijo
+		// el metodo del padre se va a reescribe con el metodo del hijo
+    static bienvenida(mensaje){ 
+        return `Bienvenido al cajero para empresas`;
+    }
+}
+
+const pedro = new Cliente('Pedro', 3000);
+console.log(pedro);
+console.log(pedro.imprimirSaldo() ); // Hola Pedro, tu saldo es: 3000
+
+// Heredando y creando una instancia de empresa
+const empresa = new Empresa('Empresa1', 10000, 10290193, 'Construccion');
+
+// Debido a que heredamos podemos acceder a imprimirSaldo
+console.log(empresa.imprimirSaldo() ); // Hola Empresa1, tu saldo es: 10000
+
+// Acceder al statico sin instanciar de ambos
+console.log(Empresa.bienvenida() ); // Bienvenido al cajero para empresas
+console.log(Cliente.bienvenida() ); // Bienvenido al cajero
+```
