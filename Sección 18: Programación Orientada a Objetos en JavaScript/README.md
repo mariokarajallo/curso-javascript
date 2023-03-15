@@ -43,3 +43,56 @@ const Cliente2 = class {
 const juan2 = new Cliente2('Juan', 400);
 console.log(juan2);
 ```
+
+## 18.2 Métodos y Métodos estáticos en las clases
+
+Los métodos terminan siendo lo mismo que los prototypes. Son funciones específicas para los objetos, que se crean a partir de una clase.
+
+Los métodos son también llamados funciones.
+
+```jsx
+// Veamos como añadir métodos a nuestras classes...
+class Cliente { 
+
+    constructor( nombre, saldo ) {
+        this.nombre = nombre;
+        this.saldo = saldo;
+    }
+
+    // cualquier método agregado a la clase será parte del proto
+		// si mandamos llamar imprimirSaldo(), obtendremos los valores que se establecieron una vez instanciados la clase.
+		// this. -> siempre hace referencia al objeto actual
+		// de esta manera agregamos un metodo:
+    imprimirSaldo() {
+        return `Hola ${this.nombre}, tu saldo es: ${this.saldo}`;
+    }
+
+    retiraSaldo(retiro) {
+        this.saldo -= retiro;
+    }
+
+		// existe otra manera de "crear un metodo"
+    // También existe algo llamado las propiedades estaticas, estas no requieren ser instanciadas...
+
+    static bienvenida(){
+        return `Bienvenido al cajero`;
+    }
+
+}
+
+// javascript es constructaor
+const juan = new Cliente('Juan', 400);
+
+console.log(juan);
+
+// de esta manera podemos acceder a los metodos de nuestra clase -> clase.metodo()
+console.log(juan.imprimirSaldo() ); // Hola Juan, tu saldo es: 400
+juan.retiraSaldo(200);
+console.log(juan.imprimirSaldo() ); // Hola Juan, tu saldo es: 200
+
+// si llamas a una propiedad estatica, desde un objeto instanciado...
+juan.bienvenida(); // No va a funcionar
+
+// las propiedades estaticas se mandan llamar directamente desde las clases...
+console.log( Cliente.bienvenida() ); // Esto si va a funcionar
+```
