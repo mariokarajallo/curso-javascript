@@ -152,3 +152,49 @@ console.log(empresa.imprimirSaldo() ); // Hola Empresa1, tu saldo es: 10000
 console.log(Empresa.bienvenida() ); // Bienvenido al cajero para empresas
 console.log(Cliente.bienvenida() ); // Bienvenido al cajero
 ```
+
+## 18.4 Propiedades Privadas en JavaScript
+
+En esta sección estaremos viendo los modificadores de acceso, básicamente solamente hay `private`, es decir que se pueda acceder desde la clase.
+
+Ahora en JavaScript de nueva cuenta las `classes` son algo nuevo, funcionan sobre `prototypes`, pero con una forma más sencilla, previamente la forma de hacerlo `private` era con un guion bajo, eso le daba a entender al programador que esa propiedad o método era privado, pero aun así no era como un, `private` real.
+
+```jsx
+class Cliente { 
+		//propiedad privada -> #propiedad
+		// solamente podemos acceder desde la clase con otro atributo -> get,set,constructor u otro metodo.
+    #nombre = '';
+    constructor( nombre, saldo = 0) {
+        // this._nombre = nombre; //antes se codificaba asi
+        this.#nombre = nombre; // agregando un valor a la propiedad  privada
+        this.saldo = saldo;
+    }
+		
+		//podemos acceder a la propiedad privada a traves de un metodo
+		mostrarInformacion(){
+			return `cliente: ${this.#nombre}, tu saldo es de ${this.saldo}`
+		}
+
+		// get
+    nombreCliente() {
+        return this.#nombre;
+    }
+
+		// set
+    retiraSaldo(retiro) {
+        this.saldo -= retiro;
+    }
+
+		//
+
+}
+
+const pedro = new Cliente('Pedro', 200);
+// no podemos acceder a la propiedad privada desde el objeto instanciado
+console.log(pedro.#nombre); // error acceder desde el objeto -> campo privado
+
+// si podemos acceder a la propiedad privada por medio y desde de la clase
+console.log(pedro.mostrarInformacion() );
+
+console.log(pedro.nombreCliente() );
+```
