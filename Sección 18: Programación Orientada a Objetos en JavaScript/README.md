@@ -10,17 +10,19 @@ En realidad sigue siendo lo mismo, pero la facilidad de crear objetos y añadirl
 
 ### Class Declaration
 
-Las classes se crean con la palabra reservada class. El Nombre debe ser en mayusculas Y esta forma se le conoce como CLASS DECLARATION en el CONSTRUCTOR pasamos los valores que va a tener el objeto una vez instanciados
+Las classes se crean con la palabra reservada class. El Nombre debe ser en mayusculas, abrimos llaves y todo lo que este dentro de las llaves se le conoce como cuerpo de la clase, y esta forma se le conoce como CLASS DECLARATION , en java script se utiliza el método de  `CONSTRUCTOR,` y en este le pasamos los valores que va a tener el objeto una vez que es instanciado
 
 ```jsx
 class Cliente { 
     constructor( nombre, saldo ) {
+// sintaxis para asignar los valores 
         this.nombre = nombre;
         this.saldo = saldo;
     }
 }
 
 // Si recuerdas previamente instanciabamos nuestro objecto con...
+// el constructor instaciado "Cliente", toma un nombre y un saldo
 const juan = new Cliente('Juan', 400);
 // para pasar esos valores ('juan',400) las classes introducieron lo que se conoce como constructores...
 // en algunos lenguajes el constructor es el mismo nombre de la clase pero en javascript es constructor
@@ -39,11 +41,10 @@ const Cliente2 = class {
     }
 
 }
-
+// instanciamos y creamos el constructor
 const juan2 = new Cliente2('Juan', 400);
 console.log(juan2);
 ```
-
 ## 18.2 Métodos y Métodos estáticos en las clases
 
 Los métodos terminan siendo lo mismo que los prototypes. Son funciones específicas para los objetos, que se crean a partir de una clase.
