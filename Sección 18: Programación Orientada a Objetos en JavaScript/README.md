@@ -47,12 +47,12 @@ console.log(juan2);
 ```
 ## 18.2 Métodos y Métodos estáticos en las clases
 
-Los métodos terminan siendo lo mismo que los prototypes. Son funciones específicas para los objetos, que se crean a partir de una clase.
+Los métodos terminan siendo lo mismo que los `prototypes`. Son funciones específicas para los objetos, que se crean a partir de una clase.
 
-Los métodos son también llamados funciones.
+La mayoría de las veces después de nuestro `constructor` de la clase se crean métodos que son también llamados funciones.
 
 ```jsx
-// Veamos como añadir métodos a nuestras classes...
+// Veamos como añadir métodos/funciones a nuestras clases...
 class Cliente { 
 
     constructor( nombre, saldo ) {
@@ -72,8 +72,8 @@ class Cliente {
         this.saldo -= retiro;
     }
 
-		// existe otra manera de "crear un metodo"
-    // También existe algo llamado las propiedades estaticas, estas no requieren ser instanciadas...
+		// existe otra manera de "crear un metodo" -> propiedades estaticas
+    // También existe algo llamado las propiedades estaticas, estas no requieren ser instanciadas para mandarlos llamar...
 
     static bienvenida(){
         return `Bienvenido al cajero`;
@@ -97,7 +97,6 @@ juan.bienvenida(); // No va a funcionar
 // las propiedades estaticas se mandan llamar directamente desde las clases...
 console.log( Cliente.bienvenida() ); // Esto si va a funcionar
 ```
-
 ## 18.3 Heredar una clase
 
 De la misma forma que puedes heredar un `constructor` con `Prototoypes` y sus `métodos`, también puedes `heredar` una `clase`, es una de la característica que hay en POO (programación orientada a objetos)
