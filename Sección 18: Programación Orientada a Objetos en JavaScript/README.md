@@ -119,20 +119,22 @@ class Cliente {
     }
 }
 
-// Queremos crear una CLASE nueva que HEREDE los mismos atributos y propiedades de OTRA CLASE
+// Queremos crear una CLASE (Empresa) nueva que HEREDE los mismos atributos y propiedades de OTRA CLASE (Cliente)
 // Herencia - > se crea el nombre de la clase y se extiende con el nombre de la clase que queremos heredar
+// de esta forma la clase empresa es un hijo de la clase client, comparten los metodos, atributos y constructor
 class Empresa extends Cliente {
     constructor(nombre, saldo, telefono, tipo) {
         // Va hacia el constructor del padre, y busca los atributos que necesita heredar
         super(nombre, saldo);
-        // otros atributos se declaran fuera
+        // otros atributos que no existen en la clase padre se declaran fuera de -> super
         this.telefono = telefono;
         this.tipo = tipo;
     }
 
-		// Reescribir un método...
+		// Reescribir(actualizar) un método del padre...
+		// basta con renombrar un metodo en l aclase hijo  de la misma forma que un metodo de la clase padre
 		// si el padre tiene el mismo nombre de metodo tambien en el hijo
-		// el metodo del padre se va a reescribe con el metodo del hijo
+		// el metodo del padre se va a reescribir con el metodo del hijo
     static bienvenida(mensaje){ 
         return `Bienvenido al cajero para empresas`;
     }
@@ -148,11 +150,9 @@ const empresa = new Empresa('Empresa1', 10000, 10290193, 'Construccion');
 // Debido a que heredamos podemos acceder a imprimirSaldo
 console.log(empresa.imprimirSaldo() ); // Hola Empresa1, tu saldo es: 10000
 
-// Acceder al statico sin instanciar de ambos
 console.log(Empresa.bienvenida() ); // Bienvenido al cajero para empresas
 console.log(Cliente.bienvenida() ); // Bienvenido al cajero
 ```
-
 ## 18.4 Propiedades Privadas en JavaScript
 
 En esta sección estaremos viendo los modificadores de acceso, básicamente solamente hay `private`, es decir que se pueda acceder desde la clase.
