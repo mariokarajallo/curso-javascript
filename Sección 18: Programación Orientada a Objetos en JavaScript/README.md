@@ -159,9 +159,17 @@ En esta sección estaremos viendo los modificadores de acceso, básicamente sola
 
 Ahora en JavaScript de nueva cuenta las `classes` son algo nuevo, funcionan sobre `prototypes`, pero con una forma más sencilla, previamente la forma de hacerlo `private` era con un guion bajo, eso le daba a entender al programador que esa propiedad o método era privado, pero aun así no era como un, `private` real.
 
+### Propiedad/Atributos Público
+
+- Puedes acceder dentro de la clase o en el objeto
+
+### Propiedad Privada
+
+- solo se puede acceder dentro de la clase
+
 ```jsx
 class Cliente { 
-		//propiedad privada -> #propiedad
+		// propiedad privada -> #propiedad
 		// solamente podemos acceder desde la clase con otro atributo -> get,set,constructor u otro metodo.
     #nombre = '';
     constructor( nombre, saldo = 0) {
@@ -176,7 +184,7 @@ class Cliente {
 		}
 
 		// get
-    nombreCliente() {
+    getNombreCliente() {
         return this.#nombre;
     }
 
@@ -196,5 +204,5 @@ console.log(pedro.#nombre); // error acceder desde el objeto -> campo privado
 // si podemos acceder a la propiedad privada por medio y desde de la clase
 console.log(pedro.mostrarInformacion() );
 
-console.log(pedro.nombreCliente() );
+console.log(pedro.getNombreCliente() );
 ```
