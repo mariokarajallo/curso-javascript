@@ -119,3 +119,5 @@ carrito.forEach((producto, index, pertenece) =>  {
     console.log(pertenece  === carrito); // nombre de la variable -> true
 })
 ```
+
+## 19.2 Qué es un WeakSet y en que se diferencia de un Set
