@@ -121,3 +121,79 @@ carrito.forEach((producto, index, pertenece) =>  {
 ```
 
 ## 19.2 Qué es un WeakSet y en que se diferencia de un Set
+
+A diferencia del `set` en el set le puedes pasar cualquier valor: objetos, números, boléanos, etc. En el `weakset` solamente le puedes pasar o agregar objetos.
+
+No tienen la propiedad o método size no podremos conocer la extensión del `weakset` asi como si lo tiene `set`, aunque si tienen length. Tampoco son iterables, no podemos usar foreach como hicimos con los `sets`  ni tienen keys, values entries etc.
+
+```jsx
+// Weakset se escribe de esta manera
+// creamos un set debil
+var ws = new WeakSet();
+
+// como solo podemos agregar objetos, declaramos un objeto.
+const cliente = {
+    nombre: 'mario',
+    saldo: 3000
+}
+```
+
+### Weakset method add()
+
+con el método add podemos agregar valores a nuestros `weakset`, pero solo podemos agregar objetos, cualquier otro tipo de valor nos daría error.
+
+```jsx
+var weakset = new WeakSet();
+
+// como solo podemos agregar objetos, declaramos un objeto.
+const cliente = {
+    nombre: 'mario',
+    saldo: 3000
+}
+
+const nombre = 'Pedro';
+
+weakset.add(cliente) // no agregar el objeto en el weakset
+console.log(weakset) // comprobamos en consola nuestro weakset
+
+weakset.add(nombre) // nos dara error por que queremos agregar un valor tipo string que no es valido para los weakset
+
+```
+
+### Weakset method has()
+
+con este método podemos saber si existe o no un valor dentro de nuestro `weakset`
+
+```jsx
+var weakset = new WeakSet();
+
+const cliente = {
+    nombre: 'mario',
+    saldo: 3000
+}
+
+const nombre = 'Pedro';
+
+console.log( weakset.has(cliente) ); // devolvera true
+console.log( weakset.has(cliente2));  // como no existe devolvera undefined
+console.log( weakset.has(nombre));  // devolvera false, por que no existe un valor string en weaksets
+```
+
+### Weakset method delete()
+
+podemos eliminar un valor que se encuentra dentro de nuestro `weakset`
+
+```jsx
+var weakset = new WeakSet();
+
+const cliente = {
+    nombre: 'mario',
+    saldo: 3000
+}
+
+const nombre = 'Pedro';
+
+weakset.delete(cliente); // elimina el objeto cliente dentro del wakset
+console.log( weakset.delete(cliente2)); // devolvera un falso, por que no existe ese valor en nuestro weakset
+
+```
