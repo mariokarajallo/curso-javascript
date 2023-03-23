@@ -197,3 +197,146 @@ weakset.delete(cliente); // elimina el objeto cliente dentro del wakset
 console.log( weakset.delete(cliente2)); // devolvera un falso, por que no existe ese valor en nuestro weakset
 
 ```
+
+## 19.3 Que son los Maps
+
+son listas ordenadas en llave - valor, (algo así como un objeto, pero un objeto con una sola propiedad) donde la llave y el valor pueden ser cualquier tipo de dato, a diferencia de un objeto puede tener la llave de cualquier tipo de dato.
+
+Y en cuanto a performance los maps tienen mejor performance que los objetos, son especialmente diseñados para agregar o quitar elementos así como recorrer, también cuando son muy grandes tienen mejor performance que un objeto
+
+```jsx
+// MAPS se crean al igual que los sets
+let cliente = new Map();
+```
+
+### Map Method set()
+
+para agregar un elemento en los Maps se utiliza set
+
+```jsx
+let cliente = new Map();
+
+// guardamos en nuestro map su valores "llave:valor"
+// pueden tener cualquier tipo de datos como llave y como valor
+cliente.set('nombre', 'mario');
+cliente.set('tipo', 'Premium');
+cliente.set('saldo', 3000);
+cliente.set(true, true);
+cliente.set([0], true);
+
+console.log(cliente); // imprime nuestro maps con sus valores
+
+// También se puede inicializar un map con diferentes valores...
+const paciente = new Map([['nombre', 'juan'], ['cuarto', 'no definido']]);
+console.log(paciente) // el valor de nombre ahora es juan, cuarto -> no definido
+
+// pdemos reemplazar un valor existente
+paciente.set('nombre', 'Antonio');
+paciente.set('cuarto', 400);
+
+console.log(paciente); // el valor de nombre ahora sera antonio, cuarto -> 400
+
+```
+
+### Map Method get()
+
+nos ayuda a obtener los valores que existen de un map
+
+```jsx
+let cliente = new Map();
+
+cliente.set('nombre', 'mario');
+cliente.set('tipo', 'Premium');
+cliente.set('saldo', 3000);
+
+// acceder a los valores
+console.log(cliente.get('nombre')); // mario
+console.log(cliente.get('tipo')); // Premium
+console.log(cliente.get('saldo')); // saldo
+```
+
+### Map Method size()
+
+podemos obtener la extensión de nuestro Map, en otras palabras cuantos elementos hay nuestro map
+
+```jsx
+let cliente = new Map();
+
+cliente.set('nombre', 'mario');
+cliente.set('tipo', 'Premium');
+cliente.set('saldo', 3000);
+
+// Tamaño del MAP
+console.log(cliente.size); // 3
+```
+
+### Map Method has()
+
+comprueba si un valor existe dentro de nuestro map
+
+```jsx
+let cliente = new Map();
+
+cliente.set('nombre', 'mario');
+cliente.set('tipo', 'Premium');
+cliente.set('saldo', 3000);
+
+// Contiene un valor
+console.log(cliente.has('tipo')); //true
+console.log(cliente.has('nombre')); //true
+console.log(cliente.has('nombre2')); //false
+```
+
+### Map Method delete()
+
+elimina los elementos de un map
+
+```jsx
+let cliente = new Map();
+
+cliente.set('nombre', 'mario');
+cliente.set('tipo', 'Premium');
+cliente.set('saldo', 3000);
+
+// Borrar
+cliente.delete('nombre');
+
+console.log(cliente.has('nombre')); //false
+console.log(cliente.get('nombre')); //undefined
+```
+
+### Map Method clear()
+
+limpia o elimina todos los elementos de un map
+
+```jsx
+let cliente = new Map();
+
+cliente.set('nombre', 'mario');
+cliente.set('tipo', 'Premium');
+cliente.set('saldo', 3000);
+
+// Borrar el map
+cliente.clear();
+
+console.log(cliente);
+```
+
+### Map Method forEach()
+
+los maps también son iterables, y podemos acceder a cada elemento
+
+```jsx
+let cliente = new Map();
+
+cliente.set('nombre', 'mario');
+cliente.set('tipo', 'Premium');
+cliente.set('saldo', 3000);
+
+// Foreach a un map
+
+cliente.forEach((datos, index) => {
+    // console.log(datos);
+    console.log(`${index}:${datos}`); // nombre:mario tipo:premium saldo:3000
+});
+```
