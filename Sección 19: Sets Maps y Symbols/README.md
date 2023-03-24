@@ -442,3 +442,41 @@ console.log(cliente[nombreCliente]); // Pedro
 console.log(nombreCliente); // Symbol (Nombre del Cliente)
 ```
 
+## 19.6 Iteradores en JavaScript
+
+Aprendamos a crear nuestro propio iterador.
+
+```jsx
+// Iterators
+// la funcion recibira los elementos que queremos iterar
+function crearIterador(carrito) {
+		//iniciamos a iterar en la pocicion 0
+    let i = 0;
+
+    return {
+        siguiente: () => {
+						//saber cuando llegamos al final de nuestro elemento a iterar
+            const fin = (i >= carrito.length);
+						// obtener el valor actual de la posicion, si esta en la pocision final devuelve undefined
+            const valor = !fin ? carrito[i++] : undefined;
+
+            return {
+                fin,
+                valor
+            };
+        }
+    };
+}
+
+// creamos el arreglo que vamos a iterar
+const carrito = ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4'];
+
+// utilizar el iterador
+const recorrerCarrito = crearIterador(carrito);
+
+console.log(recorrerCarrito.siguiente() ); // {fin: false,  valor: Producto 1}
+console.log(recorrerCarrito.siguiente() );// {fin: false,  valor: Producto 2}
+console.log(recorrerCarrito.siguiente() );// {fin: false,  valor: Producto 3}
+console.log(recorrerCarrito.siguiente() );// {fin: false,  valor: Producto 4}
+console.log(recorrerCarrito.siguiente() );// {fin: true,  valor: undefined}
+```
