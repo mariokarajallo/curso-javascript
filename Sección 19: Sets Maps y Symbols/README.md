@@ -480,3 +480,93 @@ console.log(recorrerCarrito.siguiente() );// {fin: false,  valor: Producto 3}
 console.log(recorrerCarrito.siguiente() );// {fin: false,  valor: Producto 4}
 console.log(recorrerCarrito.siguiente() );// {fin: true,  valor: undefined}
 ```
+
+## 19.7 Generadores en JavaScript
+
+Las funciones regulares devuelven solo un valor único (o nada).
+
+Los generadores pueden producir (“`yield`”) múltiples valores, uno tras otro, a pedido. Son funciones especiales que pueden pausar su ejecución en cualquier momento y luego continuarla desde donde se detuvieron en el punto de pausa. Funcionan muy bien con los iterables, permitiendo crear flujos de datos con facilidad. Es una funcion que retorna un Iterador.
+
+Se indican con un asterisco después de  la palabra function
+
+Para crear un generador, necesitamos una construcción de sintaxis especial: `function*`, la llamada “función generadora”. Que se diferencia de una función normal por el uso de la palabra clave **`function*`**  en lugar de **`function`** . También se utiliza la palabra clave **`yield`** dentro de la función para pausar la ejecución y devolver un valor.
+
+```jsx
+function* crearGenerador() {
+    // Yiel es nuevo también en es6 y son los valores que podemos utilizar para iterar...
+  yield 1;
+  yield 2;
+	yield 'Nombre';
+  yield 3 +3;
+  yield true;
+  return 3;
+}
+
+// Se llaman como funciones normales pero retornan un iteraador
+const iterador = crearGenerador();
+```
+
+Las funciones generadoras se comportan de manera diferente a las normales. Cuando se llama a dicha función, no ejecuta su código. En su lugar, devuelve un objeto especial, llamado “objeto generador”, para gestionar la ejecución.
+
+El método principal de un generador es `next()`. Cuando se llama, se ejecuta hasta la declaración `yield <value>` más cercana (se puede omitir `value`, entonces será `undefined`). Luego, la ejecución de la función se detiene y el `value` obtenido se devuelve al código externo.
+
+El resultado de `next()` es siempre un objeto con dos propiedades:
+
+- `value`: el valor de yield.
+- `done`: `true` si el código de la función ha terminado, de lo contrario `false`.
+
+### Generador Estático
+
+```jsx
+function* crearGenerador() {
+  yield 1;
+  yield 2;
+	yield 'Nombre';
+  yield 3 +3;
+  yield true;
+  return 3;
+}
+
+// Se llaman como funciones normales pero retornan un iteraador
+const iterador = crearGenerador();
+
+console.log(iterador.next().value); // 1
+console.log(iterador.next()); // {value: 2, done: false}
+console.log(iterador.next().done); // false
+console.log(iterador.next());// {value: 6, done: false}
+console.log(iterador.next()); // {value: true, done: false}
+console.log(iterador.next()); // {value: 3, done: true}
+
+//Las nuevas llamadas a generator.next() ya no tienen sentido. Si las hacemos, devuelven el mismo objeto: {done: true}.
+console.log(iterador.next()); // {done: true}
+```
+
+### Generador Dinámico
+
+```jsx
+// Crear el generador llamada nuevoGenerador que acepta un parámetro carrito.
+function* generadorCarrito(carrito) {
+		//La función utiliza un bucle for para recorrer los elementos del arreglo carrito
+		// y utiliza la palabra clave yield para pausar la ejecución y devolver cada elemento del arreglo uno por uno.
+    for( let i = 0; i < carrito.length; i++) {
+        yield carrito[i];
+    }
+}
+// se crea un arreglo "carrito" que contiene varios elementos 
+const carrito = ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4'];
+
+// recorrer el iterador
+// se llama a la función nuevoGenerador pasando el arreglo como argumento. Esto devuelve un iterador que se almacena en la variable iterador.
+
+let iterador = generadorCarrito(carrito);
+
+// se utilizan varias llamadas al método next() del iterador para recorrer los elementos del arreglo carrito.
+// Cada vez que se llama al método next(), el generador se ejecuta hasta la siguiente pausa
+// y devuelve un objeto que contiene el valor del elemento actual y un indicador de si el iterador ha llegado al final del arreglo.
+console.log(iterador.next() ); // {value: Producto 1, done: false}
+console.log(iterador.next() ); // {value: Producto 2, done: false}
+console.log(iterador.next() ); // {value: Producto 3, done: false}
+console.log(iterador.next() ); // {value: Producto 4, done: true}
+console.log(iterador.next() ); // {done: true}
+```
+
