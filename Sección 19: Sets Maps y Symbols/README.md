@@ -340,3 +340,38 @@ cliente.forEach((datos, index) => {
     console.log(`${index}:${datos}`); // nombre:mario tipo:premium saldo:3000
 });
 ```
+
+## 19.4 Que son los WeakMaps
+
+Son similares a los `MAPs` y al igual que los `weakset` tienen ciertas diferencias con su par `sets`, `weakmaps` tiene cierta diferencia con su par `map`. Son los menos utilizados, quizás se utilizan en algunas librerías.
+
+Sirve para mantener una serie de datos en privado, utiliza como elemento “llave:valor” y no se pueden iterar ni usar el método Foreach(), ni conocer su extensión con el método size().
+
+Recuerda los `weakset` o `weakmap`,  solamente aceptan objetos, no aceptan un Sting, número, booleano etc.
+
+```jsx
+// Weakmap
+const producto = {
+	idProducto = 10
+}
+
+//instanciamos
+const weakmap = new WeakMap();
+
+//agregan elementos en nuestro weakmap
+weakmap.set(producto,"Monitor");
+
+//comprobar si existe un objeto dentro de nuestro weakmap
+weakmap.has(producto); //true
+
+// extraer elemento del weakmap
+weakmap.get(producto); //Monitor
+
+// eliminar elementos o vaciar nuestro weakmap
+weakmap.delete(producto); // true
+
+weakmap.get(key); //undefined
+
+// no podemos conocer la extension de un weakmap
+weakmap.size; //undefined
+```
