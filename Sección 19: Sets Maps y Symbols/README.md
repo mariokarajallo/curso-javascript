@@ -375,3 +375,70 @@ weakmap.get(key); //undefined
 // no podemos conocer la extension de un weakmap
 weakmap.size; //undefined
 ```
+
+## 19.5 Symbols y sus Características
+
+Los `symbols` se lanzaron en el **ECMAScript** 6, te van a permitir crear una propiedad única, no hay dos `symbol` que sean igual.
+
+No se crea con la palabra reservada `New`. Si declaras `new Symbol` enviará un error.
+
+```jsx
+const sym = Symbol('1');
+const sym2 = Symbol('1');
+
+// Los symbolos siempre son diferentes
+
+if (sym === sym2){
+	console.log("Son iguales"); 
+} else {
+		console.log("Son diferentes"); 
+}
+// Son diferentes
+
+console.log( Symbol() === Symbol() ); // false
+
+// creamos dos propiedades
+// Llaves de objetos únicas
+const nombre = Symbol();
+const apellido = Symbol();
+
+// Crear un objeto vacio
+const  persona = {}
+
+console.log(persona); // {}
+
+// agregamos las propiedades (nombre, apellido) al objeto (cliente), deben tener corchetes
+// agregar nombre y apellido como llaves del objeto 
+persona[nombre] = 'Mario';
+persona[apellido] = 'Karajallo';
+
+// agregamos mas propiedades a este objeto (cliente) de una forma "nomral"
+persona.tipoCliente = 'Premium';
+persona.saldo = 500;
+
+// ahora veamos como se compartan las propiedades
+console.log(persona);
+
+// si quiero acceder al valor de la propiedad "nombre", debemos de usar corchetes
+console.log(persona.nombre); // undefined
+console.log(persona[nombre]); // mario
+
+// Las propiedades que esten definidas por medio de un symbol no son iterables
+// No se puede acceder al SYMBOL con un for.
+for(let i in persona) {
+    console.log(`${i} : ${persona[i]}`); // "tipo de cliente : premium", "saldo:500"
+}
+
+// También se puede crear UNA DESCRIPCION DEL SYMBOLO
+const nombreCliente = Symbol('Nombre del cliente');
+const cliente = {};
+
+//agregamos propiedad a nuestro objeto
+cliente[nombreCliente] = 'Pedro';
+
+// Probar
+console.log(cliente); // Symbol (nombre del cliente): Pedro
+console.log(cliente[nombreCliente]); // Pedro
+console.log(nombreCliente); // Symbol (Nombre del Cliente)
+```
+
