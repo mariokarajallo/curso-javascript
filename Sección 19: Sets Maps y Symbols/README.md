@@ -570,3 +570,267 @@ console.log(iterador.next() ); // {value: Producto 4, done: true}
 console.log(iterador.next() ); // {done: true}
 ```
 
+## 19.8 Iteradores en JavaScript
+
+Ahora veamos unas series de iteradores que se pueden considerar nuevos en JavaScript, ya estuvimos viendo en secciones anteriores algunos y usualmente con un `for` un `map` estarás bien a la hora de tu carrera como programador, pero hay otros que pueden simplificarte y facilitarte tu código.
+
+Veamos los diferentes métodos compatibles  de como iterar un `arrelgo`, un `set` y un  `map` 
+
+### Enties Iterator
+
+El iterador **`entries()`**  en JavaScript es una función de los objetos **`Array`, `Map`, `Set`**. Y otros tipos de colecciones (objeto que contiene un conjunto de elementos) que devuelve un iterador que produce un arreglo de dos elementos para cada entrada en la colección. Devuelve un array de pares `[propiedad, valor]`
+
+El uso del método **`entries()`**  puede ser útil en situaciones en las que se necesita acceder tanto a las claves como a los valores de una colección (objeto que contiene un conjunto de elementos).
+
+```jsx
+const ciudades = ['Londres', 'New York', 'Madrid', 'Paris']; // puede contener todo tipo de elementos separados por comas.
+const ordenes = new Set([123, 231, 131, 102]); // set solo recibe valores, no "llave : valor"
+const datos = new Map(); // contiene dos entradas "llave:valor" como elementos
+datos.set('nombre', 'Mario');
+datos.set('profesion', 'Desarrollador Web');
+
+// entries a las ciudades
+/*la variable "entry" (iterador) almacena en cada iteración un arreglo de dos elementos, 
+donde el primer elemento es el índice del elemento en el arreglo ciudades y el segundo elemento es el valor del elemento.
+Por lo tanto, en cada iteración del bucle, el valor de entry es un arreglo con la forma [indice, valor]*/
+
+for( let entry of ciudades.entries() ){
+    console.log(entry);
+}
+// [0, 'Londres'], [1, 'New York'], [2, 'Madrid'], [3, 'Paris']
+
+// entries a las ordenes
+/*la variable entry (iterador) almacena en cada iteración un arreglo de dos elementos, donde el primer elemento es el valor 
+del elemento en el conjunto ordenes y el segundo elemento es el mismo valor. En un conjunto, la clave es igual al valor. 
+Por lo tanto, en cada iteración del bucle, el valor de entry es un arreglo con la forma [valor, valor].*/
+
+for( let entry of ordenes.entries() ){
+    console.log(entry);
+}
+// [123, 123], [231, 231], [131, 131],[102, 102]
+
+// entries a los datos
+/*La variable entry almacena en cada iteración un arreglo de dos elementos, donde el primer elemento es la clave de la entrada
+en el objeto Map datos y el segundo elemento es el valor correspondiente a esa clave. Por lo tanto, en cada iteración 
+del bucle, el valor de entry es un arreglo con la forma [clave, valor].*/
+
+for( let entry of datos.entries() ){
+    console.log(entry);
+}
+// ['nombre', 'Mario'], ['profesion', 'Desarrollador Web']
+
+```
+
+En resumen, el método **`entries()`**  en JavaScript es una función útil para acceder a las claves y valores de una colección de manera controlada y ordenada. Puede ser utilizado con objetos **`Array`,`Map`**,**`Set`** y otros tipos de colecciones.
+
+### Values Iterator
+
+El método **`values()`** devuelve un objeto iterador que produce los valores de cada elemento en una colección, en el mismo orden en que aparecen en la colección. Por lo tanto, un bucle **`for...of`**  que utiliza un iterador **`values()`**  recorre la colección y accede solamente a los valores, no a las claves o índices. Devuelve un array de valores.
+
+```jsx
+const ciudades = ['Londres', 'New York', 'Madrid', 'Paris']; // puede contener todo tipo de elementos separados por comas.
+const ordenes = new Set([123, 231, 131, 102]); // set solo recibe valores, no "llave : valor"
+const datos = new Map(); // contiene dos entradas "llave:valor" como elementos
+datos.set('nombre', 'Mario');
+datos.set('profesion', 'Desarrollador Web');
+
+// values a arreglo
+/*En el caso de un arreglo, el método values() devuelve un iterador que produce los valores de cada elemento en el arreglo.
+El iterador values() produce los valores de cada elemento en el arreglo ciudades, por lo que el bucle for...of imprime
+en la consola cada valor en el arreglo en el mismo orden en que aparece en el arreglo:
+*/
+
+for(let value of ciudades.values()) {
+    console.log(value);
+}
+// Londres, New York, Madrid, Paris
+
+// values de un objeto SET
+/*el método values() devuelve un iterador que produce los valores de cada elemento en el conjunto.
+El iterador values() produce los valores de cada elemento en el conjunto ordenes, por lo que el bucle for...of imprime
+ en la consola cada valor en el conjunto en el mismo orden en que aparece en el conjunto
+*/
+
+for( let value of ordenes.values() ){
+    console.log(value);
+}
+//123 //231 //131 //102
+
+// values de un objeo MAP
+/*el método values() devuelve un iterador que produce los valores de cada entrada en el objeto Map.
+El iterador values() produce los valores de cada entrada en el objeto Map datos, por lo que el bucle for...of imprime 
+en la consola cada valor en el objeto en el mismo orden en que aparece en el objeto
+*/
+for( let value of datos.values() ){
+    console.log(value);
+}
+// Mario //Desarrollador Web
+
+```
+
+### Keys Iterator
+
+El método **`keys()`** devuelve un objeto iterador que produce las claves de cada elemento en una colección(array, set, map), en el mismo orden en que aparecen en la colección.
+
+Por lo tanto, un bucle **`for...of`**  que utiliza un iterador **`keys()`**  recorre la colección y accede solamente a las claves o índices, no a los valores. Devuelve un array de propiedades.
+
+```jsx
+const ciudades = ['Londres', 'New York', 'Madrid', 'Paris']; // puede contener todo tipo de elementos separados por comas.
+const ordenes = new Set([123, 231, 131, 102]); // set solo recibe valores, no "llave : valor"
+const datos = new Map(); // contiene dos entradas "llave:valor" como elementos
+datos.set('nombre', 'Mario');
+datos.set('profesion', 'Desarrollador Web');
+
+// Keys iterator
+
+// keys a un arreglo
+/*En el caso de un arreglo, el método keys() devuelve un iterador que produce los índices de cada elemento en el arreglo.
+El iterador keys() produce los índices de cada elemento en el arreglo ciudades, por lo que el bucle for...of imprime 
+en la consola cada índice en el arreglo en el mismo orden en que aparece en el arreglo*/
+for(let keys of ciudades.keys() ) {
+    console.log(keys);
+}
+//0
+//1
+//2
+//3
+
+// keys a un objeto SET
+/* En el caso de un objeto Set, el método keys() devuelve un iterador que produce los valores de cada elemento en el conjunto.
+El iterador keys() produce los valores de cada elemento en el conjunto ordenes, por lo que el bucle for...of imprime
+ en la consola cada valor en el conjunto en el mismo orden en que aparece en el conjunto.
+*/
+for( let keys of ordenes.keys()  ){
+    console.log(keys);
+}
+//123
+//231
+//131
+//102
+
+// keyss a un objeto MAP
+/*En el caso de un objeto Map, el método keys() devuelve un iterador que produce las claves de cada entrada en el objeto Map.
+El iterador keys() produce las claves de cada entrada en el objeto Map datos, por lo que el bucle for...of imprime
+en la consola cada clave en el objeto en el mismo orden en que aparece en el objeto*/
+for( let keys of datos.keys()  ){
+    console.log(keys);
+}
+//nombre
+//profesion
+
+```
+
+### Default iterador
+
+El iterador por defecto en JavaScript se refiere al comportamiento predeterminado que se aplica a un objeto cuando se utiliza en un bucle **`for...of`**
+ pero no se especifica ningún método específico.
+
+```jsx
+
+const ciudades = ['Londres', 'New York', 'Madrid', 'Paris']; // puede contener todo tipo de elementos separados por comas.
+const ordenes = new Set([123, 231, 131, 102]); // set solo recibe valores, no "llave : valor"
+const datos = new Map(); // contiene dos entradas "llave:valor" como elementos
+datos.set('nombre', 'Mario');
+datos.set('profesion', 'Desarrollador Web');
+
+// Default sobre un arreglo
+/*En este caso, el iterador por defecto se aplica automáticamente al arreglo ciudades, y se utiliza el iterador values() 
+para iterar sobre los elementos del arreglo.*/
+for(let ciudad of ciudades) {
+    console.log(ciudad);
+}
+//'Londres', 'New York', 'Madrid' y 'Paris'.
+
+// Default en un objeto SET
+/*En este caso, el iterador por defecto se aplica automáticamente al objeto 'Set' 'ordenes', y se utiliza el iterador 
+values() para iterar sobre los elementos del conjunto*/
+for( let orden of ordenes){
+    console.log(orden);
+}
+//123, 231, 131 y 102.
+
+// Default sobre un MAP
+/*el iterador por defecto se aplica automáticamente al objeto 'Map' 'datos', y se utiliza el iterador entries()
+para iterar sobre las entradas del mapa.*/
+for( let dato of datos){
+    console.log(dato);
+}
+//'nombre', 'Mario' y 'profesion','Desarrollador Web'.
+```
+
+### Iterar sobre String
+
+En forma "vieja", es decir, en versiones antiguas de JavaScript, se puede iterar un `string` utilizando un bucle **`for`** que recorre cada caracter del `string` utilizando el operador de indexación **`[]`**
+
+```jsx
+// Iterar en un string
+
+const mensaje = 'Hola mundo';
+
+// Forma vieja
+// En este caso, se utiliza el operador de indexación [] para acceder al caracter en la posición i del string mensaje.
+for( let i = 0; i < mensaje.length; i++ ) {
+    console.log(mensaje[i]);
+}
+/*H
+o
+l
+a
+
+m
+u
+n
+d
+o
+*/
+```
+
+En la forma "nueva" de iterar un string, introducida en ECMAScript 6, se puede utilizar un bucle **`for...of`**
+ para recorrer cada caracter del string de manera más sencilla:
+
+```jsx
+const mensaje = 'Hola mundo';
+
+// forma nueva
+/*En este caso, el bucle for...of itera sobre cada elemento del string 'mensaje', y en cada iteración asigna el valor de cada caracter a la variable letra. Esto hace que el código sea más claro y fácil de entender.*/
+for( let letra of mensaje) {
+    console.log(letra);
+}
+
+/*H
+o
+l
+a
+
+m
+u
+n
+d
+o
+*/
+```
+
+### Iterar en un NODE LIST
+
+En JavaScript, un NodeList es una colección de nodos que puede ser obtenida de diferentes formas, como por ejemplo a través de métodos como **`querySelectorAll()`** o **`getElementsByTagName()`** del objeto **`document`.** Es una estructura de datos muy utilizada en el ámbito del desarrollo web, ya que es común necesitar iterar sobre una lista de elementos en el DOM para realizar ciertas operaciones.
+
+Para iterar un NodeList, se puede utilizar un bucle **`for...of`** que recorra cada elemento de la lista de forma sencilla y legible. En cada iteración, se puede acceder a las propiedades y métodos del elemento actual para realizar las operaciones necesarias.
+
+```jsx
+
+// Iterar en un NODE LIST
+/*
+supongamos que queremos obtener la URL de todos los enlaces de una página web y mostrarlas en la consola.
+- se utiliza el método getElementsByTagName() del objeto document para obtener una lista de todos los elementos <a> de la página.
+- Luego, se utiliza un bucle for...of para recorrer la lista y acceder a la propiedad href de cada elemento, que contiene la URL del enlace.
+- Finalmente, se utiliza el método console.log() para mostrar la URL en la consola.
+*/
+
+const enlaces = document.getElementsByTagName('a');
+
+for (let enlace of enlaces) {
+    console.log(enlace.href);
+}
+```
+
+La ventaja de utilizar un bucle **`for...of`**  para iterar un NodeList es que se trata de una forma sencilla y legible de recorrer una colección de elementos.
