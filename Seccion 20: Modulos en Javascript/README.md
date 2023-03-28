@@ -151,3 +151,57 @@ import { nombre, edad } from './modulo.js';
 ```
 
 Es importante destacar que, en ambos casos, el nombre utilizado en la importación debe coincidir con el nombre utilizado en la exportación.
+
+## 20.1 Exportar e Importar Funciones
+
+veamos como exportar e importar valores y funciones. La modularidad de este enfoque facilita la organización y mantenimiento del código.
+
+#### App.js
+
+como importar funciones y usar modulos.
+
+```jsx
+// se utiliza la palabra clave import para importar varias funciones y variables desde un archivo llamado cliente.js
+// se realiza mediante destructuración de objetos, lo que significa que cada elemento importado debe tener el mismo nombre que en el archivo original.
+// En este caso, se están importando cuatro elementos: nombreCliente, ahorro, mostrarInformacion y tieneSaldo.
+import { nombreCliente, ahorro, mostrarInformacion, tieneSaldo} from './cliente.js'
+
+// se usan las variables y funciones  que importamos en el código actual
+console.log(nombreCliente);
+console.log(ahorro);
+
+// llama a la función mostrarInformacion y se pasa como argumentos las variables nombreCliente y ahorro.
+console.log(mostrarInformacion(nombreClinete, ahorro));
+
+//llama a la función tieneSaldo y se pasa como argumento la variable ahorro.
+// La función tieneSaldo verifica si la variable ahorro es mayor que cero y muestra un mensaje correspondiente en la consola.
+tieneSaldo(ahorro)
+
+```
+
+#### Cliente.js
+
+veamos cómo se pueden exportar valores y funciones en un módulo en JavaScript.
+
+```jsx
+// Ambas constantes nombreCLiente, ahorro se exportan para que puedan ser utilizadas en otros archivos de JavaScript que importen este módulo.
+export const nombreCliente = 'Mario'
+export const ahorro = 200;
+
+// Las siguientes líneas son dos funciones que también se exportan
+export function mostrarInformacion(nombre, ahorro) {
+	return `Cliente: ${nombre} - Ahorro: ${ahorro}`;
+}
+
+export function tieneSaldo(ahorro){
+	if (ahorro>0){
+		console.log('si tiene saldo');
+	} else {
+		console.log('El cliente no tiene saldo');
+	}
+}
+
+```
+
+Exportar estos valores y funciones permite que se puedan utilizar en otros archivos que importen este módulo.
+
