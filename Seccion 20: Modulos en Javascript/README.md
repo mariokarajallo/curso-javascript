@@ -276,3 +276,118 @@ export class Cliente {
 
 // Exportar estas constantes, funciones y clase permite que otros archivos de JavaScript las importen y las utilicen en su propio código.
 ```
+
+## 20.4 Heredar una clase que está siendo importada
+
+Veamos como hacer uso de la herencia de una clase importada desde otro archivo.
+
+#### App.js
+
+este código importa diferentes funciones y variables de diferentes archivos JavaScript, luego utiliza estas funciones y variables para crear instancias de las clases **`Cliente`** y **`Empresa`** , y finalmente muestra su información en la consola utilizando la función **`mostrarInformacion`**.
+
+```jsx
+// se utiliza la palabra clave import para importar varias funciones y variables desde un archivo llamado cliente.js
+// se realiza mediante destructuración de objetos, lo que significa que cada elemento importado debe tener el mismo nombre que en el archivo original.
+// En este caso, se están importando cuatro elementos: nombreCliente, ahorro, mostrarInformacion, tieneSaldo y la clase Cliente.
+import { nombreCliente, ahorro, mostrarInformacion, tieneSaldo, Cliente} from './cliente.js'
+// ahora importamos la clasae Empresa desde empresa.js
+import {empresa} from './empresa.js'
+
+// se usan las variables y funciones  que importamos en el código actual
+console.log(nombreCliente);
+console.log(ahorro);
+
+// llama a la función mostrarInformacion y se pasa como argumentos las variables nombreCliente y ahorro.
+console.log(mostrarInformacion(nombreClinete, ahorro));
+
+//llama a la función tieneSaldo y se pasa como argumento la variable ahorro.
+// La función tieneSaldo verifica si la variable ahorro es mayor que cero y muestra un mensaje correspondiente en la consola.
+tieneSaldo(ahorro)
+
+// se crea una instancia de la clase Cliente utilizando nombreCliente y ahorro como argumentos, y se muestra su información 
+// utilizando la función mostrarInformacion definida en la clase.
+const cliente = new Cliente ( nombreCliente, ahorro);
+
+console.log(cliente.mostrarInformacion ())
+
+// se crea una instancia de la clase Empresa utilizando nombre, ahorro y categoria como argumentos, y se muestra su información utilizando la función mostrarInformacion definida en la clase.
+const empresa = new Empresa('Codigo con Juan', 100, 'Aprendizaje en Linea')
+
+console.log(empresa.mostrarInformacion)
+
+```
+
+#### Cliente.js
+
+Este código es un módulo de JavaScript que exporta constantes, funciones y una clase que pueden ser utilizadas en otros archivos JavaScript que importen este módulo.
+
+```jsx
+// Ambas constantes nombreCLiente, ahorro se exportan para que puedan ser utilizadas en otros archivos de JavaScript que importen este módulo.
+export const nombreCliente = 'Mario'
+export const ahorro = 200;
+
+// Las siguientes líneas son dos funciones que también se exportan
+export function mostrarInformacion(nombre, ahorro) {
+	return `Cliente: ${nombre} - Ahorro: ${ahorro}`;
+}
+
+export function tieneSaldo(ahorro){
+	if (ahorro>0){
+		console.log('si tiene saldo');
+	} else {
+		console.log('El cliente no tiene saldo');
+	}
+}
+
+// exporta una clase llamada Cliente. 
+// La clase tiene un constructor que acepta dos argumentos, nombre y ahorro, y establece estas propiedades en el objeto de la clase.
+// también tiene un método llamado mostrarInformacion que devuelve información sobre el cliente.
+export class Cliente {
+	constructor(nombre, ahorro){
+		this.nombre = nombre;
+		this.ahorro = ahorro;
+	}
+
+	mostrarInformacion(){
+		return `CLiente: ${this.nombre} - Ahorro: ${this.ahorro}`
+	}
+}
+
+// Exportar estas constantes, funciones y clase permite que otros archivos de JavaScript las importen y las utilicen en su propio código.
+```
+
+#### Empresa.js
+
+Al exportar la clase **`Empresa`** , se puede importar en otros archivos de JavaScript y se puede utilizar para crear nuevas instancias de la clase **`Empresa`**  y llamar a sus métodos. Al extender la clase **`Cliente`** , la clase **`Empresa`**  hereda todos los métodos y propiedades de la clase **`Cliente`**
+, lo que significa que la clase **`Empresa`**  puede utilizar todas las funciones y variables definidas en la clase **`Cliente`**.
+
+```jsx
+// Este código importa una clase Cliente desde un archivo cliente.js utilizando la sintaxis de módulos de ES6.
+import {cliente} from './cliente.js'
+
+// La clase Empresa extiende la clase Cliente utilizando la palabra clave <extends>.
+export class Empresa extends Cliente {
+	//La clase Empresa tiene un constructor que acepta tres parámetros: nombre, ahorro y categoria.
+	constructor(nombre, ahorro, categoria){
+		// La sintaxis <super()> se utiliza para llamar al constructor de la clase padre(Cliente) y pasarle los argumentos necesarios.
+		//En este caso, se pasan los argumentos nombre y ahorro.
+		super (nombre, ahorro);
+		//La clase Empresa también tiene una propiedad adicional categoria, que se inicializa en el constructor.
+		this.categoria = categoria;
+	}
+
+// La función mostrarInformacion() se redefine en la clase Empresa, lo que significa
+// que se sobrescribe la función heredada de la clase Cliente.
+// La función redefinida agrega la propiedad categoria a la cadena de texto devuelta por la función.
+	mostrarInformacion(){
+		return `Cliente: ${this.nombre} - Ahorro: ${this.ahorra} - Categoria: ${this.categoria}`
+	}
+}
+
+// Al exportar la clase Empresa, se permite su uso en otros archivos de JavaScript que importen este módulo.
+```
+
+### Que es un constructor en las clases
+
+Un constructor es una función especial en una clase que se ejecuta automáticamente cuando se crea un nuevo objeto a partir de esa clase. Su objetivo es inicializar las propiedades del objeto y establecer su estado inicial. El constructor generalmente toma argumentos que se utilizan para establecer los valores iniciales de las propiedades del objeto. Los constructores se utilizan ampliamente en la programación orientada a objetos para crear nuevos objetos con una estructura y un comportamiento definidos por la clase.
+
