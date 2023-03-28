@@ -205,3 +205,74 @@ export function tieneSaldo(ahorro){
 
 Exportar estos valores y funciones permite que se puedan utilizar en otros archivos que importen este módulo.
 
+## 20.3 Exportar e Importar una clase
+
+Veamos como exportar e importar clases.
+
+#### App.js
+
+Este código muestra cómo importar variables y funciones desde otro archivo utilizando la sintaxis de destructuración de objetos, y cómo utilizarlas en el código actual. También muestra cómo crear una instancia de una clase y llamar a sus métodos.
+
+```jsx
+// se utiliza la palabra clave import para importar varias funciones y variables desde un archivo llamado cliente.js
+// se realiza mediante destructuración de objetos, lo que significa que cada elemento importado debe tener el mismo nombre que en el archivo original.
+// En este caso, se están importando cuatro elementos: nombreCliente, ahorro, mostrarInformacion, tieneSaldo y la clase Cliente.
+import { nombreCliente, ahorro, mostrarInformacion, tieneSaldo, Cliente} from './cliente.js'
+
+// se usan las variables y funciones  que importamos en el código actual
+console.log(nombreCliente);
+console.log(ahorro);
+
+// llama a la función mostrarInformacion y se pasa como argumentos las variables nombreCliente y ahorro.
+console.log(mostrarInformacion(nombreClinete, ahorro));
+
+//llama a la función tieneSaldo y se pasa como argumento la variable ahorro.
+// La función tieneSaldo verifica si la variable ahorro es mayor que cero y muestra un mensaje correspondiente en la consola.
+tieneSaldo(ahorro)
+
+// se crea una instancia de la clase Cliente utilizando nombreCliente y ahorro como argumentos, y se muestra su información 
+// utilizando la función mostrarInformacion definida en la clase.
+const cliente = new Cliente ( nombreCliente, ahorro);
+
+console.log(cliente.mostrarInformacion ())
+
+```
+
+#### Cliente.js
+
+Este código es un módulo de JavaScript que exporta constantes, funciones y una clase que pueden ser utilizadas en otros archivos JavaScript que importen este módulo.
+
+```jsx
+// Ambas constantes nombreCLiente, ahorro se exportan para que puedan ser utilizadas en otros archivos de JavaScript que importen este módulo.
+export const nombreCliente = 'Mario'
+export const ahorro = 200;
+
+// Las siguientes líneas son dos funciones que también se exportan
+export function mostrarInformacion(nombre, ahorro) {
+	return `Cliente: ${nombre} - Ahorro: ${ahorro}`;
+}
+
+export function tieneSaldo(ahorro){
+	if (ahorro>0){
+		console.log('si tiene saldo');
+	} else {
+		console.log('El cliente no tiene saldo');
+	}
+}
+
+// exporta una clase llamada Cliente. 
+// La clase tiene un constructor que acepta dos argumentos, nombre y ahorro, y establece estas propiedades en el objeto de la clase.
+// también tiene un método llamado mostrarInformacion que devuelve información sobre el cliente.
+export class Cliente {
+	constructor(nombre, ahorro){
+		this.nombre = nombre;
+		this.ahorro = ahorro;
+	}
+
+	mostrarInformacion(){
+		return `CLiente: ${this.nombre} - Ahorro: ${this.ahorro}`
+	}
+}
+
+// Exportar estas constantes, funciones y clase permite que otros archivos de JavaScript las importen y las utilicen en su propio código.
+```
