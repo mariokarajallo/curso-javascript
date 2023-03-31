@@ -31,3 +31,54 @@ IndexedDB y localStorage son ambas tecnologías de almacenamiento en el lado del
 En resumen, IndexedDB es más adecuado para aplicaciones que necesitan almacenar grandes cantidades de datos complejos y realizar búsquedas eficientes, mientras que localStorage es más adecuado para aplicaciones que necesitan almacenar datos simples en pequeñas cantidades. Además, IndexedDB proporciona soporte para transacciones, índices y una mayor capacidad de almacenamiento, mientras que localStorage es más simple y fácil de usar en comparación con IndexedDB.
 
 Ten en cuenta que funciona en el cliente, en otras palabras en el navegador y los datos almacenados siguen siendo visibles para cualquiera, por lo que no es recomendable almacenar passwords, tarjetas de créditos o información sensible.
+
+## 21.2 Creando la base de datos
+
+Para encontrar la base de datos IndexedDB en su navegador, puede utilizar las herramientas de desarrollador integradas en su navegador. Aquí hay algunos pasos generales para encontrar IndexedDB en algunos navegadores populares:
+
+Google Chrome: Abra la página web que utiliza IndexedDB, haga clic derecho en la página y seleccione "Inspeccionar". Luego, en la ventana de herramientas de desarrollador que se abre, seleccione la pestaña "Application". Aquí puede encontrar IndexedDB en la sección "Storage" en el panel izquierdo.
+
+<img src="./img/section-21-1.png"/>
+
+Mozilla Firefox: Abra la página web que utiliza IndexedDB y haga clic derecho en la página. Seleccione "Inspeccionar elemento" y luego seleccione la pestaña "Storage" en la ventana de herramientas de desarrollador que se abre. Aquí puede encontrar IndexedDB en la sección "IndexedDB" en el panel izquierdo.
+
+<img src="./img/section-21-2.png"/>
+
+Tenga en cuenta que la ubicación específica de IndexedDB puede variar según el navegador y la versión del mismo.
+
+```jsx
+
+// se agrega un escucha de evento al objeto "document". 
+// El evento que se escucha es "DOMContentLoaded", que se dispara cuando se ha cargado todo el contenido HTML 
+// y se pueden manipular los elementos de la página. Cuando se dispara el evento, se ejecuta la función "crmDB()".
+document.addventListener('DOMContentLoaded', () => {
+	crmDB();
+})
+
+// La función "crmDB()" es una función que crea y configura una base de datos en IndexedDB.
+function crmDB() {
+	//se crea una variable "crmDB" que abre una nueva base de datos en IndexedDB. La base de datos se llama "crm" y su versión es 1.
+	let crmDB = window.indexdeDB.open('crm', 1);
+
+	// Si hay un error al abrir la base de datos, se ejecuta esta función que imprime un mensaje
+	crmDB.onerror = function(){
+		console.log('Hubo un error a la hora de crear la BD');	
+	}
+
+	// Si la base de datos se abre correctamente, se ejecuta esta función que imprime un mensaje
+	crmDB.onsucces= function(){
+		console.log('Base de datos Creada');
+	}
+
+	// Configuracion de la base de datos
+	// Esta es una función que se ejecuta solo una vez, cuando se actualiza la versión de la base de datos.
+	crmDB.onupgradeneeded = function () {
+		console.log('Este metodo solo se ejecuta una vez...');
+	}
+
+}
+```
+
+<img src="./img/section-21-3.png"/>
+
+En resumen, este código utiliza IndexedDB para crear una base de datos llamada "crm" con la versión 1.0, y establece funciones para manejar los casos de éxito, error y actualización de la base de datos.
