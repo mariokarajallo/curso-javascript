@@ -82,3 +82,64 @@ function crmDB() {
 <img src="./img/section-21-3.png"/>
 
 En resumen, este código utiliza IndexedDB para crear una base de datos llamada "crm" con la versión 1.0, y establece funciones para manejar los casos de éxito, error y actualización de la base de datos.
+
+## 21.3 Creando las Tablas
+
+establecemos la función `onupgradeneeded` que se ejecutara cuando la base de datos se actualice y se cree una nueva versión. 
+
+```jsx
+
+// se agrega un escucha de evento al objeto "document". 
+// El evento que se escucha es "DOMContentLoaded", que se dispara cuando se ha cargado todo el contenido HTML 
+// y se pueden manipular los elementos de la página. Cuando se dispara el evento, se ejecuta la función "crmDB()".
+document.addventListener('DOMContentLoaded', () => {
+	crmDB();
+})
+
+// La función "crmDB()" es una función que crea y configura una base de datos en IndexedDB.
+function crmDB() {
+
+	//se crea una variable "crmDB" que abre una nueva base de datos en IndexedDB. La base de datos se llama "crm" y su versión es 1.
+	let crmDB = window.indexdeDB.open('crm', 1);
+
+	// Si hay un error al abrir la base de datos, se ejecuta esta función que imprime un mensaje
+	crmDB.onerror = function(){
+		console.log('Hubo un error a la hora de crear la BD');	
+	}
+
+	// Si la base de datos se abre correctamente, se ejecuta esta función que imprime un mensaje
+	crmDB.onsucces= function(){
+		console.log('Base de datos Creada');
+	}
+
+	// Configuracion de la base de datos
+	// Se establece la función que se ejecutará cuando la base de datos se actualice y se cree una nueva versión.
+	// La función recibe como parámetro un objeto de evento e.
+	crmDB.onupgradeneeded = function (e) {
+		
+		// ahora se obtiene el objeto result que contiene la base de datos creada.
+		// El objeto <e> que se está recibiendo como parámetro contiene información sobre el evento que ha sido disparado, incluyendo el objeto <result>.
+		const db = e.target.result;
+
+		//Se crea un objeto store (almacenamiento de objetos) llamado "crm" utilizando el método createObjectStore() de la base de datos db. 
+		//El objeto keyPath especifica la propiedad que actuará como clave primaria de este store.
+		//en este caso llamada "crm" y se autoincrementará mediante autoIncrement para cada objeto almacenado.
+		const objectStore = db.createObjectStore('crm', {
+			keyPath: 'crm',
+			autoIncrement: true
+		});
+
+		//definir las columnas
+		//Se definen los índices que se utilizarán para buscar y ordenar los datos almacenados en el objeto store.
+		//En este caso, se definen índices para las propiedades "nombre", "email" y "telefono" del objeto almacenado. 
+		//El índice "email" se define como único, lo que significa que no se permitirá almacenar dos objetos con el mismo valor en la propiedad "email".
+		objectStore.createIndex('nombre','nombre', {unique: false});
+		objectStore.createIndex('email','email', {unique: true});
+		objectStore.createIndex('telefono','telefono', {unique: false});
+
+//Se muestra en la consola el mensaje "Columnas creadas" para indicar que se han creado los índices con éxito.
+	console.log('Columnas creadas')
+	}
+
+}
+```
