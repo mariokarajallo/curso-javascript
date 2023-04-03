@@ -143,3 +143,112 @@ function crmDB() {
 
 }
 ```
+
+## 21.4 Creando un Nuevo Cliente por Medio de una transacción
+
+como agregar registros a nuestra base de datos creados con indexeddb. Este ejemplo crea y configura una base de datos en IndexedDB para almacenar información de clientes y luego agrega nuevos clientes a la base de datos. La base de datos se llama "crm" y tiene una versión de 1, y la información del cliente se almacena en un objeto store con los índices "nombre", "email" y "telefono".
+
+```jsx
+
+// Primero, se declara una variable DB sin inicializar, 
+// lo que indica que se usará más adelante para almacenar una referencia a la base de datos.
+let DB;
+
+// se agrega un escucha de evento al objeto "document". 
+// El evento que se escucha es "DOMContentLoaded", que se dispara cuando se ha cargado todo el contenido HTML 
+// y se pueden manipular los elementos de la página. Cuando se dispara el evento, se ejecuta la función "crmDB()".
+document.addventListener('DOMContentLoaded', () => {
+	crmDB();
+
+	//se agrega un temporizador de 5 segundos que llama a la función "crearCliente()" después de que se haya cargado la página.
+	setTimeout(()=>{
+		crearliente();
+	}, 5000)
+})
+
+// La función "crmDB()" es una función que crea y configura una base de datos en IndexedDB.
+function crmDB() {
+
+	//se crea una variable "crmDB" que abre una nueva base de datos en IndexedDB. La base de datos se llama "crm" y su versión es 1.
+	let crmDB = window.indexdeDB.open('crm', 1);
+
+	// Si hay un error al abrir la base de datos, se ejecuta esta función que imprime un mensaje
+	crmDB.onerror = function(){
+		console.log('Hubo un error a la hora de crear la BD');	
+	}
+
+	// Si la base de datos se abre correctamente, se ejecuta esta función que imprime un mensaje
+	crmDB.onsucces= function(){
+		console.log('Base de datos Creada');
+
+		DB = crmDB.result;
+	}
+
+	// Configuracion de la base de datos
+	// Se establece la función que se ejecutará cuando la base de datos se actualice y se cree una nueva versión.
+	// La función recibe como parámetro un objeto de evento e.
+	crmDB.onupgradeneeded = function (e) {
+		
+		// ahora se obtiene el objeto result que contiene la base de datos creada.
+		// El objeto <e> que se está recibiendo como parámetro contiene información sobre el evento que ha sido disparado, incluyendo el objeto <result>.
+		const db = e.target.result;
+
+		//Se crea un objeto store (almacenamiento de objetos) llamado "crm" utilizando el método createObjectStore() de la base de datos db. 
+		//El objeto keyPath especifica la propiedad que actuará como clave primaria de este store.
+		//en este caso llamada "crm" y se autoincrementará mediante autoIncrement para cada objeto almacenado.
+		const objectStore = db.createObjectStore('crm', {
+			keyPath: 'crm',
+			autoIncrement: true
+		});
+
+		//definir las columnas
+		//Se definen los índices que se utilizarán para buscar y ordenar los datos almacenados en el objeto store.
+		//En este caso, se definen índices para las propiedades "nombre", "email" y "telefono" del objeto almacenado. 
+		//El índice "email" se define como único, lo que significa que no se permitirá almacenar dos objetos con el mismo valor en la propiedad "email".
+		objectStore.createIndex('nombre','nombre', {unique: false});
+		objectStore.createIndex('email','email', {unique: true});
+		objectStore.createIndex('telefono','telefono', {unique: false});
+
+//Se muestra en la consola el mensaje "Columnas creadas" para indicar que se han creado los índices con éxito.
+	console.log('Columnas creadas')
+	}
+
+}
+
+// La función crearCliente() crea un objeto transaction que permite realizar transacciones en la base de datos.
+// es la encargada de agregar nuevos clientes a la base de datos.
+function crearCliente(){
+	//se crea una transacción de lectura y escritura (readwrite) en la base de datos "crm" utilizando la variable global "DB" que se estableció en la función "crmDB()".
+	// La transacción se crea con el método "transaction" que toma dos argumentos: el nombre de la base de datos y el modo de acceso a la transacción
+	let transaction = DB.transaction(['crm'],'readwrite');
+
+	//La transacción tiene dos event listeners: uno para el evento "oncomplete", que se ejecuta cuando la transacción se completa correctamente, y otro para el evento "onerror", que se ejecuta cuando ocurre un error en la transacción.
+
+	//Si la transacción se completa correctamente, se ejecuta una función que imprime un mensaje en la consola.
+	transaction.oncomplete = function(){
+		console.log('transaccion completada');
+	}
+
+	//Si ocurre un error en la transacción, se ejecuta otra función que imprime un mensaje en la consola.
+	transaction.onerror= function() {
+		console.log('Hubo un error en la transaccion');
+	}
+
+	//Luego, la función obtiene el objeto store "crm" utilizando la transacción creada y 
+	//crea un nuevo objeto "nuevoCliente" con un número de teléfono, un nombre y una dirección de correo electrónico.
+	const objectStore = transaction.objectStore('crm');
+
+	const nuevoCliente = {
+		telefono: 19009120,
+		nombre: 'Mario'
+		corre: 'mario@correo.com'
+	}
+
+	//se agrega el objeto cliente a la base de datos utilizando el método add() del objeto store y se guarda en una constante llamada "peticion"
+	const peticion = objectStore.add(nuevoCliente);
+
+	//se imprime el valor de la constante "peticion" en la consola para mostrar si la operación se realizó correctamente o no.
+	console.log(peticion);
+}
+
+```
