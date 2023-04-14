@@ -192,3 +192,72 @@ function descuento(mensaje) {
     console.log(mensaje);
 }
 ```
+
+## 22.4 Del callback Hell a Promises
+
+En secciones anteriores vimos un ejemplo de lo que son los denominados `callback hell`
+
+```jsx
+const paises = [];
+
+function nuevoPais(pais, callback) {
+    paises.push(pais);
+    console.log(`Agregado: ${pais}`)
+    callback();
+}
+
+function iniciarCallbackHell() {
+    setTimeout(() => {
+        nuevoPais('Alemania', mostrarPaises); 
+        setTimeout(  () =>  {
+            nuevoPais('Francia', mostrarPaises);
+            setTimeout(() => { 
+                nuevoPais('Inglaterra', mostrarPaises);
+            }, 3000);
+        }, 3000 );
+    }, 3000);
+}
+
+iniciarCallbackHell();
+```
+
+Ahora pasemos este código a una estructura  más legible y fácil de mantener.
+
+```jsx
+const paises = [];
+
+//se define una nueva función nuevoPais que devuelve una Promise
+//dentro de la cual se ha utilizado la función setTimeout para simular la espera de 3 segundos
+// antes de agregar el país a la lista de países y resolver la Promise con la cadena "Agregado: {pais}".
+const nuevoPais = pais => new Promise (resolve => {
+    setTimeout(() => {
+      paises.push(pais);
+      resolve(`Agregado: ${pais}`);
+    }, 3000);
+})
+
+//la función iniciarPromises en la que se llama a la función nuevoPais para agregar Alemania a la lista de países,
+// y se utiliza el método .then() para ejecutar el siguiente nuevoPais (para agregar Francia) después de que el primer país haya sido agregado. 
+// De nuevo, se utiliza .then() para agregar Inglaterra después de que se haya agregado Francia. 
+// Finalmente, se llama a console.log(paises) para imprimir la lista de países actualizada.
+// También se ha utilizado .catch() para manejar cualquier error que pueda ocurrir durante la ejecución de la cadena de Promises.
+iniciarPromises() {
+  nuevoPais('Alemania')
+    .then( resultado => {
+			console.log(resultado)		
+			console.log(paises)
+			return nuevoPais('francia')
+			})
+	.then( resultado => {
+				console.log(resultado)		
+				console.log(paises)
+				return nuevoPais('Inglaterra')
+				})
+	.then(resultado =>console.log(paises))
+	.catch((error) => console.error(error));
+}
+
+iniciarPromises();
+```
+
+Con esto se elimina el anidamiento excesivo de callbacks y se usa una cadena de promesas para lograr el mismo resultado.
