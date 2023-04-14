@@ -1,6 +1,6 @@
 # Sección 22: **Promises, Callbacks y Programación asincrónica**
 
-## Código Sincrónico, código asíncrono y Callbacks
+## 22.1 Código Sincrónico, código asíncrono y Callbacks
 
 En programación, el código síncrono y el código asíncrono son dos estilos diferentes de ejecución de código.
 
@@ -55,3 +55,54 @@ nuevoPais('Alemania', mostrarPaises);
 ```
 
 En resumen, este ejemplo utiliza un callback para asegurarse de que la función **`mostrarPaises`**  se ejecute después de que se haya agregado un nuevo país al arreglo **`paises`**. El **`setTimeout`**  se utiliza para simular una tarea asíncrona, lo que significa que el programa no se bloquea mientras espera que el retraso termine. El callback se llama una vez que se ha completado la tarea asíncrona para notificar al programa que puede continuar con la siguiente tarea.
+
+## 22.2 Callback Hell
+
+### Que es Callback Hell
+
+Callback Hell es un término que se refiere a la situación en la que un programa JavaScript tiene varias funciones anidadas que utilizan callbacks, lo que hace que el código sea difícil de leer y mantener.
+
+Cuando se tienen muchas tareas asíncronas que se deben realizar en orden, puede ser necesario utilizar callbacks para manejar la secuencia de eventos. Sin embargo, si no se manejan adecuadamente, los callbacks pueden resultar en una estructura de código anidada y compleja que se hace difícil de leer y entender.
+
+Para evitar Callback Hell, existen varias técnicas alternativas que permiten manejar tareas asíncronas de manera más elegante y fácil de leer, como las Promesas o Async/Await.
+
+Este código es un ejemplo de "Callback Hell", que se produce cuando se utilizan varios callbacks anidados para realizar tareas secuenciales. En este caso, el objetivo es agregar varios países al array "paises" y luego mostrarlos.
+
+```jsx
+// Listado de paises
+const paises = [];
+
+//se define la función "nuevoPais", que agrega un país al array, imprime un mensaje en la consola y llama al callback proporcionado.
+function nuevoPais(pais, callback) {
+    paises.push(pais);
+    console.log(`Agregado: ${pais}`)
+    callback();
+}
+
+//Se define una función llamada "mostrarPaises" simplemente imprime el contenido del array "paises" en la consola.
+function mostrarPaises() {
+    console.log(paises);
+}
+// Se define una función llamada "iniciarCallbackHell" que contiene múltiples funciones anidadas que utilizan callbacks para realizar tareas asíncronas. Esta función es la que representa el Callback Hell.
+// Primero, se utiliza setTimeout para esperar 3 segundos antes de comenzar el proceso. 
+// Luego, se llama a la función "nuevoPais" con el país "Alemania" y el callback "mostrarPaises".
+// Después de agregar Alemania, se llama a otro setTimeout que espera 3 segundos antes de agregar Francia utilizando "nuevoPais" y "mostrarPaises" como callbacks
+// A continuación, se utiliza otro setTimeout anidado para esperar otros 3 segundos antes de agregar Inglaterra.
+// Finalmente, después de agregar todos los países, se llamará a la función "mostrarPaises" para imprimir el array completo en la consola.
+function iniciarCallbackHell() {
+    setTimeout(() => {
+        // Agregar nuevo pais
+        nuevoPais('Alemania', mostrarPaises); 
+        setTimeout(  () =>  {
+            nuevoPais('Francia', mostrarPaises);
+            setTimeout(() => { 
+                nuevoPais('Inglaterra', mostrarPaises);
+            }, 3000);
+        }, 3000 );
+    }, 3000);
+}
+
+iniciarCallbackHell();
+```
+
+Este ejemplo de Callback Hell representa una situación en la que se deben realizar múltiples tareas asíncronas en un orden específico utilizando callbacks anidados. Si no se manejan adecuadamente, los callbacks pueden resultar en una estructura de código compleja y difícil de entender. Por esta razón, es recomendable utilizar otras técnicas como Promesas o Async/Await para manejar tareas asíncronas de manera más elegante y fácil de leer.
