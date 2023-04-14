@@ -106,3 +106,89 @@ iniciarCallbackHell();
 ```
 
 Este ejemplo de Callback Hell representa una situación en la que se deben realizar múltiples tareas asíncronas en un orden específico utilizando callbacks anidados. Si no se manejan adecuadamente, los callbacks pueden resultar en una estructura de código compleja y difícil de entender. Por esta razón, es recomendable utilizar otras técnicas como Promesas o Async/Await para manejar tareas asíncronas de manera más elegante y fácil de leer.
+
+## 22.3 Creando un Promise, .then y .catch
+
+### Promises
+
+Los Promises en JavaScript son un patrón de diseño que se utiliza para manejar el flujo asincrónico de código en la programación. Los Promises permiten escribir código asíncrono de manera más legible y fácil de mantener.
+
+Un Promise representa un valor que puede no estar disponible todavía, pero que se espera que lo esté en algún momento. Es un objeto que representa la eventual completitud (o fallo) de una operación asíncrona y su valor resultante.
+
+La promesa puede estar en uno de tres estados:
+
+- "pendiente" (pending): el valor aún no está disponible
+- "cumplida" (fulfilled): la operación ha finalizado con éxito y se ha obtenido un valor
+- "rechazada" (rejected): la operación ha fallado y se ha obtenido un motivo de rechazo.
+
+El estado inicial de una Promesa es "pendiente". Cuando la operación asíncrona asociada con la Promesa se completa, se establece el estado en "cumplida" o "rechazada". Cuando se establece el estado, se llama a una función de retorno de llamada (callback), que puede ser encadenada con otra Promesa o manejar el valor obtenido.
+
+Los Promises también proporcionan una forma más sencilla de manejar errores, ya que se pueden encadenar varias llamadas de then() y catch() para manejar diferentes resultados.
+
+### .then
+
+El método then() se usa para manejar el resultado exitoso de un Promise. Cuando un Promise se resuelve correctamente, el método then() se ejecuta con el resultado de la operación asincrónica como argumento. Este método devuelve un nuevo Promise que puede ser usado para encadenar más llamadas then() o catch().
+
+Por ejemplo, si queremos mostrar el resultado de un Promise exitoso en la consola, podríamos usar el siguiente código:
+
+```jsx
+miPromise.then(resultado => {
+  console.log(resultado);
+});
+```
+
+### .catch
+
+el método catch() se usa para manejar el resultado fallido de un Promise. Si un Promise es rechazado con un error, el método catch() se ejecuta con el error como argumento. Este método también devuelve un nuevo Promise que puede ser usado para encadenar más llamadas then() o catch().
+
+Por ejemplo, si queremos manejar un error en un Promise, podemos usar el siguiente código:
+
+```jsx
+miPromise.catch(error => {
+  console.error(error);
+});
+```
+
+En resumen, las llamadas then() y catch() son métodos que nos permiten manejar los resultados de un Promise, ya sea exitoso o fallido. Estas llamadas nos permiten crear cadenas de promesas que son más fáciles de leer y mantener que las funciones anidadas, y nos permiten manejar errores de manera más efectiva.
+
+Este código muestra un ejemplo básico de cómo funciona un Promise en JavaScript.:
+
+```jsx
+// Vamos a definir un promise
+// Primero, se crea un nuevo Promise llamado "aplicarDescuento" que tiene una función de callback que toma dos parámetros, resolve y reject.
+const aplicarDescuento = new Promise( (resolve, reject) => { // Puede ser arrow function...
+    const descuento = true;
+
+    // Comentar estas siguientes lineas para ver el Resolve...
+		// se usa una estructura condicional para evaluar si el descuento es verdadero o falso.
+		// Si es verdadero, se llama a la función resolve con el argumento "Descuento Aplicado", lo que significa que se ha cumplido el Promise.
+		// Si es falso, se llama a la función reject con el argumento "No se pudo aplicar el descuento", lo que significa que el Promise ha sido rechazado.
+    if(descuento) {
+        resolve('Descuento Aplicado'); 
+    } else {
+        reject('No se pudo aplicar el descuento');
+    }
+
+});
+
+//Después de definir el Promise, se utiliza el método then() para manejar la resolución exitosa del Promise, 
+// y el método catch() para manejar el rechazo del Promise.
+// método then() se recibe el resultado del Promise en el parámetro "resultado" y toma una función como argumento. Esa función recibe el resultado del promise como parámetro y lo pasa a la función descuento,
+// método catch() se recibe el error en el parámetro "error" y también se imprime en la consola.
+aplicarDescuento
+    .then( resultado => descuento(resultado));
+		.catch( error => {
+        console.log(error);
+    });
+
+		//se imprime en la consola el Promise creado, lo que muestra que es un objeto pendiente hasta que se cumpla o se rechace.
+    console.log(aplicarDescuento);
+
+// recuerda que gracias a las ventajas de los  arrow functions puedes colocar todo en una sola linea...
+
+// Tal vez tengas la duda de si puedes ejecutar funciones para no tener mucho código, la respuesta es si...
+// la funcion descuento imprime el mensaje recibido en la consola.
+function descuento(mensaje) {
+    console.log(mensaje);
+}
+```
