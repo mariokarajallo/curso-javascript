@@ -1,6 +1,20 @@
 # Sección 22: **Promises, Callbacks y Programación asincrónica**
 
-## 22.1 Ejemplo de Callbacks
+## Código Sincrónico, código asíncrono y Callbacks
+
+En programación, el código síncrono y el código asíncrono son dos estilos diferentes de ejecución de código.
+
+### Código sincrónico
+
+El código síncrono es aquel que se ejecuta en secuencia, una línea de código a la vez. Esto significa que una instrucción debe ser completada antes de que la siguiente se ejecute. En otras palabras, el código síncrono bloquea la ejecución de todo el programa hasta que una tarea se completa. Si una tarea tarda mucho en completarse, puede ralentizar todo el programa.
+
+### Código Asíncrono
+
+el código asíncrono es aquel que se ejecuta en segundo plano, en paralelo con otros procesos. En lugar de esperar a que una tarea se complete, el programa puede continuar ejecutando otras tareas mientras espera la finalización de una tarea asincrónica. Esto significa que el código asíncrono no bloquea la ejecución del programa, lo que permite que el programa siga siendo sensible y reactivo incluso cuando se están realizando tareas de larga duración.
+
+En JavaScript, una función asíncrona se ejecuta en segundo plano y no bloquea la ejecución de otras tareas. En su lugar, se utiliza una función callback para notificar al programa cuando la tarea asíncrona se ha completado. Esto permite al programa continuar ejecutando otras tareas mientras espera la finalización de la tarea asíncrona.
+
+### Callbacks
 
 Los callbacks en JavaScript son funciones que se pasan como argumentos a otras funciones y que se invocan dentro de esas funciones en un momento determinado. El objetivo principal de los callbacks es permitir que el código asíncrono (código asíncrono se ejecuta en segundo plano) se comunique con el código sincrónico (código síncrono se ejecuta en secuencia).
 
