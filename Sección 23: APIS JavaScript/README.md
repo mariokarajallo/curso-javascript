@@ -76,7 +76,7 @@ verNotificacionBtn.addEventListener('click', () => {
 
 En resumen, este código proporciona una idea básica de cómo utilizar la `API Notification` para crear y mostrar notificaciones en el escritorio del usuario, y cómo agregar acciones personalizadas a las notificaciones para realizar acciones adicionales al hacer clic en ellas. Sin embargo, es importante tener en cuenta que la compatibilidad de la `API Notification` varía según el navegador y el sistema operativo.
 
-## 23.2 API Intersection Observer 
+## 23.2 APIIntersection Observer 
 
 El Intersection Observer es una API de JavaScript que permite a los desarrolladores observar cambios en la intersección de un elemento con un contenedor específico. Esto es útil cuando se quiere realizar una acción cuando un elemento se encuentra en el área visible de la pantalla del usuario o, por el contrario, cuando está fuera de ella.
 
@@ -90,7 +90,11 @@ Para crear un objeto IntersectionObserver se utiliza el siguiente código:
 const observer = new IntersectionObserver(callback, options);
 ```
 
-Donde "callback" es la función que se ejecutará cuando se observe una intersección, y "options" es un objeto que contiene opciones de configuración para el observer, como por ejemplo, el threshold o umbral de intersección que se desea observar.
+Donde "callback" es la función que se ejecutará cuando se observe una intersección, y "options" es un objeto que contiene opciones de configuración para el observer y es opcional, se utiliza para configurar el comportamiento del observador. Puede incluir las siguientes propiedades:
+
+- **`root`**: Especifica el elemento que se utilizará como contenedor para la observación. Por defecto, este valor es el viewport del navegador (es decir, la ventana del navegador). Si se desea observar un elemento dentro de un contenedor específico, se puede indicar ese contenedor en esta propiedad.
+- **`rootMargin`**: Define un margen adicional (en píxeles) que se añadirá alrededor del contenedor especificado en la propiedad **`root`**. Esto puede ser útil si se desea detectar la intersección antes de que el elemento esté completamente visible en la pantalla.
+- **`threshold`**: Define un umbral de intersección, que indica el porcentaje del elemento que debe estar visible en el contenedor para que se considere una intersección. Por defecto, este valor es 0 (es decir, se considera una intersección incluso si el elemento está parcialmente visible). Se puede configurar este valor para que la intersección se detecte cuando el elemento está completamente visible, o para que se detecte antes.
 
 Una vez creado el objeto observer, se puede observar un elemento utilizando el método observe:
 
