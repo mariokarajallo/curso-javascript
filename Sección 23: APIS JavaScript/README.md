@@ -75,3 +75,59 @@ verNotificacionBtn.addEventListener('click', () => {
 ```
 
 En resumen, este código proporciona una idea básica de cómo utilizar la `API Notification` para crear y mostrar notificaciones en el escritorio del usuario, y cómo agregar acciones personalizadas a las notificaciones para realizar acciones adicionales al hacer clic en ellas. Sin embargo, es importante tener en cuenta que la compatibilidad de la `API Notification` varía según el navegador y el sistema operativo.
+
+## 23.2 API Intersection Observer 
+
+El Intersection Observer es una API de JavaScript que permite a los desarrolladores observar cambios en la intersección de un elemento con un contenedor específico. Esto es útil cuando se quiere realizar una acción cuando un elemento se encuentra en el área visible de la pantalla del usuario o, por el contrario, cuando está fuera de ella.
+
+El uso principal del Intersection Observer es para la carga de imágenes, técnicas de carga perezosa (lazy loading) de imágenes o elementos multimedias ej: videos que están en la parte inferior de una página web. En lugar de cargar todos los elementos al mismo tiempo, se puede utilizar el Intersection Observer para cargar solo los elementos que están a punto de aparecer en la pantalla del usuario, reduciendo así el tiempo de carga de la página.
+
+El funcionamiento de Intersection Observer es simple: se crea una instancia del objeto IntersectionObserver que recibe una función callback que se ejecutará cada vez que se observe una intersección del elemento observado con el área visible del contenedor. Esta función callback recibe un array de objetos IntersectionObserverEntry que contienen información sobre el elemento observado y su intersección con el área visible del contenedor.
+
+Para crear un objeto IntersectionObserver se utiliza el siguiente código:
+
+```jsx
+const observer = new IntersectionObserver(callback, options);
+```
+
+Donde "callback" es la función que se ejecutará cuando se observe una intersección, y "options" es un objeto que contiene opciones de configuración para el observer, como por ejemplo, el threshold o umbral de intersección que se desea observar.
+
+Una vez creado el objeto observer, se puede observar un elemento utilizando el método observe:
+
+```jsx
+observer.observe(element);
+```
+
+Donde "element" es el elemento que se desea observar.
+
+En resumen, Intersection Observer es una API útil para mejorar el rendimiento de las páginas web al cargar contenido de manera perezosa, permitiendo que los elementos se carguen solo cuando son visibles para el usuario, reduciendo así la cantidad de datos que se deben cargar inicialmente.
+
+Aquí te dejo un ejemplo de cómo podrías utilizar el Intersection Observer:
+
+```jsx
+// Seleccionamos el elemento que queremos observar
+// se selecciona un elemento HTML con la clase "mi-elemento" utilizando el método querySelector.
+const elementoObservado = document.querySelector('.mi-elemento');
+
+// Creamos una instancia del Intersection Observer
+const observador = new IntersectionObserver((entries, observer) => {
+	// Código a ejecutar cada vez que se observe una intersección
+  // entries es un array de objetos que contienen información sobre cada uno de los elementos observados
+	// Dentro de la función callback, se utiliza el método forEach del array entries para iterar sobre cada uno de los objetos IntersectionObserverEntry 
+	//y comprobar si el elemento observado está dentro o fuera del área visible del contenedor
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // El elemento está dentro del área visible, realizamos la acción que deseemos
+      console.log('El elemento está dentro del área visible');
+    } else {
+      // El elemento está fuera del área visible, podemos realizar otra acción
+      console.log('El elemento está fuera del área visible');
+    }
+  });
+});
+
+// Configuramos el observador para que observe el elemento seleccionado
+observador.observe(elementoObservado);
+```
+
+En este ejemplo, estamos observando un elemento con la clase **`.mi-elemento`**. Cuando el elemento está dentro del área visible, se muestra un mensaje en la consola. Si está fuera, se muestra otro mensaje.  Es importante destacar que esta API es muy flexible y se pueden configurar varias opciones, como el threshold o umbral de intersección que se desea observar, la raíz del elemento contenedor, entre otras.
