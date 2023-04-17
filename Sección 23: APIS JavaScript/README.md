@@ -76,7 +76,7 @@ verNotificacionBtn.addEventListener('click', () => {
 
 En resumen, este código proporciona una idea básica de cómo utilizar la `API Notification` para crear y mostrar notificaciones en el escritorio del usuario, y cómo agregar acciones personalizadas a las notificaciones para realizar acciones adicionales al hacer clic en ellas. Sin embargo, es importante tener en cuenta que la compatibilidad de la `API Notification` varía según el navegador y el sistema operativo.
 
-## 23.2 APIIntersection Observer 
+## 23.2 API Intersection Observer 
 
 El Intersection Observer es una API de JavaScript que permite a los desarrolladores observar cambios en la intersección de un elemento con un contenedor específico. Esto es útil cuando se quiere realizar una acción cuando un elemento se encuentra en el área visible de la pantalla del usuario o, por el contrario, cuando está fuera de ella.
 
@@ -135,3 +135,54 @@ observador.observe(elementoObservado);
 ```
 
 En este ejemplo, estamos observando un elemento con la clase **`.mi-elemento`**. Cuando el elemento está dentro del área visible, se muestra un mensaje en la consola. Si está fuera, se muestra otro mensaje.  Es importante destacar que esta API es muy flexible y se pueden configurar varias opciones, como el threshold o umbral de intersección que se desea observar, la raíz del elemento contenedor, entre otras.
+
+## 23.3 Detectar si hay conexión a internet o no
+
+La propiedad **`navigator.onLine`** en JavaScript es una propiedad booleana que indica si el navegador está conectado a internet o no.
+
+Cuando el valor de esta propiedad es **`true`**, significa que el navegador está conectado a internet, y cuando es **`false`**, significa que el navegador no tiene conexión a internet.
+
+Esta propiedad es útil para realizar acciones en línea o fuera de línea en una aplicación web. Por ejemplo, se puede utilizar para mostrar un mensaje al usuario indicando que no hay conexión a internet cuando **`navigator.onLine`** es **`false`**, o para sincronizar datos en segundo plano cuando la conexión a internet está disponible de nuevo, enviar o recibir datos de un servidor remoto.
+
+Es importante tener en cuenta que la propiedad **`navigator.onLine`** no indica la velocidad de la conexión a internet ni el estado de los servidores o sitios web específicos. Simplemente, indica si hay una conexión activa entre el navegador y el dispositivo que proporciona acceso a internet.
+
+Este es un ejemplo muy básico, pero puede ser útil para hacer una verificación rápida del estado de conexión del usuario. También puedes utilizar el valor de **`navigator.onLine`** en otras partes de tu código para tomar decisiones en función del estado de conexión del usuario.
+
+```jsx
+// En este ejemplo, simplemente verificamos el valor de la propiedad navigator.onLine utilizando un condicional if. 
+// Si el valor es true, el usuario está conectado a Internet, se muestra el mensaje "Estás conectado a Internet" en la consola del navegador. 
+// De lo contrario, si el valor es false, se muestra el mensaje "No estás conectado a Internet".
+if (navigator.onLine) {
+  console.log('Estás conectado a Internet');
+} else {
+  console.log('No estás conectado a Internet');
+}
+```
+
+```jsx
+// Seleccionamos el elemento en el que mostraremos el estado de conexión
+const estadoConexion = document.getElementById('estado-conexion');
+
+// Verificamos el estado de conexión inicial del usuario utilizando la propiedad navigator.onLine
+if (navigator.onLine) {
+	//Si el valor de navigator.onLine es true, establecemos el texto del elemento estadoConexion en "Estás conectado a Internet".
+  estadoConexion.textContent = 'Estás conectado a Internet';
+} else {
+	// De lo contrario, establecemos el texto en "No estás conectado a Internet".
+  estadoConexion.textContent = 'No estás conectado a Internet';
+}
+
+// utilizamos los eventos online y offline para detectar cuando el estado de conexión del usuario cambia
+
+// Escuchamos el evento "online" para detectar cuando el usuario se conecta a Internet
+window.addEventListener('online', () => {
+  estadoConexion.textContent = 'Estás conectado a Internet';
+});
+
+// Escuchamos el evento "offline" para detectar cuando el usuario pierde la conexión a Internet
+window.addEventListener('offline', () => {
+  estadoConexion.textContent = 'No estás conectado a Internet';
+});
+```
+
+De esta manera, podemos proporcionar retroalimentación visual al usuario sobre su estado de conexión y actualizarla automáticamente cuando cambia.
