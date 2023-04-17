@@ -136,7 +136,7 @@ observador.observe(elementoObservado);
 
 En este ejemplo, estamos observando un elemento con la clase **`.mi-elemento`**. Cuando el elemento está dentro del área visible, se muestra un mensaje en la consola. Si está fuera, se muestra otro mensaje.  Es importante destacar que esta API es muy flexible y se pueden configurar varias opciones, como el threshold o umbral de intersección que se desea observar, la raíz del elemento contenedor, entre otras.
 
-## 23.3 Detectar si hay conexión a internet o no
+## 23.3 Detectar si hay conexión a internet o no - navigatorOnline
 
 La propiedad **`navigator.onLine`** en JavaScript es una propiedad booleana que indica si el navegador está conectado a internet o no.
 
@@ -186,3 +186,74 @@ window.addEventListener('offline', () => {
 ```
 
 De esta manera, podemos proporcionar retroalimentación visual al usuario sobre su estado de conexión y actualizarla automáticamente cuando cambia.
+
+## 23.4 Ejecutar pantalla completa con JS - resquestFullscreen()
+
+### Método **requestFullscreen()**
+
+**`requestFullscreen`** es un método de JavaScript que se utiliza para solicitar que un elemento HTML se muestre en pantalla completa. Este método se llama en un elemento específico del DOM y puede ser utilizado en navegadores modernos que soportan la API Fullscreen.
+
+Cuando se llama a **`requestFullscreen`** en un elemento, el navegador cambia el modo de visualización del elemento a pantalla completa, lo que significa que se expande para cubrir toda la pantalla del dispositivo. Esto puede ser útil para proporcionar una experiencia de visualización inmersiva para el usuario, especialmente para elementos como videos o imágenes.
+
+### Otros metodos fullscreen
+
+Hay varios métodos relacionados con el modo de pantalla completa
+
+1. **`requestFullscreen()`**: Se utiliza para solicitar que un elemento del DOM se muestre en modo de pantalla completa. Este método se llama en el elemento que deseas mostrar en pantalla completa.
+2. **`exitFullscreen()`**: Este método se utiliza para salir del modo de pantalla completa. Puedes llamar a este método en el objeto **`document`** o en el elemento que está en modo de pantalla completa.
+3. **`fullscreenElement`**: Esta es una propiedad de solo lectura que devuelve el elemento en modo de pantalla completa, si hay uno. Si no hay ningún elemento en modo de pantalla completa, el valor de esta propiedad es **`null`**.
+4. **`fullscreenEnabled`**: Esta es una propiedad de solo lectura que indica si el navegador admite el modo de pantalla completa. El valor de esta propiedad es **`true`** si el navegador admite el modo de pantalla completa y **`false`** en caso contrario.
+5. **`fullscreenchange`**: Este es un evento que se dispara cuando cambia el estado del modo de pantalla completa. Por ejemplo, se dispara cuando se entra o sale del modo de pantalla completa. Puedes usar este evento para realizar acciones adicionales cuando se activa o desactiva el modo de pantalla completa.
+6. **`fullscreenerror`**: Este es un evento que se dispara si se produce un error al intentar cambiar al modo de pantalla completa.
+
+Es importante tener en cuenta que no todos los navegadores admiten estos métodos y propiedades, y algunos de ellos tienen diferentes prefijos de navegador. Por ejemplo, algunos navegadores pueden utilizar el prefijo `webkit` o **`moz`**antes de los nombres de los métodos y propiedades relacionados con el modo de pantalla completa. Es una buena práctica verificar primero si el método o propiedad está disponible en el navegador antes de utilizarlo.
+
+Para utilizar **`requestFullscreen`**, primero debes seleccionar el elemento en el que deseas habilitar el modo de pantalla completa, utilizando el método **`document.querySelector`** o similar. Luego, llamas al método **`requestFullscreen`** en ese elemento para solicitar que se muestre en pantalla completa. Aquí te muestro un ejemplo de cómo utilizar **`requestFullscreen`**:
+
+```jsx
+// Seleccionamos el elemento que queremos mostrar en pantalla completa
+const elementoPantallaCompleta = document.querySelector('.mi-elemento');
+
+// Llamamos al método requestFullscreen en el elemento seleccionado
+if (elementoPantallaCompleta.requestFullscreen) {
+  elementoPantallaCompleta.requestFullscreen();
+}
+```
+
+En este ejemplo, seleccionamos el elemento que queremos mostrar en pantalla completa utilizando **`document.querySelector`** y lo almacenamos en la variable **`elementoPantallaCompleta`**. Luego, comprobamos si el método **`requestFullscreen`** está disponible en el elemento utilizando un condicional **`if`**. Si el método está disponible, lo llamamos en el elemento para solicitar que se muestre en pantalla completa.
+
+Es importante tener en cuenta que la solicitud de pantalla completa solo se puede realizar en respuesta a una acción del usuario, como un clic en un botón o un evento similar. Esto es para evitar que los sitios web abusen del modo de pantalla completa y lo activen sin el consentimiento del usuario.
+
+#### Veamos otro ejemplo:
+
+Este código se encarga de agregar un comportamiento de pantalla completa a dos botones HTML con ID **`abrir-pantalla-completa`**
+ y **`salir-pantalla-completa`**. Cuando el usuario hace clic en el botón “abrir pantalla completa”, se ejecuta la función **`pantallaCompleta`**, que solicita que todo el documento se muestre en modo de pantalla completa utilizando el método **`requestFullscreen()`** en el elemento **`document.documentElement`**. Cuando el usuario hace clic en el botón “salir pantalla completa”, se ejecuta la función **`cerrarPantallaCompleta`**, que sale del modo de pantalla completa utilizando el método **`exitFullscreen()`**
+ en el elemento **`document`**.
+
+<img src="./img/section-23-4.png"/>
+
+```jsx
+// ejecutar el sitio web en pantalla completa...
+// se seleccionan dos botones HTML con los ID abrir-pantalla-completa y salir-pantalla-completa 
+// utilizando el método document.querySelector() y se guardan en las constantes abrirBtn y salirBtn.
+const abrirBtn = document.querySelector('#abrir-pantalla-completa');
+const salirBtn = document.querySelector('#salir-pantalla-completa');
+
+// se agregan eventos de escucha EventListener de clic a los botones abrirBtn y salirBtn
+// Cuando se hace clic en el botón abrirBtn, se llama a la función pantallaCompleta y cuando se hace clic en el botón salirBtn, se llama a la función cerrarPantallaCompleta.
+abrirBtn.addEventListener('click',  pantallaCompleta);
+salirBtn.addEventListener('click',  cerrarPantallaCompleta);
+
+//Esta función se llama cuando el usuario hace clic en el botón abrirBtn.
+// Llama al método requestFullscreen() en el objeto document.documentElement para solicitar que todo el documento se muestre en modo de pantalla completa.
+function pantallaCompleta() {
+    document.documentElement.requestFullscreen();
+}
+
+//Esta función se llama cuando el usuario hace clic en el botón salirBtn. Llama al método exitFullscreen() en el objeto document para salir del modo de pantalla completa.
+function cerrarPantallaCompleta() {
+    document.exitFullscreen();
+}
+```
+
+En resumen, este código proporciona una manera fácil para que los usuarios puedan expandir y contraer el sitio web en modo de pantalla completa, usando dos botones simples.
