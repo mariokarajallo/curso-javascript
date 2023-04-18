@@ -331,3 +331,138 @@ document.addEventListener('visibilitychange', () => {
 });
 ```
 
+## 23.6 Speech API
+
+Speech API (también conocida como Web Speech API) es una API de JavaScript que permite a los desarrolladores agregar la funcionalidad de reconocimiento `SpeechRecognition` y síntesis `SpeechSynthesis` de voz en aplicaciones web. Con esta API, es posible reconocer y transcribir voz en tiempo real, y sintetizar voz para generar mensajes de audio en respuesta.
+
+La API de voz se divide en dos partes principales:
+
+### `SpeechRecognition`
+
+La API de reconocimiento de voz `SpeechRecognition`: permite a los desarrolladores capturar el audio del usuario y transcribirlo en texto en tiempo real utilizando tecnología de reconocimiento de voz. La API transcribe el habla en texto en tiempo real y envía el resultado a la aplicación para su procesamiento. La API también puede reconocer comandos de voz específicos y ejecutar acciones en función de esos comandos.
+
+Existen varios manejadores de evento en la API de Web Speech Recognition que permiten realizar diferentes acciones en respuesta a eventos específicos. A continuación, se describen algunos de los manejadores de eventos más comunes:
+
+1. **`onstart`**:  se activa cuando comienza el reconocimiento de voz. Puede usarse para realizar una acción de inicialización.
+2. **`onspeechend`**:se activa cuando se ha detectado el final de una entrada de voz. Puede usarse para realizar una acción de limpieza o para reiniciar el reconocimiento de voz.
+3. **`onresult`**: se activa cuando se ha detectado una entrada de voz válida y se ha procesado. Proporciona una lista de resultados que pueden ser utilizados por la aplicación.
+4. **`onerror`**: se activa cuando se produce un error durante el reconocimiento de voz. Proporciona información sobre el error y puede usarse para tomar medidas correctivas.
+5. **`onend`**: se activa cuando se ha detenido el reconocimiento de voz. Puede usarse para realizar una acción de limpieza o para reiniciar el reconocimiento de voz.
+6. **`onnomatch`**: se activa cuando no se encuentra ninguna coincidencia en la entrada de voz. Puede usarse para proporcionar una respuesta adecuada al usuario.
+7. **`onaudiostart`**: se activa cuando se comienza a capturar audio. Puede usarse para proporcionar una respuesta visual al usuario.
+8. **`onaudioend`**: se activa cuando se detiene la captura de audio. Puede usarse para proporcionar una respuesta visual al usuario.
+9. **`onsoundstart`**: se activa cuando se detecta un sonido en la entrada de voz. Puede usarse para proporcionar una respuesta visual al usuario.
+10. **`onsoundend`**: se activa cuando se detecta el final de un sonido en la entrada de voz. Puede usarse para proporcionar una respuesta visual al usuario.
+
+Cabe destacar que estos son solo algunos de los manejadores de eventos disponibles, pero es importante tener en cuenta que no todos los manejadores de eventos son compatibles con todos los navegadores y plataformas, y algunos pueden requerir permisos adicionales para funcionar correctamente. Por lo tanto, es importante verificar la documentación oficial de la API de Web Speech Recognition para obtener información detallada sobre los manejadores de eventos disponibles y sus requisitos de compatibilidad.
+
+### `SpeechSynthesis`
+
+La API de síntesis de voz `SpeechSynthesis`: permite a los desarrolladores generar voz en tiempo real utilizando una tecnología de síntesis de voz. La API ofrece una serie de voces sintéticas en diferentes idiomas y dialectos. Los desarrolladores pueden usar la API para generar voz en tiempo real o para crear archivos de audio que contengan la voz generada.
+
+SpeechSynthesis tiene algunos manejadores de eventos diferentes en comparación con SpeechRecognition
+
+1. onvoiceschanged: se activa cuando la lista de voces está disponible y cambia.
+2. onstart: se activa cuando comienza la síntesis de voz.
+3. onend: se activa cuando la síntesis de voz se completa, ya sea con éxito o con un error.
+4. onerror: se activa cuando se produce un error en la síntesis de voz.
+5. onpause: se activa cuando se pausa la síntesis de voz.
+6. onresume: se activa cuando se reanuda la síntesis de voz después de una pausa.
+7. onboundary: se activa cuando se alcanza un límite de palabras, caracteres o frases durante la síntesis de voz.
+8. onmark: se activa cuando se encuentra una marca de referencia durante la síntesis de voz.
+9. oncancel: se activa cuando se cancela la síntesis de voz.
+10. onaudiostart, onaudioend, onvoiceschanged, onpause, onresume, onboundary, onmark, onstart, onend, onerror.
+
+Estos son solo algunos de los manejadores de eventos disponibles en la API SpeechSynthesis, y puedes encontrar más información en la documentación oficial.
+
+La API de voz es muy útil para hacer que las aplicaciones web sean más accesibles, ya que permite a los usuarios interactuar con ellas utilizando solo la voz en lugar de tener que escribir o hacer clic en los botones. También es útil para la creación de chatbots y asistentes virtuales, puesto que permite una interacción más natural con el usuario.
+
+Algunos casos de uso comunes de la API de voz incluyen la creación de aplicaciones de dictado de voz, la traducción de voz en tiempo real, la automatización de llamadas telefónicas y la creación de aplicaciones de accesibilidad para personas con discapacidades visuales o motoras.
+
+un ejemplo sencillo de cómo utilizar la Speech API de JavaScript para reconocer la voz del usuario y mostrar el texto en la pantalla:
+
+HTML:
+
+```html
+<button id="startBtn">Iniciar reconocimiento de voz</button>
+<div id="texto"></div>
+```
+
+JavaScript:
+
+```jsx
+const startBtn = document.getElementById('startBtn');
+const texto = document.getElementById('texto');
+
+// Verificar si el navegador soporta la Speech API
+if ('webkitSpeechRecognition' in window) {
+  // Crear instancia del objeto reconocimiento
+  const reconocimiento = new webkitSpeechRecognition();
+
+  // Establecer las opciones del objeto reconocimiento
+  reconocimiento.continuous = true;
+  reconocimiento.interimResults = true;
+  reconocimiento.lang = 'es-ES';
+
+  // Agregar un evento para cuando se detecte voz
+  reconocimiento.onresult = function(event) {
+    let textoTranscrito = '';
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      if (event.results[i].isFinal) {
+        textoTranscrito += event.results[i][0].transcript;
+      }
+    }
+    // Mostrar el texto transcrito en la pantalla
+    texto.textContent = textoTranscrito;
+  };
+
+  // Agregar un evento para cuando se haga clic en el botón
+  startBtn.addEventListener('click', function() {
+    reconocimiento.start();
+  });
+} else {
+  texto.textContent = 'Lo siento, la Speech API no está disponible en este navegador.';
+}
+```
+
+Este código crea un botón y un contenedor de texto en HTML, y luego utiliza JavaScript para detectar si el navegador es compatible con la Speech API. Si lo es, se crea una instancia del objeto **`webkitSpeechRecognition`** y se configura para que detecte la voz del usuario en español. Luego se agrega un evento al botón que inicia el reconocimiento de voz cuando se hace clic en él. Cuando el objeto reconocimiento detecta voz, se transcribe el texto y se muestra en el contenedor de texto en pantalla. Si la Speech API no está disponible en el navegador, se muestra un mensaje de error en lugar del botón.
+
+Ejemplo sencillo de **`SpeechRecognition`**:
+
+```jsx
+// Creamos un nuevo objeto SpeechRecognition
+//una instancia del objeto SpeechRecognition, que se utilizará para configurar y realizar el reconocimiento de voz.
+const recognition = new SpeechRecognition();
+
+// Configuramos el reconocimiento de voz
+recognition.lang = "es-ES"; // Idioma español de España
+recognition.continuous = false; // El reconocimiento se detendrá después de una pausa en el habla
+recognition.interimResults = true; // Devuelve resultados provisionales mientras se habla
+
+// Creamos una variable donde se almacenará el texto reconocido
+let textoReconocido = "";
+
+// Evento que se dispara cuando se detecta una pausa en el habla del usuario
+recognition.onresult = event => {
+  // Obtenemos el último resultado del reconocimiento
+  const resultado = event.results[event.results.length - 1];
+
+  // Si el resultado es definitivo, almacenamos el texto reconocido
+  if (resultado.isFinal) {
+    textoReconocido += resultado[0].transcript;
+  }
+}
+
+// Evento que se dispara cuando el reconocimiento ha finalizado
+// En este evento, se muestra el texto reconocido en la consola del navegador.
+recognition.onend = () => {
+  console.log(textoReconocido);
+}
+
+// Iniciamos el reconocimiento de voz lamando al método start() del objeto SpeechRecognition. 
+// Con esta línea, se activa el micrófono del dispositivo y se inicia el proceso de reconocimiento de voz.
+recognition.start();
+
+```
+
+En resumen, este código crea una instancia del objeto **`SpeechRecognition`**, configura sus opciones, define eventos para manejar los resultados del reconocimiento y el final del mismo, y finalmente, inicia el reconocimiento de voz. Al finalizar el reconocimiento, se muestra el texto reconocido en la consola del navegador.
