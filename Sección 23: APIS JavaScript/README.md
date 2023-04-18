@@ -257,3 +257,77 @@ function cerrarPantallaCompleta() {
 ```
 
 En resumen, este código proporciona una manera fácil para que los usuarios puedan expandir y contraer el sitio web en modo de pantalla completa, usando dos botones simples.
+
+## 23.5 Detectar cuando estamos viendo la página web actual - **visibilityState**
+
+### VisibilityState
+
+La propiedad **`visibilityState`** es una propiedad de solo lectura de la API **`Page Visibility`** en JavaScript que indica si la página web está visible o no para el usuario. Esta propiedad es útil para determinar si el usuario está interactuando con la página o si la página está oculta o minimizada en la pantalla.
+
+**`visibilitychange`** es un evento que forma parte de la API **`Page Visibility`** y se dispara cada vez que el valor de la propiedad **`visibilityState`** cambia, es decir, cuando la página se oculta o se muestra. El evento se dispara en el objeto **`document`** y se puede detectar y escuchar mediante el método **`addEventListener()`** Este evento es muy útil para detectar cambios en la visibilidad de la página y así tomar medidas en consecuencia.
+
+```jsx
+// En este ejemplo, se añade un manejador de eventos al objeto document para el evento visibilitychange.
+document.addEventListener('visibilitychange', function() {
+	// Cuando se dispara el evento, se comprueba el valor actual de visibilityState
+	// para determinar si la página está oculta o visible y se realiza la acción correspondiente.
+  if (document.visibilityState === 'hidden') {
+    // La página está oculta
+  } else {
+    // La página está visible
+  }
+});
+```
+
+La propiedad **`visibilityState`** puede tener uno de los siguientes valores:
+
+- **`"visible"`**: indica que la página es visible y el usuario está interactuando con ella. Ejemplo: un usuario está mirando la página en su navegador y tiene la pestaña activa.
+- **`"hidden"`**: indica que la página está oculta y el usuario no está interactuando con ella. Por ejemplo, cuando el usuario cambia a otra pestaña del navegador.
+- **`"prerender"`**: indica que la página se está cargando en segundo plano (memoria cache) y aún no está visible para el usuario. Ejemplo: el usuario ha abierto la página en una nueva pestaña, pero aún no ha cambiado a esa pestaña para verla.
+
+La propiedad **`visibilityState`** es útil para desarrollar aplicaciones que necesitan ajustar su comportamiento según si la página está visible o no. Por ejemplo, si estás desarrollando una aplicación que utiliza muchos recursos, puedes pausar algunos procesos cuando la página no está visible para reducir la carga del sistema y mejorar el rendimiento.
+
+Aquí hay un ejemplo sencillo que muestra cómo utilizar **`visibilityState`**:
+
+```jsx
+// Verificar si la página está visible
+if (document.visibilityState === 'visible') {
+  // La página está visible, realizar una acción
+  console.log('La página está visible');
+} else {
+  // La página no está visible, realizar otra acción
+  console.log('La página no está visible');
+}
+
+// Agregar un evento de cambio de visibilidad
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    // La página está visible, realizar una acción
+    console.log('La página está visible');
+  } else {
+    // La página no está visible, realizar otra acción
+    console.log('La página no está visible');
+  }
+});
+```
+
+En este ejemplo, se utiliza la propiedad **`visibilityState`** para comprobar si la página está visible o no en el momento de la carga. También se agrega un evento de cambio de visibilidad que se dispara cuando el usuario cambia entre pestañas del navegador o minimiza la ventana del navegador. El evento comprueba si la página está visible o no y realiza una acción correspondiente en cada caso.
+
+Aquí otro ejemplo simple de cómo se puede utilizar la propiedad **`visibilityState`** para pausar un video cuando la página está oculta:
+
+```jsx
+//se selecciona un elemento de video utilizando el método **document.querySelector()**
+const video = document.querySelector('video');
+
+//se agrega un evento **visibilitychange** a la propiedad **document** para detectar cuando cambia la visibilidad de la página. 
+// Cuando la página se oculta (**visibilityState** es **"hidden"**), el video se pausa. 
+// Cuando la página se vuelve a mostrar (**visibilityState** es **"visible"**), el video se reproduce.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') {
+    video.pause();
+  } else {
+    video.play();
+  }
+});
+```
+
