@@ -331,13 +331,13 @@ document.addEventListener('visibilitychange', () => {
 });
 ```
 
-## 23.6 Speech API
+## 23.6 Web Speech API
 
 Speech API (también conocida como Web Speech API) es una API de JavaScript que permite a los desarrolladores agregar la funcionalidad de reconocimiento `SpeechRecognition` y síntesis `SpeechSynthesis` de voz en aplicaciones web. Con esta API, es posible reconocer y transcribir voz en tiempo real, y sintetizar voz para generar mensajes de audio en respuesta.
 
 La API de voz se divide en dos partes principales:
 
-### `SpeechRecognition`
+### SpeechRecognition
 
 La API de reconocimiento de voz `SpeechRecognition`: permite a los desarrolladores capturar el audio del usuario y transcribirlo en texto en tiempo real utilizando tecnología de reconocimiento de voz. La API transcribe el habla en texto en tiempo real y envía el resultado a la aplicación para su procesamiento. La API también puede reconocer comandos de voz específicos y ejecutar acciones en función de esos comandos.
 
@@ -356,22 +356,23 @@ Existen varios manejadores de evento en la API de Web Speech Recognition que per
 
 Cabe destacar que estos son solo algunos de los manejadores de eventos disponibles, pero es importante tener en cuenta que no todos los manejadores de eventos son compatibles con todos los navegadores y plataformas, y algunos pueden requerir permisos adicionales para funcionar correctamente. Por lo tanto, es importante verificar la documentación oficial de la API de Web Speech Recognition para obtener información detallada sobre los manejadores de eventos disponibles y sus requisitos de compatibilidad.
 
-### `SpeechSynthesis`
+### SpeechSynthesis
 
 La API de síntesis de voz `SpeechSynthesis`: permite a los desarrolladores generar voz en tiempo real utilizando una tecnología de síntesis de voz. La API ofrece una serie de voces sintéticas en diferentes idiomas y dialectos. Los desarrolladores pueden usar la API para generar voz en tiempo real o para crear archivos de audio que contengan la voz generada.
 
 SpeechSynthesis tiene algunos manejadores de eventos diferentes en comparación con SpeechRecognition
 
-1. onvoiceschanged: se activa cuando la lista de voces está disponible y cambia.
-2. onstart: se activa cuando comienza la síntesis de voz.
-3. onend: se activa cuando la síntesis de voz se completa, ya sea con éxito o con un error.
-4. onerror: se activa cuando se produce un error en la síntesis de voz.
-5. onpause: se activa cuando se pausa la síntesis de voz.
-6. onresume: se activa cuando se reanuda la síntesis de voz después de una pausa.
-7. onboundary: se activa cuando se alcanza un límite de palabras, caracteres o frases durante la síntesis de voz.
-8. onmark: se activa cuando se encuentra una marca de referencia durante la síntesis de voz.
-9. oncancel: se activa cuando se cancela la síntesis de voz.
-10. onaudiostart, onaudioend, onvoiceschanged, onpause, onresume, onboundary, onmark, onstart, onend, onerror.
+1. **`onvoiceschanged`**: se activa cuando la lista de voces está disponible y cambia.
+2. **`onstart`**: se activa cuando comienza la síntesis de voz.
+3. **`onend`**: se activa cuando la síntesis de voz se completa, ya sea con éxito o con un error.
+4. **`onerror`**: se activa cuando se produce un error en la síntesis de voz.
+5. **`onpause`**: se activa cuando se pausa la síntesis de voz.
+6. **`onresume`**: se activa cuando se reanuda la síntesis de voz después de una pausa.
+7. **`onboundary`**: se activa cuando se alcanza un límite de palabras, caracteres o frases durante la síntesis de voz.
+8. **`onmark`**: se activa cuando se encuentra una marca de referencia durante la síntesis de voz.
+9. **`oncancel`**: se activa cuando se cancela la síntesis de voz.
+
+Tambien existen onaudiostart, onaudioend. 
 
 Estos son solo algunos de los manejadores de eventos disponibles en la API SpeechSynthesis, y puedes encontrar más información en la documentación oficial.
 
@@ -466,3 +467,6 @@ recognition.start();
 ```
 
 En resumen, este código crea una instancia del objeto **`SpeechRecognition`**, configura sus opciones, define eventos para manejar los resultados del reconocimiento y el final del mismo, y finalmente, inicia el reconocimiento de voz. Al finalizar el reconocimiento, se muestra el texto reconocido en la consola del navegador.
+
+
+> 💡 Documentacion Oficial - **Web Speech API**
