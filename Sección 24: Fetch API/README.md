@@ -92,3 +92,28 @@ function obtenerDatos() {
         })
 }
 ```
+
+## 24.2. Consultar un JSON
+
+### Json (JavaScript Object Notation)
+
+JSON (JavaScript Object Notation) es un formato de datos utilizado para transmitir datos estructurados en la web. Es un formato de texto sencillo y ligero que es fácil de leer y escribir para humanos, y fácil de interpretar y generar para las aplicaciones. Es un formato muy popular utilizado para intercambiar datos en aplicaciones web modernas, como RESTful APIs.
+
+En JavaScript, los objetos también JSON se pueden crear y manipular utilizando funciones nativas como **`JSON.parse()`** y **`JSON.stringify()`**. 
+
+- **`JSON.parse()`** se utiliza para convertir una cadena JSON en un objeto JavaScript.
+- **`JSON.stringify()`** se utiliza para convertir un objeto JavaScript en una cadena JSON.
+
+JSON es una notación de objeto que se utiliza para almacenar y transferir datos entre el `servidor y el cliente` en aplicaciones web. Los objetos JSON son una colección de pares clave-valor, similares a los objetos en JavaScript, pero con una sintaxis diferente. Por ejemplo:
+
+```jsx
+{
+  "nombre": "Mario",
+  "edad": 30,
+  "email": "mario@example.com"
+}
+```
+
+En este ejemplo, tenemos un objeto JSON que tiene tres propiedades: "nombre", "edad" y "email". Cada propiedad tiene un valor asociado separado por dos puntos. Los objetos JSON se utilizan comúnmente para enviar datos estructurados entre el servidor y el cliente en una solicitud HTTP, y pueden ser fácilmente interpretados y manipulados en JavaScript.
+
+En resumen, JSON es un formato de datos muy utilizado en el desarrollo web y se utiliza ampliamente en aplicaciones de JavaScript para transferir y manipular datos.
