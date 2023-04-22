@@ -117,3 +117,48 @@ JSON es una notación de objeto que se utiliza para almacenar y transferir datos
 En este ejemplo, tenemos un objeto JSON que tiene tres propiedades: "nombre", "edad" y "email". Cada propiedad tiene un valor asociado separado por dos puntos. Los objetos JSON se utilizan comúnmente para enviar datos estructurados entre el servidor y el cliente en una solicitud HTTP, y pueden ser fácilmente interpretados y manipulados en JavaScript.
 
 En resumen, JSON es un formato de datos muy utilizado en el desarrollo web y se utiliza ampliamente en aplicaciones de JavaScript para transferir y manipular datos.
+
+### Ejemplo de una consulta JSON en Fetch
+
+este ejemplo utiliza Fetch API para obtener un archivo JSON y luego utiliza la función "mostrarHTML" para mostrar los datos en una página web.
+
+```jsx
+// Fetch API desde un JSON (Array)
+// se selecciona el botón con id "cargarJSON" y se le agrega un event listener que espera que se haga clic en él.
+const cargarJSONBtn = document.querySelector('#cargarJSON');
+// Cuando se haga clic, se ejecutará la función "obtenerDatos".
+cargarJSONBtn.addEventListener('click', obtenerDatos);
+
+//Dentro de la función "obtenerDatos", se llama a la función "fetch" con la ruta del archivo "empleado.json" como argumento y realiza una solicitud HTTP GET a la ruta "data/empleado.json" para obtener los datos del empleado.
+function obtenerDatos() {
+    fetch('data/empleado.json') 
+				// se encadena una promesa "then" para manejar la respuesta del método "fetch()".
+        .then( respuesta => {
+						// // se utiliza la función "json()" del objeto "respuesta" para convertir los datos JSON en un objeto JavaScript.
+            return respuesta.json()
+        }) 
+				// se encadena otra promesa "then" que recibe el objeto JavaScript resultante.
+        .then(resultado => {
+						// se llama a la función "mostrarHTML" y se le pasa el objeto JavaScript como argumento.
+            mostrarHTML(resultado);
+						// Finalmente, se imprime el objeto JavaScript en la consola del navegador utilizando la función "console.log".
+            console.log(resultado)
+        })
+}
+
+//La función "mostrarHTML" recibe un objeto JavaScript como argumento.
+//utiliza destructuring para obtener los valores de "empresa", "id", "nombre" y "trabajo"
+function mostrarHTML({empresa,  id, nombre, trabajo}) {
+		// se selecciona el elemento con id "contenido"
+    const contenido = document.querySelector('#contenido');
+
+		//se establece su propiedad "innerHTML" con un string que contiene los valores del objeto JavaScript
+		//se muestra el contenido del objeto JavaScript en el elemento "contenido" del HTML.
+    contenido.innerHTML = `
+        <p>Empleado: ${nombre} </p>
+        <p>ID: ${id} </p>
+        <p>Empresa: ${empresa} </p>
+        <p>Trabajo: ${trabajo} </p>
+    `
+}
+```
