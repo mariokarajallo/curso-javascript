@@ -260,3 +260,118 @@ function mostrarHTML(empleados) {
 }
 ```
 
+## 24.4 Consultar e Imprimir los Resultados de una API
+
+Cuando trabajamos con APIs, una de las tareas más comunes es hacer una consulta a una API y luego imprimir los resultados en nuestra página web. Para hacer esto, podemos seguir los siguientes pasos:
+
+1. Utilizar la función **`fetch()`** para hacer una petición a la API y obtener los datos. La URL a la que se hace la petición y el método HTTP que se utiliza dependen de la API en cuestión.
+2. Una vez que se han obtenido los datos de la API, se debe analizar la respuesta para extraer la información que necesitamos. En algunos casos, la respuesta puede ser un objeto JSON que se puede parsear y trabajar como un objeto JavaScript.
+3. Una vez que se tiene la información que se necesita, se puede utilizar JavaScript para modificar el contenido de la página web y mostrar los resultados. Esto puede implicar la creación de elementos HTML dinámicamente y la inserción de datos en ellos.
+
+Por ejemplo, supongamos que queremos obtener información sobre un usuario a partir de su nombre de usuario en GitHub y mostrar su avatar, nombre y bio en nuestra página web. Para hacer esto, podemos utilizar la API pública de GitHub.
+
+El siguiente código muestra cómo hacer una consulta a la API de GitHub para obtener la información de un usuario y mostrarla en nuestra página web:
+
+```jsx
+//Se selecciona el formulario HTML y los elementos de entrada de usuario y resultado utilizando querySelector.
+const form = document.querySelector('#github-form');
+const usernameInput = document.querySelector('#username-input');
+const resultContainer = document.querySelector('#result-container');
+
+//Se agrega un evento de escucha para el evento submit del formulario.
+form.addEventListener('submit', (event) => {
+	// Se previene el comportamiento predeterminado del formulario al enviar datos al servidor y se obtiene el valor de entrada del nombre de usuario.
+  event.preventDefault();
+  const username = usernameInput.value;
+
+	// Se realiza una solicitud fetch() a la API de GitHub con el nombre de usuario del usuario especificado.
+  fetch(`https://api.github.com/users/${username}`)
+		// Se maneja la respuesta de la solicitud como un objeto JSON utilizando el método json().
+    .then(response => response.json())
+		// Se extraen los datos relevantes de la respuesta JSON, como la URL del avatar, el nombre y la biografía del usuario.
+    .then(data => {
+			//Se crean elementos HTML para mostrar los detalles del perfil de usuario, como la imagen de avatar, el nombre y la biografía.
+      const {avatar_url, name, bio} = data;
+
+      const avatar = document.createElement('img');
+      avatar.src = avatar_url;
+
+      const nameElement = document.createElement('h2');
+      nameElement.textContent = name;
+
+      const bioElement = document.createElement('p');
+      bioElement.textContent = bio;
+
+			// Se vacía el contenedor de resultados anterior y se agregan los elementos HTML creados para mostrar la información del perfil de usuario.
+      resultContainer.innerHTML = '';
+      resultContainer.appendChild(avatar);
+      resultContainer.appendChild(nameElement);
+      resultContainer.appendChild(bioElement);
+    })
+		// Se maneja cualquier error de la solicitud fetch() y se muestra un mensaje de error en caso de error.
+    .catch(error => {
+      console.error(error);
+      resultContainer.textContent = 'Hubo un error al obtener la información del usuario.';
+    });
+});
+```
+
+En este ejemplo, el código primero obtiene los elementos HTML relevantes utilizando **`document.querySelector()`**. 
+
+- Luego, se agrega un escucha de evento al formulario para que se ejecute una función cuando se envíe el formulario.
+- La función que maneja el envío del formulario utiliza **`fetch()`** para hacer una petición a la API de GitHub.
+- La URL a la que se hace la petición se construye a partir del nombre de usuario que se obtiene del campo de entrada.
+- Luego, se utiliza **`response.json()`** para analizar la respuesta de la API y extraer los datos relevantes.
+- Una vez que se han obtenido los datos del usuario, se crean elementos HTML dinámicamente utilizando **`document.createElement()`** y se les asigna el contenido correspondiente utilizando **`.textContent`** y **`.src`**.
+- Luego, se insertan estos elementos en la página utilizando  **`resultContainer.appendChild()`**.
+- En caso de que haya un error al obtener la información del usuario, se muestra un mensaje de error en lugar de los datos del usuario.
+
+### Ejemplo Práctico
+
+Este código es un ejemplo de cómo utilizar la Fetch API para obtener datos de una API externa y mostrarlos en una página HTML. En este caso, la API utilizada es la de Picsum, que proporciona una lista de imágenes con sus detalles.
+
+```jsx
+// Fetch API desde una API
+
+// Seleccionar el botón "cargarAPI" del documento HTML y añadir un evento de click que llame a la función obtenerDatos().
+const cargarAPIBtn = document.querySelector('#cargarAPI');
+cargarAPIBtn.addEventListener('click', obtenerDatos);
+
+//Definir la función obtenerDatos()
+//utiliza la función fetch() para hacer una solicitud GET a la API de Picsum.
+function obtenerDatos() {
+    fetch('https://picsum.photos/list') 
+				//Cuando se recibe la respuesta, se convierte a JSON utilizando el método json().
+        .then( respuesta => {
+            return respuesta.json()
+        }) 
+				//se llama a la función mostrarHTML() para mostrar los datos obtenidos.
+        .then(resultado => {
+            mostrarHTML(resultado);
+            console.log(resultado)
+        })
+}
+
+//la función mostrarHTML()
+// toma los datos de la API recibidos como parámetro y los muestra en el contenido HTML de la página. 
+function mostrarHTML(datos) {
+    //Primero, se selecciona el elemento del HTML donde se mostrarán los datos.
+    const contenido = document.querySelector('#contenido');
+
+    let html = '';
+		//Luego, se itera sobre cada objeto del arreglo de datos y se extraen las propiedades necesarias. 
+    datos.forEach( perfil => {
+				//Para cada objeto "perfil" en el array "datos", se extraen las propiedades "author" y "post_url".
+        const { author, post_url } = perfil;
+				//Se crea un string con el contenido HTML que se agregará al elemento seleccionado anteriormente.
+        html += `
+            <p>Autor: ${author} </p>
+            <a href="${post_url}" target="_blank">Ver Imagen</a>
+        `
+    });
+
+		//Finalmente, se establece el contenido de la sección con ID "contenido" en el HTML generado.
+    contenido.innerHTML = html;
+    
+}
+```
