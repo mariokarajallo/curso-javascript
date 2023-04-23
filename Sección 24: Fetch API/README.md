@@ -162,3 +162,101 @@ function mostrarHTML({empresa,  id, nombre, trabajo}) {
     `
 }
 ```
+
+## 24.3 Consultar e Imprimir los Resultados de un Fetch
+
+Para consultar e imprimir los resultados de un Fetch, se utiliza el método **`then()`** después de llamar a la función **`fetch()`**. Dentro de la función anónima del método **`then()`**, se pueden realizar diferentes operaciones con los datos obtenidos de la respuesta.
+
+Por ejemplo, supongamos que queremos realizar una solicitud GET a una API para obtener los datos de una lista de usuarios y mostrarlos en la consola. Podemos utilizar el siguiente código:
+
+```jsx
+fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+```
+
+En este código, se utiliza la función **`fetch()`** para realizar una solicitud GET a la API en la URL especificada. Después, se llama al método **`then()`** para analizar los datos de la respuesta con el método **`json()`**. 
+
+La promesa devuelta por **`json()`** se pasa a otra función **`then()`** donde los datos se muestran en la consola mediante la función **`console.log()`**.
+
+Finalmente, se utiliza el método **`catch()`** para manejar cualquier error que pueda ocurrir durante la solicitud.
+
+Si en lugar de mostrar los datos en la consola, queremos mostrarlos en el HTML de la página, podemos hacerlo de la siguiente manera:
+
+```jsx
+// Realiza una solicitud HTTP GET a la API JSONPlaceholder para obtener la lista de usuarios
+fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json()) // Convierte la respuesta en un objeto JavaScript
+  .then(data => { // El objeto JavaScript se recibe como parámetro "data"
+    const userList = document.querySelector('#user-list'); // Obtiene el elemento "ul" con ID "user-list"
+    data.forEach(user => { // Recorre cada usuario en el objeto "data"
+      const userElement = document.createElement('li'); // Crea un elemento de lista "li" en el HTML
+      userElement.textContent = user.name; // Establece el contenido de texto del elemento "li" en el nombre del usuario
+      userList.appendChild(userElement); // Agrega el elemento "li" al elemento "ul" en el HTML
+    });
+  })
+  .catch(error => console.error(error)); // Maneja cualquier error que ocurra durante la solicitud y lo muestra en la consola del navegador
+```
+
+Este código utiliza el método **`fetch()`** para obtener una lista de usuarios en formato JSON desde una API pública de prueba llamada JSONPlaceholder. 
+
+Luego, la respuesta de la solicitud se convierte a un objeto JavaScript utilizando el método **`.json()`**.
+
+Después de que el objeto JavaScript se haya recibido, se utiliza el método **`forEach()`** para recorrer cada usuario en la lista de usuarios y crear un elemento de lista **`li`** en el HTML para cada usuario. Se establece el contenido de texto de cada elemento **`li`** en el nombre del usuario utilizando la propiedad **`textContent`**.
+
+Finalmente, los elementos de lista **`li`** se agregan al elemento de lista **`ul`** en el HTML de la página, que tiene un ID de "user-list". Si ocurre algún error durante la solicitud, se maneja y se muestra en la consola del navegador utilizando el método **`.catch()`**.
+
+### **Ejemplo Práctico**
+
+El siguiente ejemplo es una muestra de cómo consumir un archivo JSON con Fetch API en JavaScript y mostrar su contenido en una página web.
+
+```jsx
+// Fetch API desde un JSON (Objeto)
+// Se comienza por asignar a la variable cargarJSONArrayBtn el elemento del HTML que tiene como ID "cargarJSONArray".
+const cargarJSONArrayBtn = document.querySelector('#cargarJSONArray');
+// se agrega un event listener al botón asignado en el paso anterior que llama a la función obtenerDatos cuando se hace click sobre él.
+cargarJSONArrayBtn.addEventListener('click', obtenerDatos);
+
+// La función obtenerDatos hace una solicitud a un archivo JSON mediante el uso de fetch() y la URL del archivo.
+function obtenerDatos() {
+    fetch('data/empleados.json')
+				// El método .then() se encarga de manejar la respuesta de la solicitud anterior.
+				// En este caso, se convierte la respuesta en formato JSON usando el método json().
+        .then( respuesta => {
+            return respuesta.json()
+        }) 
+				// Otra vez, el método .then() maneja la promesa retornada por json()
+				// y se llama a la función mostrarHTML para renderizar el contenido JSON en la página web.
+        .then(resultado => {
+            mostrarHTML(resultado);
+            console.log(resultado)
+        })
+}
+
+// La función mostrarHTML recibe el array de empleados en formato JSON como argumento
+// y se encarga de construir una cadena de HTML con los datos de cada empleado.
+function mostrarHTML(empleados) {
+    const contenido = document.querySelector('#contenido');
+
+    let html = '';
+		// se utiliza un bucle forEach para recorrer el array de objetos empleados que se ha obtenido previamente del archivo JSON.
+    empleados.forEach( empleado => {
+				// Para cada objeto empleado, se extraen sus propiedades id, nombre, empresa y trabajo usando la sintaxis de desestructuración de objetos de JavaScript.
+        const { id, nombre, empresa, trabajo} = empleado;
+				// se construye un bloque de HTML utilizando una cadena de plantilla y las propiedades del objeto empleado. 
+				// Este bloque de HTML se va concatenando a la variable html en cada iteración del bucle.
+        html += `
+            <p>Empleado: ${nombre} </p>
+            <p>ID: ${id} </p>
+            <p>Empresa: ${empresa} </p>
+            <p>Trabajo: ${trabajo} </p>
+        `
+    });
+		// Finalmente, el contenido de html se inserta en el elemento del DOM con ID contenido, utilizando la propiedad innerHTML.
+		// Esto hace que el HTML generado se muestre en la página web como una lista de empleados con su información correspondiente.
+    contenido.innerHTML = html;
+    
+}
+```
+
