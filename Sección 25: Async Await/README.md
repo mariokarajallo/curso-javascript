@@ -178,3 +178,136 @@ function miFuncion() {
 En este caso, `miFuncion` es una declaración de función y dentro de ella se define `otraFuncion` como una función interna. Puedes usar `async` y `await` dentro de `otraFuncion`, pero no directamente en `miFuncion`.
 
 En resumen, puedes utilizar `async` y `await` tanto en funciones de expresión como en funciones definidas dentro de declaraciones de función. Sin embargo, en una declaración de función directa, debes definir una función interna si deseas utilizar `async` y `await`. En ambos casos, las funciones asíncronas con `async` y `await` te permiten trabajar de manera más conveniente con código asincrónico y promesas.
+
+## 25.4 ¿Como manejar múltiples awaits?
+
+Hay algunas formas de manejar múltiples **`await`** de manera más eficiente y evitar esperar innecesariamente. Aquí te presento algunas sugerencias:
+
+### Utilizando `await` encadenado:
+
+Para manejar múltiples `await` de manera secuencial, puedes utilizar la sintaxis de `await` encadenado
+
+```jsx
+async function ejemplo() {
+  try {
+    const resultado1 = await promesa1();
+    console.log(resultado1);
+
+    const resultado2 = await promesa2();
+    console.log(resultado2);
+
+    const resultado3 = await promesa3();
+    console.log(resultado3);
+
+    // ...continuar con más await si es necesario
+  } catch (error) {
+    console.log(error);
+  }
+}
+```
+
+En este enfoque, cada `await` espera a que la promesa anterior se resuelva antes de ejecutarse. Esto garantiza una ejecución secuencial y ordenada de las promesas.
+
+### Utilizando una estructura de bucle:
+
+También puedes utilizar una estructura de bucle para esperar por cada promesa individualmente:
+
+```jsx
+async function ejemplo() {
+  try {
+    const promesas = [promesa1(), promesa2(), promesa3()];
+    for (const promesa of promesas) {
+      const resultado = await promesa;
+      console.log(resultado);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+```
+
+En este caso, creamos un array de promesas y luego utilizamos un bucle `for...of` para iterar sobre ellas. En cada iteración, se utiliza `await` para esperar a que la promesa se resuelva y luego se muestra el resultado.
+
+### Paralelizar las operaciones asincrónicas con Promise.all():
+
+Si tienes varias operaciones asincrónicas que no dependen entre sí, puedes ejecutarlas en paralelo utilizando **`Promise.all()`**. Esto permite que se ejecuten al mismo tiempo y no tengas que esperar por una para iniciar la siguiente. El método **`Promise.all()`** recibe un array de promesas y devuelve una promesa que se resuelve cuando todas las promesas del array se han resuelto.
+
+Ejemplo:
+
+```jsx
+async function obtenerDatos() {
+  try {
+    const respuesta = await Promise.all([promesa1(), promesa2()]);
+    console.log(respuesta[0]);
+    console.log(respuesta[1]);
+  } catch (error) {
+    console.log(error);
+  }
+}
+```
+
+#### otro ejemplo:
+
+En este ejemplo vemos que la primera versión utiliza múltiples **`await`** para esperar las promesas de forma secuencial, mientras que la segunda versión utiliza **`Promise.all()`** para realizar múltiples operaciones asincrónicas en paralelo y esperar a que todas se completen antes de continuar.
+
+```jsx
+// 2 O mas Async await...
+
+// Es muy común tener 2 Async Await,  es probable que quieras en una misma función descargar los últimos 100 clientes y también los últimos 50 pedidos..
+
+// Las primeras dos funciones, descargarNuevosClientes() y descargarUltimosPedidos(), son funciones que devuelven promesas simulando la descarga de clientes y pedidos respectivamente.
+// Estas funciones tienen un temporizador setTimeout de 5 segundos antes de resolver la promesa para simular una operación asincrónica.
+function descargarNuevosClientes() {
+  return new Promise((resolve) => {
+    console.log("Descargando Clientes....");
+    setTimeout(() => {
+      resolve("Los clientes fueron descargados");
+    }, 5000);
+  });
+}
+
+function descargarUltimosPedidos() {
+  return new Promise((resolve) => {
+    console.log("Descargando Pedidos....");
+    setTimeout(() => {
+      resolve("Los pedidos fueron descargados");
+    }, 5000);
+  });
+}
+
+// Async await secuencial
+// se muestra una forma de manejar las operaciones asincrónicas utilizando múltiples await en una secuencia.
+// const app = async () => {
+//     try {
+//         const clientes = await descargarNuevosClientes();
+//         console.log(clientes);
+
+//         const pedidos = await descargarUltimosPedidos();
+//         console.log(pedidos);
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+// La solución optima para ejecutar varios async await, Promise.all();
+// La función app() ahora utiliza await Promise.all([descargarNuevosClientes(), descargarUltimosPedidos() ])
+// Recibe un array de promesas y devuelve una promesa que se resuelve cuando todas las promesas en el array se han resuelto. Esto significa que ambas descargas se realizan al mismo tiempo, en paralelo.
+const app = async () => {
+  try {
+    ////Después de esperar a que Promise.all() se resuelva, se almacena la respuesta en la variable respuesta.
+    const respuesta = await Promise.all([
+      descargarNuevosClientes(),
+      descargarUltimosPedidos(),
+    ]);
+    // Luego se imprimen los resultados en la consola, accediendo a los elementos del array respuesta utilizando respuesta[0] y respuesta[1].
+    console.log(respuesta);
+    console.log(respuesta[0]);
+    console.log(respuesta[1]);
+  } catch (error) {
+    console.log(error);
+  }
+};
+app();
+```
+
+Los tres enfoques presentados son válidos y pueden adaptarse según los requisitos específicos de tu código. Recuerda que utilizar `await` bloquea la ejecución de la función hasta que la promesa se resuelva, por lo que ten en cuenta que el tiempo de espera total aumentará si tienes múltiples `await` secuenciales.
