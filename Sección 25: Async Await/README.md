@@ -122,3 +122,59 @@ console.log(2 + 2); // Este código se continua ejecutando mientras que el await
 ```
 
 Los **`async`** y **`await`** son herramientas poderosas que simplifican la escritura de código asíncrono en JavaScript, permitiendo una sintaxis más clara y fácil de entender cuando se trabaja con promesas y tareas asíncronas.
+
+## 25.3 Async Await en function express y Declaration
+
+### Antes hablemos del `Hoisting`
+
+El hoisting es un comportamiento en JavaScript donde las declaraciones de variables y funciones se mueven al principio del ámbito en el que se encuentran, antes de que se ejecute el código.
+
+En otras palabras, cuando se declara una variable o función en JavaScript, el intérprete de JavaScript mueve esa declaración al principio del ámbito en el que se encuentra, antes de que se ejecute cualquier otra línea de código en ese ámbito. Esto significa que se puede utilizar una variable o función antes de que se declare explícitamente en el código.
+
+Sin embargo, es importante tener en cuenta que solo la declaración se mueve al principio del ámbito, no la asignación. Por lo tanto, si se utiliza una variable antes de asignarle un valor, su valor será "undefined".
+
+Por ejemplo, considera el siguiente código:
+
+```jsx
+console.log(miVariable); // undefined
+var miVariable = 10;
+```
+
+En este caso, la declaración de la variable "miVariable" se mueve al principio del ámbito, pero la asignación no. Por lo tanto, cuando se intenta imprimir el valor de "miVariable" antes de asignarle un valor, se imprime "undefined".
+
+Es importante tener en cuenta que el hoisting puede ser confuso y puede llevar a errores sutiles en el código. Pues, es una buena práctica declarar todas las variables y funciones al principio del ámbito para evitar problemas.
+
+La diferencia principal entre una función de expresión y una función de declaración en relación con el uso de `async` y `await` radica en cómo se definen y se accede a ellas.
+
+### Asyn Await en Función de expresión:
+
+Una función de expresión se define asignando una función anónima a una variable o constante, en este caso, la variable se convierte en un nombre de referencia para la función. Estas funciones no pueden ser llamadas antes de su definición en el código y, por lo tanto, no están sujetas al hoisting. Son adecuadas para casos en los que solo necesitas llamar la función después de definirla.
+Puede utilizar `async` y `await` dentro de una función de expresión sin problemas. Aquí tienes un ejemplo:
+
+```jsx
+const miFuncion = async function () {
+  // Código usando async y await
+};
+```
+
+En este caso, la función se asigna a la variable `miFuncion`, y puede ser invocada llamando a `miFuncion()`. Puedes usar `async` y `await` dentro de la función sin ninguna restricción.
+
+### Async Await en funciones de declaración:
+
+Una declaración de función se define utilizando la palabra clave `function` seguida de un nombre de función, los parámetros de entrada entre paréntesis y luego el cuerpo de la función entre llaves. Estas funciones pueden ser llamadas antes de su declaración en el código debido al concepto de "hoisting”. Por lo tanto, son adecuadas para casos en los que necesitas llamar la función antes de que se defina.
+No puedes utilizar `async` y `await` directamente en una declaración de función, ya que se espera que una declaración de función devuelva un valor de función, no una promesa. Sin embargo, puedes utilizar `async` y `await` dentro de una función definida dentro de la declaración de función. Aquí tienes un ejemplo:
+
+```jsx
+function miFuncion() {
+  async function otraFuncion() {
+    // Código usando async y await
+  }
+
+  // Llamada a otraFuncion()
+  otraFuncion();
+}
+```
+
+En este caso, `miFuncion` es una declaración de función y dentro de ella se define `otraFuncion` como una función interna. Puedes usar `async` y `await` dentro de `otraFuncion`, pero no directamente en `miFuncion`.
+
+En resumen, puedes utilizar `async` y `await` tanto en funciones de expresión como en funciones definidas dentro de declaraciones de función. Sin embargo, en una declaración de función directa, debes definir una función interna si deseas utilizar `async` y `await`. En ambos casos, las funciones asíncronas con `async` y `await` te permiten trabajar de manera más conveniente con código asincrónico y promesas.
