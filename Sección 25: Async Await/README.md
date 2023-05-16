@@ -311,3 +311,39 @@ app();
 ```
 
 Los tres enfoques presentados son válidos y pueden adaptarse según los requisitos específicos de tu código. Recuerda que utilizar `await` bloquea la ejecución de la función hasta que la promesa se resuelva, por lo que ten en cuenta que el tiempo de espera total aumentará si tienes múltiples `await` secuenciales.
+
+## 15.5 Async Await hacia una API con Fetch
+
+**`async`** y **`await`** se utiliza comúnmente con **`fetch()`** para realizar solicitudes a una API.
+
+Recordemos que **`fetch()`** es una función incorporada de JavaScript que devuelve una promesa y se utiliza para realizar solicitudes HTTP a una URL.
+
+Aquí hay un ejemplo de cómo usar **`async`** y **`await`** para realizar una solicitud a una API con **`fetch()`**:
+
+```jsx
+async function obtenerDatosDeLaAPI() {
+  try {
+    const respuesta = await fetch("https://ejemplo-api.com/datos");
+    const datos = await respuesta.json();
+    console.log(datos);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+obtenerDatosDeLaAPI();
+```
+
+En este ejemplo, creamos una función **`obtenerDatosDeLaAPI()`** con la palabra clave **`async`** para que podamos usar **`await`** dentro de ella.
+
+Luego, usamos **`await fetch('https://ejemplo-api.com/datos')`** para enviar una solicitud HTTP a la URL especificada. La respuesta se almacena en la variable **`respuesta`**.
+
+Después, usamos **`await respuesta.json()`** para extraer los datos de la respuesta y convertir la respuesta en formato JSON.
+
+**`json()`** es un método que devuelve una promesa que se resuelve con los datos de la respuesta en formato JSON.
+
+Finalmente, imprimimos los datos en la consola con **`console.log(datos)`**.
+
+En caso de que ocurra un error durante la solicitud o al convertir los datos en JSON, capturamos el error utilizando **`try`** y **`catch`**. Si se produce un error, lo imprimimos en la consola con **`console.error('Error:', error)`**.
+
+Recuerda que este es solo un ejemplo básico y puedes adaptarlo según las necesidades de tu proyecto. Además, ten en cuenta que **`fetch()`** puede requerir configuraciones adicionales, como encabezados de autenticación o parámetros de solicitud, dependiendo de la API con la que estés trabajando.
