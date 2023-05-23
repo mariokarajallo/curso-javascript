@@ -57,3 +57,85 @@ const result = map(numbers, (num) => sum(num, 1));
 
 console.log(result); // Output: [2, 3, 4, 5, 6]
 ```
+
+## 26.2 First Class Functions
+
+En programación, el concepto de "funciones de primera clase" (o "first-class functions" en inglés) se refiere a que las funciones son tratadas como cualquier otro valor o dato en el lenguaje de programación (como números, cadenas o listas). Esto significa que en un lenguaje con soporte para funciones de primera clase, las funciones pueden ser:
+
+1. Asignadas a variables: Puedes asignar una función a una variable, de modo que la variable se convierte en una referencia a esa función.
+
+```jsx
+// Asignar una función a una variable
+const greet = function (name) {
+  console.log(`¡Hola, ${name}!`);
+};
+
+// Llamar a la función a través de la variable
+greet("Mario"); // Output: ¡Hola, Juan!
+```
+
+1. Pasadas como argumentos: Las funciones pueden ser pasadas como argumentos a otras funciones. Esto permite la posibilidad de pasar funciones como parámetros y utilizarlas dentro de otras funciones.
+
+```jsx
+// Función que recibe una función como argumento
+function applyOperation(a, b, operation) {
+  return operation(a, b);
+}
+
+// Definir funciones para realizar diferentes operaciones
+function add(a, b) {
+  return a + b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+// Llamar a la función 'applyOperation' con diferentes operaciones
+console.log(applyOperation(5, 3, add)); // Output: 8
+console.log(applyOperation(5, 3, multiply)); // Output: 15
+```
+
+1. Retornadas como resultados: Una función puede devolver otra función como resultado. Esto es útil para crear y retornar funciones dinámicamente, en función de ciertas condiciones o cálculos.
+
+```jsx
+// Función que devuelve otra función basada en un parámetro
+function createMultiplier(factor) {
+  return function (number) {
+    return number * factor;
+  };
+}
+
+// Crear funciones multiplicadoras para diferentes factores
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+
+console.log(double(5)); // Output: 10
+console.log(triple(5)); // Output: 15
+```
+
+1. Almacenadas en estructuras de datos: Las funciones pueden ser almacenadas en estructuras de datos como arreglos, objetos o incluso otras funciones.
+
+```jsx
+// Almacenar funciones en un arreglo
+const operations = [
+  function (a, b) {
+    return a + b;
+  },
+  function (a, b) {
+    return a - b;
+  },
+  function (a, b) {
+    return a * b;
+  },
+];
+
+// Llamar a las funciones del arreglo
+console.log(operations[0](3, 2)); // Output: 5
+console.log(operations[1](3, 2)); // Output: 1
+console.log(operations[2](3, 2)); // Output: 6
+```
+
+La capacidad de tratar las funciones como valores de primera clase proporciona una mayor flexibilidad y expresividad en la programación. Permite escribir código más modular, reutilizable y poderoso, ya que puedes manipular y trabajar con funciones de la misma manera que lo harías con otros tipos de datos.
+
+El soporte para funciones de primera clase es una característica común en muchos lenguajes de programación modernos, incluyendo JavaScript, Python, Ruby y otros.
