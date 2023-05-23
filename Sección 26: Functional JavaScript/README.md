@@ -278,3 +278,60 @@ La función **`filter`** recibe una función de retorno (callback) como argument
 Al llamar a **`carrito.filter(mayor400)`**, se está utilizando **`filter`** como una Higher Order Function para filtrar los elementos del arreglo **`carrito`** y obtener solo aquellos productos que cumplen con la condición definida en la función **`mayor400`**. El resultado se almacena en la variable **`resultado`**, que contendrá un nuevo arreglo con los productos cuyo precio es mayor a 400.
 
 Este es un ejemplo práctico del uso de una Higher Order Function en la programación funcional, donde se utiliza una función como argumento para aplicar un comportamiento personalizado a un proceso de filtrado.
+
+## 26.5 Funciones de Orden Superior (Higher Order Functions) más Comunes
+
+En JavaScript, hay varias funciones de orden superior integradas en el lenguaje y en la API de JavaScript. Son funciones que cumplen al menos uno de los siguientes criterios:
+
+1. Aceptan una o más funciones como argumentos.
+2. Devuelven una función como resultado.
+
+Estas funciones son fundamentales en la programación funcional, ya que permiten una mayor abstracción, modularidad y reutilización del código. Al trabajar con funciones de orden superior, los desarrolladores pueden crear funciones más genéricas y componibles que pueden ser aplicadas a diferentes tipos de datos y operaciones.
+
+#### Algunas de las funciones de orden superior más comunes son las siguientes:
+
+1. **`map`**: Recorre un arreglo y aplica una función a cada elemento, devolviendo un nuevo arreglo con los resultados de aplicar la función a cada elemento, sin duda es uno de las funciones mas utilizadas.
+2. **`filter`**: Recorre un arreglo y devuelve un nuevo arreglo con los elementos que cumplen con una determinada condición especificada en una función.
+3. **`reduce`**: Aplica una función a un acumulador y a cada elemento de un arreglo, reduciendo el arreglo a un único valor. Puede utilizarse para realizar operaciones como sumas, promedios, concatenaciones, entre otras.
+4. **`forEach`**: Recorre un arreglo y ejecuta una función en cada elemento, sin devolver un nuevo arreglo. Se utiliza principalmente para efectuar acciones en cada elemento, como realizar operaciones de lado o modificar el arreglo original.
+5. **`sort`**: Ordena los elementos de un arreglo en función de una función de comparación especificada. La función de comparación define el criterio de ordenamiento.
+6. **`find`** y **`findIndex`**: Recorren un arreglo y devuelven el primer elemento que cumple con una condición especificada en una función. **`find`** devuelve el elemento encontrado y **`findIndex`** devuelve el índice del elemento encontrado.
+7. **`some()`**: Verifica si al menos un elemento de un arreglo cumple con una condición dada por una función de prueba.
+8. **`every()`**: Verifica si todos los elementos de un arreglo cumplen con una condición dada por una función de prueba.
+
+Estas son solo algunas de las funciones de orden superior más utilizadas en JavaScript. Sin embargo, hay muchas más disponibles en el lenguaje y también es posible crear funciones de orden superior personalizadas para adaptarse a necesidades específicas.
+
+Las funciones de orden superior permiten a los desarrolladores de software escribir código más genérico y reutilizable, ya que pueden ser aplicadas a diferentes tipos de datos y operaciones. Además, al utilizar funciones de orden superior, se fomenta la inmutabilidad y la ausencia de efectos secundarios, lo que puede mejorar la legibilidad y mantenibilidad del código.
+
+#### ejemplo utilizando la función **`map()`**
+
+Este ejemplo utiliza la función **`map()`** como una función de orden superior para transformar un arreglo de objetos en un arreglo de nombres de productos.
+
+```jsx
+// Utilizando MAP
+const carrito = [
+  { nombre: "Monitor 20 Pulgadas", precio: 500 },
+  { nombre: "Televisión 50 Pulgadas", precio: 700 },
+  { nombre: "Tablet", precio: 300 },
+  { nombre: "Audifonos", precio: 200 },
+  { nombre: "Teclado", precio: 50 },
+  { nombre: "Celular", precio: 500 },
+  { nombre: "Bocinas", precio: 300 },
+  { nombre: "Laptop", precio: 800 },
+];
+
+const obtenerNombres = (producto) => {
+  return producto.nombre;
+};
+
+const resultado = carrito.map(obtenerNombres);
+console.log(resultado);
+```
+
+La función **`map()`** recibe como argumento una función de transformación, en este caso, la función **`obtenerNombres`**. La función **`obtenerNombres`** toma un objeto **`producto`** y devuelve el valor de su propiedad **`nombre`**.
+
+Al llamar a **`carrito.map(obtenerNombres)`**, se aplica la función **`obtenerNombres`** a cada elemento del arreglo **`carrito`** y se obtiene un nuevo arreglo que contiene solo los nombres de los productos.
+
+El resultado se almacena en la variable **`resultado`** y se muestra en la consola con **`console.log(resultado)`**. El resultado será un arreglo que contiene los nombres de los productos del carrito.
+
+Este ejemplo ilustra cómo la función **`map()`** es una función de orden superior que permite transformar un arreglo aplicando una función de transformación a cada elemento. Esto proporciona una forma concisa de obtener una nueva colección de datos basada en una propiedad específica de los objetos en el arreglo original.
