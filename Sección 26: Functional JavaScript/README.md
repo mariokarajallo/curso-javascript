@@ -335,3 +335,60 @@ Al llamar a **`carrito.map(obtenerNombres)`**, se aplica la función **`obtenerN
 El resultado se almacena en la variable **`resultado`** y se muestra en la consola con **`console.log(resultado)`**. El resultado será un arreglo que contiene los nombres de los productos del carrito.
 
 Este ejemplo ilustra cómo la función **`map()`** es una función de orden superior que permite transformar un arreglo aplicando una función de transformación a cada elemento. Esto proporciona una forma concisa de obtener una nueva colección de datos basada en una propiedad específica de los objetos en el arreglo original.
+
+## 26.6 Menos cantidad de código en tus Funciones
+
+En la programación funcional, uno de los objetivos principales es escribir código más conciso y expresivo. Esto se debe a varios principios y técnicas utilizados en la programación funcional, como el uso de funciones puras, composición de funciones y abstracciones de alto nivel. A continuación, te mencionaré algunas razones por las cuales la programación funcional puede ayudar a reducir la cantidad de código necesario:
+
+1. Funciones puras: Las funciones puras en la programación funcional no tienen efectos secundarios y siempre producen el mismo resultado dado el mismo conjunto de argumentos. Al evitar efectos secundarios y cambios en el estado, se reduce la necesidad de escribir código adicional para manejar y rastrear el estado mutable.
+2. Composición de funciones: En la programación funcional, se fomenta la composición de funciones pequeñas y modulares para construir operaciones más complejas. Esto permite reutilizar funciones existentes y evitar la repetición de código. Al componer funciones, se puede lograr la misma funcionalidad con menos líneas de código.
+3. Abstracciones de alto nivel: La programación funcional promueve el uso de abstracciones de alto nivel, como funciones de orden superior y funciones de transformación de datos (como **`map`**, **`filter`** y **`reduce`**). Estas abstracciones encapsulan lógica compleja en funciones reutilizables y declarativas, lo que reduce la cantidad de código necesario para lograr una tarea específica.
+4. Eliminación de bucles: En lugar de utilizar bucles tradicionales (como **`for`** o **`while`**), la programación funcional enfatiza el uso de funciones de orden superior, como **`map`**, **`filter`** y **`reduce`**, para operar sobre colecciones de datos. Estas funciones permiten expresar operaciones de manera más concisa y declarativa, eliminando la necesidad de escribir bucles explícitos.
+5. Programación declarativa: La programación funcional se centra en el "qué" se debe hacer en lugar del "cómo" se debe hacer. Esto significa que te puedes concentrar en describir la lógica y las transformaciones de datos en lugar de los detalles de implementación. Esto conduce a un código más claro y conciso.
+
+#### Ejemplo
+
+Este ejemplo se muestran algunas formas de reducir aún más el código en la programación funcional. Al utilizar funciones flecha y nombres de parámetros más cortos, se puede lograr un código más conciso sin comprometer la legibilidad.
+
+```jsx
+// En la programación funcional también se busca tener código más corto que lo que seria una función más larga...
+
+const carrito = [
+  { nombre: "Monitor 20 Pulgadas", precio: 500 },
+  { nombre: "Televisión 50 Pulgadas", precio: 700 },
+  { nombre: "Tablet", precio: 300 },
+  { nombre: "Audifonos", precio: 200 },
+  { nombre: "Teclado", precio: 50 },
+  { nombre: "Celular", precio: 500 },
+  { nombre: "Bocinas", precio: 300 },
+  { nombre: "Laptop", precio: 800 },
+];
+
+// const obtenerNombres = producto =>  producto.nombre;
+// const resultado = carrito.map(obtenerNombres);
+
+// const mayor400 = producto => producto.precio > 400
+// const resultado2 = carrito.filter(mayor400);
+
+// console.log(resultado)
+// console.log(resultado2)
+
+// Aún lo podemos recortar más cambiando la variable producto...
+// En lugar de utilizar la sintaxis completa producto => producto.nombre en la función obtenerNombres
+// se utiliza la sintaxis abreviada p => p.nombre, donde p es el nombre abreviado del parámetro.
+// Esto reduce la cantidad de código necesario para definir la función y sigue siendo claro y comprensible.
+const obtenerNombres = (p) => p.nombre;
+const resultado = carrito.map(obtenerNombres);
+
+//en la función mayor400, se utilizó p => p.precio > 400 en lugar de la versión más larga producto => producto.precio > 400.
+// Esto simplifica la escritura de la función y mantiene el código más limpio y legible.
+const mayor400 = (p) => p.precio > 400;
+const resultado2 = carrito.filter(mayor400);
+
+console.log(resultado);
+console.log(resultado2);
+```
+
+Recuerda en la programación funcional, las funciones son valores. Se busca escribir código conciso y expresivo, utilizando funciones de orden superior, composición de funciones y abstracciones de datos. La reducción del código se logra a través de la eliminación de código redundante, la simplificación de la sintaxis y la reutilización de funciones existentes.
+
+En resumen, la programación funcional fomenta el uso de funciones puras, composición de funciones y abstracciones de alto nivel, lo que puede ayudar a reducir la cantidad de código necesario. Al escribir código más conciso, se mejora la legibilidad, mantenibilidad y reutilización del código.
