@@ -452,3 +452,62 @@ En este ejemplo, la función **`saludarFamilia`** recibe un apellido como parám
 Al llamar a **`saludarFamilia('Karajallo')`**, se obtiene una función específica que saluda a las personas con el apellido "Karajallo". Luego, se pueden invocar esa función retornada pasando diferentes nombres para obtener saludos personalizados.
 
 Este ejemplo ilustra cómo una función puede retornar una función más especializada, permitiendo configurar comportamientos específicos y lograr una mayor flexibilidad y reutilización de código.
+
+## 26.9 Closures
+
+En programación funcional, los closures (cierres o clausuras) son una característica que permite a una función acceder y recordar el `ámbito léxico` (se refiere al alcance de visibilidad de variables y funciones) en el que fue creada, incluso después de que esa función haya finalizado su ejecución.
+
+Un closure combina una función y su `Entorno léxico` (se refiere al conjunto de variables y funciones disponibles en un determinado ámbito), lo que significa que la función retiene acceso a las variables, parámetros y funciones definidas en el ámbito en el que fue creada.
+
+El concepto de closure es importante en la programación funcional porque permite crear funciones que mantienen estado y comportamiento persistente, incluso cuando están fuera de su ámbito original. Esto facilita la creación de funciones de orden superior, funciones que retornan funciones y la implementación de patrones como el curry, la memorización y el encapsulamiento de datos.
+
+Un ejemplo sencillo de closure en JavaScript sería el siguiente:
+
+```jsx
+function contador() {
+  let count = 0;
+
+  return function () {
+    count++;
+    console.log(count);
+  };
+}
+
+const incrementar = contador();
+incrementar(); // Output: 1
+incrementar(); // Output: 2
+incrementar(); // Output: 3
+```
+
+En este ejemplo, la función **`contador`** retorna una función interna que incrementa un contador cada vez que se invoca. La función interna (**`incrementar`**) mantiene acceso al ámbito léxico de la función **`contador`**, lo que le permite recordar el valor de la variable **`count`** incluso después de que la función **`contador`** haya finalizado su ejecución.
+
+Al llamar a **`incrementar()`** varias veces, el contador se incrementa y se muestra por consola. Cada llamada a **`incrementar()`** accede y modifica el valor de **`count`** gracias al closure, lo que permite que el estado de la variable **`count`** se mantenga persistente entre las invocaciones.
+
+```jsx
+// Closure
+
+// En JavaScript los Closures son son creados cada que una función se crea...
+
+// Pero un closure es una forma de acceder a una función o valor, desde el exterior...
+
+const obtenerCliente = () => {
+  const nombre = "Juan";
+  function muestraNombre() {
+    console.log(nombre);
+  }
+  return muestraNombre;
+};
+
+const cliente = obtenerCliente();
+cliente();
+```
+
+Este ejemplo proporcionado se ilustra la idea de closure en JavaScript. La función **`obtenerCliente`** crea una función interna llamada **`muestraNombre`** que tiene acceso al ámbito léxico de **`obtenerCliente`**, incluyendo la variable **`nombre`**. La función **`obtenerCliente`** devuelve la función **`muestraNombre`** como resultado.
+
+Luego, al invocar **`obtenerCliente()`** y asignar su resultado a la variable **`cliente`**, se está capturando la función interna **`muestraNombre`** en el closure. Finalmente, al llamar a **`cliente()`**, se accede al valor de la variable `nombre` que se encuentra en el ámbito léxico de **`obtenerCliente`** y se muestra por consola.
+
+El closure permite que la función interna **`muestraNombre`** acceda y recuerde el valor de **`nombre`** incluso después de que **`obtenerCliente`** haya finalizado su ejecución. Esto es posible gracias al cierre del ámbito léxico en el que se creó la función.
+
+En resumen, el closure en este ejemplo permite que la función **`cliente`** acceda al valor de **`nombre`** que está fuera de su ámbito léxico original, lo que permite recordar y utilizar variables que ya no están en el ámbito actual.
+
+Los closures son una poderosa herramienta en la programación funcional que permite crear funciones más flexibles, encapsular datos y mantener estado persistente. Su capacidad para mantener el contexto léxico de una función proporciona una forma eficiente y elegante de trabajar con datos y comportamientos en un entorno funcional.
