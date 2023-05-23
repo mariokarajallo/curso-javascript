@@ -392,3 +392,33 @@ console.log(resultado2);
 Recuerda en la programación funcional, las funciones son valores. Se busca escribir código conciso y expresivo, utilizando funciones de orden superior, composición de funciones y abstracciones de datos. La reducción del código se logra a través de la eliminación de código redundante, la simplificación de la sintaxis y la reutilización de funciones existentes.
 
 En resumen, la programación funcional fomenta el uso de funciones puras, composición de funciones y abstracciones de alto nivel, lo que puede ayudar a reducir la cantidad de código necesario. Al escribir código más conciso, se mejora la legibilidad, mantenibilidad y reutilización del código.
+
+## 26.7 Pure Functions
+
+Una función pura es una función en la programación funcional que cumple con dos características principales: no tiene efectos secundarios observables y siempre produce el mismo resultado para los mismos argumentos de entrada. Estas características hacen que las funciones puras sean predecibles, fáciles de razonar y menos propensas a errores.
+
+#### Las características de las funciones puras son las siguientes:
+
+1. No tiene efectos secundarios observables: Una función pura no realiza ninguna acción que afecte el estado externo o genere cambios no locales. Esto significa que no modifica variables fuera de su alcance, no altera estructuras de datos compartidas, no realiza operaciones de entrada/salida y no produce efectos colaterales. La única salida de una función pura es su valor de retorno.
+2. Resultado determinista: Dada la misma entrada, una función pura siempre produce el mismo resultado. Esto significa que no hay dependencias ocultas en el estado o en el entorno externo que puedan afectar el resultado de la función. El resultado de una función pura depende únicamente de los valores de sus argumentos.
+
+#### Beneficios de las funciones puras:
+
+- Facilitan la comprensión y el razonamiento del código, ya que su comportamiento es predecible y no depende de factores externos.
+- Favorecen la reutilización, porque al no tener efectos secundarios, pueden ser utilizadas en diferentes contextos sin generar impactos inesperados.
+- Mejoran la testabilidad, pues al no depender de estado externo, las pruebas unitarias se vuelven más simples y confiables.
+- Promueven la modularidad, ya que las funciones puras se pueden combinar fácilmente mediante composición para construir lógica más compleja.
+
+#### Ejemplo
+
+```jsx
+function sumar(a, b) {
+  return a + b;
+}
+
+console.log(sumar(2, 3)); //5
+```
+
+La función **`sumar`** es pura porque no realiza ningún efecto secundario y siempre devuelve la suma de sus dos argumentos. No depende de ningún estado externo y el resultado es determinista para los mismos argumentos de entrada.
+
+Es importante destacar que no todas las funciones en un programa deben ser puras, ya que a menudo se necesitan efectos secundarios y operaciones no puras para interactuar con el mundo exterior. Sin embargo, la programación funcional fomenta el uso de funciones puras siempre que sea posible, puesto que ofrecen numerosos beneficios en términos de comprensión, modularidad y confiabilidad del código.
