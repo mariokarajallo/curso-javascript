@@ -422,3 +422,33 @@ console.log(sumar(2, 3)); //5
 La función **`sumar`** es pura porque no realiza ningún efecto secundario y siempre devuelve la suma de sus dos argumentos. No depende de ningún estado externo y el resultado es determinista para los mismos argumentos de entrada.
 
 Es importante destacar que no todas las funciones en un programa deben ser puras, ya que a menudo se necesitan efectos secundarios y operaciones no puras para interactuar con el mundo exterior. Sin embargo, la programación funcional fomenta el uso de funciones puras siempre que sea posible, puesto que ofrecen numerosos beneficios en términos de comprensión, modularidad y confiabilidad del código.
+
+## 26.8 Funciones que Retornan funciones
+
+Una característica interesante de la programación funcional es la capacidad de que una función retorne otra función como resultado.
+
+Estas funciones se conocen como funciones que retornan una función o funciones de orden superior. Algunas de las características de estas funciones son:
+
+1. Retorno de funciones: Una función que retorna una función devuelve una nueva función como resultado en lugar de un valor directo. Esto permite la creación de funciones más especializadas o configurables.
+2. Cierre (closure): La función retornada mantiene acceso al entorno léxico de la función que la envuelve. Esto significa que puede acceder y utilizar las variables y parámetros de la función padre incluso después de que la función padre haya finalizado su ejecución.
+3. Configurabilidad: Al retornar una función, se pueden configurar y personalizar comportamientos específicos mediante la aplicación parcial de argumentos o la definición de valores predeterminados.
+
+A continuación, se presenta un ejemplo sencillo de una función que retorna una función en JavaScript:
+
+```jsx
+function saludarFamilia(apellido) {
+  return function (nombre) {
+    console.log(`Hola ${nombre} ${apellido}`);
+  };
+}
+
+const saludarApellidoKarajallo = saludarFamilia("Karajallo");
+saludarApellidoKarajallo("Mario"); // Output: Hola Mario Karajallo
+saludarApellidoKarajallo("Javier"); // Output: Hola Javier Karajallo
+```
+
+En este ejemplo, la función **`saludarFamilia`** recibe un apellido como parámetro y retorna una nueva función que toma un nombre como parámetro. La función retornada puede acceder al valor del apellido a través del cierre (closure) y combinarlo con el nombre proporcionado para imprimir un saludo personalizado.
+
+Al llamar a **`saludarFamilia('Karajallo')`**, se obtiene una función específica que saluda a las personas con el apellido "Karajallo". Luego, se pueden invocar esa función retornada pasando diferentes nombres para obtener saludos personalizados.
+
+Este ejemplo ilustra cómo una función puede retornar una función más especializada, permitiendo configurar comportamientos específicos y lograr una mayor flexibilidad y reutilización de código.
