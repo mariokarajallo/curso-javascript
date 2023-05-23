@@ -190,3 +190,91 @@ console.log(executeOperation(5, 3, multiply)); // Output: 15
 En este ejemplo, la función **`executeOperation`** toma tres argumentos: **`a`**, **`b`** y **`operation`**, donde **`operation`** es una función. La función **`executeOperation`** luego ejecuta la función **`operation`** pasando **`a`** y **`b`** como argumentos.
 
 Al llamar a **`executeOperation`** con diferentes funciones de operación, podemos realizar diferentes cálculos utilizando la misma estructura de función. Esto demuestra cómo las funciones como argumentos pueden permitir la flexibilidad y la capacidad de adaptar el comportamiento de una función en tiempo de ejecución.
+
+## 26.4 Separar los Datos de las funciones & Higher Order Functions
+
+En la programación funcional, separar los datos de las funciones se refiere a mantener una clara distinción entre los datos y las operaciones que se realizan sobre esos datos. Se busca evitar la mutación o modificación directa de los datos y, en su lugar, trabajar con copias inmutables de los datos y utilizar funciones puras que no tengan efectos secundarios.
+
+La separación de los datos de las funciones en la programación funcional se basa en los siguientes principios:
+
+1. Inmutabilidad de los datos: En lugar de modificar directamente los datos existentes, se crean nuevas estructuras de datos inmutables que representan los cambios necesarios. Esto asegura que los datos originales no se alteren y facilita el razonamiento sobre el flujo de datos.
+2. Funciones puras: Las funciones puras son aquellas que no tienen efectos secundarios y siempre producen el mismo resultado dado el mismo conjunto de argumentos. No modifican los datos de entrada y no dependen de variables globales. Las funciones puras toman datos como entrada y generan nuevos datos como salida sin alterar los datos originales.
+3. Composición de funciones: En lugar de realizar operaciones directamente sobre los datos, se combinan funciones más pequeñas y modulares para construir operaciones más complejas. La composición de funciones permite una mayor reutilización del código y facilita el mantenimiento y la comprensión del programa.
+4. Datos como argumentos de funciones: Los datos se pasan como argumentos a las funciones, lo que permite que las funciones sean independientes de los datos específicos. Esto promueve la reutilización de las funciones con diferentes conjuntos de datos y facilita las pruebas y el razonamiento sobre el comportamiento de las funciones.
+
+La separación de datos y funciones en la programación funcional ayuda a crear programas más modulares, legibles y mantenibles. Al seguir estos principios, se puede lograr un código más limpio, menos propenso a errores y más fácil de razonar sobre el flujo de datos y las transformaciones que ocurren en el programa.
+
+```jsx
+// Función pura para duplicar un número
+function duplicar(numero) {
+  return numero * 2;
+}
+
+// Datos
+const numeroOriginal = 5;
+
+// Llamada a la función con los datos como argumento
+const numeroDuplicado = duplicar(numeroOriginal);
+
+console.log(numeroDuplicado); // Output: 10
+```
+
+En este ejemplo, la función **`duplicar`** es una función pura que toma un número como argumento y devuelve el doble del número. La función no modifica directamente el número original, sino que crea un nuevo valor basado en él y lo devuelve como resultado.
+
+Los datos se mantienen separados de la función y se pasan como argumento al llamar a la función. La función **`duplicar`** opera solo en el dato que se le pasa, sin afectar los datos originales.
+
+Este ejemplo muestra cómo la función **`duplicar`** es independiente de los datos específicos y puede ser reutilizada con diferentes números de entrada. La separación de datos y funciones permite un código más modular y fácilmente comprensible, ya que las operaciones sobre los datos se realizan a través de funciones puras sin efectos secundarios.
+
+### Funciones de orden Superior
+
+Las funciones de orden superior (Higher Order Functions) son funciones que pueden recibir otras funciones como argumentos y/o devolver funciones como resultado. En JavaScript, las funciones son ciudadanos de primera clase, lo que significa que se pueden tratar como cualquier otro valor, como cadenas de texto o números. Esto permite utilizar funciones como argumentos de otras funciones y devolver funciones desde una función.
+
+Hay varias formas de utilizar las funciones de orden superior en JavaScript:
+
+1. Pasar una función como argumento: Se puede pasar una función como argumento a otra función. Esto permite que la función receptora utilice la función pasada como argumento dentro de su implementación.
+2. Devolver una función como resultado: Una función puede devolver otra función como resultado. Esto permite la creación de funciones especializadas o funciones que generan otras funciones.
+3. Almacenar una función en una variable: Una función se puede asignar a una variable y, luego, esa variable se puede usar para invocar la función como si fuera cualquier otra función.
+
+Las funciones de orden superior son fundamentales en la programación funcional, ya que permiten abstracciones y permiten escribir código más modular y reutilizable. Al usar funciones de orden superior, se pueden crear abstracciones más poderosas y expresivas, ya que se pueden componer funciones y pasar comportamientos personalizados a través de funciones como argumentos.
+
+```jsx
+// Higher Order functions es un termino muy común con la programación funcional.
+
+// Ya los hemos visto, un Higher order function es una función que toma o retorna una función como argumento. y basicamente la mayoria de Array Methods son HOF
+
+const carrito = [
+  { nombre: "Monitor 20 Pulgadas", precio: 500 },
+  { nombre: "Televisión 50 Pulgadas", precio: 700 },
+  { nombre: "Tablet", precio: 300 },
+  { nombre: "Audifonos", precio: 200 },
+  { nombre: "Teclado", precio: 50 },
+  { nombre: "Celular", precio: 500 },
+  { nombre: "Bocinas", precio: 300 },
+  { nombre: "Laptop", precio: 800 },
+];
+
+// Si quisieramos obtener todos los productos que tienen un precio mayor a 400 tendriamos que hacer lo siguiente..
+
+// const resultado = carrito.filter( producto => {
+//     return producto.precio > 400
+// } )
+
+// console.log(resultado);
+
+// Este ejemplo es un HOF porque .filter esta tomando una función como argumento, ese producto es un Arrow Function, pero puedes dejarlo de la sig forma,..
+
+const mayor400 = (producto) => {
+  return producto.precio > 400;
+};
+
+const resultado = carrito.filter(mayor400);
+console.log(resultado);
+```
+
+En este caso, la función **`filter`** es una Higher Order Function porque toma una función como argumento.
+
+La función **`filter`** recibe una función de retorno (callback) como argumento, en este caso la función **`mayor400`**, que determina si un producto cumple con cierta condición. La función **`mayor400`** devuelve **`true`** si el precio del producto es mayor a 400, y **`false`** en caso contrario.
+
+Al llamar a **`carrito.filter(mayor400)`**, se está utilizando **`filter`** como una Higher Order Function para filtrar los elementos del arreglo **`carrito`** y obtener solo aquellos productos que cumplen con la condición definida en la función **`mayor400`**. El resultado se almacena en la variable **`resultado`**, que contendrá un nuevo arreglo con los productos cuyo precio es mayor a 400.
+
+Este es un ejemplo práctico del uso de una Higher Order Function en la programación funcional, donde se utiliza una función como argumento para aplicar un comportamiento personalizado a un proceso de filtrado.
