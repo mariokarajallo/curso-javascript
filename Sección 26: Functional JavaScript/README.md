@@ -139,3 +139,54 @@ console.log(operations[2](3, 2)); // Output: 6
 La capacidad de tratar las funciones como valores de primera clase proporciona una mayor flexibilidad y expresividad en la programación. Permite escribir código más modular, reutilizable y poderoso, ya que puedes manipular y trabajar con funciones de la misma manera que lo harías con otros tipos de datos.
 
 El soporte para funciones de primera clase es una característica común en muchos lenguajes de programación modernos, incluyendo JavaScript, Python, Ruby y otros.
+
+## 26.3 Funciones como Argumentos
+
+En la programación funcional, las funciones como argumento se refieren al concepto de pasar una función como argumento a otra función.
+
+Esto permite que una función reciba una función como uno de sus parámetros, lo que brinda flexibilidad y capacidad de abstracción en el diseño de programas.
+
+Cuando se utilizan funciones como argumentos en la programación funcional, se pueden lograr varias cosas, incluyendo:
+
+1. #### Mayor modularidad:
+   Al pasar una función como argumento, se puede separar la lógica específica de una función en particular y reutilizarla en diferentes contextos. Esto promueve la modularidad y facilita la composición de funciones más complejas.
+2. #### Abstracción de comportamiento:
+   Al permitir que las funciones sean pasadas como argumentos, se puede generalizar el comportamiento de una función y hacerla más genérica. Esto permite que la función que recibe la función como argumento pueda adaptar su comportamiento en función de la función pasada.
+3. #### Implementación de patrones de diseño:
+   Algunos patrones de diseño, como el patrón "Strategy" o el patrón "Callback", se basan en el uso de funciones como argumentos. Estos patrones permiten cambiar el comportamiento de una función en tiempo de ejecución al pasar diferentes funciones como argumentos.
+   ##### Patrón Strategy:
+   - El patrón de diseño "Strategy" (o "estrategia") es un patrón de diseño de software que permite intercambiar algoritmos o estrategias en tiempo de ejecución. Se utiliza cuando se desea tener diferentes formas de resolver un problema y poder cambiar la estrategia utilizada sin modificar la estructura principal del código.
+   - En este patrón, se define una interfaz común para todas las estrategias y se implementan clases que representan cada una de las posibles estrategias. Estas clases implementan la misma interfaz, lo que permite que se puedan intercambiar fácilmente en tiempo de ejecución.
+   - El patrón "Strategy" se beneficia del concepto de funciones como argumentos, ya que permite que una función se pase como argumento a otra función o se almacene como propiedad en un objeto, lo que proporciona una forma flexible de implementar diferentes estrategias.
+   - Ejemplo sencillo: Supongamos que tenemos una aplicación de navegación que puede calcular rutas utilizando diferentes algoritmos (ruta más corta, ruta más rápida, ruta más escénica). En lugar de codificar cada algoritmo directamente en la aplicación, se crea una interfaz común (Estrategia) y se implementan los algoritmos como clases separadas. La aplicación puede cambiar fácilmente entre algoritmos en tiempo de ejecución.
+   ##### Patrón Callback:
+   - El concepto de "callback" se refiere a una función que se pasa como argumento a otra función y que se invoca en un momento posterior dentro de esa función. Es una forma común de lograr la programación asíncrona y la manipulación de eventos en muchos lenguajes de programación.
+   - En JavaScript, los callbacks son ampliamente utilizados en operaciones asíncronas, como solicitudes de red, lectura y escritura de archivos, y manejo de eventos. Cuando se realiza una operación asíncrona, se proporciona una función de callback que se ejecuta una vez que la operación se completa o cuando se produce un evento específico.
+   - El uso de callbacks permite que el código siga ejecutándose mientras se espera la finalización de una operación asíncrona, evitando bloqueos y permitiendo una programación más eficiente y no bloqueante.
+   - Ejemplo sencillo: Imagina que estás creando una aplicación que realiza una solicitud a una API y procesa los datos recibidos. En lugar de codificar directamente la lógica de procesamiento en la función que realiza la solicitud, puedes pasar una función de callback que se encargue de procesar los datos. De esta manera, puedes reutilizar la función de solicitud para diferentes tipos de procesamiento, simplemente cambiando el callback que se pasa como argumento.
+
+Aquí tienes un ejemplo simple que ilustra el uso de funciones como argumentos en la programación funcional en JavaScript:
+
+```jsx
+// Función que toma una función como argumento
+function executeOperation(a, b, operation) {
+  return operation(a, b);
+}
+
+// Funciones de operación
+function add(a, b) {
+  return a + b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+// Llamadas a la función 'executeOperation' con diferentes operaciones
+console.log(executeOperation(5, 3, add)); // Output: 8
+console.log(executeOperation(5, 3, multiply)); // Output: 15
+```
+
+En este ejemplo, la función **`executeOperation`** toma tres argumentos: **`a`**, **`b`** y **`operation`**, donde **`operation`** es una función. La función **`executeOperation`** luego ejecuta la función **`operation`** pasando **`a`** y **`b`** como argumentos.
+
+Al llamar a **`executeOperation`** con diferentes funciones de operación, podemos realizar diferentes cálculos utilizando la misma estructura de función. Esto demuestra cómo las funciones como argumentos pueden permitir la flexibilidad y la capacidad de adaptar el comportamiento de una función en tiempo de ejecución.
