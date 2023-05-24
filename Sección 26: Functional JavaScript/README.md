@@ -616,3 +616,60 @@ console.log(resultadoParcial);
 ```
 
 En resumen, tanto el currying como los partials son técnicas que permiten una mayor flexibilidad y reutilización de funciones en la programación funcional. El currying divide una función con múltiples argumentos en funciones más pequeñas y especializadas, mientras que los partials fijan algunos argumentos de una función para generar una nueva función más específica. Ambas técnicas son útiles para lograr una composición de funciones más modular y flexible.
+
+## 26.11 Composition
+
+La composición es un concepto clave en la programación funcional que se refiere a la combinación de dos o más funciones para crear una nueva función. En otras palabras, la composición es el proceso de aplicar una función al resultado de otra función, de manera que el resultado de una función se convierte en el argumento de la siguiente. La composición permite crear funciones más complejas a partir de funciones más simples y reutilizables, lo que facilita la modularidad y la legibilidad del código.
+
+En JavaScript, la composición se puede lograr utilizando funciones de orden superior, que son funciones que toman otras funciones como argumentos o devuelven funciones como resultado. Aquí tienes un ejemplo simple de composición en JavaScript:
+
+```jsx
+// Funciones simples
+const doble = (x) => x * 2;
+const suma1 = (x) => x + 1;
+
+// Función de composición
+const compose = (f, g) => (x) => f(g(x));
+
+// Componer las funciones doble y suma1
+const dobleMas1 = compose(doble, suma1);
+
+// Usar la función compuesta
+console.log(dobleMas1(5)); // 12
+```
+
+En este ejemplo, definimos dos funciones simples, **doble** y **suma1**, y una función de composición llamada **compose**.
+
+La función **compose** toma dos funciones **f** y **g** como argumentos y devuelve una nueva función que aplica **f** al resultado de **g**.
+
+Luego, creamos una nueva función **dobleMas1** que es la composición de **doble** y **suma1**.
+
+Cuando llamamos a **dobleMas1(5)**, primero se aplica **suma1** (5 + 1 = 6) y luego se aplica **doble** al resultado (6 \* 2 = 12).
+
+Ahora veamos otro ejemplo sencillo de composición en JavaScript. En este caso, vamos a componer tres funciones simples: **cuadrado**, **doble** y **suma1**.
+
+```jsx
+// Funciones simples
+const cuadrado = (x) => x * x;
+const doble = (x) => x * 2;
+const suma1 = (x) => x + 1;
+
+// Función de composición
+const compose = (f, g) => (x) => f(g(x));
+
+// Componer las funciones cuadrado, doble y suma1
+const cuadradoDobleMas1 = compose(cuadrado, compose(doble, suma1));
+
+// Usar la función compuesta
+console.log(cuadradoDobleMas1(3)); // 49
+```
+
+En este ejemplo, definimos tres funciones simples: **cuadrado**, **doble** y **suma1**.
+
+Luego, utilizamos la función de composición **compose** para combinar estas funciones en una nueva función llamada **cuadradoDobleMas1**.
+
+La función **cuadradoDobleMas1** es el resultado de componer **cuadrado** con la composición de **doble** y **suma1**.
+
+Cuando llamamos a **cuadradoDobleMas1(3)**, primero se aplica **suma1** (3 + 1 = 4), luego se aplica **doble** al resultado (4 _ 2 = 8) y finalmente se aplica **cuadrado** al resultado (8 _ 8 = 64). Por lo tanto, el resultado final es 64.
+
+La composición es una técnica poderosa en la programación funcional, ya que permite crear soluciones modulares y reutilizables a partir de funciones más simples. Además, la composición promueve la creación de funciones puras y sin efectos secundarios, lo que facilita el razonamiento sobre el código y la detección de errores.
