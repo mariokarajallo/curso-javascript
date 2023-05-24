@@ -365,3 +365,80 @@ Finalmente, se utiliza **`.bind()`** para crear una nueva función **`nuevaFn`**
 El enlace explícito es útil cuando queremos asegurarnos de que **`this`** se refiera a un objeto específico, incluso en situaciones en las que el contexto de ejecución podría cambiar. Esto nos brinda un mayor control sobre el comportamiento de nuestras funciones y permite establecer explícitamente el contexto deseado.
 
 El enlace explícito es útil cuando queremos asegurarnos de que **`this`** se refiera a un objeto específico, incluso en situaciones en las que el contexto de ejecución podría cambiar. Esto nos brinda un mayor control sobre el comportamiento de nuestras funciones y permite establecer explícitamente el contexto deseado.
+
+## 27.6 New Binding y Window Binding
+
+### New Binding
+
+El "new binding" es un mecanismo en JavaScript que se utiliza para crear objetos a partir de funciones constructoras. Cuando se utiliza la palabra clave **new** seguida de una función, se crea un nuevo objeto vacío y se ejecuta la función constructora con el objeto recién creado como su contexto (**this**). Esto permite que la función constructora inicialice el objeto y establezca sus propiedades y métodos.
+
+Aquí hay un ejemplo de cómo funciona el "new binding":
+
+```jsx
+functionCoche(marca, modelo, año) {
+this.marca = marca;
+this.modelo = modelo;
+this.año = año;
+}
+
+const miCoche =new Coche("Toyota", "Corolla", 2020);
+
+console.log(miCoche.marca);// Muestra "Toyota"
+console.log(miCoche.modelo);// Muestra "Corolla"
+console.log(miCoche.año);// Muestra 2020
+```
+
+En este ejemplo, la función **Coche** es una función constructora que toma tres argumentos: **marca**, **modelo** y **año**. Cuando se llama a la función con la palabra clave **new**, se crea un nuevo objeto vacío y se ejecuta la función constructora con el objeto como su contexto (**this**). Esto asigna las propiedades **marca**, **modelo** y **año** al objeto recién creado.
+
+El "new binding" es una forma de crear objetos en JavaScript que sigue el patrón de la programación orientada a objetos. Sin embargo, con la introducción de las clases en ECMAScript 6 (ES6), se ha vuelto más común utilizar la sintaxis de clases para crear objetos, ya que proporciona una forma más clara y estructurada de definir constructores y métodos de objetos. Aun así, es importante comprender cómo funciona el "new binding", ya que sigue siendo una parte fundamental del lenguaje JavaScript.
+
+### Window Binding
+
+El window binding es un concepto en JavaScript relacionado con el valor de **this** en una función. Cuando una función es llamada sin un objeto específico al cual hacer referencia, el valor de **this** se vincula automáticamente al objeto global, que en el caso de los navegadores web es el objeto **window**.
+
+Aquí hay un ejemplo para ilustrar el window binding:
+
+```jsx
+functionejemplo() {
+console.log(this);
+}
+
+ejemplo();// En un navegador, esto imprimirá el objeto 'window'
+```
+
+En este caso, como la función **ejemplo** no está asociada a ningún objeto específico, el valor de **this** se vincula al objeto **window**.
+
+#### Window Binding modo estricto
+
+Es importante tener en cuenta que el comportamiento del window binding puede variar dependiendo del modo estricto (strict mode) en JavaScript. Si se utiliza el modo estricto, el valor de **this** será **undefined** en lugar de vincularse al objeto global:
+
+```jsx
+'use strict';
+
+functionejemplo() {
+console.log(this);
+}
+
+ejemplo();// Imprimirá 'undefined'
+```
+
+veamos otro ejemplo:
+
+En este ejemplo, tenemos una función **`saludar()`** que muestra un saludo utilizando el valor de **`this.nombre`**.
+
+```jsx
+function saludar() {
+  console.log("Hola, mi nombre es " + this.nombre);
+}
+
+var nombre = "Juan";
+saludar(); // Salida: "Hola, mi nombre es Juan"
+```
+
+Cuando llamamos a la función **`saludar()`** sin ningún enlace explícito o implícito, **`this`** en este caso se refiere al objeto global, que en un navegador es el objeto **`window`**.
+
+Por lo tanto, cuando se ejecuta **`saludar()`**, el valor de **`this.nombre`** se evalúa como **`window.nombre`**.
+
+En el ejemplo, hemos declarado una variable global **`nombre`** con el valor **`"Juan"`**. Al llamar a la función **`saludar()`**, se muestra el saludo "Hola, mi nombre es Juan" porque **`this.nombre`** se evalúa como **`window.nombre`**, y en el objeto **`window`** se encuentra la variable global **`nombre`**.
+
+En resumen, el window binding es un comportamiento en JavaScript que vincula el valor de **this** al objeto global cuando una función es llamada sin un objeto específico al cual hacer referencia. Este comportamiento puede variar si se utiliza el modo estricto.
