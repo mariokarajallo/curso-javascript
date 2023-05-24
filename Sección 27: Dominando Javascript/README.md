@@ -422,7 +422,7 @@ console.log(this);
 ejemplo();// Imprimirá 'undefined'
 ```
 
-veamos otro ejemplo:
+#### veamos otro ejemplo:
 
 En este ejemplo, tenemos una función **`saludar()`** que muestra un saludo utilizando el valor de **`this.nombre`**.
 
@@ -442,3 +442,37 @@ Por lo tanto, cuando se ejecuta **`saludar()`**, el valor de **`this.nombre`** s
 En el ejemplo, hemos declarado una variable global **`nombre`** con el valor **`"Juan"`**. Al llamar a la función **`saludar()`**, se muestra el saludo "Hola, mi nombre es Juan" porque **`this.nombre`** se evalúa como **`window.nombre`**, y en el objeto **`window`** se encuentra la variable global **`nombre`**.
 
 En resumen, el window binding es un comportamiento en JavaScript que vincula el valor de **this** al objeto global cuando una función es llamada sin un objeto específico al cual hacer referencia. Este comportamiento puede variar si se utiliza el modo estricto.
+
+## 27.7 Event Loop o Loop de Eventos en JS
+
+El "Event Loop" (bucle de eventos) es un concepto fundamental en JavaScript que permite manejar de forma eficiente la ejecución de eventos y tareas asíncronas en un entorno de programación de un solo subproceso como el navegador o Node.js.
+
+En JavaScript, las operaciones síncronas se ejecutan de manera secuencial, una después de la otra. Sin embargo, algunas operaciones pueden ser asíncronas, como la solicitud de datos a un servidor, la lectura de archivos o la espera de un temporizador. Estas operaciones pueden llevar tiempo y no bloquean la ejecución del código en JavaScript.
+
+El Event Loop es responsable de manejar la ejecución de estas operaciones asíncronas y los eventos en JavaScript. Se compone de dos partes principales: la pila de llamadas (call stack) y la cola de tareas (task queue).
+
+### Pila de llamadas (Call Stack):
+
+La pila de llamadas es donde se registran las funciones que se están ejecutando actualmente. Cuando se llama a una función, se agrega a la parte superior de la pila, y cuando una función se completa, se elimina de la parte superior de la pila.
+
+### Cola de tareas (Task Queue):
+
+La cola de tareas es donde se almacenan las tareas asíncronas y los eventos que están esperando para ser ejecutados. Cuando una tarea asíncrona se completa o se produce un evento, se agrega a la cola de tareas.
+
+### Procesos del Event Loop
+
+El proceso del Event Loop se puede describir en los siguientes pasos:
+
+1. Ejecución del código secuencial: El código se ejecuta línea por línea de manera secuencial.
+2. Tareas asincrónicas: Si hay tareas que requieren tiempo, como peticiones de red o temporizadores, se inician en segundo plano sin bloquear la ejecución del código principal.
+3. Cola de tareas: Una vez que se completan las tareas asincrónicas, se colocan en una cola llamada "cola de tareas" (Task Queue).
+4. Verificación de la pila de llamadas: El Event Loop verifica constantemente si la pila de llamadas (Call Stack) está vacía.
+5. Moviendo tareas a la pila de llamadas: Si la pila de llamadas está vacía, el Event Loop toma la siguiente tarea de la cola de tareas y la mueve a la pila de llamadas para su ejecución.
+6. Ejecución de la tarea: La tarea se ejecuta, lo que puede implicar la llamada a una función o la ejecución de un fragmento de código.
+7. Repetición del Event Loop: Después de ejecutar la tarea, el Event Loop vuelve al paso 4 y repite el ciclo. Verifica si la pila de llamadas está vacía, mueve la siguiente tarea de la cola de tareas a la pila de llamadas y la ejecuta.
+
+Este proceso se repite continuamente, permitiendo que las tareas asincrónicas se ejecuten en el momento adecuado sin bloquear la ejecución del código principal. El Event Loop garantiza que el código se ejecute de manera eficiente y que las tareas asincrónicas se manejen de forma no bloqueante.
+
+Esto permite que JavaScript maneje tareas asíncronas sin bloquear la ejecución del código. Por ejemplo, cuando se realiza una solicitud de red, en lugar de esperar a que se complete antes de continuar con otras tareas, el Event Loop permite que otras tareas se ejecuten mientras la solicitud de red está en curso. Una vez que la solicitud de red se completa y se agrega a la cola de tareas, el Event Loop la selecciona y la ejecuta cuando la pila de llamadas está vacía.
+
+En resumen, el Event Loop es un mecanismo esencial en JavaScript que garantiza que las operaciones asíncronas y los eventos se manejen de manera eficiente y no bloqueen la ejecución del código. Permite la ejecución continua de tareas y eventos en un entorno de un solo subproceso.
