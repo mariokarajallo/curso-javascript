@@ -229,3 +229,27 @@ console.log(numeroEntero); // Salida: 5
 En este caso, se utiliza la función **`parseInt()`** para convertir explícitamente la cadena de texto **`"5"`** a un número entero. La coerción explícita nos permite especificar el tipo de conversión que deseamos realizar.
 
 Es importante tener en cuenta que la coerción puede tener implicaciones en la precisión y el comportamiento de las operaciones, por lo que es fundamental comprender cómo se realizan las conversiones automáticas en JavaScript y tener cuidado al utilizar la coerción en nuestros programas.
+
+## 27.4 Implicit Binding
+
+El "implicit binding" (enlace implícito) es un concepto que se refiere a la forma en que JavaScript determina automáticamente el valor de **`this`** dentro de un objeto en función del contexto de ejecución.
+
+En JavaScript, la palabra clave **`this`** se refiere al objeto en el que se está ejecutando actualmente un fragmento de código. El "implicit binding" establece que, cuando se llama a un método en un objeto, el valor de **`this`** dentro de ese método se establecerá automáticamente como el objeto en sí mismo.
+
+Veamos un ejemplo para entenderlo mejor:
+
+```jsx
+var persona = {
+  nombre: "Juan",
+  edad: 30,
+  saludar: function () {
+    console.log("Hola, mi nombre es " + this.nombre);
+  },
+};
+
+persona.saludar(); // Salida: "Hola, mi nombre es Juan"
+```
+
+En este caso, **`persona`** es un objeto que tiene una propiedad **`nombre`** y un método **`saludar`**. Cuando se llama al método **`saludar()`** en el objeto **`persona`**, el valor de **`this`** dentro de ese método se establecerá automáticamente como **`persona`**. Por lo tanto, podemos acceder a la propiedad **`nombre`** del objeto utilizando **`this.nombre`**.
+
+El enlace implícito es útil para acceder a las propiedades y métodos de un objeto desde su propio contexto. Sin embargo, es importante tener en cuenta que el valor de **`this`** en JavaScript puede cambiar dependiendo del contexto de ejecución y la forma en que se llama a una función. Por lo tanto, es importante comprender cómo se establece **`this`** en diferentes situaciones, como el enlace implícito, explícito o mediante el uso de arrow functions.
