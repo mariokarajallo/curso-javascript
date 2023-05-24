@@ -253,3 +253,76 @@ persona.saludar(); // Salida: "Hola, mi nombre es Juan"
 En este caso, **`persona`** es un objeto que tiene una propiedad **`nombre`** y un método **`saludar`**. Cuando se llama al método **`saludar()`** en el objeto **`persona`**, el valor de **`this`** dentro de ese método se establecerá automáticamente como **`persona`**. Por lo tanto, podemos acceder a la propiedad **`nombre`** del objeto utilizando **`this.nombre`**.
 
 El enlace implícito es útil para acceder a las propiedades y métodos de un objeto desde su propio contexto. Sin embargo, es importante tener en cuenta que el valor de **`this`** en JavaScript puede cambiar dependiendo del contexto de ejecución y la forma en que se llama a una función. Por lo tanto, es importante comprender cómo se establece **`this`** en diferentes situaciones, como el enlace implícito, explícito o mediante el uso de arrow functions.
+
+## 27.5 Explicit Binding
+
+El "explicit binding" (enlace explícito) en JavaScript es un mecanismo que nos permite establecer manualmente el valor de **`this`** en una función utilizando métodos especiales para controlar el contexto de ejecución.
+
+Existen tres métodos principales que se utilizan para lograr el enlace explícito:
+
+### Método **`call()`**:
+
+El método **`call()`** permite llamar a una función y establecer explícitamente el valor de **`this`** en el primer argumento que recibe. Los argumentos restantes se pasan como argumentos individuales en la función llamada.
+
+Ejemplo de enlace explícito con **`call()`**:
+
+```jsx
+function saludar() {
+  console.log("Hola, mi nombre es " + this.nombre);
+}
+
+var persona = {
+  nombre: "Juan",
+};
+
+saludar.call(persona); // Salida: "Hola, mi nombre es Juan"
+```
+
+En este ejemplo, se utiliza **`call()`** para llamar a la función **`saludar()`** y establecer **`this`** como el objeto **`persona`**. Esto permite acceder a la propiedad **`nombre`** del objeto **`persona`** dentro de la función.
+
+### Método **`apply()`**:
+
+El método **`apply()`** es similar a **`call()`**, pero en lugar de recibir argumentos individuales, toma un array de argumentos como su segundo argumento.
+
+Ejemplo de enlace explícito con **`apply()`**:
+
+```jsx
+function saludar(lenguaje) {
+  console.log("Hola, mi nombre es " + this.nombre + " y hablo " + lenguaje);
+}
+
+var persona = {
+  nombre: "Juan",
+};
+
+saludar.apply(persona, ["español"]); // Salida: "Hola, mi nombre es Juan y hablo español"
+```
+
+En este ejemplo, tenemos una función **`saludar()`** que acepta un parámetro **`lenguaje`** y muestra un saludo utilizando el nombre de la persona y el lenguaje proporcionado.
+
+Usando **`apply()`**, llamamos a la función **`saludar()`** y establecemos explícitamente el valor de **`this`** como el objeto **`persona`**. El segundo argumento de **`apply()`** es un array **`[ "español" ]`**, que contiene los argumentos que se pasan a la función **`saludar()`**.
+
+Dentro de la función **`saludar()`**, podemos acceder a la propiedad **`nombre`** del objeto **`persona`** utilizando **`this.nombre`**. Además, pasamos el valor **`"español"`** como argumento en **`apply()`**, que se utiliza para mostrar el lenguaje en el saludo.
+
+### Método **`bind()`**:
+
+El método **`bind()`** crea una nueva función enlazada, donde el valor de **`this`** se establece permanentemente al objeto especificado. Esta nueva función enlazada se puede llamar más tarde.
+
+Ejemplo de enlace explícito con **`bind()`**:
+
+```jsx
+function saludar() {
+  console.log("Hola, mi nombre es " + this.nombre);
+}
+
+var persona = {
+  nombre: "Juan",
+};
+
+var saludarPersona = saludar.bind(persona);
+saludarPersona(); // Salida: "Hola, mi nombre es Juan"
+```
+
+En este ejemplo, **`bind()`** se utiliza para crear una nueva función **`saludarPersona`** enlazada al objeto **`persona`**. Al llamar a **`saludarPersona()`**, se utilizará el valor de **`this`** establecido en **`persona`**.
+
+El enlace explícito es útil cuando queremos asegurarnos de que **`this`** se refiera a un objeto específico, incluso en situaciones en las que el contexto de ejecución podría cambiar. Esto nos brinda un mayor control sobre el comportamiento de nuestras funciones y permite establecer explícitamente el contexto deseado.
