@@ -99,3 +99,133 @@ console.log(variableDeBloque); // Error: variableDeBloque no está definida
 ```
 
 El entendimiento y manejo adecuado del scope es importante para evitar colisiones de nombres de variables, proteger los datos y modularizar el código de manera eficiente en programas JavaScript.
+
+## 27.2 Hoisting
+
+El hoisting en JavaScript es un comportamiento especial que ocurre durante la fase de compilación del código. Consiste en el movimiento automático de las declaraciones de variables y funciones al inicio de su ámbito, sin importar dónde se haya realizado la declaración en el código.
+
+En otras palabras, JavaScript "eleva" las declaraciones de variables y funciones al principio de su ámbito, lo que permite utilizarlas antes de que se declaren explícitamente en el código. Sin embargo, es importante tener en cuenta que solo las declaraciones se elevan, no las inicializaciones o asignaciones.
+
+### Hoisting Variables
+
+Cuando se utilizan las palabras clave **var**, las declaraciones de variables se elevan al inicio de su ámbito, pero se inicializan con **undefined**.
+
+Si se utilizan **let** y **const**, las declaraciones también se elevan, pero no se inicializan, lo que da como resultado un error si se intenta acceder a ellas antes de su declaración.
+
+Ejemplo con **var**:
+
+```jsx
+console.log(miVariable); // Muestra "undefined"
+var miVariable = 10;
+console.log(miVariable); // Muestra "10"
+```
+
+```jsx
+console.log(nombre); // Salida: undefined
+var nombre = "Juan";
+```
+
+En este ejemplo, aunque la variable **`nombre`** se utiliza antes de ser declarada, no se produce un error. Esto se debe a que durante la fase de compilación, la declaración de la variable se "eleva" al principio del ámbito. Sin embargo, en ese momento, la variable no tiene un valor asignado, por lo que su valor es **`undefined`**.
+
+Ejemplo con **let**:
+
+```jsx
+console.log(miVariable); // Error: miVariable no está definida
+let miVariable = 10;
+console.log(miVariable); // Muestra "10"
+```
+
+### Hoisting con Funciones:
+
+Las declaraciones de funciones se elevan al inicio de su ámbito junto con su cuerpo, lo que permite llamar a una función antes de que sea declarada en el código.
+
+```jsx
+saludar(); // Salida: "Hola"
+
+function saludar() {
+  console.log("Hola");
+}
+```
+
+En este caso, la función **`saludar()`** se llama antes de su declaración en el código. Gracias al hoisting, la declaración de la función se mueve al principio del ámbito, lo que permite su invocación antes de la declaración real.
+
+### Diferencia entre function Declarations & Expressions
+
+El hoisting en JavaScript se aplica tanto a las funciones declarativas como a las expresivas, pero hay diferencias sutiles en su comportamiento.
+
+Veamos ejemplos de hoisting con ambos tipos de funciones:
+
+#### Hoisting con funciones declarativas:
+
+```jsx
+saludar(); // Salida: "Hola"
+
+function saludar() {
+  console.log("Hola");
+}
+```
+
+En este caso, la función **`saludar()`** se declara utilizando la sintaxis de función declarativa. Aunque se llama a la función antes de su declaración en el código, el hoisting mueve la declaración de la función al principio del ámbito y luego lo ejecuta, lo que permite su invocación exitosa.
+
+#### Hoisting con funciones expresivas:
+
+```jsx
+saludar(); // Error: saludar is not a function
+
+var saludar = function () {
+  console.log("Hola");
+};
+```
+
+En este ejemplo, la función **`saludar`** se declara utilizando la sintaxis de función expresiva asignada a una variable. Al intentar llamar a la función antes de su declaración, se produce un error. A diferencia de las funciones declarativas, solo la declaración de la variable **`saludar`** se eleva al principio del ámbito, no la asignación de la función en sí. Por lo tanto, al intentar llamar a **`saludar()`** antes de asignar la función, se produce un error, ya que en ese momento, **`saludar`** es **`undefined`**.
+
+Es importante destacar que, aunque las declaraciones de funciones se "elevan" durante la fase de compilación, el hoisting no se aplica a las asignaciones de variables u objetos. Solo las declaraciones de variables y funciones se ven afectadas por el hoisting. Por eso, en el caso de las funciones expresivas, es importante asegurarse de que la asignación se realice antes de intentar llamar a la función.
+
+Sin embargo, aunque el hoisting puede resultar útil en algunos casos, se recomienda mantener un código claro y legible, evitando depender demasiado de este comportamiento. Es una buena práctica declarar las variables y funciones en su posición adecuada antes de utilizarlas, para evitar confusiones y errores.
+
+## 27.3 Coercion
+
+La `coerción` en JavaScript es el proceso mediante el cual los valores de un tipo de datos se convierten automáticamente a otro tipo de datos durante una operación.
+
+JavaScript realiza la `coerción` de manera implícita para adaptar los valores y permitir realizar operaciones entre diferentes tipos de datos.
+
+Existen dos tipos de coerción en JavaScript: coerción implícita (o automática) y coerción explícita (o manual).
+
+### Coerción implícita:
+
+La coerción implícita ocurre cuando JavaScript convierte automáticamente un valor de un tipo de datos a otro tipo de datos sin que se realice una conversión explícita en el código.
+
+Esto puede suceder en situaciones como la concatenación de cadenas de texto y números, operaciones aritméticas, comparaciones o evaluaciones lógicas.
+
+Ejemplo de coerción implícita:
+
+```jsx
+var numero = 10;
+var texto = "El número es: " + numero;
+
+console.log(texto); // Salida: "El número es: 10"
+
+const num1 = 1;
+const num2 = "2";
+
+console.log(num1 + num2); // "3"
+```
+
+En este caso, se realiza una concatenación de una cadena de texto y un número. JavaScript realiza automáticamente la coerción del número a una cadena de texto para poder concatenarlos.
+
+### Coerción explícita:
+
+La coerción explícita ocurre cuando se realiza una conversión manual de un tipo de dato a otro mediante el uso de funciones o métodos específicos. Esto permite controlar y forzar la conversión de un tipo de dato a otro según nuestras necesidades.
+
+Ejemplo de coerción explícita:
+
+```jsx
+var numero = "5";
+var numeroEntero = parseInt(numero);
+
+console.log(numeroEntero); // Salida: 5
+```
+
+En este caso, se utiliza la función **`parseInt()`** para convertir explícitamente la cadena de texto **`"5"`** a un número entero. La coerción explícita nos permite especificar el tipo de conversión que deseamos realizar.
+
+Es importante tener en cuenta que la coerción puede tener implicaciones en la precisión y el comportamiento de las operaciones, por lo que es fundamental comprender cómo se realizan las conversiones automáticas en JavaScript y tener cuidado al utilizar la coerción en nuestros programas.
