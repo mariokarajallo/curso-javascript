@@ -325,4 +325,43 @@ saludarPersona(); // Salida: "Hola, mi nombre es Juan"
 
 En este ejemplo, **`bind()`** se utiliza para crear una nueva función **`saludarPersona`** enlazada al objeto **`persona`**. Al llamar a **`saludarPersona()`**, se utilizará el valor de **`this`** establecido en **`persona`**.
 
+#### Otros ejemplos
+
+```jsx
+// Explicit binding
+
+// Existe otra forma de hacer binding y es con EXPLICITI BINDING...
+
+function persona(el1, el2) {
+  console.log(`Mi Nombre es: ${this.name} & I  listen: ${el1} & ${el2} `);
+}
+const informacion = {
+  name: "Juan",
+  job: "Developer",
+};
+const musicaFavorita = ["Heavy Metal", "Rock"];
+
+// UTILIZAREMOS un método llamado .call, .call existe en todas las funciones de Javascript, y puedes pasarle digamos un objeto o arreglo dentro de la función... MUY IMPORTANTE esque nota como el segundo argumento es un array, en .call tienes que pasar cada elemento del array de forma individial, con su posición...
+persona.call(informacion, musicaFavorita[0], musicaFavorita[1]);
+
+// explicit binding with .apply, este es exactamente igual a .call, existe en todas las funciones pero toma un array completo...
+persona.apply(informacion, musicaFavorita);
+
+// finalmente .bind va a ser como .call en que le pasas cada argumento de forma individual, pero te crea una nueva función..
+const nuevaFn = persona.bind(informacion, musicaFavorita[0], musicaFavorita[1]);
+nuevaFn();
+
+// Estos 3, .call, .apply y .bind ya son temas más avanzados, pero los he visto en entrevistas de Desarrolladores JavaScript así que es importante que conozcas las diferencias.
+```
+
+En primer lugar, se define la función **`persona()`** que muestra información sobre una persona y dos elementos que escucha. Luego, se crea un objeto **`informacion`** con propiedades **`name`** y **`job`**. También se define un array **`musicaFavorita`** con dos elementos.
+
+A continuación, se utiliza **`.call()`** para llamar a la función **`persona()`** y establecer explícitamente el valor de **`this`** como el objeto **`informacion`**. Los elementos del array **`musicaFavorita`** se pasan como argumentos individuales utilizando **`musicaFavorita[0]`** y **`musicaFavorita[1]`**.
+
+Después, se utiliza **`.apply()`** de manera similar a **`.call()`**, pero en lugar de pasar los argumentos uno a uno, se pasa el array completo **`musicaFavorita`**.
+
+Finalmente, se utiliza **`.bind()`** para crear una nueva función **`nuevaFn`** que está enlazada al objeto **`informacion`** y a los elementos del array **`musicaFavorita`**. Al llamar a **`nuevaFn()`**, se muestra la información correspondiente.
+
+El enlace explícito es útil cuando queremos asegurarnos de que **`this`** se refiera a un objeto específico, incluso en situaciones en las que el contexto de ejecución podría cambiar. Esto nos brinda un mayor control sobre el comportamiento de nuestras funciones y permite establecer explícitamente el contexto deseado.
+
 El enlace explícito es útil cuando queremos asegurarnos de que **`this`** se refiera a un objeto específico, incluso en situaciones en las que el contexto de ejecución podría cambiar. Esto nos brinda un mayor control sobre el comportamiento de nuestras funciones y permite establecer explícitamente el contexto deseado.
