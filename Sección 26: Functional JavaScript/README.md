@@ -511,3 +511,108 @@ El closure permite que la función interna **`muestraNombre`** acceda y recuerde
 En resumen, el closure en este ejemplo permite que la función **`cliente`** acceda al valor de **`nombre`** que está fuera de su ámbito léxico original, lo que permite recordar y utilizar variables que ya no están en el ámbito actual.
 
 Los closures son una poderosa herramienta en la programación funcional que permite crear funciones más flexibles, encapsular datos y mantener estado persistente. Su capacidad para mantener el contexto léxico de una función proporciona una forma eficiente y elegante de trabajar con datos y comportamientos en un entorno funcional.
+
+## 26.10 Partials y Currying
+
+El currying y los partials son técnicas utilizadas en programación funcional para transformar funciones y lograr una mayor flexibilidad en la aplicación de argumentos.
+
+### Currying:
+
+El currying es una técnica que consiste en transformar una función que toma múltiples argumentos en una secuencia de funciones que toman un solo argumento. En otras palabras, se trata de dividir una función con varios parámetros en una serie de funciones más pequeñas y especializadas, donde cada una toma un solo argumento.
+
+#### Características del currying:
+
+- Crea funciones más específicas y reutilizables.
+- Permite aplicar parcialmente los argumentos, es decir, fijar algunos argumentos de antemano y generar una nueva función con los argumentos restantes.
+- Facilita la composición de funciones.
+
+Ejemplo de currying en JavaScript:
+
+```jsx
+function sum(a) {
+  return function (b) {
+    return a + b;
+  };
+}
+
+const sumTwo = sum(2);
+console.log(sumTwo(3)); // Output: 5
+```
+
+En este ejemplo, la función **`sum`** toma un argumento **`a`** y retorna una función interna que toma otro argumento **`b`** y realiza la suma de **`a`** y **`b`**. Al llamar a **`sum(2)`**, se genera una nueva función **`sumTwo`** que suma **`2`** al argumento que se le pase. Al invocar **`sumTwo(3)`**, se suma **`2`** y **`3`** para obtener el resultado **`5`**.
+
+### Partials:
+
+Los partials son una técnica relacionada con el currying que permite fijar algunos argumentos de una función y generar una nueva función con esos argumentos predefinidos. La nueva función puede luego ser utilizada con los argumentos restantes en un momento posterior.
+
+#### Características de los partials:
+
+- Permite fijar argumentos de una función y generar una nueva función más específica.
+- Facilita la reutilización de funciones al aplicar parcialmente los argumentos.
+- Puede utilizarse en combinación con el currying para lograr una mayor flexibilidad en la aplicación de argumentos.
+
+Ejemplo de partials en JavaScript:
+
+```jsx
+function greet(greeting, name) {
+  console.log(`${greeting}, ${name}!`);
+}
+
+const greetHello = (name) => greet("Hello", name);
+greetHello("John"); // Output: Hello, John!
+```
+
+En este ejemplo, la función **`greet`** recibe dos argumentos: **`greeting`** y **`name`**, y muestra un saludo combinando ambos. La función **`greetHello`** es una nueva función que toma un solo argumento **`name`**. Esta función se crea utilizando una función de flecha (arrow function) y hace uso de la función **`greet`** aplicando parcialmente el argumento **`'Hello'`**.
+
+Al llamar a **`greetHello('John')`**, se invoca la función **`greet`** con el argumento **`'Hello'`** predefinido y el argumento **`'John'`** que se pasa en la llamada a **`greetHello`**. Como resultado, se muestra el saludo **`'Hello, John!'`**.
+
+En este caso, el partial se logra mediante el uso de una función de flecha y la aplicación parcial del argumento **`'Hello'`** en la función **`greet`**. Esto permite generar una nueva función más específica (**`greetHello`**) que solo requiere el argumento **`name`**.
+
+#### Ejemplos
+
+En el ejemplo, la función **`suma`** toma tres argumentos **`a`**, **`b`** y **`c`**, y devuelve la suma de los tres. Luego, se utiliza la técnica de currying para dividir la función **`suma`** en múltiples funciones más pequeñas.
+
+```jsx
+// const suma = (a, b, c ) => { // Esto podría quedar como a + b + c
+//     return a + b + c;
+// }
+
+// console.log(suma(1,2,3));
+
+// Curring es dividir  una función que toma más de un parametro, en argumentos de forma parcial...
+
+// Podriamos agregar un Currying de la siguiente forma...
+
+const suma = (a, b, c) => a + b + c;
+```
+
+Aquí, en ejemplo comentado, se utiliza una función **`parcial`** que toma el argumento **`a`** y devuelve una nueva función que toma los argumentos **`b`** y **`c`**. Al aplicar esta técnica, se pueden generar funciones más específicas y reutilizables. Por ejemplo, al crear la función **`primerNumero`** utilizando **`parcial(5)`**, se obtiene una función que suma **`5`** a los argumentos **`b`** y **`c`**. Luego, al invocar **`primerNumero(4, 3)`**, se obtiene el resultado de la suma: **`12`**.
+
+Luego en el siguiente ejemplo se utiliza una estructura anidada de funciones de flecha para lograr el currying. La función **`parcial`** toma el argumento **`a`** y devuelve una función que toma el argumento **`b`** y devuelve otra función que toma el argumento **`c`**. Esto permite invocar las funciones de forma encadenada. Al crear las funciones **`primerNumero`** y **`segundoNumero`** de esta manera, se puede lograr la aplicación parcial de argumentos de forma más modular. Luego, al invocar **`segundoNumero(3)`**, se obtiene el resultado de la suma: **`12`**.
+
+En el último ejemplo, se utiliza la función **`parcial`** para generar una función más específica directamente en una sola línea. Al utilizar **`parcial(5)(5)(3)`**, se fijan los argumentos **`5`**, **`5`** y **`3`** en la función **`suma`**. Esto genera una nueva función que toma los argumentos restantes y devuelve el resultado de la suma. Al invocar **`resultadoParcial`**, se obtiene el resultado: **`13`**.
+
+```jsx
+// const parcial = a =>
+//     (b,c) =>  suma(a, b, c);
+
+// const primerNumero = parcial(5);
+// const resultado = primerNumero(4,3);
+// console.log(resultado);
+
+// Podriamos dividir más esta función suma... a que sea un argumento en cada ocasion...
+
+const parcial = (a) => (b) => (c) => suma(a, b, c);
+
+const primerNumero = parcial(5);
+const segundoNumero = primerNumero(4);
+const resultado = segundoNumero(3);
+
+console.log(resultado);
+
+// Otra opción seria...
+const resultadoParcial = parcial(5)(5)(3);
+console.log(resultadoParcial);
+```
+
+En resumen, tanto el currying como los partials son técnicas que permiten una mayor flexibilidad y reutilización de funciones en la programación funcional. El currying divide una función con múltiples argumentos en funciones más pequeñas y especializadas, mientras que los partials fijan algunos argumentos de una función para generar una nueva función más específica. Ambas técnicas son útiles para lograr una composición de funciones más modular y flexible.
