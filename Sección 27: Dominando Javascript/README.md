@@ -476,3 +476,71 @@ Este proceso se repite continuamente, permitiendo que las tareas asincrónicas s
 Esto permite que JavaScript maneje tareas asíncronas sin bloquear la ejecución del código. Por ejemplo, cuando se realiza una solicitud de red, en lugar de esperar a que se complete antes de continuar con otras tareas, el Event Loop permite que otras tareas se ejecuten mientras la solicitud de red está en curso. Una vez que la solicitud de red se completa y se agrega a la cola de tareas, el Event Loop la selecciona y la ejecuta cuando la pila de llamadas está vacía.
 
 En resumen, el Event Loop es un mecanismo esencial en JavaScript que garantiza que las operaciones asíncronas y los eventos se manejen de manera eficiente y no bloqueen la ejecución del código. Permite la ejecución continua de tareas y eventos en un entorno de un solo subproceso.
+
+## 27.8 ¿Qué es self?
+
+En JavaScript, el término "self" no es una característica intrínseca del lenguaje, sino más bien una convención utilizada por los desarrolladores para hacer referencia al contexto actual o a una instancia específica dentro de un objeto. No es una palabra reservada ni un operador propio del lenguaje, sino una variable o propiedad que se utiliza con diferentes enfoques según el contexto.
+
+La idea detrás del uso de **`self`** es mantener una referencia al objeto actual cuando se está trabajando con scopes o contextos anidados, como en closures o callbacks, donde el valor de **`this`** puede cambiar.
+
+A continuación, te mostraré un ejemplo para ilustrar cómo se puede utilizar **`self`** para mantener una referencia al objeto actual:
+
+```jsx
+function Persona(nombre) {
+  var self = this; // Guardamos una referencia al objeto actual en la variable 'self'
+  self.nombre = nombre;
+
+  self.saludar = function () {
+    console.log("Hola, mi nombre es " + self.nombre);
+  };
+
+  setTimeout(function () {
+    console.log("Dentro de setTimeout: " + self.nombre); // Usamos 'self' para acceder al objeto actual
+  }, 1000);
+}
+
+var persona = new Persona("Juan");
+persona.saludar(); // Salida: "Hola, mi nombre es Juan"
+```
+
+En este ejemplo, se utiliza **`self`** para mantener una referencia al objeto actual (**`this`**) dentro del constructor **`Persona`**. Luego, en el método **`saludar`**, podemos acceder a las propiedades del objeto utilizando **`self.nombre`**.
+
+Además, en el **`setTimeout`**, también utilizamos **`self`** para asegurarnos de que el objeto actual se acceda correctamente dentro de la función de callback.
+
+La forma más común de usar "self" es dentro de funciones o métodos para referirse al objeto actual. Aquí tienes un ejemplo:
+
+```jsx
+const obj = {
+  name: "Juan",
+  sayHello: function () {
+    console.log("Hola, mi nombre es " + this.name);
+    console.log("El objeto actual es:", self); // Uso de "self"
+  },
+};
+
+obj.sayHello();
+```
+
+En este ejemplo, "self" se utiliza para hacer referencia al objeto actual (**`obj`**) dentro del método **`sayHello()`**. Sin embargo, debes tener en cuenta que esto es una convención y no una característica del lenguaje en sí.
+
+En algunos casos, se puede utilizar "self" como una variable para guardar la referencia al objeto actual antes de entrar en un nuevo ámbito. Esto puede ser útil en situaciones donde hay un cambio de contexto y se necesita acceder al objeto original. Aquí tienes un ejemplo:
+
+```jsx
+const obj = {
+  name: "Juan",
+  printName: function () {
+    const self = this; // Guardar referencia al objeto actual en "self"
+    setTimeout(function () {
+      console.log("Nombre:", self.name); // Acceder al nombre usando "self"
+    }, 1000);
+  },
+};
+
+obj.printName();
+```
+
+En este caso, se guarda la referencia al objeto actual en la variable "self" antes de entrar en el ámbito de la función interna del **`setTimeout()`**. Esto permite acceder al nombre del objeto original incluso dentro de un contexto diferente.
+
+Es importante mencionar que el uso de "self" puede variar dependiendo del contexto y las convenciones de código del proyecto. Algunas personas prefieren utilizar "this" directamente en lugar de "self". Sin embargo, en situaciones donde se necesita acceder al objeto actual en un contexto diferente o cuando se utilizan funciones anidadas, el uso de "self" puede resultar útil.
+
+Tener en cuenta que el uso de **`self`** es una convención y no es una característica del lenguaje JavaScript en sí. Es común verlo en código legado o en situaciones donde se necesita mantener una referencia al objeto actual en un contexto cambiante.
