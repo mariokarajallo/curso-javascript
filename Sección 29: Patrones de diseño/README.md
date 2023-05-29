@@ -406,3 +406,119 @@ restaurApp.funciones.ordenar(1);
 El patrón de diseño Namespace en JavaScript ES6 proporciona una forma de organizar el código en un espacio de nombres único y evitar conflictos de nombres entre diferentes partes del código. Esto promueve la modularidad y el mantenimiento del código a medida que el proyecto crece.
 
 Ten en cuenta que, si bien puedes simular el patrón Namespace en JavaScript ES6 con objetos literales, existen otras formas más avanzadas de implementar namespaces utilizando módulos y sistemas de construcción de JavaScript, como Webpack o TypeScript, que ofrecen soporte nativo para la organización de código en espacios de nombres.
+
+## 29.9 Mediator
+
+El patrón de diseño Mediator es un patrón de comportamiento que promueve la comunicación indirecta y desacopla los componentes de un sistema. Proporciona un objeto mediador que coordina las interacciones entre múltiples objetos, permitiendo que se comuniquen entre sí sin conocerse directamente. El mediador actúa como un intermediario centralizado y maneja la lógica de comunicación y coordinación.
+
+El objetivo del patrón Mediator es reducir la dependencia directa entre los componentes y promover un acoplamiento más débil y flexible, ya que los componentes solo necesitan comunicarse a través del mediador en lugar de comunicarse directamente entre sí.
+
+### Principios del patrón Mediator:
+
+1. Desacoplamiento: El patrón Mediator reduce el acoplamiento entre objetos, ya que no necesitan conocerse entre sí. Los objetos se comunican a través del mediador, lo que permite que los cambios en un objeto no afecten directamente a otros objetos.
+2. Centralización del control: El mediador centraliza el control y la lógica de comunicación entre objetos. Esto evita que los objetos tengan que comunicarse directamente y los libera de la responsabilidad de conocer y gestionar las relaciones con otros objetos.
+
+Es importante tener en cuenta que el uso del patrón Mediator debe equilibrarse con la simplicidad y la claridad del código. No es recomendable utilizar un mediador excesivamente complejo o sobrecargado, ya que puede dificultar la comprensión y mantenibilidad del sistema.
+
+Aquí tienes un ejemplo, supongamos que tenemos un sistema de chat donde varios usuarios pueden enviar mensajes entre sí. En lugar de permitir que los usuarios se comuniquen directamente, utilizaremos el patrón Mediator para facilitar la comunicación a través de un objeto mediador.
+
+```jsx
+// Mediator (ChatRoom)
+class ChatRoom {
+  showMessage(user, message) {
+    console.log(`${user}: ${message}`);
+  }
+}
+
+// Componente (Usuario)
+class User {
+  constructor(name, chatRoom) {
+    this.name = name;
+    this.chatRoom = chatRoom;
+  }
+
+  send(message) {
+    this.chatRoom.showMessage(this.name, message);
+  }
+}
+
+// Uso del Mediator
+const chatRoom = new ChatRoom();
+
+const user1 = new User("John", chatRoom);
+const user2 = new User("Alice", chatRoom);
+
+user1.send("Hello, everyone!");
+user2.send("Hi, John!");
+```
+
+- En este ejemplo, tenemos un mediador llamado **`ChatRoom`** que representa la sala de chat. Tiene un método **`showMessage(user, message)`** que muestra en consola el mensaje enviado por un usuario específico.
+- Los usuarios (**`User`**) tienen un nombre y una referencia a la sala de chat (**`ChatRoom`**). Cuando un usuario quiere enviar un mensaje, utiliza el método **`send(message)`**, que llama al método **`showMessage(user, message)`** del mediador, pasando el nombre del usuario y el mensaje como argumentos.
+- Cuando se ejecuta el código, los usuarios envían mensajes utilizando el método **`send(message)`**. El mediador se encarga de mostrar los mensajes en consola, indicando el nombre del usuario y el contenido del mensaje.
+- Este ejemplo muestra cómo el patrón Mediator facilita la comunicación indirecta entre componentes a través de un mediador (la sala de chat). Los usuarios no se comunican directamente entre sí, sino que utilizan el mediador para enviar y mostrar mensajes. Esto reduce el acoplamiento entre los usuarios y centraliza la lógica de comunicación en el mediador.
+
+En el siguiente ejemplo tenemos una subasta, el intermediario (objeto **`Subasta`**) maneja la comunicación entre vendedores y compradores, asegurando que todos los mensajes se envíen y reciban adecuadamente.
+
+```jsx
+// Un intermediario es un design pattern que se comunica con distintos objetos a la vez...
+// el mediator define objetos ya localizados para objetivos especificos,
+
+function Vendedor(nombre) {
+  this.nombre = nombre;
+  this.sala = null;
+}
+
+Vendedor.prototype = {
+  oferta: (articulo, precio) => {
+    console.log(
+      `Tenemos el siguiente articulo ${articulo}, iniciamos en ${precio}`
+    );
+  },
+  vendido: (comprador) => {
+    console.log(`Vendido a ${comprador}`);
+  },
+};
+
+function Comprador(nombre) {
+  this.nombre = nombre;
+  this.sala = null;
+}
+Comprador.prototype = {
+  oferta: (cantidad, comprador) => {
+    console.log(`${comprador.nombre} : ${cantidad}`);
+  },
+};
+
+function Subasta(id) {
+  let compradores = {};
+
+  return {
+    registrar: (usuario) => {
+      compradores[usuario.nombre] = usuario;
+      usuario.sala = id;
+    },
+  };
+}
+
+const juan = new Comprador("Juan");
+const pablo = new Comprador("pablo");
+const vendedor = new Vendedor("Vendedor de Autos...");
+const subasta = new Subasta(Date.now());
+
+subasta.registrar(juan);
+subasta.registrar(pablo);
+subasta.registrar(vendedor);
+
+vendedor.oferta("Mustang 1966", 300);
+juan.oferta(300, juan);
+pablo.oferta(400, pablo); // Comentar... y no se podrá ver la oferta porque no fue registrado...
+vendedor.vendido("Pablo");
+```
+
+- Tenemos dos tipos de participantes en una subasta: vendedores (representados por la clase **`Vendedor`**) y compradores (representados por la clase **`Comprador`**).
+- El objeto **`Subasta`** actúa como el mediador o intermediario entre los vendedores y los compradores. Contiene una lista de compradores registrados en la subasta.
+- Los vendedores pueden realizar ofertas utilizando el método **`oferta(articulo, precio)`** del objeto **`Vendedor`**. Esto muestra en consola el artículo y el precio inicial.
+- Los compradores pueden realizar ofertas utilizando el método **`oferta(cantidad, comprador)`** del objeto **`Comprador`**. Esto muestra en consola la cantidad de la oferta y el nombre del comprador.
+- Para participar en la subasta, los participantes deben registrarse utilizando el método **`registrar(usuario)`** del objeto **`Subasta`**. Esto agrega al usuario a la lista de compradores registrados y establece su sala de subasta.
+- En el ejemplo, se registran el vendedor (**`Vendedor`**) y dos compradores (**`Comprador`**). Luego, el vendedor realiza una oferta y los compradores hacen sus ofertas correspondientes.
+- Finalmente, el vendedor anuncia que el artículo ha sido vendido a un comprador específico utilizando el método **`vendido(comprador)`** del objeto **`Vendedor`**.
