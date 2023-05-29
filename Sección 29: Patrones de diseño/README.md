@@ -298,3 +298,111 @@ console.log(objeto.mixinProperty); // Soy una propiedad del mixin
 - Después de aplicar el mixin, creamos una instancia de **`MiClase`** llamada **`objeto`** y podemos llamar al método **`mixinMethod()`** y acceder a **`mixinProperty`** a través de esa instancia.
 
 El Mixin Pattern es útil cuando deseas agregar funcionalidades adicionales a una clase sin tener que utilizar la herencia tradicional de clases. Puedes mezclar múltiples mixins con una clase para extender su funcionalidad de manera flexible y modular. Esto facilita la composición de comportamientos y evita la complejidad que a menudo surge de la herencia múltiple o profunda.
+
+## 29.8 Namespace
+
+El patrón de diseño Namespace en JavaScript ES6 se utiliza para organizar y agrupar código relacionado dentro de un espacio de nombres o contenedor. Su objetivo principal es evitar colisiones de nombres y proporcionar una estructura más ordenada y modular para las variables, funciones y clases.
+
+Los namespaces son especialmente útiles en lenguajes de programación que no tienen soporte nativo para la modularidad, como JavaScript antes de la introducción de los módulos ES6. Con los namespaces, puedes simular la estructura modular y evitar la contaminación del ámbito global.
+
+Es importante tener en cuenta que aunque los namespaces pueden ser útiles en algunos casos, la tendencia actual en JavaScript es utilizar módulos ES6 para lograr una modularidad más efectiva y un mejor manejo de la dependencia entre diferentes partes del código.
+
+```jsx
+// Definición del namespace
+const MiNamespace = {
+  // Variables y constantes
+  variableA: 10,
+  variableB: "Hola",
+
+  // Funciones
+  funcionA() {
+    console.log("Función A");
+  },
+
+  funcionB() {
+    console.log("Función B");
+  },
+
+  // Clases
+  MiClase: class {
+    constructor(nombre) {
+      this.nombre = nombre;
+    }
+
+    saludar() {
+      console.log(`Hola, soy ${this.nombre}`);
+    }
+  },
+};
+
+// Uso del namespace
+console.log(MiNamespace.variableA); // 10
+MiNamespace.funcionA(); // Función A
+
+const instancia = new MiNamespace.MiClase("Juan");
+instancia.saludar(); // Hola, soy Juan
+```
+
+- En este ejemplo, creamos un objeto literal llamado **`MiNamespace`**, que actúa como nuestro espacio de nombres. Dentro de este objeto, definimos variables, funciones y una clase.
+- Las variables **`variableA`** y **`variableB`** son propiedades del namespace y se pueden acceder mediante **`MiNamespace.variableA`** y **`MiNamespace.variableB`**.
+- Las funciones **`funcionA`** y **`funcionB`** son métodos del namespace y se pueden invocar utilizando **`MiNamespace.funcionA()`** y **`MiNamespace.funcionB()`**.
+- La clase **`MiClase`** también se define dentro del namespace y se puede instanciar utilizando **`new MiNamespace.MiClase()`**. Luego, se pueden llamar a los métodos de la clase utilizando la instancia creada.
+
+```jsx
+// Namespaces es un design pattern de organización de código, ayuda a evitar colision con nombres en el scope global de javascript.
+
+// la idea del namespace es crear un objeto global alrededor de tu aplicación y agregar todas las funciones dentro en lugar de crear múltiples funciones y objetos que se puedan acceder de forma global.
+
+const restaurApp = {};
+
+restaurApp.platillos = [
+  {
+    platillo: "Pizza",
+    precio: 25,
+  },
+  {
+    platillo: "Hamburguesa",
+    precio: 20,
+  },
+  {
+    platillo: "Hot Dog",
+    precio: 20,
+  },
+];
+
+restaurApp.funciones = {
+  ordenar: (id) => {
+    console.log(
+      `Tu platillo: ${restaurApp.platillos[id].platillo} se esta preparando`
+    );
+  },
+  agregarPlatillo: (platillo, precio) => {
+    const nuevo = {
+      platillo,
+      precio,
+    };
+    restaurApp.platillos.push(nuevo);
+  },
+  mostrarMenu: (platillos) => {
+    console.log(`Bienvenidos a nuestro Menú:`);
+    platillos.forEach((platillo, index) => {
+      console.log(`${index})  ${platillo.platillo} $ ${platillo.precio}`);
+    });
+  },
+};
+
+restaurApp.funciones.agregarPlatillo("Pastel", 20);
+// console.log(restaurApp );
+const { platillos } = restaurApp;
+
+restaurApp.funciones.mostrarMenu(platillos);
+restaurApp.funciones.ordenar(1);
+```
+
+- Dentro del **`restaurApp`**, tienes una propiedad **`platillos`** que es un array que almacena información sobre los platillos disponibles en el menú del restaurante.
+- Además, tienes un objeto **`funciones`** dentro de **`restaurApp`** que contiene diferentes funciones relacionadas con la aplicación del restaurante. Estas funciones incluyen **`ordenar`**, que muestra un mensaje indicando que se está preparando un platillo específico, **`agregarPlatillo`**, que permite agregar nuevos platillos al menú, y **`mostrarMenu`**, que muestra en consola el menú con todos los platillos y sus precios.
+- Al final del código, estás utilizando las funciones del namespace **`restaurApp`**. Por ejemplo, estás agregando un nuevo platillo llamado "Pastel" mediante **`restaurApp.funciones.agregarPlatillo('Pastel', 20)`**, y luego mostrando el menú completo con **`restaurApp.funciones.mostrarMenu(platillos)`**. También estás realizando un pedido específico usando **`restaurApp.funciones.ordenar(1)`**.
+
+El patrón de diseño Namespace en JavaScript ES6 proporciona una forma de organizar el código en un espacio de nombres único y evitar conflictos de nombres entre diferentes partes del código. Esto promueve la modularidad y el mantenimiento del código a medida que el proyecto crece.
+
+Ten en cuenta que, si bien puedes simular el patrón Namespace en JavaScript ES6 con objetos literales, existen otras formas más avanzadas de implementar namespaces utilizando módulos y sistemas de construcción de JavaScript, como Webpack o TypeScript, que ofrecen soporte nativo para la organización de código en espacios de nombres.
