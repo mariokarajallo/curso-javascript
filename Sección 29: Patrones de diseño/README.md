@@ -219,3 +219,46 @@ productoC.describir(); // Producto: Producto C, Precio: 300
 - Al utilizar el Factory Pattern, puedes crear objetos de productos sin necesidad de conocer los detalles internos de cómo se crean. Simplemente utilizas el método estático **`crearProducto`** de la fábrica para obtener el objeto deseado.
 
 Este patrón es útil cuando necesitas crear diferentes tipos de objetos en función de ciertos parámetros o condiciones, y deseas mantener la lógica de creación centralizada en una fábrica. Esto puede facilitar la gestión y la extensibilidad del código a medida que se agregan nuevos tipos de objetos en el futuro.
+
+## 29.6. Module
+
+El patrón Module (Módulo) en JavaScript es un patrón de diseño estructural que permite organizar y encapsular código relacionado en módulos independientes. Este patrón es útil para mantener el código organizado, facilitar la reutilización y evitar la contaminación del espacio de nombres global.
+
+En ECMAScript 6 (ES6), el patrón Module se implementa utilizando módulos nativos de JavaScript, que permiten exportar e importar funciones, clases y variables entre archivos. Aquí tienes un ejemplo de cómo usar módulos en ES6:
+
+1. Creamos un archivo llamado **math.js** que exporta algunas funciones matemáticas:
+
+```jsx
+// math.js
+exportfunctionadd(a, b) {
+return a + b;
+}
+
+exportfunctionsubtract(a, b) {
+return a - b;
+}
+
+exportfunctionmultiply(a, b) {
+return a * b;
+}
+
+exportfunctiondivide(a, b) {
+return a / b;
+}
+```
+
+2. Creamos otro archivo llamado **app.js** que importa y utiliza las funciones matemáticas:
+
+```jsx
+// app.js
+import { add, subtract, multiply, divide } from "./math";
+
+console.log(add(1, 2)); // 3
+console.log(subtract(5, 3)); // 2
+console.log(multiply(2, 3)); // 6
+console.log(divide(10, 2)); // 5
+```
+
+- En este ejemplo, hemos creado un módulo **math.js** que exporta varias funciones matemáticas. Luego, en **app.js**, importamos y utilizamos estas funciones. Los módulos ES6 nos permiten mantener nuestro código organizado y separado en archivos diferentes, lo que facilita la comprensión y el mantenimiento del código.
+
+Además de las funciones, también puedes exportar e importar clases, objetos y variables utilizando módulos ES6. Esto te permite crear una estructura modular y escalable para tus aplicaciones JavaScript.
