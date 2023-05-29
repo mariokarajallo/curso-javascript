@@ -64,3 +64,72 @@ persona.saludar(); // Imprime: "Hola, mi nombre es Mario y tengo 25 años."
 - Finalmente, se llama al método **`saludar()`** en **`persona`**, lo que imprime el mensaje con el nombre y la edad.
 
 El patrón de clase en JavaScript simplifica la sintaxis y la estructura del código cuando se trabaja con programación orientada a objetos, lo que facilita la creación y el mantenimiento de clases y objetos en tu aplicación.
+
+## 29.3 Constructor Pattern
+
+El patrón Constructor en JavaScript es una forma de crear objetos utilizando funciones constructoras. Este patrón se basa en el concepto de clases y objetos, donde una función constructora actúa como una plantilla para crear múltiples instancias de un objeto con propiedades y métodos similares.
+
+En lugar de utilizar un objeto literal o una función de fábrica para crear objetos, el patrón Constructor emplea una función constructora que se invoca con la palabra clave **new** para crear e inicializar objetos.
+
+### Características del patrón Constructor:
+
+1. Encapsula la creación y la inicialización de objetos en una función constructora.
+2. Permite la creación de múltiples objetos con propiedades y métodos similares.
+3. Facilita la herencia y la reutilización de código a través de prototipos.
+
+Aquí tienes un ejemplo sencillo de cómo implementar el patrón Constructor en JavaScript:
+
+```jsx
+// Definir la función constructora
+function Auto(marca, modelo, anio) {
+  this.marca = marca;
+  this.modelo = modelo;
+  this.anio = anio;
+
+  this.getDescripcion = function () {
+    returnthis.marca + " " + this.modelo + " (" + this.anio + ")";
+  };
+}
+
+// Crear instancias de Auto utilizando el patrón Constructor
+var auto1 = new Auto("Toyota", "Corolla", 2020);
+var auto2 = new Auto("Honda", "Civic", 2019);
+
+// Llamar a un método en las instancias creadas
+console.log(auto1.getDescripcion()); // Output: "Toyota Corolla (2020)"
+console.log(auto2.getDescripcion()); // Output: "Honda Civic (2019)"
+```
+
+- En este ejemplo, la función **Auto** es la función constructora que define las propiedades **marca**, **modelo** y **anio**, así como el método **getDescripcion**.
+- Al utilizar la palabra clave **new** para crear instancias de **Auto**, se crea un nuevo objeto con las propiedades y métodos definidos en la función constructora.
+- Luego, puedes interactuar con las instancias creadas y llamar a sus métodos, como en el caso de **auto1.getDescripcion()** y **auto2.getDescripcion()**.
+
+Con la introducción de las clases en ECMAScript 2015 (ES6), el patrón constructor también se puede implementar utilizando la sintaxis de clases.
+
+El Constructor Pattern con la sintaxis de clases en ES6 consiste en definir una clase que actúa como un constructor para crear objetos. El constructor se define utilizando el método especial **`constructor()`**, que se ejecuta automáticamente cuando se crea una nueva instancia de la clase. Dentro del constructor, se pueden definir propiedades y métodos para los objetos creados.
+
+Aquí tienes un ejemplo sencillo del Constructor Pattern utilizando la sintaxis de clases de ES6:
+
+```jsx
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  sayHello() {
+    console.log(
+      `Hello, my name is ${this.name} and I'm ${this.age} years old.`
+    );
+  }
+}
+
+// Crear instancias de la clase Person
+const person1 = new Person("John", 25);
+const person2 = new Person("Jane", 30);
+
+// Acceder a las propiedades y métodos de las instancias
+console.log(person1.name); // John
+console.log(person2.age); // 30
+person1.sayHello(); // Hello, my name is John and I'm 25 years old.
+```
