@@ -262,3 +262,39 @@ console.log(divide(10, 2)); // 5
 - En este ejemplo, hemos creado un módulo **math.js** que exporta varias funciones matemáticas. Luego, en **app.js**, importamos y utilizamos estas funciones. Los módulos ES6 nos permiten mantener nuestro código organizado y separado en archivos diferentes, lo que facilita la comprensión y el mantenimiento del código.
 
 Además de las funciones, también puedes exportar e importar clases, objetos y variables utilizando módulos ES6. Esto te permite crear una estructura modular y escalable para tus aplicaciones JavaScript.
+
+## 29.7. Mixin Pattern
+
+El patrón Mixin es un patrón de diseño que permite componer múltiples comportamientos en una sola clase, sin la necesidad de utilizar la herencia de clases. En lugar de heredar comportamientos de una clase base, los mixins permiten "mezclar" comportamientos en una clase de manera flexible y reutilizable.
+
+En ECMAScript 6 (ES6), puedes implementar el patrón Mixin utilizando clases y funciones. Aquí tienes un ejemplo de cómo hacerlo:
+
+```jsx
+// Objeto Mixin de ejemplo
+const mixin = {
+  mixinMethod() {
+    console.log("Soy un método del mixin");
+  },
+
+  mixinProperty: "Soy una propiedad del mixin",
+};
+
+// Clase de ejemplo
+class MiClase {
+  // Métodos y propiedades de la clase
+}
+
+// Aplicar el mixin a la clase
+Object.assign(MiClase.prototype, mixin);
+
+// Uso del Mixin Pattern
+const objeto = new MiClase();
+objeto.mixinMethod(); // Soy un método del mixin
+console.log(objeto.mixinProperty); // Soy una propiedad del mixin
+```
+
+- Tenemos un objeto **`mixin`** que contiene un método **`mixinMethod()`** y una propiedad **`mixinProperty`** que deseamos mezclar con nuestra clase **`MiClase`**.
+- Luego utilizamos **`Object.assign()`** para asignar el mixin al prototipo de la clase de ejemplo llamado**`MiClase`**. Esto hace que todas las instancias de **`MiClase`** tengan acceso a los métodos y propiedades definidos en objeto `mixin`.
+- Después de aplicar el mixin, creamos una instancia de **`MiClase`** llamada **`objeto`** y podemos llamar al método **`mixinMethod()`** y acceder a **`mixinProperty`** a través de esa instancia.
+
+El Mixin Pattern es útil cuando deseas agregar funcionalidades adicionales a una clase sin tener que utilizar la herencia tradicional de clases. Puedes mezclar múltiples mixins con una clase para extender su funcionalidad de manera flexible y modular. Esto facilita la composición de comportamientos y evita la complejidad que a menudo surge de la herencia múltiple o profunda.
