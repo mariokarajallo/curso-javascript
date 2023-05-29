@@ -169,3 +169,53 @@ console.log(persona2);
 - Al imprimir **`persona`** y **`persona2`**, verás que ambos objetos tienen los mismos valores de **`nombre`** y **`email`**, lo que demuestra que están utilizando la misma instancia del Singleton.
 
 Es importante tener en cuenta que la implementación del patrón Singleton puede variar según el lenguaje de programación utilizado. Además, es importante tener en cuenta que el patrón Singleton puede tener algunas desventajas, como la dificultad para probar y la posible violación del principio de responsabilidad única. Por lo tanto, se recomienda utilizar el patrón Singleton con precaución y solo en situaciones en las que sea realmente necesario.
+
+## 29.5 Factory
+
+El patrón Factory (Fábrica) es un patrón de diseño creacional que proporciona una interfaz para crear objetos en una superclase, permitiendo a las subclases alterar el tipo de objetos que se crearán. En lugar de llamar directamente al constructor de una clase para crear un objeto, se utiliza una función o método de fábrica para crear el objeto.
+
+La implementación del Factory Pattern en JavaScript ES6 se beneficia de la sintaxis de clases y métodos estáticos. Aquí tienes un ejemplo para ilustrar cómo se puede implementar:
+
+```jsx
+class Producto {
+  constructor(nombre, precio) {
+    this.nombre = nombre;
+    this.precio = precio;
+  }
+
+  describir() {
+    console.log(`Producto: ${this.nombre}, Precio: ${this.precio}`);
+  }
+}
+
+class FabricaProductos {
+  static crearProducto(tipo) {
+    switch (tipo) {
+      case "A":
+        return new Producto("Producto A", 100);
+      case "B":
+        return new Producto("Producto B", 200);
+      case "C":
+        return new Producto("Producto C", 300);
+      default:
+        throw new Error("Tipo de producto inválido");
+    }
+  }
+}
+
+// Uso del Factory Pattern
+const productoA = FabricaProductos.crearProducto("A");
+const productoB = FabricaProductos.crearProducto("B");
+const productoC = FabricaProductos.crearProducto("C");
+
+productoA.describir(); // Producto: Producto A, Precio: 100
+productoB.describir(); // Producto: Producto B, Precio: 200
+productoC.describir(); // Producto: Producto C, Precio: 300
+```
+
+- En este ejemplo, la clase **`Producto`** representa un objeto de producto con propiedades de nombre y precio, y un método **`describir()`** para mostrar la información del producto.
+- La clase **`FabricaProductos`** es la fábrica que encapsula la lógica de creación de objetos de producto. Contiene un método estático **`crearProducto(tipo)`** que acepta un parámetro **`tipo`** y devuelve un objeto **`Producto`** basado en el tipo especificado.
+- En este caso, se utiliza un switch para determinar qué tipo de producto crear y se retorna la instancia correspondiente.
+- Al utilizar el Factory Pattern, puedes crear objetos de productos sin necesidad de conocer los detalles internos de cómo se crean. Simplemente utilizas el método estático **`crearProducto`** de la fábrica para obtener el objeto deseado.
+
+Este patrón es útil cuando necesitas crear diferentes tipos de objetos en función de ciertos parámetros o condiciones, y deseas mantener la lógica de creación centralizada en una fábrica. Esto puede facilitar la gestión y la extensibilidad del código a medida que se agregan nuevos tipos de objetos en el futuro.
