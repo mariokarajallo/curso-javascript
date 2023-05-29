@@ -135,3 +135,37 @@ console.log(cliente);
 
 - En este ejemplo se demuestra la herencia utilizando la palabra clave **extends** y la función **super()**. La clase **Cliente** hereda de la clase **Persona**, lo que significa que **Cliente** tiene acceso a las propiedades y métodos de **Persona**. En el primer ejemplo, no se muestra la herencia.
 - Ambos ejemplos siguen el patrón Constructor, pero el segundo ejemplo utiliza la sintaxis de clases de ES6, que es más moderna y fácil de leer. Además, el segundo ejemplo demuestra cómo implementar la herencia utilizando clases de ES6, lo que no se muestra en el primer ejemplo. En general, se recomienda utilizar la sintaxis de clases de ES6 cuando sea posible, ya que proporciona una forma más clara y estructurada de trabajar con objetos y herencia en JavaScript.
+
+## 29.4 Singleton
+
+El patrón Singleton es un patrón de diseño creacional que se utiliza para garantizar que una clase tenga una única instancia y proporcionar un punto de acceso global a ella. En otras palabras, el patrón Singleton garantiza que solo haya una instancia de una clase en todo el programa y proporciona una forma de acceder a esa instancia desde cualquier parte del programa.
+
+El patrón Singleton se utiliza a menudo en situaciones en las que es importante que solo haya una instancia de una clase, como en el caso de una conexión de base de datos o un registro de eventos. Al utilizar el patrón Singleton, se garantiza que solo haya una instancia de la clase y que todas las solicitudes de esa instancia se dirijan a la misma instancia.
+
+```jsx
+// Singleton no te va a permitir crear múltiples instancias de una clase..., en cambio te va a retornar el objeto ya instanciado...
+let instancia = null;
+
+class Persona {
+  constructor(nombre, email) {
+    if (!instancia) {
+      this.nombre = nombre;
+      this.email = email;
+      instancia = this;
+    } else {
+      return instancia;
+    }
+  }
+}
+
+const persona = new Persona("Juan", "correo@correo.com");
+const persona2 = new Persona("Karen", "karen@karen.com");
+
+console.log(persona);
+console.log(persona2);
+```
+
+- En este ejemplo, **`persona`** y **`persona2`** hacen referencia a la misma instancia de **`Persona`**, ya que el patrón Singleton asegura que no se puedan crear múltiples instancias y que todas las llamadas a la creación de instancias devuelvan la instancia existente.
+- Al imprimir **`persona`** y **`persona2`**, verás que ambos objetos tienen los mismos valores de **`nombre`** y **`email`**, lo que demuestra que están utilizando la misma instancia del Singleton.
+
+Es importante tener en cuenta que la implementación del patrón Singleton puede variar según el lenguaje de programación utilizado. Además, es importante tener en cuenta que el patrón Singleton puede tener algunas desventajas, como la dificultad para probar y la posible violación del principio de responsabilidad única. Por lo tanto, se recomienda utilizar el patrón Singleton con precaución y solo en situaciones en las que sea realmente necesario.
