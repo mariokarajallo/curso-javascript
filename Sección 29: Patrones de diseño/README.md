@@ -111,25 +111,27 @@ El Constructor Pattern con la sintaxis de clases en ES6 consiste en definir una 
 Aquí tienes un ejemplo sencillo del Constructor Pattern utilizando la sintaxis de clases de ES6:
 
 ```jsx
-class Person {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  sayHello() {
-    console.log(
-      `Hello, my name is ${this.name} and I'm ${this.age} years old.`
-    );
+// Constructor Pattern es cuando utilizamos una clase base
+class Persona {
+  constructor(nombre, email, empresa) {
+    this.nombre = nombre;
+    this.email = email;
   }
 }
 
-// Crear instancias de la clase Person
-const person1 = new Person("John", 25);
-const person2 = new Person("Jane", 30);
+class Cliente extends Persona {
+  constructor(nombre, email, empresa) {
+    super(nombre, email);
+    this.empresa = empresa;
+  }
+}
 
-// Acceder a las propiedades y métodos de las instancias
-console.log(person1.name); // John
-console.log(person2.age); // 30
-person1.sayHello(); // Hello, my name is John and I'm 25 years old.
+const persona = new Persona("Juan", "correo@correo.com");
+console.log(persona);
+
+const cliente = new Cliente("Miguel", "cliente@cliente.com", "Código Con Juan");
+console.log(cliente);
 ```
+
+- En este ejemplo se demuestra la herencia utilizando la palabra clave **extends** y la función **super()**. La clase **Cliente** hereda de la clase **Persona**, lo que significa que **Cliente** tiene acceso a las propiedades y métodos de **Persona**. En el primer ejemplo, no se muestra la herencia.
+- Ambos ejemplos siguen el patrón Constructor, pero el segundo ejemplo utiliza la sintaxis de clases de ES6, que es más moderna y fácil de leer. Además, el segundo ejemplo demuestra cómo implementar la herencia utilizando clases de ES6, lo que no se muestra en el primer ejemplo. En general, se recomienda utilizar la sintaxis de clases de ES6 cuando sea posible, ya que proporciona una forma más clara y estructurada de trabajar con objetos y herencia en JavaScript.
