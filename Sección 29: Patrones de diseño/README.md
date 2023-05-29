@@ -32,3 +32,35 @@ A continuación, se presentan algunas de las categorías más comunes:
 - Estos patrones abordan la estructura y organización de sistemas más grandes, como patrones MVC (Model-View-Controller), MVVM (Model-View-ViewModel) y Flux.
 
 Es importante tener en cuenta que los patrones de diseño son soluciones generales y flexibles, y pueden adaptarse y combinarse según las necesidades específicas de cada proyecto. La clave para utilizarlos de manera efectiva es comprender los problemas que resuelven y cómo se pueden aplicar en diferentes situaciones.
+
+## 29.2 Class Pattern
+
+El patrón de clase (Class Pattern) en JavaScript es una forma de implementar la programación orientada a objetos (POO) utilizando la sintaxis de clases introducida en ECMAScript 2015 (ES6). Aunque JavaScript es un lenguaje basado en prototipos, el patrón de clase brinda una estructura más familiar para aquellos familiarizados con otros lenguajes de programación orientados a objetos, como Java o C++.
+
+El patrón de clase en JavaScript consiste en utilizar la palabra clave **`class`** para definir una clase, que puede tener propiedades (atributos) y métodos. Los objetos se crean mediante la palabra clave **`new`**, y las propiedades y métodos se pueden acceder utilizando la notación de punto.
+
+Aquí tienes un ejemplo sencillo de cómo se utiliza el patrón de clase en JavaScript:
+
+```jsx
+class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+
+  saludar() {
+    console.log(`Hola, mi nombre es ${this.nombre} y tengo ${this.edad} años.`);
+  }
+}
+
+// Crear un objeto utilizando la clase Persona
+const persona = new Persona("Mario", 25);
+persona.saludar(); // Imprime: "Hola, mi nombre es Mario y tengo 25 años."
+```
+
+- En este ejemplo, se define una clase **`Persona`** con un constructor que recibe el nombre y la edad como parámetros y los asigna a las propiedades **`nombre`** y **`edad`**.
+- La clase también tiene un método **`saludar()`** que imprime un mensaje utilizando los valores de las propiedades.
+- Luego, se crea un objeto **`persona`** utilizando la clase **`Persona`**, pasando los valores **`'Mario'`** y **`25`** al constructor.
+- Finalmente, se llama al método **`saludar()`** en **`persona`**, lo que imprime el mensaje con el nombre y la edad.
+
+El patrón de clase en JavaScript simplifica la sintaxis y la estructura del código cuando se trabaja con programación orientada a objetos, lo que facilita la creación y el mantenimiento de clases y objetos en tu aplicación.
