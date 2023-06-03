@@ -118,3 +118,46 @@ En este ejemplo, la ejecución se detendrá en la línea donde se encuentra **`d
 3. El panel de Depuración de JavaScript. Contiene varias herramientas para inspeccionar el JavaScript de la página. Si la ventana de las herramientas de desarrollo es ancha, este panel se muestra a la derecha del panel del Editor de código.
 
 Las herramientas de depuración, tanto la palabra clave **`debugger`** como las disponibles en los navegadores web, son fundamentales para detectar y solucionar problemas en el código JavaScript, ya que permiten examinar el estado de las variables, seguir la ejecución del programa y analizar posibles errores o comportamientos inesperados.
+
+## 30.4 Ofuscar el código
+
+La ofuscación de código en JavaScript se refiere al proceso de modificar el código fuente de un programa de manera que sea más difícil de entender y leer para los humanos, sin cambiar su funcionalidad. El objetivo principal de la ofuscación es dificultar la comprensión y el análisis del código por parte de terceros, como los desarrolladores malintencionados que intentan realizar ingeniería inversa, robar propiedad intelectual o encontrar vulnerabilidades.
+
+### La ofuscación se logra mediante técnicas como:
+
+1. **Minificación**: Consiste en eliminar espacios en blanco, comentarios y reducir el tamaño de los nombres de variables y funciones, utilizando nombres más cortos y crípticos. Esto no altera la funcionalidad del código, pero dificulta su lectura y comprensión.
+2. **Ofuscación de nombres**: Implica cambiar los nombres de variables y funciones por nombres aleatorios o sin sentido. Esto hace que el código sea más difícil de entender, ya que los nombres no proporcionan ninguna pista sobre su propósito o uso.
+3. **Transformación de estructuras**: Se modifican estructuras de código, como reemplazar condicionales claros por estructuras más complejas, cambiar el orden de las declaraciones, utilizar operaciones matemáticas en lugar de literales, entre otros cambios. Estas transformaciones dificultan la lectura y el análisis del código.
+4. **Encriptación**: Se utiliza en algunos casos para proteger partes sensibles del código, como claves o algoritmos, mediante técnicas de encriptación. Esto dificulta el acceso directo a la información sensible y la comprensión de su lógica interna.
+
+### Características de la ofuscación de código JavaScript:
+
+1. Protección de propiedad intelectual: La ofuscación ayuda a proteger el código fuente de ser copiado o reutilizado fácilmente por terceros.
+2. Dificultar la ingeniería inversa: La ofuscación hace que el proceso de ingeniería inversa sea más complicado y requiera más tiempo y esfuerzo.
+3. Reducción del tamaño del archivo: Al eliminar espacios en blanco y comentarios, y cambiar nombres de variables y funciones, la ofuscación puede reducir el tamaño del archivo JavaScript, lo que puede mejorar el tiempo de carga de la página.
+4. Personalización: Las herramientas de ofuscación suelen ofrecer opciones de configuración para adaptarse a las necesidades específicas del proyecto.
+
+Ejemplo de código JavaScript antes de la ofuscación:
+
+```jsx
+function suma(a, b) {
+  return a + b;
+}
+
+const resultado = suma(5, 3);
+console.log("El resultado es:", resultado);
+```
+
+Ejemplo de código JavaScript después de la ofuscación:
+
+```jsx
+var _0x4b22=["\x45\x6C\x20\x72\x65\x73\x75\x6C\x74\x61\x64\x6F\x20\x65\x73\x3A"];function_0x2a3c(_0x4b22,_0x2a3c){return _0x4b22[_0x2a3c]}(function(_0x4b22,_0x2a3c){var _0x5a8e=function(_0x4b22){while(--_0x4b22){_0x2a3c["\x70\x75\x73\x68"](_0x2a3c["\x73\x68\x69\x66\x74"]())}};_0x5a8e(++_0x2a3c)}(_0x4b22,0x1b3));var _0x5a8e=function(_0x4b22,_0x2a3c){_0x4b22=_0x4b22-0x0;var _0x5a8e=_0x4b22[_0x2a3c];return _0x5a8e};functionsuma(_0x2a3c,_0x5a8e){return _0x2a3c+_0x5a8e}var resultado=suma(0x5,0x3);console[_0x5a8e(0x0)](_0x5a8e(0x0),resultado);
+```
+
+### Herramientas y bibliotecas para ofuscar código JavaScript:
+
+1. UglifyJS (https://github.com/mishoo/UglifyJS): Es una herramienta de línea de comandos y una biblioteca de JavaScript que permite minificar y ofuscar el código JavaScript.
+2. Terser (https://github.com/terser/terser): Es una herramienta de línea de comandos y una biblioteca de JavaScript que permite minificar y ofuscar el código JavaScript. Terser es compatible con ECMAScript 2015 (ES6) y versiones posteriores.
+3. javascript-obfuscator (https://github.com/javascript-obfuscator/javascript-obfuscator): Es una biblioteca de JavaScript que ofrece una amplia gama de opciones de ofuscación, incluyendo cifrado de strings, transformaciones de código y protección de dominio.
+
+Es importante destacar que la ofuscación de código no proporciona una seguridad completa. Aunque dificulta el análisis y la comprensión del código, aún es posible desofuscar y entender el funcionamiento subyacente. La ofuscación se utiliza principalmente como una medida adicional de seguridad y para proteger la propiedad intelectual, pero no debe considerarse como una solución definitiva para proteger secretos o información confidencial en una aplicación.
