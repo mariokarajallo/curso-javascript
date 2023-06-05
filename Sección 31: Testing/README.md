@@ -47,3 +47,143 @@ El testing en programación es el proceso de verificar y validar que un software
 4. Integración continua y entrega continua: Considera adoptar prácticas de integración continua y entrega continua, que permiten ejecutar pruebas automáticamente y proporcionar retroalimentación rápida sobre la calidad del software.
 
 Recuerda que el testing es un proceso continuo y evolutivo a lo largo del ciclo de vida del desarrollo de software. Es importante diseñar casos de prueba exhaustivos, considerar distintos escenarios y probar tanto las funcionalidades esperadas como las no esperadas. Además, la documentación y el seguimiento de errores encontrados durante las pruebas son elementos esenciales para mantener la calidad del software.
+
+## 31.2 Creando un Mini Framework para Testing
+
+Antes de entrar a ver las herramientas de testing, veamos un ejemplo de un mini framework de testing en JavaScript utilizando funciones y métodos personalizados.
+
+```jsx
+// Mini Framework de Testing
+
+/**
+ * El propósito de este código es proporcionar un mini framework de testing en JavaScript.
+ * Permite definir pruebas y realizar comparaciones entre el resultado de las pruebas y los valores esperados.
+ */
+
+// Funciones
+
+/**
+ * Realiza la suma de dos valores.
+ * @param {number} a - El primer valor a sumar.
+ * @param {number} b - El segundo valor a sumar.
+ * @returns {number} El resultado de la suma.
+ */
+function suma(a, b) {
+  return a + b;
+}
+
+/**
+ * Realiza la resta de dos valores.
+ * @param {number} a - El valor del cual se va a restar.
+ * @param {number} b - El valor a restar.
+ * @returns {number} El resultado de la resta.
+ */
+function restar(a, b) {
+  return a - b;
+}
+
+/**
+ * Versión asíncrona de la función suma.
+ * @param {number} a - El primer valor a sumar.
+ * @param {number} b - El segundo valor a sumar.
+ * @returns {Promise<number>} Una promesa resuelta con el resultado de la suma.
+ */
+async function sumaAsync(a, b) {
+  return Promise.resolve(suma(a, b));
+}
+
+// Variables
+let resultado, esperado;
+
+// Pruebas
+/**
+ * Prueba de suma.
+ */
+resultado = suma(1, 2);
+esperado = 3;
+expected(esperado).toBe(resultado);
+
+/**
+ * Prueba de resta.
+ */
+resultado = restar(10, 5);
+esperado = 5;
+expected(esperado).toBe(resultado);
+/**
+ * Otra prueba de igualdad.
+ */
+expected(esperado).toEqual(resultado);
+
+/**
+ * Prueba asíncrona de suma.
+ */
+test("Suma 10 + 20 y el resultado debe ser 30", async () => {
+  const resultado = await sumaAsync(10, 20);
+  const esperado = 31;
+  expected(esperado).toBe(resultado);
+});
+
+// Funciones de Testing
+
+/**
+ * Ejecuta una prueba y muestra el resultado en la consola.
+ * @param {string} mensaje - Descripción de la prueba.
+ * @param {function} callback - Función que contiene la lógica de la prueba.
+ */
+async function test(mensaje, callback) {
+  try {
+    await callback();
+    console.log(`El Test: ${mensaje} se ejecutó correctamente`);
+  } catch (error) {
+    console.error("Error:");
+    console.error(error);
+  }
+}
+
+/**
+ * Crea un objeto con métodos para realizar comparaciones entre el resultado de una prueba y un valor esperado.
+ * @param {*} esperado - El valor esperado.
+ * @returns {object} Objeto con los métodos toBe y toEqual para realizar las comparaciones.
+ */
+function expected(esperado) {
+  return {
+    /**
+     * Compara si el resultado es igual al valor esperado utilizando el operador de igualdad estricta (===).
+     * Muestra un mensaje en la consola indicando si la prueba pasó o no.
+     * @param {*} resultado - El resultado de la prueba.
+     */
+    toBe(resultado) {
+      if (resultado !== esperado) {
+        console.error(
+          `El ${resultado} es diferente a lo esperado; la prueba no pasó`
+        );
+      } else {
+        console.log("La prueba pasó correctamente");
+      }
+    },
+    /**
+     * Compara si el resultado es igual al valor esperado utilizando el operador de igualdad (==).
+     * Muestra un mensaje en la consola indicando si la prueba pasó o no.
+     * @param {*} resultado - El resultado de la prueba.
+     */
+    toEqual(resultado) {
+      if (resultado !== esperado) {
+        console.error(
+          `El ${resultado} no es igual a lo esperado; la prueba no pasó`
+        );
+      } else {
+        console.log("La prueba pasó correctamente");
+      }
+    },
+  };
+}
+```
+
+- En primer lugar, se definen las funciones **suma** y **restar**, que realizan las operaciones matemáticas correspondientes.
+- Luego se define la función **sumaAsync**, que es una versión asíncrona de la función **suma** y devuelve una promesa resuelta con el resultado de la suma.
+- Se declaran variables **resultado** y **esperado** para almacenar los valores resultantes y esperados de las pruebas. Dentro de cada prueba, se utiliza la función expected para realizar las comparaciones entre el resultado de una operación y el valor esperado. Dependiendo del método utilizado (toBe o toEqual), se muestra un mensaje en la consola indicando si la prueba pasó o no.
+- Test asincrono; Cada prueba se inicia llamando a test y pasando como primer parámetro un mensaje descriptivo de la prueba y como segundo parámetro una función anónima que contiene la lógica de la prueba.
+- Luego Se declara la función test, que toma dos parámetros: mensaje y callback. Esta función se encarga de ejecutar una prueba. Dentro de test, se utiliza await para esperar a que se resuelva la promesa devuelta por callback. Callback, es una función que contiene la lógica de la prueba a realizar. Si la prueba se ejecuta sin errores, se muestra un mensaje de éxito en la consola mediante console.log. Si se produce un error, se captura mediante catch, se muestra un mensaje de error en la consola mediante console.error y se muestra el error capturado.
+- Finalmente, se declara la función expected, que toma como parámetro el valor esperado y devuelve un objeto con dos métodos: toBe y toEqual. Estos métodos se utilizan para realizar las comparaciones entre el resultado de una prueba y el valor esperado.
+
+En resumen, este mini framework de testing permite definir pruebas mediante la función **`test`**, realizar comparaciones mediante la función **`expected`** y mostrar los resultados de las pruebas en la consola. Proporciona una forma sencilla de implementar pruebas unitarias básicas en JavaScript.
