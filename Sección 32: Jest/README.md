@@ -168,4 +168,5 @@ describe("Valida que el password no este vacio y tenga una extension de 6 caract
 - **`expect(pass).not.toHaveLength(0);`**
   - En esta línea, se utiliza el matcher **`not`** junto con **`toHaveLength`** para verificar si el valor de **`pass`** no tiene una longitud de 0 (es decir, no está vacío).
 
+![Alt text](img/section-32-3.png)
 En resumen, el código utiliza Jest para agrupar pruebas relacionadas y definir expectativas sobre un password. Mediante el uso de los matchers **`toHaveLength`** y **`not`**, se comprueba la longitud del password y se verifica que no esté vacío.
