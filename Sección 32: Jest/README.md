@@ -350,3 +350,116 @@ describe("Testing al Cliente", () => {
 En resumen, estas funciones de prueba se utilizan para verificar diferentes aspectos del cliente, como su balance, nombre y comparaciones con otros valores. Permiten evaluar si el cliente cumple con ciertas condiciones y asegurar que los datos del cliente sean consistentes.
 
 ![Alt text](img/section-32-5.png)
+
+## 32.5 Probando Funciones
+
+Probemos nuestros tests con funciones:
+
+Test General:
+
+- Testing a las funciones de suma y resta. Este test suite agrupa las pruebas relacionadas con las funciones de suma y resta.
+
+Test 1:
+
+- "Suma de 20 y 30" Este test case verifica si la suma de 20 y 30 es igual a 50.
+
+Test 2:
+
+- "Resta de 10 - 5": Este test case verifica si la resta de 10 menos 5 es igual a 5.
+
+Test 3:
+
+- "Que la suma 10 y 10, no sea 10": Este test case verifica si la suma de 10 y 10 no es igual a 10.
+
+Test 4:
+
+- "Que la resta de 10 - 5 no sea otro valor": Este test case verifica si la resta de 10 menos 5 no es igual a 2.
+
+```jsx
+/**
+ * Realiza una suma entre dos números.
+ *
+ * @param {number} a - El primer número.
+ * @param {number} b - El segundo número.
+ * @returns {number} - El resultado de la suma.
+ */
+function suma(a, b) {
+  return a + b;
+}
+
+/**
+ * Realiza una resta entre dos números.
+ *
+ * @param {number} a - El número inicial.
+ * @param {number} b - El número a restar.
+ * @returns {number} - El resultado de la resta.
+ */
+function restar(a, b) {
+  return a - b;
+}
+
+/**
+ * Pruebas relacionadas a las funciones de suma y resta.
+ */
+describe("Testing a las funciones de suma y resta", () => {
+  /**
+   * Prueba que verifica si la suma de dos números es correcta.
+   */
+  test("Suma de 20 y 30", () => {
+    /**
+     * Comprueba si la suma de dos números es igual a un valor esperado.
+     * @param {number} suma(20, 30) - El resultado de la suma de 20 y 30.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(suma(20, 30)).toBe(50);
+  });
+
+  /**
+   * Prueba que verifica si la resta de dos números es correcta.
+   */
+  test("Resta de 10 - 5", () => {
+    /**
+     * Comprueba si la resta de dos números es igual a un valor esperado.
+     * @param {number} restar(10, 5) - El resultado de la resta de 10 y 5.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(restar(10, 5)).toBe(5);
+  });
+
+  /**
+   * Prueba que verifica si la suma de dos números no es igual a un valor específico.
+   */
+  test("Que la suma 10 y 10, no sea 10", () => {
+    /**
+     * Comprueba si la suma de dos números no es igual a un valor específico.
+     * @param {number} suma(10, 10) - El resultado de la suma de 10 y 10.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(suma(10, 10)).not.toBe(10);
+  });
+
+  /**
+   * Prueba que verifica si la resta de dos números no es igual a un valor específico.
+   */
+  test("Que la resta de 10 - 5 no sea otro valor", () => {
+    /**
+     * Comprueba si la resta de dos números no es igual a un valor específico.
+     * @param {number} restar(10, 5) - El resultado de la resta de 10 y 5.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(restar(10, 5)).not.toBe(2);
+  });
+});
+```
+
+- La función **`suma`** se define para realizar una suma entre dos números. Toma dos parámetros (**`a`** y **`b`**) de tipo **`number`** y devuelve el resultado de la suma.
+- La función **`restar`** se define para realizar una resta entre dos números. Toma dos parámetros (**`a`** y **`b`**) de tipo **`number`** y devuelve el resultado de la resta.
+- Se crea un bloque **`describe`** que agrupa las pruebas relacionadas a las funciones de suma y resta.
+- Se define un bloque **`test`** para probar la suma de 20 y 30. Se utiliza **`expect`** para realizar una aserción sobre el resultado de la función **`suma(20, 30)`**. Se verifica que el resultado sea igual a 50.
+- Se define otro bloque **`test`** para probar la resta de 10 menos 5. Se utiliza **`expect`** para realizar una aserción sobre el resultado de la función **`restar(10, 5)`**. Se verifica que el resultado sea igual a 5.
+- Se define otro bloque **`test`** para verificar que la suma de 10 y 10 no sea igual a 10. Se utiliza **`expect`** para realizar una aserción sobre el resultado de la función **`suma(10, 10)`**. Se verifica que el resultado no sea igual a 10.
+- Se define otro bloque **`test`** para verificar que la resta de 10 menos 5 no sea igual a 2. Se utiliza **`expect`** para realizar una aserción sobre el resultado de la función **`restar(10, 5)`**. Se verifica que el resultado no sea igual a 2.
+
+En resumen, este código realiza pruebas unitarias simples para verificar el comportamiento de las funciones de suma y resta en casos específicos.
+
+![Alt text](img/section-32-6.png)
