@@ -232,3 +232,104 @@ describe("Testing al carrito de compras", () => {
 En resumen, el código define dos pruebas utilizando Jest para verificar que el carrito de compras tenga una longitud específica y que no esté vacío. Estas pruebas son útiles para garantizar que el carrito funcione correctamente y contenga los productos esperados.
 
 ![Alt text](img/section-32-4.png)
+
+## 32.4 Probando Objetos
+
+Veamos como trabajar con objetos:
+
+Test Suite:
+
+- Se crea una "test suite" llamada "Testing al Cliente" que agrupa las pruebas relacionadas con el cliente.
+
+Test Set:
+
+1. Prueba: "El cliente es premium"
+   - Verifica si el balance del cliente es mayor que 800.
+2. Prueba: "El cliente es: Mario"
+   - Verifica si el nombre del cliente es exactamente "Mario".
+3. Prueba: "No es otro cliente"
+   - Verifica si el nombre del cliente no es "Javier".
+4. Prueba: "No tiene 1000"
+   - Verifica si el balance del cliente no es exactamente 800.
+
+```jsx
+/**
+ * Representa un cliente con su nombre y balance.
+ * @typedef {Object} Cliente
+ * @property {string} nombre - El nombre del cliente.
+ * @property {number} balance - El balance del cliente.
+ */
+
+/**
+ * Cliente actual con nombre y balance.
+ * @type {Cliente}
+ */
+const cliente = {
+  nombre: "Mario",
+  balance: 1000,
+};
+
+/**
+ * Pruebas relacionadas al cliente.
+ */
+describe("Testing al Cliente", () => {
+  /**
+   * Prueba que verifica si el cliente es considerado premium.
+   */
+  test("El cliente es premium", () => {
+    /**
+     * Comprueba si el balance del cliente es mayor a 800.
+     * @param {number} cliente.balance - El balance del cliente a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(cliente.balance).toBeGreaterThan(800);
+  });
+
+  /**
+   * Prueba que verifica si el nombre del cliente es "Mario".
+   */
+  test("El cliente es: Mario", () => {
+    /**
+     * Comprueba si el nombre del cliente es exactamente "Mario".
+     * @param {string} cliente.nombre - El nombre del cliente a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(cliente.nombre).toBe("Mario");
+  });
+
+  /**
+   * Prueba que verifica si el nombre del cliente no es "Javier".
+   */
+  test("No es otro cliente", () => {
+    /**
+     * Comprueba si el nombre del cliente no es "Javier".
+     * @param {string} cliente.nombre - El nombre del cliente a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(cliente.nombre).not.toBe("Javier");
+  });
+
+  /**
+   * Prueba que verifica si el balance del cliente no es 800.
+   */
+  test("No tiene 1000", () => {
+    /**
+     * Comprueba si el balance del cliente no es exactamente 800.
+     * @param {number} cliente.balance - El balance del cliente a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(cliente.balance).not.toBe(800);
+  });
+});
+```
+
+- La variable **`cliente`** contiene un objeto que representa al cliente actual, con su nombre "Mario" y un balance de 1000.
+- La función **`describe`** se utiliza para agrupar las pruebas relacionadas con el cliente. En este caso, agrupa las pruebas que se realizarán en el objeto **`cliente`**.
+- La función **`test`** se utiliza para definir una prueba individual. En esta prueba, se verifica si el cliente es considerado premium, comprobando si su balance es mayor que 800.
+- En el segundo test, se verifica si el nombre del cliente es "Mario". Utilizando el matcher **`toBe`**, se comprueba si el nombre del cliente es exactamente igual a "Mario".
+- En la tercera prueba, se verifica si el nombre del cliente no es "Javier". Utilizando el matcher **`not.toBe`**, se comprueba si el nombre del cliente no es igual a "Javier".
+- En la última prueba, se verifica si el balance del cliente no es 800. Utilizando el matcher **`not.toBe`**, se comprueba si el balance del cliente no es igual a 800.
+
+En resumen, estas funciones de prueba se utilizan para verificar diferentes aspectos del cliente, como su balance, nombre y comparaciones con otros valores. Permiten evaluar si el cliente cumple con ciertas condiciones y asegurar que los datos del cliente sean consistentes.
+
+![Alt text](img/section-32-5.png)
