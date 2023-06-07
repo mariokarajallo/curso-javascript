@@ -107,17 +107,17 @@ Es importante tener en cuenta que **`toHaveLength`** solo se puede utilizar con 
 
 En el código proporcionado, se define un conjunto de pruebas utilizando Jest para validar que un password cumpla con los requisitos de longitud y no esté vacío.
 
-Test suite "Valida que el password no esté vacío y tenga una extensión de 6 caracteres":
+Test General:
 
-- Describe un conjunto de pruebas relacionadas que verifican las propiedades del password.
+- "Valida que el password no esté vacío y tenga una extensión de 6 caracteres": Describe un conjunto de pruebas relacionadas que verifican las propiedades del password.
 
-Test case "Que el password tenga 6 caracteres":
+Test 1:
 
-- Prueba que el password tenga una longitud de 6 caracteres.
+- "Que el password tenga 6 caracteres": Prueba que el password tenga una longitud de 6 caracteres.
 
-Test case "Password no vacío":
+Test 2:
 
-- Prueba que el password no esté vacío.
+- "Password no vacío": Prueba que el password no esté vacío.
 
 ```jsx
 /**
@@ -174,6 +174,18 @@ En resumen, el código utiliza Jest para agrupar pruebas relacionadas y definir 
 ## 32.3 Probando Arrays
 
 El siguiente ejemplo de código define dos pruebas utilizando Jest para verificar que el carrito de compras tenga una longitud específica y que no esté vacío:
+
+Test General:
+
+- El código proporcionado define un test suite llamado "Testing al carrito de compras". Este test suite agrupa las pruebas relacionadas con el carrito de compras.
+
+Test 1:
+
+- "Probar que el array tenga 3 elementos". Este test case verifica si el carrito de compras tiene exactamente 3 elementos.
+
+Test 2:
+
+- "Verificar que el carrito no esté vacío". Este test case verifica si el carrito de compras no está vacío, es decir, si tiene al menos un elemento.
 
 ```jsx
 /**
@@ -237,20 +249,25 @@ En resumen, el código define dos pruebas utilizando Jest para verificar que el 
 
 Veamos como trabajar con objetos:
 
-Test Suite:
+Test General:
 
 - Se crea una "test suite" llamada "Testing al Cliente" que agrupa las pruebas relacionadas con el cliente.
 
-Test Set:
+Test 1:
 
-1. Prueba: "El cliente es premium"
-   - Verifica si el balance del cliente es mayor que 800.
-2. Prueba: "El cliente es: Mario"
-   - Verifica si el nombre del cliente es exactamente "Mario".
-3. Prueba: "No es otro cliente"
-   - Verifica si el nombre del cliente no es "Javier".
-4. Prueba: "No tiene 1000"
-   - Verifica si el balance del cliente no es exactamente 800.
+- "El cliente es premium": Verifica si el balance del cliente es mayor que 800.
+
+Test 2:
+
+- "El cliente es: Mario": Verifica si el nombre del cliente es exactamente "Mario".
+
+Test 3:
+
+- "No es otro cliente": Verifica si el nombre del cliente no es "Javier".
+
+Test 4:
+
+- "No tiene 1000": Verifica si el balance del cliente no es exactamente 800.
 
 ```jsx
 /**
