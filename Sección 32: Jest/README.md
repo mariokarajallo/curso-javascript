@@ -170,3 +170,65 @@ describe("Valida que el password no este vacio y tenga una extension de 6 caract
 
 ![Alt text](img/section-32-3.png)
 En resumen, el código utiliza Jest para agrupar pruebas relacionadas y definir expectativas sobre un password. Mediante el uso de los matchers **`toHaveLength`** y **`not`**, se comprueba la longitud del password y se verifica que no esté vacío.
+
+## 32.3 Probando Arrays
+
+El siguiente ejemplo de código define dos pruebas utilizando Jest para verificar que el carrito de compras tenga una longitud específica y que no esté vacío:
+
+```jsx
+/**
+ * Representa un carrito de compras.
+ * @type {Array.<string>}
+ */
+const carrito = ["Producto 1", "Producto 2", "Producto 3"];
+
+/**
+ * Pruebas relacionadas al carrito de compras.
+ */
+describe("Testing al carrito de compras", () => {
+  /**
+   * Prueba que verifica si el carrito tiene 3 elementos.
+   */
+  test("Probar que el array tenga 3 elementos", () => {
+    /**
+     * Comprueba si el carrito tiene una longitud de 3 elementos.
+     * @param {Array.<string>} carrito - El carrito de compras a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(carrito).toHaveLength(3);
+  });
+
+  /**
+   * Prueba que verifica si el carrito no está vacío.
+   */
+  test("Verificar que el carrito no esté vacío", () => {
+    /**
+     * Comprueba si el carrito no tiene una longitud de 0, es decir, no está vacío.
+     * @param {Array.<string>} carrito - El carrito de compras a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(carrito).not.toHaveLength(0);
+  });
+});
+```
+
+- **`const carrito = ["Producto 1", "Producto 2", "Producto 3"];`**
+  - Esta línea declara una constante llamada **`carrito`** y la inicializa con un array de tres elementos. En este caso, el carrito de compras se representa como una lista de productos.
+- **`describe("Testing al carrito de compras", () => { ... });`**
+  - La función **`describe`** se utiliza para agrupar pruebas relacionadas.
+  - En este caso, se está agrupando las pruebas relacionadas con el carrito de compras y se le da una descripción de "Testing al carrito de compras".
+- **`test("Probar que el array tenga 3 elementos", () => { ... });`**
+  - La función **`test`** se utiliza para definir una prueba individual dentro del grupo.
+  - En este caso, se está definiendo una prueba que verifica si el carrito de compras tiene exactamente 3 elementos.
+- **`expect(carrito).toHaveLength(3);`**
+  - La función **`expect`** se utiliza para definir expectativas en una prueba.
+  - El matcher **`toHaveLength`** verifica si el valor pasado como argumento tiene una longitud específica.
+  - En este caso, se está utilizando **`expect`** para verificar si el **`carrito`** tiene una longitud de 3 elementos.
+- **`test("Verificar que el carrito no esté vacío", () => { ... });`**
+  - En esta línea se define otra prueba que verifica si el carrito de compras no está vacío.
+- **`expect(carrito).not.toHaveLength(0);`**
+  - Aquí se utiliza el matcher **`not`** junto con **`toHaveLength`** para verificar si el **`carrito`** no tiene una longitud de 0, es decir, no está vacío.
+
+En resumen, el código define dos pruebas utilizando Jest para verificar que el carrito de compras tenga una longitud específica y que no esté vacío. Estas pruebas son útiles para garantizar que el carrito funcione correctamente y contenga los productos esperados.
+
+![Alt text](img/section-32-4.png)
