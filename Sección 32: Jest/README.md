@@ -81,3 +81,91 @@ describe("Grupo de pruebas", () => {
   ![resultado consola test](img/section-32-2.png)
 
 Con Jest, también puedes aprovechar características adicionales como el mocking para simular comportamientos, pruebas asincrónicas para manejar operaciones asíncronas y la generación de informes de cobertura de código.
+
+## 32.2 Probando Strings - matcher toHaveLength
+
+### **toHaveLength()**
+
+La función **`toHaveLength`** es un matcher (comparador) proporcionado por Jest. Se utiliza para verificar si un valor tiene una longitud específica.
+
+El matcher **`toHaveLength`** se puede usar para comparar la longitud de una cadena de texto, un array u otro tipo de objeto que tenga una propiedad **`length`**. La sintaxis general es la siguiente:
+
+```jsx
+expect(valor).toHaveLength(longitudEsperada);
+```
+
+Donde:
+
+- **`valor`** es el valor que se está evaluando, como una cadena de texto, un array u otro objeto con una propiedad **`length`**.
+- **`longitudEsperada`** es el número que representa la longitud que se espera que tenga el valor.
+
+Cuando se ejecuta esta comparación, Jest verificará si la propiedad **`length`** del valor coincide exactamente con la longitud esperada. Si la longitud es la misma, la prueba pasará; de lo contrario, la prueba fallará.
+
+Es importante tener en cuenta que **`toHaveLength`** solo se puede utilizar con valores que tienen una propiedad **`length`**. Si intentas usarlo en un valor que no tiene esta propiedad, la prueba producirá un error.
+
+### Veamos un ejemplo:
+
+En el código proporcionado, se define un conjunto de pruebas utilizando Jest para validar que un password cumpla con los requisitos de longitud y no esté vacío.
+
+Test suite "Valida que el password no esté vacío y tenga una extensión de 6 caracteres":
+
+- Describe un conjunto de pruebas relacionadas que verifican las propiedades del password.
+
+Test case "Que el password tenga 6 caracteres":
+
+- Prueba que el password tenga una longitud de 6 caracteres.
+
+Test case "Password no vacío":
+
+- Prueba que el password no esté vacío.
+
+```jsx
+/**
+ * Valida que el password no esté vacío y tenga una extensión de 6 caracteres.
+ */
+describe("Valida que el password no este vacio y tenga una extension de 6 caracteres", () => {
+  /**
+   * Prueba que el password tenga 6 caracteres.
+   */
+  test("Que el password tenga 6 caracteres", () => {
+    /**
+     * Comprueba si la longitud del password es igual a 6.
+     * @param {string} pass - El password a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(pass).toHaveLength(6);
+  });
+
+  /**
+   * Prueba que el password no esté vacío.
+   */
+  test("Password no vacio", () => {
+    /**
+     * Comprueba si la longitud del password no es igual a 0.
+     * @param {string} pass - El password a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(pass).not.toHaveLength(0);
+  });
+});
+```
+
+- **`const pass = "123456";`** Esta línea declara una constante llamada **`pass`** y le asigna el valor de **`"123456"`**. Aquí se está inicializando una variable que representa un password para ser utilizado en las pruebas.
+- **`describe("Valida que el password no este vacio y tenga una extension de 6 caracteres", () => { ... });`**
+  - **`describe`** es una función proporcionada por Jest que se utiliza para agrupar pruebas relacionadas.
+  - Toma dos argumentos: una descripción (cadena de texto) que describe el grupo de pruebas y una función de callback que contiene las pruebas relacionadas dentro de ese grupo.
+  - En este caso, el grupo de pruebas se describe como "Valida que el password no esté vacío y tenga una extensión de 6 caracteres".
+- **`test("Que el password tenga 6 caracteres", () => { ... });`**
+  - **`test`** es una función proporcionada por Jest que se utiliza para definir una prueba individual.
+  - Toma dos argumentos: una descripción (cadena de texto) que describe la prueba en cuestión y una función de callback que representa la prueba en sí misma.
+  - En este caso, se está definiendo una prueba que verifica si el password tiene 6 caracteres.
+- **`expect(pass).toHaveLength(6);`**
+  - **`expect`** es una función proporcionada por Jest que se utiliza para definir expectativas en una prueba.
+  - **`toHaveLength`** es un matcher (comparador) proporcionado por Jest que verifica si el valor pasado como argumento tiene una longitud específica.
+  - Aquí se está utilizando **`expect`** para verificar si el valor de **`pass`** tiene una longitud de 6 caracteres.
+- **`test("Password no vacio", () => { ... });`**
+  - Aquí se define otra prueba que verifica si el password no está vacío.
+- **`expect(pass).not.toHaveLength(0);`**
+  - En esta línea, se utiliza el matcher **`not`** junto con **`toHaveLength`** para verificar si el valor de **`pass`** no tiene una longitud de 0 (es decir, no está vacío).
+
+En resumen, el código utiliza Jest para agrupar pruebas relacionadas y definir expectativas sobre un password. Mediante el uso de los matchers **`toHaveLength`** y **`not`**, se comprueba la longitud del password y se verifica que no esté vacío.
