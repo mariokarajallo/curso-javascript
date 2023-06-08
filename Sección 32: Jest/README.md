@@ -463,3 +463,67 @@ describe("Testing a las funciones de suma y resta", () => {
 En resumen, este código realiza pruebas unitarias simples para verificar el comportamiento de las funciones de suma y resta en casos específicos.
 
 ![Alt text](img/section-32-6.png)
+
+## 32.6 Introducción a Snapshots
+
+los snapshots son una característica en Jest que permite capturar y verificar automáticamente las salidas esperadas de una prueba. En lugar de verificar manualmente los resultados, Jest guarda una "instantánea" (snapshot) del resultado obtenido en la primera ejecución de la prueba y luego la compara con los resultados de ejecuciones posteriores.
+
+Aquí tienes una explicación más detallada sobre los snapshots en Jest:
+
+1. Cuando ejecutas una prueba que utiliza snapshots por primera vez, Jest guarda la salida (por ejemplo, una cadena de texto, un objeto JSON, una representación HTML) en un archivo especial llamado "snapshot".
+2. En ejecuciones posteriores de la prueba, Jest compara la salida actual con la instantánea almacenada. Si son idénticas, la prueba pasa. Si son diferentes, Jest muestra una advertencia y te pide que revises y confirmes los cambios.
+3. Si los cambios en la salida son intencionales y correctos, puedes actualizar la instantánea existente con el comando **`jest --updateSnapshot`** o **`jest -u`**. Esto sobrescribirá la instantánea anterior con la nueva salida, marcando la prueba como aprobada en futuras ejecuciones.
+4. Los archivos de instantáneas se almacenan junto a tus archivos de prueba y tienen una extensión **`.snap`**. Es importante agregar estos archivos al control de versiones para que las instantáneas se mantengan consistentes en todo el equipo y se actualicen cuando sea necesario.
+
+Los snapshots son útiles para pruebas de resultados predecibles y estables, como salidas de texto, representaciones visuales o estructuras de datos específicas. Al utilizarlos, se agiliza el proceso de verificación de resultados y se reduce la posibilidad de errores humanos al verificar manualmente las salidas esperadas.
+
+Es importante tener en cuenta que los snapshots no son adecuados para todas las pruebas. En casos donde los resultados son más dinámicos o pueden cambiar con frecuencia, como en pruebas de tiempo real o de interacciones complejas, puede ser más apropiado utilizar otras técnicas de prueba. Sin embargo, para muchos casos comunes, los snapshots son una herramienta poderosa y conveniente en Jest.
+
+![Alt text](img/section-32-8.png)
+
+```jsx
+/**
+ * Representa un carrito de compras.
+ * @type {Array.<string>}
+ */
+const carrito = ["Producto 1", "Producto 2", "Producto 3"];
+
+/**
+ * Pruebas relacionadas al carrito de compras.
+ */
+describe("Testing al carrito de compras", () => {
+  /**
+   * Prueba que verifica si el carrito tiene 3 elementos.
+   */
+  test("Probar que el array tenga 3 elementos", () => {
+    /**
+     * Comprueba si el carrito tiene una longitud de 3 elementos.
+     * @param {Array.<string>} carrito - El carrito de compras a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(carrito).toHaveLength(3);
+  });
+
+  /**
+   * Prueba que verifica si el carrito no está vacío.
+   */
+  test("Verificar que el carrito no esté vacío", () => {
+    /**
+     * Comprueba si el carrito no tiene una longitud de 0, es decir, no está vacío.
+     * @param {Array.<string>} carrito - El carrito de compras a verificar.
+     * @returns {void} - No devuelve ningún valor.
+     */
+    expect(carrito).not.toHaveLength(0);
+  });
+});
+```
+
+- **`const carrito = ["Producto 1", "Producto 2", "Producto 3"];`**: Se crea una variable **`carrito`** que es un array que contiene tres elementos de tipo string. Este array representa un carrito de compras con tres productos.
+- **`describe("Testing al carrito de compras", () => {`**: Se inicia un bloque **`describe`** que agrupa las pruebas relacionadas al carrito de compras. El primer parámetro es una descripción textual de las pruebas en este grupo.
+- **`test("Probar que el array tenga 3 elementos", () => {`**: Se define un bloque **`test`** que realiza una prueba específica. El primer parámetro es una descripción textual de la prueba.
+- **`expect(carrito).toHaveLength(3);`**: Se utiliza la función **`expect`** para realizar una aserción sobre la variable **`carrito`**. En este caso, se verifica que el carrito tenga una longitud (es decir, cantidad de elementos) igual a 3 utilizando la función **`toHaveLength`**.
+- **`test("Verificar que el carrito no este vacio", () => {`**: Se define otro bloque **`test`** para realizar una segunda prueba.
+- **`expect(carrito).not.toHaveLength(0);`**: Se utiliza la función **`expect`** para realizar una aserción sobre la variable **`carrito`**. En este caso, se verifica que el carrito no tenga una longitud igual a 0 utilizando la función **`toHaveLength`** combinada con el modificador **`not`**.
+- En resumen, este código realiza dos pruebas sobre el carrito de compras. La primera prueba verifica que el carrito tenga exactamente tres elementos, mientras que la segunda prueba verifica que el carrito no esté vacío (es decir, que tenga una longitud distinta de cero). Estas pruebas son útiles para asegurar que el carrito de compras funcione correctamente y cumpla con las expectativas.
+
+![test snapshot](img/section-32-7.png)!
