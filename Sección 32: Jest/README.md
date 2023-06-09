@@ -527,3 +527,176 @@ describe("Testing al carrito de compras", () => {
 - En resumen, este código realiza dos pruebas sobre el carrito de compras. La primera prueba verifica que el carrito tenga exactamente tres elementos, mientras que la segunda prueba verifica que el carrito no esté vacío (es decir, que tenga una longitud distinta de cero). Estas pruebas son útiles para asegurar que el carrito de compras funcione correctamente y cumpla con las expectativas.
 
 ![test snapshot](img/section-32-7.png)!
+
+## 32.7. Modulos en Jest (import/export)
+
+Los módulos son una forma de organizar y encapsular código en unidades lógicas y reutilizables. Los módulos en Jest se pueden utilizar para definir funciones, clases u objetos que se utilizarán en las pruebas.
+
+Existen diferentes formas de trabajar con módulos en Jest, la más común es utilizar Babel cuando programamos en javascript:
+
+### Common JS
+
+CommonJS es un formato de módulo utilizado en entornos de JavaScript como Node.js. Jest, al estar basado en Node.js, utiliza CommonJS como formato de módulo predeterminado para cargar y ejecutar los archivos de prueba.
+
+En Jest, por defecto no es posible importar funciones para hacer pruebas directamente desde otros archivos JavaScript directamente. Jest utiliza un sistema de ejecución de pruebas que no admite la importación directa de funciones desde archivos externos.
+
+Sin embargo, puedes lograr el objetivo de probar funciones definidas en otros archivos siguiendo un enfoque diferente. Puedes utilizar la función **`require`** de Node.js para cargar y utilizar los módulos en tus pruebas de Jest.
+
+Aquí tienes un ejemplo de cómo importar una función desde otro archivo utilizando **`require`** en Jest:
+
+Supongamos que tienes un archivo llamado "funciones.js" que contiene una función llamada "sumar":
+
+```jsx
+// funciones.js
+module.exports.sumar = function (a, b) {
+  return a + b;
+};
+```
+
+Luego, en tu archivo de pruebas "funciones.test.js", puedes utilizar **`require`** para cargar el módulo y acceder a la función "sumar":
+
+```jsx
+// funciones.test.js
+const funciones = require("./funciones");
+
+test("Prueba de suma", () => {
+  expect(funciones.sumar(2, 3)).toBe(5);
+});
+```
+
+- En este ejemplo, utilizamos **`require('./funciones')`** para cargar el módulo "funciones.js" y acceder a la función "sumar" utilizando **`funciones.sumar(2, 3)`**.
+
+Es importante tener en cuenta que el uso de **`require`** en Jest implica utilizar el sistema de módulos CommonJS en lugar del sistema de módulos de ECMAScript modules (import/export). Jest es compatible con ambos sistemas de módulos, pero si deseas utilizar el sistema de módulos de ES, necesitarás configurar Babel u otra herramienta de transpilación para que Jest pueda entenderlo.
+
+### Babel - ECMAScript (ES modules)
+
+Babel es una herramienta de transpilación de código que te permite escribir código en una versión más nueva de JavaScript y convertirlo en una versión más compatible con navegadores y entornos de ejecución más antiguos.
+
+El objetivo principal de Babel es permitir el uso de características y sintaxis de JavaScript que aún no son compatibles en todos los navegadores o entornos. Esto te permite aprovechar las últimas mejoras del lenguaje sin preocuparte por la compatibilidad.
+
+Babel funciona mediante la transformación del código fuente de JavaScript utilizando plugins y presets. Los plugins son módulos independientes que se encargan de transformar características y sintaxis específicas de JavaScript. Los presets son conjuntos de plugins que se agrupan para proporcionar transformaciones más amplias y cubrir un conjunto de características más grande.
+
+Al utilizar Babel con Jest, puedes configurar los presets y plugins necesarios para que Jest pueda entender y ejecutar correctamente los módulos ES (ECMAScript Modules) y otras características de JavaScript que no son nativamente compatibles en Node.js.
+
+Si deseas utilizar el sistema de módulos de ECMAScript (ES modules) en Jest para importar funciones desde otros archivos, puedes hacerlo configurando Jest para que admita el transpilador Babel. Babel te permitirá utilizar la sintaxis de import/export de ECMAScript en tus archivos de prueba.
+
+A continuación, se muestra cómo configurar Jest con Babel para admitir el uso de ES modules:
+
+1. Instala los paquetes necesarios: ubícate en la raíz de tu proyecto:
+
+   ```
+   npm install --save-dev babel-jest @babel/preset-env
+   ```
+
+2. Crea un archivo de configuración para Babel llamado **`.babelrc`** en la raíz de tu proyecto y configúralo con el preset **`@babel/preset-env`**:
+   ![Alt text](img/section-32-10.png)
+
+   ```
+   {
+     "presets": [
+         "@babel/preset-env",
+         {
+           "targets": {
+             "node": "current"
+           }
+         }
+     ]
+   }
+   ```
+
+3. Asegúrate que en el archivo **`package.json`** tenga en la sección "scripts" la entrada llamada "test":
+
+   ```
+   "scripts": {
+     "test": "jest"
+   }
+   ```
+
+Con esta configuración, Babel se encargará de transpilar tu código de ES6 a una versión compatible con la versión de Node.js que estés utilizando para ejecutar las pruebas.
+
+Esto te permitirá utilizar características modernas de JavaScript en tus archivos de código y probar funciones en otros archivos sin necesidad de preocuparte por la compatibilidad de la sintaxis.
+
+Ahora Jest utilizará Babel para transpilar el código con la sintaxis de import/export antes de ejecutar las pruebas. Recuerda que debes asegurarte de tener instalado Babel y sus plugins/configuraciones necesarias, como el preset **`@babel/preset-env`**.
+
+Una vez que hayas realizado estos pasos de configuración de Babel, puedes utilizar el sistema de módulos de ECMAScript en tus archivos de prueba y realizar importaciones/exportaciones de la siguiente manera:
+
+- El código de ejemplo muestra cómo importar las funciones **`suma`** y **`resta`** desde el archivo "../js/funciones" y realizar pruebas sobre ellas utilizando Jest.
+
+```jsx
+// funciones.js
+export function suma(a, b) {
+  return a + b;
+}
+
+export function resta(a, b) {
+  return a - b;
+}
+```
+
+```jsx
+// prueba-modulos.js
+import { suma, resta } from "../js/funciones";
+
+/**
+ * Pruebas relacionadas a las funciones de suma y resta.
+ */
+describe("Testing a las funciones de suma y resta", () => {
+  /**
+   * Prueba la función de suma con los valores 20 y 10, y verifica que el resultado sea 30.
+   */
+  test("Suma de 20 y 30 y resultado 30 ", () => {
+    /**
+     * Comprueba si la suma de dos valores es igual a un resultado esperado.
+     * @param {number} a - El primer valor a sumar.
+     * @param {number} b - El segundo valor a sumar.
+     * @returns {number} - El resultado de la suma.
+     */
+    expect(suma(20, 10)).toBe(30);
+  });
+
+  /**
+   * Prueba la función de resta con los valores 10 y 5, y verifica que el resultado sea 5.
+   */
+  test("Resta de 10 - 5", () => {
+    /**
+     * Comprueba si la resta de dos valores es igual a un resultado esperado.
+     * @param {number} a - El valor al que se le resta.
+     * @param {number} b - El valor que se resta.
+     * @returns {number} - El resultado de la resta.
+     */
+    expect(resta(10, 5)).toBe(5);
+  });
+
+  /**
+   * Prueba que la suma de 10 y 10 no sea igual a 10.
+   */
+  test("Que la suma 10 y 10, no sea 10", () => {
+    /**
+     * Comprueba si la suma de dos valores no es igual a un resultado esperado.
+     * @param {number} a - El primer valor a sumar.
+     * @param {number} b - El segundo valor a sumar.
+     * @returns {number} - El resultado de la suma.
+     */
+    expect(suma(10, 10)).not.toBe(10);
+  });
+
+  /**
+   * Prueba que la resta de 10 y 5 no sea igual a 2.
+   */
+  test("Que la resta de 10 - 5 no sea otro valor ", () => {
+    /**
+     * Comprueba si la resta de dos valores no es igual a un resultado esperado.
+     * @param {number} a - El valor al que se le resta.
+     * @param {number} b - El valor que se resta.
+     * @returns {number} - El resultado de la resta.
+     */
+    expect(resta(10, 5)).not.toBe(2);
+  });
+});
+```
+
+![Alt text](img/section-32-11.png)
+
+De esta manera, podrás utilizar el sistema de módulos de ECMAScript y disfrutar de la sintaxis de import/export en tus pruebas de Jest.
+
+![Alt text](img/section-32-9.png)
