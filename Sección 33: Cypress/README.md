@@ -79,7 +79,16 @@ Para instalar Cypress como una dependencia de desarrollo, sigue estos pasos:
    npx cypress open
    ```
 
-Una vez que hayas instalado Cypress y lo hayas abierto con el Test Runner, podrás empezar a escribir tus pruebas automatizadas utilizando la API de Cypress y ejecutarlas en diferentes navegadores. También puedes configurar Cypress para ajustarlo a tus necesidades específicas editando el archivo de configuración **`cypress.json`**.
+   El Launchpad es tu portal a Cypress, te ayuda con la incorporación, la elección de un tipo de prueba (E2E en nuestro caso) y el lanzamiento de un navegador.
+   ![Alt text](img/section-33-0.png)
+   Al elegir tu navegador en el Launchpad, se te presentará una lista de tus especificaciones (specs) con sus nombres, ubicaciones e información sobre las últimas ejecuciones grabadas. Aquí puedes ejecutar las especificaciones haciendo clic en ellas, crear nuevas especificaciones en blanco o ejemplos, o buscar especificaciones por nombre (útil para suites de pruebas grandes), por defecto cypress te ofrecera y descargar algunos ejemplos de pruebas.
+   ![Alt text](img/section-33-2.png)
+   Una vez que seleccionas la prueba que quieres hacer se abrira el **`Test Runner`**. Cypress ejecuta pruebas de forma interactiva, lo que te permite ver los comandos a medida que se ejecutan, al mismo tiempo que visualizas la aplicación o el componente que se está probando y exploras su DOM (Modelo de Objetos del Documento).
+   ![Alt text](img/section-33-3.png)
+
+Una vez que hayas instalado Cypress y lo hayas abierto con el Test Runner, podrás empezar a escribir tus pruebas automatizadas utilizando la API de Cypress y ejecutarlas en diferentes navegadores.
+
+También puedes configurar Cypress para ajustarlo a tus necesidades específicas editando el archivo de configuración `cypress.config.js`
 
 Recuerda que Cypress requiere una aplicación web existente para realizar las pruebas. Asegúrate de tener una aplicación web disponible para probar o crea una antes de comenzar a utilizar Cypress.
 
