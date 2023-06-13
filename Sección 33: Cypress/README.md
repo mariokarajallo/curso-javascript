@@ -80,11 +80,13 @@ Para instalar Cypress como una dependencia de desarrollo, sigue estos pasos:
    ```
 
    El Launchpad es tu portal a Cypress, te ayuda con la incorporación, la elección de un tipo de prueba (E2E en nuestro caso) y el lanzamiento de un navegador.
+
    ![Alt text](img/section-33-0.png)
 
 ### Abriendo la aplicación
 
 Al abrir Cypress, tu viaje de pruebas comienza con el Launchpad. Su función es guiarte a través de las decisiones y tareas de configuración que necesitas completar antes de comenzar a escribir tu primera prueba.
+
 ![Alt text](img/section-33-0.png)
 
 Si es la primera vez que usas Cypress, te llevará a través de los siguientes pasos en orden.
@@ -92,24 +94,29 @@ Si es la primera vez que usas Cypress, te llevará a través de los siguientes p
 #### Elegir un tipo de prueba
 
 ![Alt text](img/section-33-2.png)
+
 El Launchpad te presenta tu decisión más importante primero: ¿Qué tipo de prueba debo hacer? ¿Pruebas de extremo a extremo (E2E), donde ejecuto toda mi aplicación y visito páginas para probarlas? ¿O pruebas de componentes, donde monto componentes individuales de mi aplicación y los pruebo de forma aislada? Si no estás seguro del tipo que deseas y simplemente quieres continuar con tu viaje de pruebas, elige E2E por ahora, ¡siempre puedes cambiar esto más adelante!
 
 #### Configuración rápida
 
 ![Alt text](img/section-33-3.png)
+
 En el siguiente paso, el Launchpad generará una serie de archivos de configuración apropiados para el tipo de prueba que has elegido, y los cambios se mostrarán para que los revises. Para obtener más información sobre la configuración generada, consulta la referencia de configuración de Cypress, o simplemente desplázate hacia abajo y haz clic en "Continuar".
 
 #### Lanzamiento de un navegador
 
 ![Alt text](img/section-33-4.png)
+
 Por último, se te presenta la lista de navegadores compatibles que Cypress encontró en tu sistema. Nuevamente, no te preocupes, puedes cambiar de navegador cuando quieras. ¡Ahora PRESIONA EL BOTÓN DE INICIO!
 
 ##
 
 Al elegir tu navegador en el Launchpad, se te presentará una lista de tus especificaciones/pruebas (specs) con sus nombres, ubicaciones e información sobre las últimas ejecuciones grabadas. Aquí puedes lanzar las especificaciones haciendo clic en ellas, crear nuevas pruebas en blanco o ejemplos, o buscar pruebas por nombre (útil para suites de pruebas grandes).
+
 ![Alt text](img/section-33-5.png)
 
 Una vez que seleccionas la prueba que quieres hacer se abrira el **`Test Runner`** en sí. Cypress ejecuta pruebas de forma interactiva, lo que te permite ver los comandos a medida que se ejecutan, al mismo tiempo que visualizas la aplicación o el componente que se está probando y exploras su DOM (Modelo de Objetos del Documento).
+
 ![Alt text](img/section-33-6.png)
 
 También puedes configurar Cypress para ajustarlo a tus necesidades específicas editando el archivo de configuración `cypress.config.js`
@@ -192,3 +199,101 @@ a continuación te presento una estructura comúnmente utilizada para organizar 
 5. Carpeta "screenshots" y "videos": Estas carpetas se utilizan para almacenar capturas de pantalla y grabaciones de video de tus pruebas cuando se ejecutan en modo **`npx cypress run`**.
 
 Esto es solo una estructura básica y puedes personalizarla según tus necesidades. Puedes agregar más carpetas, archivos de configuración adicional o estructurar las pruebas de acuerdo con la arquitectura y características de tu proyecto.
+
+## 33.3. Nuestra primera prueba en Cypress
+
+### Iniciando nuestra app en cypress
+
+Configuración de ruta de acceso de nuestra aplicación para iniciar en cypress. Esta modificación te permite utilizar la URL base configurada en lugar de tener que escribir la URL completa en cada prueba, lo que hace que tus pruebas sean más legibles y fáciles de mantener.
+
+#### **baseUrl**
+
+1. Abre el archivo de configuración de Cypress. **`cypress.config.js.`**
+
+   ```jsx
+   const { defineConfig } = require("cypress");
+
+   module.exports = defineConfig({
+     e2e: {},
+   });
+   ```
+
+2. En el archivo de configuración, agrega una nueva propiedad llamada "baseUrl" y asigna la URL base que deseas utilizar. Por ejemplo:
+
+   ```jsx
+   const { defineConfig } = require("cypress");
+
+   module.exports = defineConfig({
+     e2e: {
+       baseUrl: "http://localhost:8080",
+     },
+   });
+   ```
+
+   Asegúrate de reemplazar "http://localhost:8080" con la URL base de tu aplicación.
+
+3. Guarda los cambios en el archivo de configuración.
+
+   A partir de ahora, Cypress utilizará la URL base especificada en todas las pruebas. Puedes acceder a ella utilizando **`cy.visit()`** u otros comandos de navegación. Por ejemplo:
+
+   ```jsx
+   // archivo de prueba
+   describe("The Home Page", () => {
+     it("successfully loads", () => {
+       cy.visit("/");
+     });
+   });
+   ```
+
+   Esto abrirá la URL base y navegará a la ruta especificada ("/" en este caso).
+
+### Añadir un archivo de prueba
+
+Asumiendo que has instalado Cypress con éxito y has abierto Cypress, ahora es el momento de añadir tu primera prueba. Vamos a hacerlo con el botón “Create new empty spec”.
+![Alt text](img/section-33-7.png)
+
+Al hacer clic en él, debería ver un cuadro de diálogo donde puede introducir el nombre de su nueva prueba/especificación/test. De momento, acepta el nombre por defecto.
+
+![Alt text](img/section-33-8.png)
+
+La prueba recién generada se muestra en un cuadro de diálogo de confirmación. Ciérrelo con el botón ✕.
+
+![Alt text](img/section-33-9.png)
+
+Una vez que hayamos creado ese archivo, deberías verlo inmediatamente en la lista de especificaciones de extremo a extremo (E2E). Cypress supervisa los archivos de especificaciones para detectar cambios y los muestra automáticamente.
+
+![Alt text](img/section-33-10.png)
+
+Aunque todavía no hayamos escrito ningún código -no pasa nada-, vamos a hacer clic en la prueba recientemente creada, y a ver cómo Cypress la lanza.
+
+Alerta de spoiler: probablemente va a FALLAR. No te preocupes, es solo porque aún no has configurado Cypress para que visite tu página de tu aplicación. (anteriormente, configuramos la ruta de acceso en los archivos de configuración de cypress)
+
+![Alt text](img/section-33-12.png)
+
+Para corregir esto, deberás abrir el archivo de prueba recientemente creado ubicado en la carpeta `cypress/e2e/` en tu proyecto:
+
+![Alt text](img/section-33-11.png)
+
+Y editar la prueba recientemente creada llamada por defecto `spec.cy.js`:
+
+```jsx
+describe("template spec", () => {
+  it("passes", () => {
+    cy.visit("https://example.cypress.io");
+  });
+});
+```
+
+reemplazar **`cy.visit('https://example.cypress.io')`** por **`cy.visit("/")`**, la prueba visitará la ruta base especificada en la propiedad **`baseUrl`** que configuraste previamente:
+
+```jsx
+describe("template spec", () => {
+  it("passes", () => {
+    cy.visit("/");
+  });
+});
+```
+
+Al ejecutar la prueba modificada, verás que la prueba se realiza con éxito y Cypress abrirá la URL base que has especificado con tu aplicación.
+
+![Alt text](img/section-33-13.png)
