@@ -73,7 +73,7 @@ Para instalar Cypress como una dependencia de desarrollo, sigue estos pasos:
 
    Esto descargará e instalará Cypress en tu proyecto y lo añadirá como una dependencia de desarrollo en el archivo **`package.json`**.
 
-5. Después de la instalación, ejecuta el siguiente comando para abrir el Test Runner de Cypress:
+5. Después de la instalación, ejecuta el siguiente comando para abrir el Launchpad de Cypress:
 
    ```
    npx cypress open
@@ -81,12 +81,36 @@ Para instalar Cypress como una dependencia de desarrollo, sigue estos pasos:
 
    El Launchpad es tu portal a Cypress, te ayuda con la incorporación, la elección de un tipo de prueba (E2E en nuestro caso) y el lanzamiento de un navegador.
    ![Alt text](img/section-33-0.png)
-   Al elegir tu navegador en el Launchpad, se te presentará una lista de tus especificaciones (specs) con sus nombres, ubicaciones e información sobre las últimas ejecuciones grabadas. Aquí puedes ejecutar las especificaciones haciendo clic en ellas, crear nuevas especificaciones en blanco o ejemplos, o buscar especificaciones por nombre (útil para suites de pruebas grandes), por defecto cypress te ofrecera y descargar algunos ejemplos de pruebas.
-   ![Alt text](img/section-33-2.png)
-   Una vez que seleccionas la prueba que quieres hacer se abrira el **`Test Runner`**. Cypress ejecuta pruebas de forma interactiva, lo que te permite ver los comandos a medida que se ejecutan, al mismo tiempo que visualizas la aplicación o el componente que se está probando y exploras su DOM (Modelo de Objetos del Documento).
-   ![Alt text](img/section-33-3.png)
 
-Una vez que hayas instalado Cypress y lo hayas abierto con el Test Runner, podrás empezar a escribir tus pruebas automatizadas utilizando la API de Cypress y ejecutarlas en diferentes navegadores.
+### Abriendo la aplicación
+
+Al abrir Cypress, tu viaje de pruebas comienza con el Launchpad. Su función es guiarte a través de las decisiones y tareas de configuración que necesitas completar antes de comenzar a escribir tu primera prueba.
+![Alt text](img/section-33-0.png)
+
+Si es la primera vez que usas Cypress, te llevará a través de los siguientes pasos en orden.
+
+#### Elegir un tipo de prueba
+
+![Alt text](img/section-33-2.png)
+El Launchpad te presenta tu decisión más importante primero: ¿Qué tipo de prueba debo hacer? ¿Pruebas de extremo a extremo (E2E), donde ejecuto toda mi aplicación y visito páginas para probarlas? ¿O pruebas de componentes, donde monto componentes individuales de mi aplicación y los pruebo de forma aislada? Si no estás seguro del tipo que deseas y simplemente quieres continuar con tu viaje de pruebas, elige E2E por ahora, ¡siempre puedes cambiar esto más adelante!
+
+#### Configuración rápida
+
+![Alt text](img/section-33-3.png)
+En el siguiente paso, el Launchpad generará una serie de archivos de configuración apropiados para el tipo de prueba que has elegido, y los cambios se mostrarán para que los revises. Para obtener más información sobre la configuración generada, consulta la referencia de configuración de Cypress, o simplemente desplázate hacia abajo y haz clic en "Continuar".
+
+#### Lanzamiento de un navegador
+
+![Alt text](img/section-33-4.png)
+Por último, se te presenta la lista de navegadores compatibles que Cypress encontró en tu sistema. Nuevamente, no te preocupes, puedes cambiar de navegador cuando quieras. ¡Ahora PRESIONA EL BOTÓN DE INICIO!
+
+##
+
+Al elegir tu navegador en el Launchpad, se te presentará una lista de tus especificaciones/pruebas (specs) con sus nombres, ubicaciones e información sobre las últimas ejecuciones grabadas. Aquí puedes lanzar las especificaciones haciendo clic en ellas, crear nuevas pruebas en blanco o ejemplos, o buscar pruebas por nombre (útil para suites de pruebas grandes).
+![Alt text](img/section-33-5.png)
+
+Una vez que seleccionas la prueba que quieres hacer se abrira el **`Test Runner`** en sí. Cypress ejecuta pruebas de forma interactiva, lo que te permite ver los comandos a medida que se ejecutan, al mismo tiempo que visualizas la aplicación o el componente que se está probando y exploras su DOM (Modelo de Objetos del Documento).
+![Alt text](img/section-33-6.png)
 
 También puedes configurar Cypress para ajustarlo a tus necesidades específicas editando el archivo de configuración `cypress.config.js`
 
