@@ -1,6 +1,6 @@
 # Sección 33: **Cypress**
 
-## 33.1. Qué es Cypress?
+## 33.1 Qué es Cypress?
 
 Cypress es un framework de pruebas de código abierto utilizado para realizar pruebas automatizadas en aplicaciones web. Especificamente, Cypress se utiliza para realizar pruebas de extremo a extremo (end-to-end) en aplicaciones web modernas.
 
@@ -27,3 +27,135 @@ Dentro de las pruebas de extremo a extremo, puedes abordar diferentes aspectos d
 Es importante destacar que Cypress está diseñado específicamente para las pruebas de extremo a extremo, donde se simula la interacción del usuario con la interfaz de usuario y se validan los resultados esperados. Otros tipos de pruebas, como las pruebas unitarias o las pruebas de integración de nivel inferior, generalmente se realizan utilizando otras herramientas o frameworks específicos.
 
 En resumen, Cypress es una herramienta poderosa para realizar pruebas automatizadas de extremo a extremo en aplicaciones web, brindando una experiencia de desarrollo fluida y facilitando la detección temprana de errores.
+
+## 33.2 Instalando y Primeros Pasos con Cypress
+
+Antes de iniciar consulta el sitio web oficial de Cypress (**https://www.cypress.io/**) y su documentación oficial para obtener la información más actualizada sobre la última versión de Cypress y sus características más recientes.
+
+Empecemos! en el contexto de Node.js en la gestión de paquetes al instalar herramientas o frameworks, existen dos categorías principales para las dependencias: dependencias de desarrollo (devDependencies) y dependencias de producción (dependencies). A continuación, te explico las diferencias entre ambas:
+
+### Dependencias de desarrollo (devDependencies):
+
+Estas son las dependencias que se requieren únicamente durante el desarrollo del proyecto, pero no se necesitan en el entorno de producción. Generalmente, se incluyen herramientas, bibliotecas y paquetes relacionados con las pruebas, tareas de construcción, tareas de compilación, linters, bundlers, entre otros. Estas dependencias no se envían a los servidores de producción y no afectan el funcionamiento de la aplicación en ese entorno.
+
+### Dependencias de producción (dependencies):
+
+Estas son las dependencias que son necesarias para que la aplicación se ejecute correctamente en el entorno de producción. Son los paquetes y bibliotecas que se utilizan directamente en la lógica de la aplicación y que son necesarios para su correcto funcionamiento. Estas dependencias se instalan en los servidores de producción y se incluyen en el paquete final que se entrega a los usuarios.
+
+La elección de sí una dependencia se incluye como dependencia de desarrollo o de producción depende de su propósito y su uso en el proyecto. En el caso de Cypress, generalmente se incluye como dependencia de desarrollo porque está destinado a realizar pruebas automatizadas durante el desarrollo de la aplicación. Cypress no es necesario en el entorno de producción, ya que su función es ayudar a los desarrolladores a escribir y ejecutar pruebas.
+
+Al instalar Cypress como una dependencia de desarrollo, te aseguras de que no se incluya en el paquete final de producción y evitas aumentar el tamaño del paquete y las dependencias innecesarias en el entorno de producción.
+
+Para instalar Cypress como una dependencia de desarrollo, sigue estos pasos:
+
+1. Asegúrate de tener Node.js instalado en tu sistema. Puedes verificarlo ejecutando el siguiente comando en tu terminal:
+
+   ```
+   node -v
+   ```
+
+   Si no tienes Node.js instalado, descárgalo e instálalo desde el sitio oficial de Node.js (**[https://nodejs.org](https://nodejs.org/)**).
+
+2. Crea un nuevo directorio para tu proyecto de Cypress, o navega al directorio existente donde deseas instalarlo.
+3. Inicializa un nuevo proyecto de Node.js ejecutando el siguiente comando en tu terminal:
+
+   ```
+   npm init -y
+   ```
+
+   Esto creará un archivo **`package.json`** en tu directorio.
+
+4. Ahora, instala Cypress como una dependencia de desarrollo ejecutando el siguiente comando:
+
+   ```
+   npm install cypress --save-dev
+   ```
+
+   Esto descargará e instalará Cypress en tu proyecto y lo añadirá como una dependencia de desarrollo en el archivo **`package.json`**.
+
+5. Después de la instalación, ejecuta el siguiente comando para abrir el Test Runner de Cypress:
+
+   ```
+   npx cypress open
+   ```
+
+Una vez que hayas instalado Cypress y lo hayas abierto con el Test Runner, podrás empezar a escribir tus pruebas automatizadas utilizando la API de Cypress y ejecutarlas en diferentes navegadores. También puedes configurar Cypress para ajustarlo a tus necesidades específicas editando el archivo de configuración **`cypress.json`**.
+
+Recuerda que Cypress requiere una aplicación web existente para realizar las pruebas. Asegúrate de tener una aplicación web disponible para probar o crea una antes de comenzar a utilizar Cypress.
+
+### npm (jest) vs npx (cypress)
+
+La diferencia en cómo se ejecuta Cypress con **`npx`** y Jest con **`npm`** se debe a cómo están diseñados y cómo se manejan en el ecosistema de pruebas.
+
+1. Cypress con **`npx`**: Cypress se ejecuta utilizando el comando **`npx cypress`**. La razón de esto es que Cypress proporciona un ejecutable global llamado "cypress" que se instala como una dependencia de desarrollo en tu proyecto. Sin embargo, en lugar de requerir una instalación global, **`npx`** permite ejecutar el comando **`cypress`** sin necesidad de instalarlo previamente de forma global en tu sistema. Esto es útil porque te permite ejecutar Cypress directamente desde el directorio del proyecto sin preocuparte por versiones o problemas de compatibilidad.
+2. Jest con **`npm`**: Jest es un framework de pruebas para JavaScript que se instala como una dependencia de desarrollo utilizando el comando **`npm install jest --save-dev`**. Una vez instalado, puedes ejecutar las pruebas de Jest simplemente utilizando el comando **`npm test`**. Jest busca automáticamente los archivos de prueba en tu proyecto y los ejecuta utilizando su propia CLI (Interfaz de línea de comandos).
+
+La diferencia en cómo se ejecutan Cypress y Jest no está relacionada directamente con la funcionalidad de las herramientas en sí, sino más bien con las opciones de ejecución proporcionadas por cada uno y cómo se distribuyen e instalan las dependencias.
+
+Es importante tener en cuenta que tanto Cypress como Jest son opciones populares para realizar pruebas automatizadas en proyectos de desarrollo, pero se utilizan en contextos diferentes. Cypress se enfoca en pruebas de extremo a extremo para aplicaciones web, mientras que Jest es un framework de pruebas más generalizado para pruebas unitarias, pruebas de integración y pruebas funcionales.
+
+En resumen, la diferencia en cómo se ejecuta Cypress con **`npx`** y Jest con **`npm`** se debe a las opciones de ejecución y las características específicas de cada herramienta, así como a su integración y distribución en el ecosistema de pruebas.
+
+### npx cypress run vs npx cypress open
+
+#### **npx cypress open**
+
+Este comando abre el Test Runner de Cypress, una interfaz gráfica que te permite interactuar con tus pruebas de forma visual. Desde el Test Runner, puedes seleccionar pruebas específicas para ejecutar, ver los resultados en tiempo real, depurar pruebas y ejecutar pruebas en diferentes navegadores. Es útil para un enfoque interactivo de desarrollo y depuración de pruebas.
+
+#### **npx cypress run**
+
+Este comando ejecuta las pruebas de Cypress en modo de línea de comandos, sin abrir el Test Runner gráfico. Las pruebas se ejecutan en segundo plano y generan informes de resultados en la terminal o en formatos específicos como JSON o JUnit. Este modo es útil para la ejecución automatizada de pruebas, como en entornos de integración continua (CI) o cuando deseas ejecutar tus pruebas sin la intervención manual en una interfaz gráfica.
+
+La elección entre **`npx cypress open`** y **`npx cypress run`** depende del contexto y los requisitos de tu proyecto:
+
+- Si estás desarrollando y depurando pruebas de forma interactiva, **`npx cypress open`** te brinda una interfaz gráfica que facilita la selección y ejecución de pruebas, así como la visualización en tiempo real de los resultados.
+- Si buscas una ejecución automatizada de tus pruebas, especialmente en entornos de CI, **`npx cypress run`** es más adecuado. Este modo permite la ejecución de pruebas en segundo plano, generando informes y resultados para su posterior análisis.
+
+No hay un comando que sea "mejor" en general, ya que ambos tienen su utilidad dependiendo de tus necesidades específicas. Puedes utilizar **`npx cypress open`** durante el desarrollo y las pruebas locales, y luego pasar a **`npx cypress run`** para la ejecución automatizada en tu flujo de trabajo de CI.
+
+En resumen, **`npx cypress open`** es útil para un enfoque interactivo y visual durante el desarrollo y depuración de pruebas, mientras que **`npx cypress run`** es más adecuado para ejecuciones automatizadas en entornos de CI.
+
+### Estructura proyecto con Cypress
+
+La estructura básica de un proyecto con Cypress puede variar según las preferencias y necesidades específicas del equipo de desarrollo.
+
+Cypress ahora recomienda nombrar tus pruebas de extremo a extremo como test.cy.js y tus pruebas de componentes como test.spec.js. Esto, por supuesto, es solo una recomendación, y puedes especificar cualquier patrón utilizando la opción specPattern en el archivo cypress.config.js.
+
+a continuación te presento una estructura comúnmente utilizada para organizar un proyecto de Cypress:
+
+```jsx
+|-- cypress
+|   |-- e2e
+|   |   |-- example.spec.js
+|   |   |-- example.cy.js
+|   |-- fixtures
+|   |   |-- example.json
+|   |-- support
+|   |   |-- commands.js
+|   |   |-- e2e.js
+|   |-- videos
+|   |-- screenshots
+|-- node_modules
+|-- cypress.config.js
+|-- package.json
+```
+
+![Alt text](img/section-33-1.png)
+
+1. Directorio raíz del proyecto: En este nivel se encuentran los archivos y carpetas principales del proyecto.
+   - `cypress.config.js`: Es el archivo de configuración de Cypress. Aquí puedes establecer diferentes opciones de configuración para tus pruebas, como la URL base, la carpeta de pruebas personalizada, las variables de entorno, entre otros. registrar plugins personalizados para modificar el comportamiento de Cypress.
+   - **`package.json`**: Es el archivo de configuración de npm. Aquí se definen las dependencias y scripts del proyecto, incluyendo las dependencias de Cypress.
+   - **`node_modules/`**: Este directorio contiene las dependencias de tu proyecto instaladas a través de npm.
+   - **`cypress/`**: Este directorio contiene todos los archivos y carpetas relacionados con las pruebas en Cypress.
+2. Carpeta "e2e": En esta carpeta se encuentran los archivos de prueba de Cypress. Puedes organizar tus pruebas en subcarpetas según tus necesidades. Por ejemplo:
+   - **`e2e/example.spec.js`**: Un archivo de prueba de ejemplo para mostrar la estructura y sintaxis de una prueba en Cypress.
+     - El formato **`spec.js`** o **`cy.js`** se refieren a los archivos de especificaciones (specifications) en Cypress. Se utilizan para escribir las pruebas en Cypress.
+     - Un archivo de especificación (**`spec.js`**) en Cypress contiene una o más pruebas que se ejecutarán en el entorno de prueba. Puedes organizar tus pruebas en diferentes archivos de especificación según la lógica y la funcionalidad que estés probando.
+3. Carpeta "fixtures": En esta carpeta puedes colocar archivos estáticos utilizados en tus pruebas, como datos de prueba o archivos de configuración.
+   - **`fixtures/example.json`**: Un archivo de ejemplo que contiene datos de prueba en formato JSON.
+4. Carpeta "support": En esta carpeta se encuentran los archivos de soporte utilizados por tus pruebas. Algunos archivos comunes son:
+   - **`support/e2e.js`**: Aquí puedes definir funciones y configuraciones personalizadas que se aplican a todas tus pruebas.
+   - **`support/commands.js`**: En este archivo, puedes agregar comandos personalizados que extienden las capacidades de Cypress y se pueden utilizar en tus pruebas.
+5. Carpeta "screenshots" y "videos": Estas carpetas se utilizan para almacenar capturas de pantalla y grabaciones de video de tus pruebas cuando se ejecutan en modo **`npx cypress run`**.
+
+Esto es solo una estructura básica y puedes personalizarla según tus necesidades. Puedes agregar más carpetas, archivos de configuración adicional o estructurar las pruebas de acuerdo con la arquitectura y características de tu proyecto.
