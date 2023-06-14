@@ -297,3 +297,195 @@ describe("template spec", () => {
 Al ejecutar la prueba modificada, verás que la prueba se realiza con éxito y Cypress abrirá la URL base que has especificado con tu aplicación.
 
 ![Alt text](img/section-33-13.png)
+
+## 33.4 Comandos de accion (action), Aserción (asertion) y consultas(query)
+
+Un test en Cypress se compone de varios elementos clave. A continuación, se presenta una descripción de cada uno de ellos:
+
+### Elementos que conforman un test:
+
+#### Declaración de referencia de tipos:
+
+Al comienzo del archivo de prueba, se suele incluir una declaración de referencia de tipos para Cypress. Esto permite que el editor de código proporcione autocompletado y verificación de tipos para las funciones y comandos de Cypress. Por ejemplo:
+
+```jsx
+/// <reference types="cypress" />
+```
+
+#### Bloque describe:
+
+Se utiliza para agrupar los tests relacionados en un conjunto o suite de pruebas. Ayuda a organizar y estructurar las pruebas de manera lógica. Por ejemplo:
+
+```jsx
+describe("Suite de pruebas", () => {
+  // Aquí se definen los tests
+});
+```
+
+#### Bloque it:
+
+Representa un caso de prueba individual. Contiene una descripción del escenario que se está probando y una función que define las acciones y las aserciones a realizar. Por ejemplo:
+
+```jsx
+it("Descripción del caso de prueba", () => {
+  // Aquí se definen las acciones y aserciones
+});
+```
+
+### Comandos de Cypress:
+
+Los comandos de Cypress se pueden clasificar en una de las siguientes categorías:
+
+1. Query: Son comandos que leen el estado de tu aplicación. Estos comandos te permiten buscar elementos en el DOM, obtener valores, propiedades o atributos de elementos, entre otras acciones. Algunos ejemplos de comandos de consulta son **`cy.get()`**, **`cy.contains()`**, **`cy.find()`**, **`cy.should()`**.
+2. Assertion: Son comandos que realizan afirmaciones sobre un estado dado. Estos comandos te permiten verificar que ciertos elementos o valores cumplen con ciertas condiciones. Algunos ejemplos de comandos de afirmación son **`cy.expect()`**, **`cy.should()`**, **`cy.assert()`**.
+3. Action: Son comandos que interactúan con tu aplicación como lo haría un usuario. Estos comandos te permiten hacer clic en elementos, ingresar texto en campos de entrada, enviar formularios, desplazarte por la página, entre otras acciones. Algunos ejemplos de comandos de acción son **`cy.click()`**, **`cy.type()`**, **`cy.submit()`**, **`cy.scroll()`**.
+4. Otros: Esta categoría incluye cualquier otro comando que sea útil para escribir pruebas, pero que no encaja directamente en las categorías anteriores. Por ejemplo, los comandos para manejar ventanas emergentes, establecer cookies, realizar solicitudes de red, entre otros.
+
+Al utilizar una combinación de estos comandos en tus pruebas de Cypress, puedes interactuar con tu aplicación, verificar su estado y realizar afirmaciones para garantizar su correcto funcionamiento.
+
+### Query
+
+Los comandos de consulta (query) en Cypress se utilizan para leer el estado de tu aplicación y buscar elementos en el DOM. Estos comandos te permiten interactuar con elementos y obtener información sobre ellos. Puedes utilizarlos en combinación con otros comandos para interactuar con tu aplicación, verificar estados y realizar pruebas más completas.
+
+| Comando         | Descripción                                                                                       | Ejemplo de Uso                              |
+| --------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| .as()           | Asigna un alias para su uso posterior.                                                            | cy.get('button').as('myButton')             |
+| .children()     | Obtiene los elementos hijos de un elemento.                                                       | cy.get('ul').children('li')                 |
+| .closest()      | Obtiene el primer elemento ancestral que coincide con un selector.                                | cy.get('button').closest('div')             |
+| .contains()     | Selecciona un elemento por su contenido de texto.                                                 | cy.contains('Login')                        |
+| .document()     | Obtiene el objeto window.document de la página activa.                                            | cy.document()                               |
+| .eq()           | Selecciona un elemento por su índice dentro de una colección.                                     | cy.get('li').eq(2)                          |
+| .filter()       | Filtra elementos con un selector.                                                                 | cy.get('li').filter('.active')              |
+| .find()         | Encuentra elementos descendientes con un selector.                                                | cy.get('.container').find('button')         |
+| .first()        | Selecciona el primer elemento de una colección.                                                   | cy.get('li').first()                        |
+| .focused()      | Obtiene el elemento del DOM que actualmente tiene el enfoque.                                     | cy.focused()                                |
+| .get()          | Encuentra elementos del DOM por selector, o lee un alias creado previamente con el comando .as(). | cy.get('input') / cy.get('@myAlias')        |
+| .hash()         | Obtiene el fragmento de URL de la página activa.                                                  | cy.hash()                                   |
+| .invoke()       | Invoca una función en el sujeto previamente obtenido.                                             | cy.get('input').invoke('val')               |
+| .its()          | Obtiene el valor de una propiedad en el sujeto previamente obtenido.                              | cy.get('input').its('value')                |
+| .last()         | Selecciona el último elemento de una colección.                                                   | cy.get('li').last()                         |
+| .location()     | Obtiene el objeto window.location de la página activa.                                            | cy.location()                               |
+| .next()         | Obtiene el siguiente elemento hermano.                                                            | cy.get('li').next()                         |
+| .nextAll()      | Obtiene todos los elementos hermanos siguientes.                                                  | cy.get('li').nextAll()                      |
+| .nextUntil()    | Obtiene todos los elementos hermanos siguientes hasta llegar a un selector.                       | cy.get('li').nextUntil('.active')           |
+| .not()          | Filtra los elementos seleccionados con un selector.                                               | cy.get('li').not('.active')                 |
+| .parent()       | Obtiene el elemento padre de un elemento DOM.                                                     | cy.get('button').parent()                   |
+| .parents()      | Obtiene todos los elementos padres de un elemento DOM.                                            | cy.get('button').parents()                  |
+| .parentsUntil() | Obtiene todos los elementos padres hasta llegar a un selector.                                    | cy.get('button').parentsUntil('.container') |
+| .prev()         | Obtiene el elemento hermano anterior.                                                             | cy.get('li').prev()                         |
+| .prevAll()      | Obtiene todos los elementos hermanos anteriores.                                                  | cy.get('li').prevAll()                      |
+| .prevUntil()    | Obtiene todos los elementos hermanos anteriores hasta llegar a un selector.                       | cy.get('li').prevUntil('.active')           |
+| .root()         | Obtiene el elemento raíz del DOM.                                                                 | cy.root()                                   |
+| .shadow()       | Accede al shadow DOM de un elemento.                                                              | cy.get('my-component').shadow()             |
+| .siblings()     | Obtiene todos los elementos hermanos.                                                             | cy.get('li').siblings()                     |
+| .title()        | Obtiene la propiedad document.title de la página activa.                                          | cy.title()                                  |
+| .url()          | Obtiene la URL de la página activa.                                                               | cy.url()                                    |
+| .window()       | Obtiene el objeto window de la página activa.                                                     | cy.window()                                 |
+
+### Assertion
+
+Las aserciones (assertions) son comandos en Cypress que permiten realizar afirmaciones o verificaciones sobre el estado de tu aplicación durante las pruebas. Las aserciones se utilizan para verificar si un determinado estado o condición se cumple, y si no es así, el test se pausará y fallará.
+
+Es importante destacar que las assertions en Cypress son encadenadas, lo que significa que se pueden utilizar varias assertions en una sola línea de código.
+
+Cypress proporciona una amplia gama de comandos de aserción que te permiten verificar diferentes aspectos del estado de tu aplicación. Aquí tienes una tabla con algunos de los comandos de aserción más comunes en Cypress, junto con una breve descripción de su uso y un ejemplo:
+
+| Comando                                   | Descripción                                                              | Ejemplo                                                         | Descripción del Ejemplo                                                        |
+| ----------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| .should('exist')                          | Verifica que un elemento exista en el DOM.                               | cy.get('button').should('exist')                                | Verifica que exista al menos un botón en el DOM.                               |
+| .should('not.exist')                      | Verifica que un elemento no exista en el DOM.                            | cy.get('input').should('not.exist')                             | Verifica que no haya ningún campo de entrada en el DOM.                        |
+| .should('be.visible')                     | Verifica que un elemento sea visible en la pantalla.                     | cy.get('.modal').should('be.visible')                           | Verifica que una modal esté visible en la pantalla.                            |
+| .should('not.be.visible')                 | Verifica que un elemento no sea visible en la pantalla.                  | cy.get('.loader').should('not.be.visible')                      | Verifica que un indicador de carga no esté visible en la pantalla.             |
+| .should('be.hidden')                      | Verifica que un elemento esté oculto.                                    | cy.get('.dropdown').should('be.hidden')                         | Verifica que un menú desplegable esté oculto.                                  |
+| .should('have.text', texto)               | Verifica que un elemento tenga el texto especificado.                    | cy.get('h1').should('have.text', 'Bienvenido')                  | Verifica que un encabezado tenga el texto "Bienvenido".                        |
+| .should('not.have.text', texto)           | Verifica que un elemento no tenga el texto especificado.                 | cy.get('span').should('not.have.text', 'Error')                 | Verifica que un elemento de tipo span no contenga el texto "Error".            |
+| .should('contain', texto)                 | Verifica que un elemento contenga el texto especificado.                 | cy.get('.card').should('contain', 'Producto')                   | Verifica que una tarjeta contenga el texto "Producto".                         |
+| .should('not.contain', texto)             | Verifica que un elemento no contenga el texto especificado.              | cy.get('.message').should('not.contain', 'Advertencia')         | Verifica que un mensaje no contenga el texto "Advertencia".                    |
+| .should('have.value', valor)              | Verifica que un elemento tenga el valor especificado.                    | cy.get('input[name="username"]').should('have.value', 'admin')  | Verifica que un campo de entrada tenga el valor "admin".                       |
+| .should('not.have.value', valor)          | Verifica que un elemento no tenga el valor especificado.                 | cy.get('input[type="checkbox"]').should('not.have.value', 'on') | Verifica que una casilla de verificación no tenga el valor "on".               |
+| .should('have.class', clase)              | Verifica que un elemento tenga la clase especificada.                    | cy.get('button').should('have.class', 'primary')                | Verifica que un botón tenga la clase "primary".                                |
+| .should('not.have.class', clase)          | Verifica que un elemento no tenga la clase especificada.                 | cy.get('a').should('not.have.class', 'disabled')                | Verifica que un enlace no tenga la clase "disabled".                           |
+| .should('be.enabled')                     | Verifica que un elemento esté habilitado.                                | cy.get('input[type="submit"]').should('be.enabled')             | Verifica que un botón de envío esté habilitado.                                |
+| .should('be.disabled')                    | Verifica que un elemento esté deshabilitado.                             | cy.get('input[type="text"]').should('be.disabled')              | Verifica que un campo de entrada de texto esté deshabilitado.                  |
+| .should('be.checked')                     | Verifica que un elemento de tipo checkbox esté seleccionado.             | cy.get('input[type="checkbox"]').should('be.checked')           | Verifica que una casilla de verificación esté seleccionada.                    |
+| .should('not.be.checked')                 | Verifica que un elemento de tipo checkbox no esté seleccionado.          | cy.get('input[type="radio"]').should('not.be.checked')          | Verifica que un botón de opción no esté seleccionado.                          |
+| .should('be.selected')                    | Verifica que un elemento de un select esté seleccionado.                 | cy.get('select').should('be.selected', 'option1')               | Verifica que la opción "option1" esté seleccionada en un elemento `select`.    |
+| .should('not.be.selected')                | Verifica que un elemento de un select no esté seleccionado.              | cy.get('select').should('not.be.selected', 'option2')           | Verifica que la opción "option2" no esté seleccionada en un elemento `select`. |
+| .should('have.attr', atributo, valor)     | Verifica que un elemento tenga un atributo con el valor especificado.    | cy.get('img').should('have.attr', 'src', '/img/logo.png')       | Verifica que una imagen tenga el atributo src con el valor "/img/logo.png".    |
+| .should('not.have.attr', atributo, valor) | Verifica que un elemento no tenga un atributo con el valor especificado. | cy.get('a').should('not.have.attr', 'target', '\_blank')        | Verifica que un enlace no tenga el atributo target con el valor "\_blank".     |
+
+### Action
+
+Los comandos de acción en Cypress son aquellos que interactúan con tu aplicación de la misma manera que un usuario lo haría. Estos comandos simulan acciones como hacer clic en elementos, escribir en campos de entrada, seleccionar opciones de lista desplegable y otras interacciones similares. A continuación, se presenta una tabla con los principales comandos de acción en Cypress, junto con su descripción, ejemplo y descripción del ejemplo:
+
+| Comando        | Descripción                                             | Ejemplo                                                | Descripción del Ejemplo                                                                                                  |
+| -------------- | ------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| visit          | Visita una URL específica.                              | cy.visit('https://www.example.com')                    | Visita el sitio web en la URL proporcionada.                                                                             |
+| click          | Haz clic en un elemento o conjunto de elementos.        | cy.get('button').click()                               | Hace clic en el primer botón encontrado en la página.                                                                    |
+| type           | Escribe texto en un campo de entrada.                   | cy.get('input[name="username"]').type('usuario123')    | Escribe 'usuario123' en el campo de entrada con el nombre de usuario.                                                    |
+| clear          | Borra el contenido de un campo de entrada.              | cy.get('input[name="password"]').clear()               | Borra el contenido del campo de entrada de la contraseña.                                                                |
+| submit         | Envía un formulario.                                    | cy.get('form').submit()                                | Envía el formulario encontrado en la página.                                                                             |
+| check          | Marca una casilla de verificación.                      | cy.get('input[type="checkbox"]').check()               | Marca la primera casilla de verificación encontrada en la página.                                                        |
+| uncheck        | Desmarca una casilla de verificación.                   | cy.get('input[type="checkbox"]').uncheck()             | Desmarca la primera casilla de verificación encontrada en la página.                                                     |
+| select         | Selecciona una opción de un menú desplegable.           | cy.get('select').select('Opción 1')                    | Selecciona la opción 'Opción 1' del menú desplegable encontrado en la página.                                            |
+| trigger        | Activa un evento personalizado en un elemento.          | cy.get('button').trigger('mouseover')                  | Activa el evento 'mouseover' en el primer botón encontrado en la página.                                                 |
+| dblclick       | Realiza un doble clic en un elemento.                   | cy.get('button').dblclick()                            | Realiza un doble clic en el primer botón encontrado en la página.                                                        |
+| rightclick     | Realiza un clic derecho en un elemento.                 | cy.get('button').rightclick()                          | Realiza un clic derecho en el primer botón encontrado en la página.                                                      |
+| scrollIntoView | Desplaza la página para hacer visible un elemento.      | cy.get('#elementId').scrollIntoView()                  | Desplaza la página para hacer visible el elemento con el ID especificado.                                                |
+| wait           | Espera un período de tiempo específico.                 | cy.wait(2000)                                          | Espera 2 segundos antes de continuar.                                                                                    |
+| should         | Realiza una aserción sobre un elemento.                 | cy.get('button').should('be.visible')                  | Verifica que el primer botón encontrado sea visible en la página.                                                        |
+| contains       | Encuentra un elemento que contenga un texto específico. | cy.contains('Login')                                   | Encuentra un elemento que contenga el texto 'Login'.                                                                     |
+| within         | Realiza una acción dentro de un alcance específico.     | cy.get('.container').within(() => { ... })             | Realiza acciones dentro del alcance del elemento con la clase 'container'.                                               |
+| each           | Realiza una acción en cada elemento de una colección.   | cy.get('li').each(($el, index) => { ... })             | Realiza una acción para cada elemento `li` encontrado en la página.                                                      |
+| first          | Selecciona el primer elemento de una colección.         | cy.get('button').first().click()                       | Selecciona el primer botón encontrado y realiza un clic en él.                                                           |
+| last           | Selecciona el último elemento de una colección.         | cy.get('button').last().click()                        | Selecciona el último botón encontrado y realiza un clic en él.                                                           |
+| eq             | Selecciona un elemento de una colección por su índice.  | cy.get('button').eq(2).click()                         | Selecciona el tercer botón encontrado (índice 2) y realiza un clic en él.                                                |
+| scrollTo       | Desplaza la página a un elemento específico.            | cy.get('#elementId').scrollIntoView().scrollTo(0, 200) | Desplaza la página verticalmente hacia abajo en 200 píxeles después de hacer visible el elemento con el ID especificado. |
+| hover          | Realiza un desplazamiento del ratón sobre un elemento.  | cy.get('button').hover()                               | Realiza un desplazamiento del ratón sobre el primer botón encontrado en la página.                                       |
+
+### Ejemplo test completo en cypress
+
+Aquí tienes un ejemplo que muestra cómo implementar una aserción (assertion), una acción (action) y una consulta (query) en una prueba de Cypress:
+
+```jsx
+describe("Prueba de ejemplo", () => {
+  it("Realizar una búsqueda y verificar resultados", () => {
+    // Visitar la página de inicio
+    cy.visit("/");
+
+    // Ingresar un término de búsqueda en el campo de búsqueda
+    cy.get("input[type='text']").type("Cypress");
+
+    // Hacer clic en el botón de búsqueda
+    cy.get("button[type='submit']").click();
+
+    // Verificar que se muestren los resultados de búsqueda
+    cy.get(".resultado-busqueda").should("exist");
+
+    // Verificar que el primer resultado contenga el texto esperado
+    cy.get(".resultado-busqueda").first().should("contain", "Cypress");
+
+    // Comprobar que se muestran resultados de búsqueda
+    cy.get(".search-results").should("be.visible");
+
+    // Verificar que haya al menos 5 resultados de búsqueda
+    cy.get(".resultado-busqueda").should("have.length.at.least", 5);
+  });
+});
+```
+
+- **`describe("Prueba de ejemplo", () => { ... });`**: El bloque **`describe`** se utiliza para agrupar pruebas relacionadas. En este caso, estamos creando un grupo de pruebas llamado "Prueba de ejemplo".
+- **`it("Realizar una búsqueda y verificar resultados", () => { ... });`**: El bloque **`it`** se utiliza para definir una prueba individual dentro del grupo **`describe`**. Aquí estamos describiendo la prueba "Realizar una búsqueda y verificar resultados".
+- **`cy.visit("/");`**: **`cy.visit()`** se utiliza para visitar una URL en el navegador. En este caso, estamos visitando la página de inicio, que se especifica como "/".
+- **`cy.get("input[type='text']").type("Cypress");`**: **`cy.get()`** se utiliza para seleccionar un elemento en la página basado en un selector. Aquí estamos seleccionando el campo de búsqueda (un input de tipo texto) y escribiendo el texto "Cypress" usando **`.type()`**.
+- **`cy.get("button[type='submit']").click();`**: Aquí estamos seleccionando el botón de búsqueda (un botón de tipo submit) y haciendo clic en él usando **`.click()`**.
+- **`cy.get(".resultado-busqueda").should("exist");`**: Estamos seleccionando el elemento con la clase "resultado-busqueda" y verificando que exista en la página usando **`.should("exist")`**.
+- **`cy.get(".resultado-busqueda").first().should("contain", "Cypress");`**: Aquí seleccionamos el primer elemento con la clase "resultado-busqueda" y verificamos que contenga el texto "Cypress" usando **`.should("contain", "Cypress")`**.
+- **`cy.get(".search-results").should("be.visible");`**: Estamos seleccionando el elemento con la clase "search-results" y verificando que esté visible en la página usando **`.should("be.visible")`**.
+- **`cy.get(".resultado-busqueda").should("have.length.at.least", 5);`**: Seleccionamos todos los elementos con la clase "resultado-busqueda" y verificamos que haya al menos 5 elementos usando **`.should("have.length.at.least", 5)`**.
+
+En resumen, este código de ejemplo muestra cómo realizar una serie de acciones, como visitar una página, interactuar con campos de entrada y botones, y realizar aserciones para verificar que los elementos y resultados esperados se encuentren en la página.
+
+Cypress proporciona una sintaxis expresiva y fácil de entender para realizar pruebas de extremo a extremo de manera efectiva. Con este ejemplo, deberías tener una mejor comprensión de cómo se estructuran y ejecutan las pruebas en Cypress.
+
+Este ejemplo te muestra cómo utilizar aserciones (assertions) para verificar resultados, acciones (actions) para interactuar con la página y consultas (queries) para seleccionar elementos de la página. Puedes adaptar este ejemplo a tus necesidades y utilizar otros comandos y aserciones de Cypress para realizar distintas acciones y comprobaciones en tu aplicación.
