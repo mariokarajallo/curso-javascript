@@ -141,10 +141,37 @@ En resumen, la diferencia en cómo se ejecuta Cypress con **`npx`** y Jest con *
 #### **npx cypress open**
 
 Este comando abre el Test Runner de Cypress, una interfaz gráfica que te permite interactuar con tus pruebas de forma visual. Desde el Test Runner, puedes seleccionar pruebas específicas para ejecutar, ver los resultados en tiempo real, depurar pruebas y ejecutar pruebas en diferentes navegadores. Es útil para un enfoque interactivo de desarrollo y depuración de pruebas.
+![example npx cypress open - 1](img/section-33-0.png)
 
 #### **npx cypress run**
 
-Este comando ejecuta las pruebas de Cypress en modo de línea de comandos, sin abrir el Test Runner gráfico. Las pruebas se ejecutan en segundo plano y generan informes de resultados en la terminal o en formatos específicos como JSON o JUnit. Este modo es útil para la ejecución automatizada de pruebas, como en entornos de integración continua (CI) o cuando deseas ejecutar tus pruebas sin la intervención manual en una interfaz gráfica.
+Este comando ejecuta las pruebas de Cypress en modo de línea de comandos, sin abrir el Test Runner gráfico. Las pruebas se ejecutan en segundo plano y generan informes de resultados en la terminal o en formatos específicos como JSON o JUnit.
+
+Este modo es útil para la ejecución automatizada de pruebas, como en entornos de integración continua (CI) o cuando deseas ejecutar tus pruebas sin la intervención manual en una interfaz gráfica.
+
+Cuando ejecutas Cypress en modo de línea de comandos utilizando el comando npx cypress run, se genera una carpeta llamada "videos" que contiene los videos grabados durante la ejecución de las pruebas.
+
+La carpeta "videos" se crea automáticamente en el directorio raíz de tu proyecto de Cypress y contendrá los videos de cada ejecución de prueba. Cada video se guarda con un nombre único y generalmente tiene el formato .mp4.
+
+Los videos generados durante la ejecución de Cypress pueden ser útiles para la depuración y el análisis posterior de las pruebas, ya que te permiten ver la reproducción exacta de lo que sucedió durante la ejecución de cada prueba.
+![example npx cypress run - 1](img/section-33-14.png)
+![example npx cypress run- 2](img/section-33-15.png)
+
+- Para ejecutar solo una prueba específica con el comando **`npx cypress run`**, puedes utilizar la opción **`--spec`** seguida de la ruta del archivo de prueba.
+
+  Aquí tienes un ejemplo de cómo ejecutar una sola prueba:
+
+  con **`npx cypress run`**:
+
+  ```
+  npx cypress run --spec "cypress/e2e/my-test.spec.js"
+  ```
+
+  En el ejemplo anterior, se ejecutará únicamente la prueba ubicada en el archivo **`my-test.spec.js`** dentro de la carpeta **`cypress/e2e`**.
+
+  Asegúrate de proporcionar la ruta correcta del archivo de prueba que deseas ejecutar. Puedes especificar el nombre del archivo o también puedes incluir rutas relativas o absolutas, dependiendo de la ubicación de tu archivo de prueba dentro del proyecto.
+
+  Recuerda que debes estar ubicado en el directorio raíz de tu proyecto de Cypress al ejecutar este comando.
 
 La elección entre **`npx cypress open`** y **`npx cypress run`** depende del contexto y los requisitos de tu proyecto:
 
