@@ -47,3 +47,76 @@ El middleware se puede utilizar a nivel de aplicación o a nivel de ruta en Expr
 Express ofrece una amplia variedad de funciones de middleware incorporadas, como **`express.json()`** para el análisis de datos JSON, **`express.urlencoded()`** para el análisis de datos enviados a través de formularios, **`express.static()`** para servir archivos estáticos, entre otros. También puedes crear tu propio middleware personalizado para satisfacer las necesidades específicas de tu aplicación.
 
 En resumen, Express es un framework web ligero pero potente que simplifica el desarrollo de aplicaciones web y APIs en Node.js. Ofrece una gran flexibilidad, un sistema de enrutamiento intuitivo, middleware modular y una amplia comunidad de soporte, lo que lo convierte en una opción popular para construir aplicaciones web rápidas y escalables en Node.js.
+
+## 34.3 Instalando Node
+
+Para utilizar Node.js, sigue estos pasos:
+
+Paso 1: Instalación
+
+- Ve al sitio web oficial de Node.js (**[https://nodejs.org](https://nodejs.org/)**) y descarga la versión correspondiente a tu sistema operativo.
+- Sigue las instrucciones de instalación proporcionadas en el sitio web para completar la instalación de Node.js en tu computadora.
+
+Paso 2: Creación de un archivo de proyecto
+
+- Crea una carpeta en tu sistema de archivos para tu proyecto de Node.js.
+- Inicializa un nuevo proyecto de Node.js ejecutando el siguiente comando:
+  ```
+  npm init -y
+  ```
+  Esto creará un archivo package.json con la configuración básica del proyecto.
+- Ejecuta el siguiente comando en la terminal para instalar el módulo **`express`**, que es un framework web popular para Node.js: **`npm install express`**
+- Abre un editor de texto o un entorno de desarrollo integrado (IDE) de tu elección y crea un nuevo archivo en esa carpeta con una extensión de archivo ".js". Por ejemplo, "app.js".
+
+Paso 3: Configuración del proyecto
+
+- Abre el archivo "app.js" en tu editor de texto o IDE y comienza a escribir tu código de Node.js.
+
+Paso 4: Escritura de código de Node.js
+
+- Abre **`app.js`** en tu editor de texto o IDE y escribe el siguiente código:
+
+```jsx
+// Importa el módulo 'express'
+const express = require("express");
+
+// Crea una instancia de la aplicación Express
+const app = express();
+
+// Define el puerto en el que se ejecutará el servidor
+const port = 3000;
+
+// Define una ruta raíz y una respuesta para esa ruta
+app.get("/", (req, res) => {
+  res.send("¡Hola, mundo!");
+});
+
+// Inicia el servidor en el puerto especificado
+app.listen(port, () => {
+  console.log(`Servidor escuchando en http://localhost:${port}`);
+});
+```
+
+- En este código, primero importamos el módulo **`express`** que instalamos en el paso anterior a través de npm. Asignamos el objeto **`express`** a la constante **`express`**.
+- Luego, creamos una instancia de la aplicación Express utilizando **`express()`**. Esto nos permite utilizar todas las funcionalidades y métodos proporcionados por Express en nuestra aplicación.
+- A continuación, definimos la variable **`port`** para especificar en qué puerto queremos que se ejecute nuestro servidor. En este caso, utilizamos el puerto 3000. Esto indica en qué puerto queremos que nuestro servidor escuche las solicitudes entrantes. Puedes cambiar este número de puerto según tus necesidades.
+- Luego, definimos una ruta raíz utilizando **`app.get('/', ...)`**. El primer parámetro es la ruta **`/`**, que es la ruta raíz de nuestro servidor. El segundo parámetro es una función de controlador **`(req, res) => { ... }`**, que se ejecutará cuando se acceda a esta ruta. En este caso, estamos utilizando el método **`send()`** del objeto **`res`** para enviar la respuesta "¡Hola, mundo!" al cliente que realizó la solicitud.
+- Finalmente, llamamos al método **`app.listen()`** para iniciar el servidor en el puerto especificado. También mostramos un mensaje en la consola para indicar que el servidor está escuchando correctamente. Estamos utilizando el método **`listen()`** de nuestra aplicación Express para iniciar el servidor en el puerto especificado (**`port`**). La función de callback se ejecuta cuando el servidor se inicia correctamente, y simplemente muestra un mensaje en la consola indicando que el servidor está escuchando en la URL **`http://localhost:3000`**.
+- A partir de ahí, puedes comenzar a escribir tu lógica de aplicación utilizando las funciones y métodos proporcionados por los módulos de Node.js y JavaScript.
+
+Paso 5: Ejecución de la aplicación Node.js
+
+- Abre una terminal o línea de comandos y navega hasta la carpeta de tu proyecto de Node.js. Asegúrate de estar en la carpeta de tu proyecto.
+- Ejecuta tu aplicación Node.js escribiendo **`node app.js`** en la terminal.
+
+  ![node install](img/section-34-2.png)
+
+- Verás un mensaje en la terminal que indica que el servidor está escuchando en el puerto 3000. Esto iniciará la ejecución de tu código y comenzará a escuchar en el puerto especificado (si estás creando un servidor web).
+- Abre un navegador web y visita **`http://localhost:3000`**.
+- Verás el mensaje "¡Hola, mundo!", que se muestra en la página, lo cual significa que tu servidor Node.js está funcionando correctamente.
+
+  ![node install](img/section-34-1.png)
+
+- De esta manera has levantado un servidor web básico utilizando Node.js y Express.
+
+Con estos pasos básicos, puedes comenzar a desarrollar y ejecutar aplicaciones utilizando Node.js. Puedes aprovechar la amplia gama de módulos y paquetes disponibles a través de npm para agregar funcionalidad adicional a tu proyecto. Además, Node.js ofrece una gran documentación y una activa comunidad de desarrollo que puede ayudarte en tu viaje de desarrollo con Node.js.
