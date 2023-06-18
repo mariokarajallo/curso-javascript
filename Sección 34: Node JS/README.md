@@ -1,6 +1,6 @@
 # Sección 34: **Introducción NodeJS**
 
-## 34.1. Qué es Node.js?
+## 34.1. ¿Qué es Node.js?
 
 Node.js es un entorno de tiempo de ejecución de código abierto y multiplataforma que permite ejecutar código JavaScript fuera de un navegador web. Fue creado por Ryan Dahl en 2009 y se basa en el motor de JavaScript V8 de Google Chrome. Node.js proporciona una arquitectura orientada a eventos y no bloqueante, lo que significa que puede manejar un gran número de solicitudes simultáneas sin bloquear la ejecución de otras operaciones.
 
@@ -25,3 +25,25 @@ Node.js ofrece varias ventajas y tiene una amplia gama de aplicaciones.
 3. Aplicaciones de streaming: La naturaleza no bloqueante de Node.js lo hace ideal para aplicaciones de streaming, como transmisión de audio y video en tiempo real.
 4. Herramientas de línea de comandos: Node.js se puede utilizar para crear scripts y herramientas de línea de comandos, automatizando tareas y agilizando el flujo de trabajo.
 5. Aplicaciones de Internet de las cosas (IoT): Node.js se utiliza en el desarrollo de aplicaciones para dispositivos conectados a Internet, permitiendo la comunicación y el control de sensores y actuadores.
+
+## 34.2. ¿Qué es Express?
+
+Express es un framework web rápido y minimalista para Node.js. Proporciona una capa de abstracción sobre el núcleo de Node.js, lo que facilita la creación de aplicaciones web y servicios API de manera eficiente y sencilla. Express es extremadamente popular y ampliamente utilizado en la comunidad de desarrollo de Node.js debido a su simplicidad y flexibilidad.
+
+Algunas características y ventajas de Express son:
+
+1. Enrutamiento: Express facilita la definición de rutas y manejo de solicitudes HTTP. Permite establecer rutas para diferentes URL y métodos HTTP, y proporciona un mecanismo sencillo para manejar y responder a esas solicitudes.
+2. Middleware: Express utiliza una arquitectura de middleware que permite agregar funciones de procesamiento en el flujo de solicitud y respuesta. Esto permite realizar tareas como el manejo de sesiones, autenticación, compresión, registro, entre otros, de manera modular y reutilizable.
+3. Integración con motor de plantillas: Express permite renderizar vistas HTML utilizando diferentes motores de plantillas populares como EJS, Handlebars o Pug (anteriormente conocido como Jade). Esto facilita la generación de páginas HTML dinámicas basadas en datos enviados desde el servidor.
+4. Soporte para API RESTful: Express es una opción popular para crear servicios API RESTful. Permite definir rutas, manejar métodos HTTP como GET, POST, PUT y DELETE, y responder con datos JSON, lo que hace que el desarrollo de APIs sea rápido y sencillo.
+5. Amplio ecosistema: Express cuenta con una gran comunidad de desarrolladores y un ecosistema sólido de paquetes y módulos de terceros. A través de npm (Node Package Manager), puedes acceder a una amplia variedad de complementos y middleware para agregar funcionalidades adicionales a tu aplicación.
+
+### Middleware
+
+En Express, el middleware es una función que se ejecuta durante el ciclo de procesamiento de una solicitud HTTP antes de que se envíe una respuesta. El middleware se utiliza para realizar diversas tareas, como la manipulación de la solicitud, la modificación de la respuesta, la autenticación, el manejo de errores, el registro de solicitudes, etc. Básicamente, es una forma de agregar funcionalidades adicionales a una aplicación web de Express.
+
+El middleware se puede utilizar a nivel de aplicación o a nivel de ruta en Express. A nivel de aplicación, el middleware se aplica a todas las solicitudes que llegan a la aplicación. A nivel de ruta, el middleware se aplica solo a las solicitudes que coinciden con una ruta específica.
+
+Express ofrece una amplia variedad de funciones de middleware incorporadas, como **`express.json()`** para el análisis de datos JSON, **`express.urlencoded()`** para el análisis de datos enviados a través de formularios, **`express.static()`** para servir archivos estáticos, entre otros. También puedes crear tu propio middleware personalizado para satisfacer las necesidades específicas de tu aplicación.
+
+En resumen, Express es un framework web ligero pero potente que simplifica el desarrollo de aplicaciones web y APIs en Node.js. Ofrece una gran flexibilidad, un sistema de enrutamiento intuitivo, middleware modular y una amplia comunidad de soporte, lo que lo convierte en una opción popular para construir aplicaciones web rápidas y escalables en Node.js.
