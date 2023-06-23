@@ -119,4 +119,115 @@ Paso 5: Ejecución de la aplicación Node.js
 
 - De esta manera has levantado un servidor web básico utilizando Node.js y Express.
 
+### Utilizar la sintaxis de import/export en nuestro proyecto
+
+En Node.js, puedes usar las palabras clave **`import`** y **`export`** para importar y exportar módulos y evitar la sintaxis de requerimiento (require) de CommonJS, que es la forma tradicional (antigua) de importar módulos en Node.js.
+
+Para poder utilizar módulos en tu proyecto de Node.js, puedes seguir estos pasos:
+
+1. Asegúrate de tener un archivo **`package.json`** válido en la raíz de tu proyecto.
+2. Abre el archivo **`package.json`**
+3. Agrega o modifica la sección **`"type"`** en el archivo **`package.json`** y establece su valor como **`"module"`**. Esto indica que estás utilizando módulos ECMAScript. También, agrega una sección **`"scripts"`** si aún no la tienes.
+
+   ```
+   {
+     "name": "nombre_del_proyecto",
+     "version": "1.0.0",
+     "type": "module",
+     "description": "node js project",
+     "scripts": {
+       "test": "echo \"Error: no test specified\" && exit 1"
+     },
+     "author": "Mario Karajallo",
+     "license": "ISC",
+     "dependencies": {
+       "express": "^4.18.2"
+     }
+   }
+   ```
+
+   Hemos agregado **`"type": "module"`** a la sección **`"type"`** del archivo **`package.json`**.
+
+4. Guarda los cambios en el archivo **`package.json`**.
+5. Después de configurar el archivo **`package.json`**, puedes utilizar la sintaxis **`import`** y **`export`** en tu código JavaScript. Ejemplo nuestro app.js
+
+   ```jsx
+   // app.js
+   // Importa el módulo 'express' y archivos js utilizando la sintaxis de import/export
+   import express from "express";
+
+   // Crea una instancia de la aplicación Express
+   const app = express();
+
+   // Define el puerto en el que se ejecutará el servidor
+   const port = 3000;
+
+   // Define una ruta raíz y una respuesta para esa ruta
+   app.get("/", (req, res) => {
+     res.send("¡Hola, mundo!");
+   });
+
+   // Inicia el servidor en el puerto especificado
+   app.listen(port, () => {
+     console.log(`Servidor escuchando en http://localhost:${port}`);
+   });
+   ```
+
+6. Ejecutamos en la terminal `node app` y vemos como funciona ahora con la sintaxis de import/export
+
+### Nodemon
+
+Nodemon es una herramienta de desarrollo para Node.js que facilita la tarea de reiniciar automáticamente la aplicación cada vez que se detectan cambios en los archivos del proyecto. Esto es especialmente útil durante el desarrollo, ya que te permite ahorrar tiempo y esfuerzo al no tener que reiniciar manualmente la aplicación cada vez que realizas cambios en tu código.
+
+Al utilizar Nodemon, puedes iniciar tu aplicación Node.js con el comando **`nodemon`** en lugar de **`node`**. Nodemon monitorea los archivos en tu proyecto y, cuando detecta un cambio, reinicia automáticamente la aplicación. Esto te permite ver los resultados actualizados de tus cambios de inmediato, sin tener que detener y reiniciar manualmente el servidor cada vez.
+
+Para usar Nodemon, primero debes instalarlo en tu proyecto a través de npm. Puedes hacerlo ejecutando el siguiente comando en la línea de comandos:
+
+```
+npm install --save-dev nodemon
+```
+
+Una vez que Nodemon esté instalado, puedes ejecutar tu aplicación con Nodemon de la siguiente manera, con el nombre del archivo principal de tu aplicación. :
+
+```
+nodemon app.js
+```
+
+Nodemon iniciará tu aplicación y la mantendrá en ejecución. Si realizas cambios en los archivos de tu proyecto y los guardas, Nodemon detectará automáticamente los cambios y reiniciará la aplicación para reflejar los cambios actualizados.
+
+#### **npm run dev**
+
+Si deseas utilizar el comando **`npm run dev`** en lugar de **`nodemon`** para ejecutar tu aplicación Node.js con reinicio automático, puedes configurar un script personalizado en tu archivo **`package.json`**. Aquí tienes los pasos para hacerlo:
+
+1. Abre el archivo **`package.json.`**
+2. Encuentra la sección **`"scripts"`** en el archivo **`package.json`**. Si no existe, puedes agregarla como un objeto vacío.
+3. Agrega un nuevo script llamado **`"dev"`** dentro de la sección **`"scripts"`** y establece su valor como **`nodemon app.js`** o **`nodemon <ruta del archivo principal de tu aplicación>`**. Puedes elegir el nombre **`dev`** para el script, pero puedes cambiarlo según tus preferencias.
+
+   ```
+   //package.json
+   {
+     "name": "nombre_del_proyecto",
+     "version": "1.0.0",
+     "scripts": {
+       "dev": "nodemon app.js"
+     },
+     "dependencies": {
+       // Dependencias del proyecto
+     },
+     "devDependencies": {
+       // Dependencias de desarrollo del proyecto
+     }
+   }
+   ```
+
+4. Guarda los cambios en el archivo **`package.json`**.
+
+   Ahora, puedes ejecutar tu aplicación con el comando **`npm run dev`** en lugar de **`nodemon`**. Ejecuta el siguiente comando en la línea de comandos:
+
+   ```
+   npm run dev
+   ```
+
+   Esto iniciará tu aplicación utilizando **`nodemon`** según la configuración especificada en el script **`"dev"`** en el archivo **`package.json`**. Nodemon monitoreará los archivos en tu proyecto y reiniciará automáticamente la aplicación cuando se detecten cambios.
+
 Con estos pasos básicos, puedes comenzar a desarrollar y ejecutar aplicaciones utilizando Node.js. Puedes aprovechar la amplia gama de módulos y paquetes disponibles a través de npm para agregar funcionalidad adicional a tu proyecto. Además, Node.js ofrece una gran documentación y una activa comunidad de desarrollo que puede ayudarte en tu viaje de desarrollo con Node.js.
