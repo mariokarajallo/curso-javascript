@@ -660,3 +660,96 @@ Veamos algunos ejemplos sencillos para ilustrar cómo usar Sequelize en un proye
    ```
 
 Estos son solo ejemplos básicos para que te familiarices con Sequelize. La biblioteca ofrece muchas más funcionalidades y opciones avanzadas para trabajar con bases de datos relacionales en proyectos Node.js.
+
+## 35.6 Variables de Entorno
+
+Las variables de entorno son valores que se configuran en el sistema operativo o en el entorno de ejecución y que pueden ser accedidos por programas o scripts durante su tiempo de ejecución.
+
+Estas variables de entorno son utilizadas para ajustar el comportamiento de la aplicación, configurar aspectos específicos o acceder a recursos externos. En lugar de tener valores codificados directamente en el código fuente, se utilizan variables de entorno para proporcionar configuraciones flexibles y personalizables sin necesidad de modificar el código.
+
+Las variables de entorno pueden contener información como claves de acceso a servicios externos, rutas de archivos, configuraciones de bases de datos, tokens de autenticación, URLs de API, entre otros datos relevantes para el funcionamiento de la aplicación.
+
+En diferentes lenguajes de programación, se accede a las variables de entorno a través de una API o función proporcionada por el lenguaje o el entorno de ejecución. Por ejemplo, en Node.js, se utiliza el objeto **`process.env`** para acceder a las variables de entorno. En otros lenguajes como Python, se accede a las variables de entorno utilizando la biblioteca **`os`** o **`dotenv`**.
+
+Las variables de entorno son especialmente útiles para separar la configuración sensible del código fuente, facilitar la portabilidad de la aplicación entre diferentes entornos (desarrollo, prueba, producción) y mantener la seguridad de información confidencial, como contraseñas o claves de API.
+
+#### Algunas características importantes de las variables de entorno:
+
+1. **Separación de la configuración**: Las variables de entorno permiten separar la configuración sensible, como claves de API, contraseñas de bases de datos o información de acceso a servicios externos, del código fuente. Esto es especialmente útil cuando compartes el código fuente con otras personas o cuando despliegas tu aplicación en diferentes entornos.
+2. **Portabilidad**: Las variables de entorno permiten que tu aplicación se ejecute en diferentes entornos sin modificar el código fuente. Puedes ajustar la configuración simplemente cambiando los valores de las variables de entorno, lo que facilita la migración de la aplicación entre entornos de desarrollo, prueba y producción.
+3. **Seguridad**: Al mantener información sensible fuera del código fuente, las variables de entorno ayudan a proteger tus credenciales y claves de acceso. Esto es especialmente relevante cuando se trata de bases de datos, servicios externos o servicios en la nube, donde es importante mantener la información de acceso de manera segura.
+
+### Libreria DOTENV
+
+**`dotenv`** es una biblioteca de Node.js que permite cargar variables de entorno desde un archivo **`.env`** en el entorno de desarrollo. El archivo **`.env`** es un archivo de texto plano que contiene pares, clave-valor, donde cada línea representa una variable de entorno y su valor correspondiente.
+
+La biblioteca **`dotenv`** facilita la carga de estas variables de entorno desde el archivo **`.env`** y las hace accesibles en tu código utilizando la variable **`process.env`**. Esto evita tener que configurar manualmente cada variable de entorno en el entorno de desarrollo y simplifica la gestión de la configuración.
+
+#### Ejemplo práctico
+
+Un ejemplo práctico de cómo se utilizan las variables de entorno en un proyecto de Node.js sería la configuración de la conexión a una base de datos. En lugar de tener valores de conexión codificados directamente en el código, se pueden usar variables de entorno para proporcionar esa información de manera dinámica y segura.
+
+Aquí tienes un ejemplo de cómo se podría usar una variable de entorno para configurar la conexión a una base de datos en un proyecto de Node.js:
+
+El archivo **`.env`** puede contener variables de entorno como:
+
+```
+DB_HOST=localhost
+DB_USER=root
+DB_NAME=name_db
+DB_PASSWORD=mysecretpassword
+API_KEY=abcdef1234567890
+```
+
+archivo index.js donde utilizamos nuestras variables de entorno
+
+```jsx
+const Sequelize = require("sequelize");
+
+// Configuración de la conexión a la base de datos
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: "mysql",
+  }
+);
+
+// Modelo de ejemplo para una tabla "Usuario"
+const Usuario = sequelize.define("Usuario", {
+  nombre: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  edad: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
+});
+
+// Uso de la conexión y el modelo en la aplicación
+(async () => {
+  try {
+    // Sincronización del modelo con la base de datos
+    await sequelize.sync();
+
+    // Creación de un nuevo usuario
+    const nuevoUsuario = await Usuario.create({
+      nombre: "John Doe",
+      edad: 25,
+    });
+
+    console.log("Usuario creado:", nuevoUsuario.toJSON());
+  } catch (error) {
+    console.error("Error:", error);
+  }
+})();
+```
+
+En este ejemplo, las variables de entorno **`DB_NAME`**, **`DB_USER`**, **`DB_PASSWORD`** y **`DB_HOST`** deben estar configuradas en el sistema operativo o en el entorno de ejecución. Estas variables contendrían los valores correspondientes para la conexión a la base de datos, como el nombre de la base de datos, el usuario, la contraseña y el host.
+
+Al utilizar variables de entorno de esta manera, puedes separar la configuración sensible de la aplicación del código fuente y mantenerla en un lugar seguro y específico para cada entorno, como en un archivo **`.env`** o en las configuraciones del sistema operativo o servidor. Esto facilita la administración y la seguridad de los valores de configuración utilizados en el proyecto.
+
+En resumen, las variables de entorno en programación son valores configurables externamente que permiten ajustar la configuración y el comportamiento de una aplicación sin necesidad de modificar el código fuente, lo que brinda flexibilidad, portabilidad y seguridad a los proyectos de programación.
