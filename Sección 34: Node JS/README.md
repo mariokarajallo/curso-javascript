@@ -477,3 +477,186 @@ La idea principal detrás del patrón MVC es lograr una separación clara de res
 El patrón MVC se utiliza ampliamente en muchos frameworks y tecnologías de desarrollo web, como Ruby on Rails, Laravel, Django, [ASP.NET](http://asp.net/) MVC, entre otros. Ayuda a estructurar las aplicaciones de manera organizada y promueve buenas prácticas de programación, como la separación de preocupaciones y la escalabilidad del código.
 
 ![MVC](img/section-34-3.png)
+
+## 35.5 Sequelize ORM
+
+Sequelize es una biblioteca de JavaScript que se utiliza como un mapeador objeto-relacional (ORM) para interactuar con bases de datos relacionales en aplicaciones Node.js. ORM es una técnica que permite mapear objetos en el código fuente a tablas en una base de datos relacional y realizar operaciones CRUD (crear, leer, actualizar y eliminar) en la base de datos utilizando métodos y propiedades de objetos.
+
+Con Sequelize, puedes definir modelos que representan tablas en tu base de datos. Estos modelos contienen propiedades que representan las columnas de la tabla y métodos que se utilizan para realizar operaciones en la base de datos, como insertar registros, buscar registros, actualizar registros y eliminar registros.
+
+Sequelize proporciona una capa de abstracción sobre la base de datos relacional subyacente, lo que significa que puedes interactuar con la base de datos utilizando objetos y métodos en lugar de escribir consultas SQL directamente. Sequelize se encarga de generar las consultas SQL necesarias según las operaciones que realices en los modelos.
+
+Además, Sequelize también ofrece funcionalidades adicionales, como la validación de datos antes de ser almacenados en la base de datos, la gestión de transacciones para asegurar la atomicidad de las operaciones y la definición de relaciones entre modelos, como asociaciones uno a uno, uno a muchos y muchos a muchos.
+
+En resumen, Sequelize es un ORM que simplifica la interacción con bases de datos relacionales en aplicaciones Node.js, permitiéndote trabajar con objetos y métodos en lugar de escribir consultas SQL directamente.
+
+### Node y Sequelize
+
+En un proyecto con Node.js, Sequelize puede ser utilizado como una herramienta para interactuar con una base de datos relacional de manera eficiente y estructurada. Al integrar Sequelize en un proyecto de Node.js, puedes aprovechar su funcionalidad ORM para realizar operaciones de base de datos de forma más sencilla.
+
+Algunas formas en las que Sequelize se relaciona con un proyecto en Node.js son:
+
+1. Definición de modelos: En tu proyecto, puedes definir modelos de Sequelize que representen las tablas de tu base de datos relacional. Estos modelos especifican las propiedades y relaciones de los datos que se almacenarán en la base de datos.
+2. Migraciones de base de datos: Sequelize proporciona una funcionalidad de migración que te permite crear y modificar la estructura de tu base de datos de manera controlada. Puedes definir migraciones para crear o modificar tablas, columnas, índices y restricciones en tu base de datos, y Sequelize se encargará de aplicar estos cambios de manera ordenada.
+3. Operaciones CRUD: Sequelize facilita las operaciones de creación, lectura, actualización y eliminación de registros en tu base de datos. Puedes utilizar los métodos proporcionados por Sequelize en los modelos para realizar estas operaciones de manera eficiente y segura.
+4. Consultas complejas: Además de las operaciones CRUD básicas, Sequelize te permite realizar consultas más complejas utilizando su API de consulta. Puedes construir consultas personalizadas con filtros, ordenamientos, uniones y agrupaciones utilizando métodos y operadores de Sequelize.
+5. Relaciones entre modelos: Si tu base de datos tiene relaciones entre tablas, Sequelize te permite definir y utilizar estas relaciones en tus modelos. Puedes establecer asociaciones uno a uno, uno a muchos y muchos a muchos, y Sequelize se encargará de gestionar estas relaciones en las consultas y operaciones de base de datos.
+
+En resumen, Sequelize se integra en un proyecto de Node.js para facilitar la interacción con una base de datos relacional. Proporciona una abstracción de base de datos orientada a objetos y simplifica la realización de operaciones de base de datos, consultas y manejo de relaciones.
+
+### Instalacion
+
+Para instalar Sequelize en tu proyecto de Node.js, puedes seguir estos pasos:
+
+1. Abre una terminal o línea de comandos en la carpeta raíz de tu proyecto.
+2. Asegúrate de tener Node.js y npm (Node Package Manager) instalados en tu sistema.
+3. Ejecuta el siguiente comando en la terminal para instalar Sequelize y sus dependencias:
+
+   ```
+   npm install sequelize
+   ```
+
+4. Dependiendo del tipo de base de datos que estés utilizando, también necesitarás instalar el controlador (driver) correspondiente. Por ejemplo, si estás utilizando MySQL, ejecuta el siguiente comando:
+
+   ```
+   npm install mysql2
+   ```
+
+   Si estás utilizando PostgreSQL, puedes instalar el controlador **`pg`** o **`pg-hstore`**:
+
+   ```
+   npm install pg
+   npm install pg-hstore
+   ```
+
+   Si estás utilizando otro tipo de base de datos, consulta la documentación de Sequelize para encontrar el controlador adecuado.
+
+5. Una vez que Sequelize y los controladores estén instalados, puedes comenzar a usarlo en tu proyecto importando la biblioteca y configurando la conexión a la base de datos, como se muestra en el ejemplo anterior.
+
+Recuerda que también puedes utilizar un gestor de paquetes como yarn en lugar de npm si lo prefieres.
+
+Con estos pasos, Sequelize estará instalado y listo para ser utilizado en tu proyecto de Node.js. Asegúrate de consultar la documentación oficial de Sequelize para obtener más detalles sobre su configuración y uso.
+
+### Veamos un ejemplo sencillo de como implementar
+
+Veamos algunos ejemplos sencillos para ilustrar cómo usar Sequelize en un proyecto de Node.js. Asumiremos que ya tienes instalado Node.js y que has creado un proyecto de Node.js con una base de datos relacional (por ejemplo, MySQL o PostgreSQL) configurada.
+
+1. Configuración e inicialización de Sequelize:
+
+   ```jsx
+   // Importamos las dependencias necesarias
+   const Sequelize = require("sequelize");
+
+   // Configuramos la conexión a la base de datos
+   const sequelize = new Sequelize(
+     "nombre_base_de_datos",
+     "usuario",
+     "contraseña",
+     {
+       host: "localhost",
+       dialect: "mysql", // o 'postgres', dependiendo del tipo de base de datos
+     }
+   );
+
+   // Definimos un modelo sencillo
+   const Usuario = sequelize.define("usuario", {
+     nombre: {
+       type: Sequelize.STRING,
+       allowNull: false,
+     },
+     edad: {
+       type: Sequelize.INTEGER,
+       allowNull: true,
+     },
+   });
+
+   // Sincronizamos el modelo con la base de datos (crea la tabla si no existe)
+   sequelize.sync();
+   ```
+
+2. Creación de registros:
+
+   ```jsx
+   // Crear un nuevo usuario
+   Usuario.create({
+     nombre: "Juan",
+     edad: 30,
+   })
+     .then((usuario) => {
+       console.log("Usuario creado:", usuario.toJSON());
+     })
+     .catch((err) => {
+       console.error("Error al crear usuario:", err);
+     });
+   ```
+
+3. Consulta de registros:
+
+   ```jsx
+   // Buscar todos los usuarios
+   Usuario.findAll()
+     .then((usuarios) => {
+       console.log(
+         "Usuarios encontrados:",
+         usuarios.map((u) => u.toJSON())
+       );
+     })
+     .catch((err) => {
+       console.error("Error al buscar usuarios:", err);
+     });
+
+   // Buscar usuarios con una condición específica (por ejemplo, todos los usuarios mayores de 25)
+   Usuario.findAll({
+     where: {
+       edad: { [Sequelize.Op.gt]: 25 }, // [Op.gt] representa el operador "mayor que"
+     },
+   })
+     .then((usuarios) => {
+       console.log(
+         "Usuarios mayores de 25:",
+         usuarios.map((u) => u.toJSON())
+       );
+     })
+     .catch((err) => {
+       console.error("Error al buscar usuarios:", err);
+     });
+   ```
+
+4. Actualización de registros:
+
+   ```jsx
+   // Buscar un usuario por su nombre y actualizar su edad
+   Usuario.update(
+     { edad: 35 },
+     {
+       where: {
+         nombre: "Juan",
+       },
+     }
+   )
+     .then((resultado) => {
+       console.log("Registros actualizados:", resultado[0]);
+     })
+     .catch((err) => {
+       console.error("Error al actualizar registros:", err);
+     });
+   ```
+
+5. Eliminación de registros:
+
+   ```jsx
+   // Eliminar un usuario por su nombre
+   Usuario.destroy({
+     where: {
+       nombre: "Juan",
+     },
+   })
+     .then((resultado) => {
+       console.log("Registros eliminados:", resultado);
+     })
+     .catch((err) => {
+       console.error("Error al eliminar registros:", err);
+     });
+   ```
+
+Estos son solo ejemplos básicos para que te familiarices con Sequelize. La biblioteca ofrece muchas más funcionalidades y opciones avanzadas para trabajar con bases de datos relacionales en proyectos Node.js.
