@@ -37,3 +37,119 @@ React fue creado por el equipo de Facebook y fue lanzado por primera vez en 2013
 4. **Comunidad activa:** React cuenta con una comunidad de desarrolladores activa y próspera. Esto significa que hay una gran cantidad de recursos, bibliotecas y herramientas disponibles para ayudarte a aprender y trabajar con React de manera efectiva.
 
 Recuerda que este es solo un breve resumen de los conceptos clave de React. A medida que profundices en tu documentación. Es recomendable consultar la documentación oficial de React (**[https://reactjs.org](https://reactjs.org/)**) y realizar tutoriales o ejemplos prácticos para familiarizarte con su uso.
+
+## 35.2 La Estructura de Archivos de React y Vite
+
+### Que es Vite?
+
+Vite es un entorno de desarrollo ultrarrápido para aplicaciones web en JavaScript. Fue creado con el objetivo de mejorar la experiencia de desarrollo al proporcionar un entorno de compilación extremadamente rápido y eficiente. Vite se centra en la velocidad y la simplicidad, permitiendo a los desarrolladores construir aplicaciones web de manera rápida y eficiente.
+
+A diferencia de otros entornos de desarrollo, como webpack o Parcel, que se basan en la generación de bundles (paquetes) estáticos, Vite utiliza una técnica llamada "Dev Server" para lograr un tiempo de inicio y una velocidad de actualización en caliente muy rápidos. En lugar de agrupar todos los archivos y dependencias en un solo archivo bundle, Vite aprovecha el soporte nativo de los navegadores modernos para módulos ES y carga los módulos de forma individual durante el desarrollo.
+
+Algunas características y ventajas importantes de Vite son:
+
+1. Tiempo de inicio rápido: Vite se inicia rápidamente gracias a su enfoque de carga de módulos individuales. Esto permite un rápido tiempo de desarrollo y una respuesta instantánea en el navegador al realizar cambios en el código fuente.
+2. Recarga en caliente (Hot Module Replacement): Vite proporciona una funcionalidad de recarga en caliente que actualiza automáticamente los cambios en el código fuente sin necesidad de recargar la página completa. Esto agiliza el proceso de desarrollo y mejora la productividad.
+3. Soporte nativo para módulos ES: Vite aprovecha las capacidades de los navegadores modernos para cargar módulos ES (ECMAScript) directamente, sin necesidad de transpilación o empaquetamiento adicional. Esto mejora el rendimiento y reduce la complejidad del entorno de desarrollo.
+4. Configuración simple: Vite utiliza una configuración simple basada en convenciones y una API intuitiva. Esto facilita la configuración y personalización de las aplicaciones, al tiempo que reduce la complejidad y el tiempo de configuración.
+5. Integración con frameworks populares: Vite es compatible con frameworks populares como React, Vue.js, Preact y Svelte, lo que facilita la construcción de aplicaciones utilizando estas tecnologías.
+
+Vite y React son tecnologías que se pueden utilizar juntas para desarrollar aplicaciones web modernas. Aunque son tecnologías independientes, pueden complementarse y aprovechar las fortalezas de cada una para mejorar la experiencia de desarrollo.
+
+Vite se destaca por su velocidad y eficiencia en el entorno de desarrollo. Proporciona un tiempo de inicio rápido y una recarga en caliente instantánea, lo que permite una iteración rápida durante el desarrollo. Vite se integra bien con React y otros frameworks, lo que significa que se puede utilizar como entorno de desarrollo optimizado para desarrollar aplicaciones React.
+
+Aquí hay algunas formas en las que Vite y React se relacionan:
+
+1. Desarrollo rápido: Vite proporciona una experiencia de desarrollo rápida y ágil al cargar módulos individualmente y aprovechar la recarga en caliente. Esto beneficia a los desarrolladores de React al permitirles realizar cambios en el código y ver los resultados inmediatamente, sin tener que esperar largos tiempos de compilación o recargar la página completa.
+2. Integración sencilla: Vite se integra de manera fluida con React. Al utilizar Vite como entorno de desarrollo, se pueden aprovechar las características de velocidad y rendimiento de Vite mientras se desarrollan aplicaciones React. Vite es compatible con JSX, la sintaxis utilizada por React, lo que facilita el uso de ambos en conjunto.
+3. Optimizaciones específicas de React: Vite puede aplicar optimizaciones específicas de React para mejorar aún más el rendimiento de las aplicaciones React. Por ejemplo, Vite puede realizar una división automática de código (code splitting) basada en los límites de ruta de React, lo que significa que solo se cargan los componentes necesarios para una determinada ruta, reduciendo así el tamaño del paquete y mejorando la velocidad de carga.
+4. Soporte para otras tecnologías de React: Vite no se limita solo a React. También se integra bien con otros frameworks y bibliotecas relacionadas con React, como React Router para la gestión de enrutamiento o React Redux para la gestión del estado. Esto permite utilizar Vite como un entorno de desarrollo rápido y eficiente para aplicaciones React que utilizan estas tecnologías complementarias.
+
+Vite y React pueden trabajar juntos de manera armoniosa para proporcionar un entorno de desarrollo rápido y eficiente para aplicaciones web basadas en React. Vite aprovecha su velocidad y recarga en caliente para mejorar la experiencia de desarrollo, mientras que React ofrece un enfoque declarativo y una biblioteca rica para construir interfaces de usuario interactivas.
+
+### \***\*Monta tu primer proyecto Vite\*\***
+
+Para crear un proyecto con React y Vite, puedes seguir estos pasos:
+
+1. Asegúrate de tener Node.js instalado en tu computadora, ya que necesitarás npm (Node Package Manager) para instalar las dependencias del proyecto.
+2. Abre tu línea de comandos o terminal y navega hasta el directorio en el que deseas crear tu proyecto.
+3. Ejecuta el siguiente comando para crear un nuevo proyecto utilizando Vite :
+
+   ```
+
+   npm create vite@latest
+   ```
+
+   También puedes especificar directamente el nombre del proyecto y la plantilla que deseas usar a través de las opciones de línea de comandos adicionales. Por ejemplo, para montar un proyecto de Vite + react, ejecuta:
+   Esto creará un nuevo directorio llamado "my-react-app" con una estructura de proyecto inicial y las dependencias necesarias.
+
+   ```jsx
+   npm create vite@latest my-react-app -- --template react
+   ```
+
+4. Navega al directorio del proyecto recién creado:
+
+   ```
+   cd my-react-app
+   ```
+
+5. Instala las dependencias del proyecto ejecutando el siguiente comando:
+
+   ```
+   npm install
+   ```
+
+   Esto instalará todas las dependencias especificadas en el archivo **`package.json`**, incluido React.
+
+6. Una vez finalizada la instalación, puedes iniciar el servidor de desarrollo de Vite ejecutando el siguiente comando:
+
+   ```
+   npm run dev
+   ```
+
+   Esto iniciará el servidor de desarrollo y se abrirá tu aplicación en el navegador en la dirección **`http://localhost:3000`**.
+
+¡Y eso es todo! Ahora tienes un proyecto de React configurado con Vite. Puedes comenzar a editar los archivos en el directorio **`src`** para construir tu aplicación React. Los cambios se reflejarán automáticamente en el navegador debido a la recarga en caliente proporcionada por Vite.
+
+Recuerda consultar la documentación oficial de Vite y React para obtener más información sobre cómo trabajar con estas tecnologías y aprovechar al máximo sus características y funcionalidades.
+
+### Estructura del proyecto
+
+La estructura de un proyecto en React con Vite sigue una convención similar a otros proyectos en React, pero con algunas diferencias debido al uso de Vite. Aquí está una estructura de carpetas típica y una explicación de los archivos más importantes:
+
+```
+my-react-app/
+  ├─ node_modules/
+  ├─ public/
+  │    ├─ favicon.ico
+  │    └─ index.html
+  ├─ src/
+  │    ├─ components/
+  │    ├─ App.css
+  │    ├─ App.jsx
+  │    └─ main.js
+  ├─ .gitignore
+  ├─ package.json
+  ├─ README.md
+  └─ vite.config.js
+```
+
+A continuación, se proporciona una explicación de los archivos y carpetas más importantes:
+
+- **`node_modules/`**: Esta carpeta contiene todas las dependencias de tu proyecto, incluidas las bibliotecas de React y Vite.
+- **`public/`**: Esta carpeta contiene los archivos estáticos de tu aplicación, como **`index.html`** y cualquier otro recurso (imágenes, iconos, etc.) que desees utilizar.
+  - **`favicon.ico`**: El icono que se mostrará en la pestaña del navegador.
+  - **`index.html`**: El archivo HTML principal que sirve como punto de entrada de tu aplicación React.
+- **`src/`**: Esta carpeta es donde escribirás la mayor parte del código fuente de tu aplicación.
+  - **`components/`**: Esta carpeta es opcional, pero se recomienda crearla para almacenar los componentes de React reutilizables que construirás para tu aplicación.
+  - **`App.css`**: Un archivo CSS donde puedes escribir estilos específicos para el componente **`App`**.
+  - **`App.jsx`**: El componente principal de tu aplicación React. Aquí es donde puedes escribir tu código JSX para construir la interfaz de usuario.
+  - **`main.js`**: El archivo JavaScript que inicializa y monta la aplicación React en el elemento HTML especificado en el archivo **`index.html`**.
+- **`.gitignore`**: Un archivo que especifica los archivos y directorios que no se deben incluir en el repositorio de Git. Puedes personalizarlo según tus necesidades.
+- **`package.json`**: El archivo de configuración de npm que contiene la información sobre tu proyecto, así como las dependencias y scripts de npm.
+- **`README.md`**: Un archivo de documentación donde puedes proporcionar información sobre tu proyecto, instrucciones de configuración, etc.
+- **`vite.config.js`**: Un archivo de configuración para Vite donde puedes personalizar varias opciones, como el puerto de desarrollo, la ruta de compilación, etc.
+
+Estos son solo los archivos y carpetas básicos que se generan inicialmente al crear un proyecto con Vite y React. A medida que agregues más funcionalidad y componentes a tu aplicación, es posible que crees más archivos y carpetas para organizar tu código de manera eficiente.
+
+Recuerda que esta es una estructura básica y puedes personalizarla según tus necesidades y preferencias a medida que desarrolles tu proyecto.
