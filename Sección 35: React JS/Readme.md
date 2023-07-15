@@ -362,8 +362,8 @@ Hay dos tipos principales de componentes en React:
 
 1.  **Componentes Funcionales (Functional Components)**:
     Los componentes funcionales son la forma más simple de crear componentes en React. Son funciones de JavaScript que reciben **`props`** (propiedades) como argumentos y devuelven elementos JSX. Hasta la versión 16.7 de React, los componentes funcionales no podían tener estado ni acceder a las características avanzadas de React (como el ciclo de vida y los hooks). Sin embargo, desde la versión 16.8, React introdujo los Hooks, lo que permitió que los componentes funcionales también tengan estado y utilicen características avanzadas de React. Hoy en día, los componentes funcionales son ampliamente utilizados debido a su simplicidad y porque los Hooks los hacen igualmente poderosos que los componentes de clase.
-        ```jsx
-        import React from 'react';
+    ```jsx
+    import React from 'react';
 
         function MiComponente(props) {
           return <div>Hola, {props.nombre}!</div>;
@@ -371,10 +371,11 @@ Hay dos tipos principales de componentes en React:
 
         export default MiComponente;
         ```
+
 2.  **Componentes de Clase (Class Components)**:
     Los componentes de clase son una forma más antigua de crear componentes en React. Son clases de JavaScript que extienden la clase **`React.Component`**. Estos componentes tienen un método **`render()`** obligatorio que devuelve elementos JSX. Los componentes de clase también pueden tener estado (**`state`**) y métodos de ciclo de vida. Los componentes de clase tienen un estado interno y pueden acceder a todas las características de React, como el ciclo de vida de los componentes y los métodos de ciclo de vida. Sin embargo, con la introducción de los Hooks en React, los componentes de clase han perdido popularidad en favor de los componentes funcionales con Hooks, ya que estos últimos son más simples y fáciles de mantener.
-        ```jsx
-        import React, { Component } from 'react';
+    ```jsx
+    import React, { Component } from 'react';
 
         class MiComponente extends Component {
           render() {
@@ -397,3 +398,143 @@ Además de estos dos tipos principales de componentes, también existen otros ti
 Estos son solo algunos ejemplos de los tipos de componentes que se utilizan en React. Puedes combinarlos y utilizarlos de acuerdo con tus necesidades específicas de desarrollo y diseño de la interfaz de usuario.
 
 Recuerda que React fomenta la creación de componentes reutilizables para facilitar el desarrollo y el mantenimiento de las aplicaciones.
+
+## 35.7. ¿Qué es el state en React?
+
+### State
+
+En React, el "state" (estado) es un concepto fundamental que representa los datos que pueden cambiar en un componente a lo largo del tiempo. Es un objeto que contiene información dinámica que afecta cómo se renderiza y se comporta un componente. Cuando el estado de un componente cambia, React se encarga de actualizar automáticamente la interfaz de usuario para reflejar esos cambios.
+
+El estado es específico de cada componente, lo que significa que cada componente puede tener su propio estado independiente de otros componentes en la aplicación. Para definir y manejar el estado en un componente de React, se utiliza el método **`useState`** o, en componentes de clase, el objeto de estado (**`this.state`**).
+
+En componentes funcionales, puedes utilizar el hook **`useState`** para agregar estado a un componente. Aquí tienes un ejemplo sencillo:
+
+```jsx
+import React, { useState } from "react";
+
+function Contador() {
+  // El primer valor devuelto por useState es el estado actual,
+  // y el segundo valor es una función para actualizar ese estado.
+  const [contador, setContador] = useState(0);
+
+  const incrementar = () => {
+    setContador(contador + 1);
+  };
+
+  return (
+    <div>
+      <p>Contador: {contador}</p>
+      <button onClick={incrementar}>Incrementar</button>
+    </div>
+  );
+}
+
+export default Contador;
+```
+
+En este ejemplo, el componente **`Contador`** tiene un estado llamado **`contador`** inicializado a **`0`** mediante el hook **`useState`**. Cuando se hace clic en el botón "Incrementar", la función **`incrementar`** se ejecuta y actualiza el estado del contador mediante **`setContador`**, lo que hace que el componente se vuelva a renderizar y muestre el nuevo valor del contador.
+
+En componentes de clase, el estado se define utilizando el objeto **`this.state`**, y se actualiza mediante el método **`setState`**. Aquí tienes el equivalente del ejemplo anterior utilizando un componente de clase:
+
+```jsx
+import React, { Component } from "react";
+
+class Contador extends Component {
+  constructor() {
+    super();
+    this.state = {
+      contador: 0,
+    };
+  }
+
+  incrementar = () => {
+    this.setState({ contador: this.state.contador + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <p>Contador: {this.state.contador}</p>
+        <button onClick={this.incrementar}>Incrementar</button>
+      </div>
+    );
+  }
+}
+
+export default Contador;
+```
+
+En resumen, el estado en React es un mecanismo que te permite almacenar y actualizar datos que pueden cambiar durante la vida útil de un componente. Es esencial para crear componentes interactivos y dinámicos en tus aplicaciones de React.
+
+### useState
+
+**`useState`** es un hook de React que te permite agregar estado a componentes funcionales. Los hooks son funciones especiales que te permiten agregar funcionalidades de React a componentes funcionales sin necesidad de utilizar clases.
+
+La función **`useState`** devuelve una tupla que contiene dos elementos: el valor actual del estado y una función para actualizar ese estado. La sintaxis es la siguiente:
+
+```jsx
+const [estado, setEstado] = useState(valorInicial);
+```
+
+- **`estado`**: Representa el valor actual del estado. Puedes utilizarlo para mostrar información en la interfaz de usuario.
+- **`setEstado`**: Es la función que se utiliza para actualizar el estado. Cuando esta función se llama con un nuevo valor, React re-renderiza el componente con el nuevo estado y actualiza la interfaz de usuario.
+- **`valorInicial`**: Es el valor que se asigna al estado cuando el componente es renderizado por primera vez.
+
+Aquí tienes un ejemplo simple de cómo utilizar **`useState`**:
+
+```jsx
+import React, { useState } from "react";
+
+function Contador() {
+  const [contador, setContador] = useState(0);
+
+  const incrementar = () => {
+    setContador(contador + 1);
+  };
+
+  return (
+    <div>
+      <p>Contador: {contador}</p>
+      <button onClick={incrementar}>Incrementar</button>
+    </div>
+  );
+}
+
+export default Contador;
+```
+
+Este código es un componente funcional en React llamado **`Contador`** que utiliza el hook **`useState`** para agregar un estado de contador a la interfaz de usuario. Aquí está la explicación detallada:
+
+1. **`import React, { useState } from 'react';`**: En esta línea, importamos React y el hook **`useState`** desde el paquete 'react'. Esto nos permite utilizar la biblioteca de React y el hook **`useState`** para manejar el estado en nuestro componente.
+2. **`function Contador() { ... }`**: Definimos el componente **`Contador`** como una función de React. Los componentes funcionales son simplemente funciones que devuelven elementos JSX para representar la interfaz de usuario.
+3. **`const [contador, setContador] = useState(0);`**: Utilizamos el hook **`useState`** para agregar estado a nuestro componente. Aquí, declaramos una constante **`contador`** que almacenará el valor actual del estado y otra constante **`setContador`**, que es la función que utilizaremos para actualizar el estado. Le pasamos **`0`** como valor inicial para el contador.
+4. **`const incrementar = () => { ... }`**: Definimos una función llamada **`incrementar`**. Esta función se ejecutará cuando hagamos clic en el botón de incrementar.
+5. **`setContador(contador + 1);`**: Dentro de la función **`incrementar`**, llamamos a **`setContador`** con el nuevo valor del contador, que es **`contador + 1`**. Cuando esta función se ejecuta, React actualizará automáticamente el estado y volverá a renderizar el componente.
+6. **`return ( ... )`**: En el bloque de retorno, definimos la estructura de la interfaz de usuario que queremos mostrar. Utilizamos el valor actual del contador en el texto del párrafo y definimos un botón que, cuando se hace clic, llamará a la función **`incrementar`**.
+7. **`<p>Contador: {contador}</p>`**: Mostramos el valor actual del contador en un elemento de párrafo.
+8. **`<button onClick={incrementar}>Incrementar</button>`**: Creamos un botón que llama a la función **`incrementar`** cuando se hace clic.
+
+En resumen, este componente **`Contador`** muestra un número en la interfaz de usuario y un botón que permite incrementar ese número en uno cada vez que se hace clic. El estado del contador es manejado por el hook **`useState`**, y cuando el estado cambia, React se encarga de actualizar automáticamente la interfaz de usuario para reflejar esos cambios.
+
+#### Reglas importantes a tener en cuenta al usar **`useState`**:
+
+1. **No modifiques el estado directamente**: No debes modificar el estado directamente, como hacer **`estado = nuevoValor`**. En su lugar, utiliza la función **`setEstado`** proporcionada por **`useState`**.
+2. **Llamadas a useState siempre deben ser en el nivel superior**: Asegúrate de llamar a **`useState`** siempre en el nivel superior del componente. No lo utilices dentro de condicionales, bucles o funciones anidadas.
+3. **El orden de llamada de los hooks debe ser consistente**: Siempre llama a los hooks en el mismo orden en cada renderizado. No los llames dentro de condicionales o ciclos, ya que puede provocar comportamientos inesperados.
+4. **No utilices useState dentro de clases**: Los hooks como **`useState`** solo se pueden usar en componentes funcionales. Si necesitas manejar el estado en un componente de clase, utiliza el objeto de estado (**`this.state`**) y el método **`setState`**.
+
+Siguiendo estas reglas, **`useState`** te proporciona una forma simple y poderosa de agregar estado a tus componentes funcionales y crear interfaces de usuario interactivas en React.
+
+### Administrar el estado en React
+
+Administrar el estado en React es una parte crucial del desarrollo de aplicaciones interactivas y dinámicas. Aquí tienes algunas pautas y enfoques para administrar el estado de manera efectiva en tus componentes:
+
+- **Utiliza useState para componentes funcionales**: En componentes funcionales, utiliza el hook **`useState`** para agregar y actualizar el estado. Como se mostró en el ejemplo anterior, **`useState`** te permite declarar el estado y la función para actualizarlo. Recuerda que **`useState`** no combina el estado existente con el nuevo estado, sino que reemplaza el estado actual por el nuevo valor.
+- **Stateful vs Stateless Components**: Separa los componentes en dos categorías: componentes con estado (stateful) y componentes sin estado (stateless). Los componentes con estado se refieren a aquellos que manejan datos cambiantes a través del estado, mientras que los componentes sin estado se encargan principalmente de la visualización de la interfaz de usuario a partir de los props que reciben. Esta separación ayuda a tener un mejor control sobre el flujo de datos en tu aplicación.
+- **Levantamiento de estado (Lifting State Up)**: Si dos o más componentes necesitan compartir el mismo estado o necesitan comunicarse entre sí, puedes "elevar" el estado común a un componente superior que los contenga. De esta manera, los componentes comparten el mismo estado y cualquier cambio realizado en él se reflejará en todos los componentes que lo utilizan.
+- **Props para pasar datos**: Utiliza props para pasar datos y funciones entre componentes, especialmente cuando necesitas compartir información desde componentes padres a componentes hijos. Los componentes hijos pueden recibir datos como props y enviar eventos al componente padre mediante funciones que se pasan como props.
+- **Controlled vs Uncontrolled Components**: En formularios, tienes la opción de utilizar componentes controlados o no controlados. Los componentes controlados son aquellos cuyos valores están vinculados al estado de React y se actualizan a través de eventos. Los componentes no controlados se basan en el DOM para mantener su estado. Es recomendable utilizar componentes controlados siempre que sea posible, ya que React puede controlar el flujo de datos y validar los cambios antes de actualizar la interfaz de usuario.
+- **Context API**: La Context API de React te permite crear un contexto que puede compartir datos entre componentes, evitando el paso explícito de props a través de componentes intermedios. Es útil cuando tienes datos que son necesarios en varios niveles de tu árbol de componentes.
+- **Redux o otros estados globales**: Si tu aplicación se vuelve más compleja y necesitas compartir estado entre múltiples componentes sin necesidad de pasarlo a través de props, puedes considerar el uso de bibliotecas de administración de estado como Redux o Mobx. Estas bibliotecas proporcionan un almacenamiento centralizado para el estado de la aplicación y permiten un flujo de datos más predecible y estructurado.
+
+Recuerda que la elección de cómo administrar el estado depende de la complejidad y las necesidades de tu aplicación. En general, comienza utilizando el hook **`useState`** para componentes funcionales y luego, a medida que la aplicación crece y se vuelve más compleja, considera otras opciones como levantar el estado, usar Context API o implementar una biblioteca de administración de estado como Redux.
