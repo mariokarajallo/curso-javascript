@@ -272,3 +272,84 @@ Aquí tienes algunas de las mejores extensiones para trabajar con React:
 En cuanto a las extensiones en navegadores, React Developer Tools ([React Developer Tools – React](https://react.dev/learn/react-developer-tools)) es la recomendada para inspeccionar y depurar componentes React directamente en el navegador. Puedes instalarla desde la tienda de extensiones de tu navegador favorito, como Chrome o Firefox.
 
 Recuerda que las extensiones pueden variar según tus preferencias y necesidades específicas. Puedes explorar la tienda de extensiones de Visual Studio Code y probar diferentes opciones para encontrar las que mejor se adapten a tu flujo de trabajo con React.
+
+## 35.5. ¿Qué es JSX?
+
+JSX (JavaScript XML) es una extensión de sintaxis utilizada en React para definir la estructura de la interfaz de usuario de una aplicación. Combina HTML (o XML) y JavaScript en un solo lugar, lo que facilita la creación y manipulación de elementos y componentes de la interfaz de usuario en React.
+
+Aquí hay un ejemplo simple de JSX:
+
+```jsx
+import React from "react";
+
+function App() {
+  return (
+    <div>
+      <h1>Hola, mundo!</h1>
+      <p>Esta es una aplicación en React con JSX.</p>
+    </div>
+  );
+}
+
+export default App;
+```
+
+En JSX, puedes escribir código similar a HTML dentro de bloques JavaScript. Esto permite crear y renderizar elementos de React de manera más declarativa y legible. Aunque JSX se parece mucho a HTML, hay algunas diferencias clave a tener en cuenta:
+
+1. Sintaxis dentro de JavaScript: En JSX, puedes incluir elementos HTML directamente dentro de tu código JavaScript. Por ejemplo:
+
+   ```jsx
+   const element = <h1>Hello, world!</h1>;
+   ```
+
+2. Expresiones JavaScript: Puedes utilizar expresiones JavaScript dentro de llaves **`{}`** en JSX. Esto permite insertar variables, llamar a funciones y realizar operaciones dentro del código JSX. Por ejemplo:
+
+   ```jsx
+   const name = "John";
+   const element = <h1>Hello, {name}!</h1>;
+   ```
+
+3. Atributos y propiedades: Los atributos HTML en JSX se especifican utilizando una sintaxis similar a la de HTML, pero se escriben en camelCase en lugar de kebab-case. Además, en lugar de utilizar comillas dobles, los valores de los atributos se pasan como expresiones JavaScript. Por ejemplo:
+
+   ```jsx
+   const element = (
+     <a href="https://example.com" target="_blank">
+       Click me!
+     </a>
+   );
+   ```
+
+   **Atributos HTML**: Los atributos HTML se especifican en camelCase en lugar de kebab-case. Por ejemplo, en lugar de **`class`**, usamos **`className`**, y en lugar de **`for`**, usamos **`htmlFor`**. Esto se debe a que JavaScript considera **`class`** y **`for`** como palabras reservadas. Por ejemplo: **`className="mi-clase"`**, **`htmlFor="etiqueta"`**. Ten en cuenta que en JSX, puedes utilizar la misma sintaxis que en HTML para otros atributos, como **`src`**, **`href`**, **`alt`**, etc.
+
+   ```jsx
+   <input type="text" value={nombre} onChange={handleChange} />
+   ```
+
+   **Propiedades personalizadas**: Además de los atributos HTML, también puedes utilizar propiedades personalizadas para pasar datos a los componentes de React. En el ejemplo, hemos pasado la función **`handleChange`** como la propiedad **`onChange`** al componente **`input`**.
+   Es importante recordar que los atributos en JSX representan las propiedades de los elementos de React. Estas propiedades se utilizan para configurar el comportamiento de los componentes y pueden ser accesibles a través de **`props`** en los componentes funcionales o **`this.props`** en los componentes de clase.
+
+4. Elementos anidados: En JSX, puedes anidar elementos dentro de otros elementos, al igual que en HTML. Por ejemplo:
+
+   ```jsx
+   const element = (
+     <div>
+       <h1>Title</h1>
+       <p>Content</p>
+     </div>
+   );
+   ```
+
+5. Componentes de React: JSX te permite utilizar componentes de React de forma similar a los elementos HTML. Los componentes de React son funciones o clases que encapsulan una parte de la interfaz de usuario reutilizable. Puedes utilizarlos como si fueran etiquetas HTML en JSX. Por ejemplo:
+
+   ```jsx
+   const MyComponent = () => {
+     return <h1>Hello, world!</h1>;
+   };
+
+   const element = <MyComponent />;
+   ```
+
+6. **Clases y estilos**: Las clases de CSS y estilos en línea se definen utilizando la propiedad **`className`** en lugar de **`class`**, debido a que **`class`** es una palabra reservada en JavaScript. Por ejemplo: **`<div className="mi-clase">Contenido</div>`**.
+7. **Comentarios**: Los comentarios en JSX se escriben entre llaves y comillas. Por ejemplo: **`{/* Este es un comentario en JSX */}`**
+
+JSX es una parte integral de React y facilita la construcción de interfaces de usuario dinámicas y reactivas utilizando la sintaxis familiar de HTML combinada con el poder de JavaScript. Al compilar el código JSX con herramientas como Babel, se traduce en llamadas a funciones de React que crean y actualizan los elementos de la interfaz de usuario en el navegador.
