@@ -353,3 +353,47 @@ En JSX, puedes escribir código similar a HTML dentro de bloques JavaScript. Est
 7. **Comentarios**: Los comentarios en JSX se escriben entre llaves y comillas. Por ejemplo: **`{/* Este es un comentario en JSX */}`**
 
 JSX es una parte integral de React y facilita la construcción de interfaces de usuario dinámicas y reactivas utilizando la sintaxis familiar de HTML combinada con el poder de JavaScript. Al compilar el código JSX con herramientas como Babel, se traduce en llamadas a funciones de React que crean y actualizan los elementos de la interfaz de usuario en el navegador.
+
+## 35.6. Componentes en React
+
+En React, los componentes son la piedra angular de la construcción de interfaces de usuario. Representan piezas reutilizables e independientes de código que encapsulan la lógica y la presentación de una parte específica de la interfaz de usuario. Los componentes permiten dividir una aplicación en partes más pequeñas y manejables, lo que facilita el desarrollo y el mantenimiento del código.
+
+Hay dos tipos principales de componentes en React:
+
+1.  **Componentes Funcionales (Functional Components)**:
+    Los componentes funcionales son la forma más simple de crear componentes en React. Son funciones de JavaScript que reciben **`props`** (propiedades) como argumentos y devuelven elementos JSX. Hasta la versión 16.7 de React, los componentes funcionales no podían tener estado ni acceder a las características avanzadas de React (como el ciclo de vida y los hooks). Sin embargo, desde la versión 16.8, React introdujo los Hooks, lo que permitió que los componentes funcionales también tengan estado y utilicen características avanzadas de React. Hoy en día, los componentes funcionales son ampliamente utilizados debido a su simplicidad y porque los Hooks los hacen igualmente poderosos que los componentes de clase.
+        ```jsx
+        import React from 'react';
+
+        function MiComponente(props) {
+          return <div>Hola, {props.nombre}!</div>;
+        }
+
+        export default MiComponente;
+        ```
+2.  **Componentes de Clase (Class Components)**:
+    Los componentes de clase son una forma más antigua de crear componentes en React. Son clases de JavaScript que extienden la clase **`React.Component`**. Estos componentes tienen un método **`render()`** obligatorio que devuelve elementos JSX. Los componentes de clase también pueden tener estado (**`state`**) y métodos de ciclo de vida. Los componentes de clase tienen un estado interno y pueden acceder a todas las características de React, como el ciclo de vida de los componentes y los métodos de ciclo de vida. Sin embargo, con la introducción de los Hooks en React, los componentes de clase han perdido popularidad en favor de los componentes funcionales con Hooks, ya que estos últimos son más simples y fáciles de mantener.
+        ```jsx
+        import React, { Component } from 'react';
+
+        class MiComponente extends Component {
+          render() {
+            return <div>Hola, {this.props.nombre}!</div>;
+          }
+        }
+
+        export default MiComponente;
+        ```
+
+En la actualidad, se recomienda utilizar componentes funcionales con Hooks en lugar de componentes de clase, a menos que tengas una razón específica para utilizar componentes de clase en proyectos heredados.
+
+Además de estos dos tipos principales de componentes, también existen otros tipos de componentes y patrones que se utilizan en React:
+
+- **Componentes de orden superior (Higher-Order Components, HOC)**: Los HOCs son funciones que toman un componente existente y devuelven un nuevo componente con funcionalidades adicionales. Se utilizan para reutilizar lógica entre varios componentes.
+- **Componentes de renderizado condicional**: Los componentes de renderizado condicional se utilizan para mostrar diferentes elementos JSX en función de ciertas condiciones. Pueden basarse en expresiones lógicas, estados o propiedades.
+- **Componentes controlados y no controlados**: Los componentes controlados son aquellos en los que el estado de los datos se maneja a través de React, mientras que los componentes no controlados se basan en el DOM para gestionar su estado.
+- **Componentes de presentación y componentes de contenedor**: Los componentes de presentación (también conocidos como componentes tontos o dumb components) se centran en la visualización de la interfaz de usuario y no tienen lógica interna, mientras que los componentes de contenedor (también conocidos como componentes inteligentes o smart components) se encargan de la lógica y la gestión de datos.
+
+Estos son solo algunos ejemplos de los tipos de componentes que se utilizan en React. Puedes combinarlos y utilizarlos de acuerdo con tus necesidades específicas de desarrollo y diseño de la interfaz de usuario.
+
+Recuerda que React fomenta la creación de componentes reutilizables para facilitar el desarrollo y el mantenimiento de las aplicaciones.
