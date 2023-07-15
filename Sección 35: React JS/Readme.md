@@ -176,10 +176,10 @@ Para instalar Tailwind CSS en un proyecto de React con Vite, puedes seguir estos
 
 1.  Asegúrate de tener Node.js instalado en tu computadora, ya que necesitarás npm (Node Package Manager) para instalar las dependencias del proyecto.
 2.  Abre tu línea de comandos o terminal y navega hasta el directorio raíz de tu proyecto creado con Vite y React.
-3.  Ejecuta el siguiente comando para instalar Tailwind CSS y sus dependencias:
+3.  Ejecuta el siguiente comando para instalar Tailwind CSS y sus dependencias como desarrollo:
 
     ```
-    npm install tailwindcss postcss autoprefixer
+    npm install -D tailwindcss postcss autoprefixer
     ```
 
     Este comando instalará las siguientes dependencias:
@@ -194,40 +194,41 @@ Para instalar Tailwind CSS en un proyecto de React con Vite, puedes seguir estos
     npx tailwindcss init -p
     ```
 
-    Esto generará el archivo **`tailwind.config.js`** y el archivo de configuración de PostCSS (**`postcss.config.js`**) en el directorio raíz de tu proyecto. Ahí podrás personalizar la configuración de Tailwind CSS y PostCSS según tus necesidades.
+    Esto generará el archivo **`tailwind.config.cjs`** y el archivo de configuración de PostCSS (**`postcss.config.cjs`**) en el directorio raíz de tu proyecto. Ahí podrás personalizar la configuración de Tailwind CSS y PostCSS según tus necesidades.
 
-5.  Abre el archivo **`tailwind.config.js`** y personaliza la configuración según tus necesidades. Aquí puedes ajustar los colores, fuentes, márgenes, tamaños y otras opciones de configuración de Tailwind CSS.
+5.  Abre el archivo **`tailwind.config.cjs`** y personaliza la configuración según tus necesidades. Aquí puedes ajustar los colores, fuentes, márgenes, tamaños y otras opciones de configuración de Tailwind CSS.
 
     ```jsx
     module.exports = {
-      purge: [],
-      darkMode: false, // or 'media' or 'class'
+      content: [],
       theme: {
-        extend: {},
-      },
-      variants: {
         extend: {},
       },
       plugins: [],
     };
     ```
 
-    1. **`purge`**: Esta opción te permite configurar la purga de clases no utilizadas en producción. Puedes proporcionar una lista de archivos de tu proyecto para que Tailwind CSS elimine las clases no utilizadas y reduzca el tamaño del archivo CSS resultante. Por ejemplo:
+    Aquí tienes una explicación de las secciones y opciones presentes:
 
+    1. **`content`**: Esta opción se utiliza para configurar la purga de clases no utilizadas en producción. Debes proporcionar una matriz de archivos en la propiedad **`content`** para que Tailwind CSS pueda analizar y eliminar las clases no utilizadas del archivo CSS resultante. Por ejemplo:
+
+       ```jsx
+       content: ['./src/**/*.html', './src/**/*.js'],
        ```
-       purge: ['./src/**/*.html', './src/**/*.jsx'],
-       ```
 
-    2. **`darkMode`**: Esta opción te permite habilitar un modo oscuro en Tailwind CSS. Puedes establecerlo en **`true`** para habilitar el modo oscuro o en **`media`** para activarlo automáticamente en función de las preferencias del sistema operativo. Por defecto, se establece en **`false`**.
-    3. **`theme`**: Esta sección es donde puedes personalizar el tema de tu proyecto. Aquí puedes agregar colores, modificar tipografía, ajustar espaciado, tamaños de fuente, márgenes, reemplazar breakpoints, entre otros aspectos. Puedes consultar la documentación oficial de Tailwind CSS para ver todas las opciones disponibles para personalizar el tema.
-    4. **`extend`**: En esta sección, puedes extender o agregar nuevas configuraciones a las clases utilitarias de Tailwind CSS. Puedes agregar estilos personalizados, crear nuevas variantes, configurar márgenes negativos y más.
-    5. **`variants`**: Aquí puedes configurar las variantes de clases utilitarias que se generan automáticamente. Por defecto, se incluyen las variantes **`responsive`**, **`hover`**, **`focus`** y **`active`**, pero puedes personalizarlo para incluir o excluir variantes específicas según tus necesidades.
-    6. **`plugins`**: En esta sección, puedes agregar plugins de terceros para ampliar las funcionalidades de Tailwind CSS. Por ejemplo, puedes agregar plugins para aplicar estilos de formularios, agregar soporte para flexbox, optimizar el tamaño del archivo CSS, entre otros.
+       En este caso, Tailwind CSS analizará todos los archivos HTML y JS en el directorio **`src`** y sus subdirectorios en busca de clases utilizadas y eliminará las clases no utilizadas del archivo CSS final.
 
-    Recuerda que el archivo **`tailwind.config.js`** es altamente personalizable y puedes ajustar estas opciones y añadir otras según tus requisitos específicos. Consulta la documentación oficial de Tailwind CSS para obtener más detalles y opciones avanzadas de configuración.
+    2. **`theme`**: En esta sección, puedes personalizar el tema de Tailwind CSS. Puedes agregar colores personalizados, modificar espaciado, tamaños de fuente, breakpoints, etc. Al utilizar la propiedad **`extend`** dentro de la sección **`theme`**, puedes extender el tema existente con nuevas configuraciones.
+    3. **`plugins`**: Esta sección te permite agregar plugins de terceros para ampliar las funcionalidades de Tailwind CSS. Puedes agregar plugins como **`typography`** para estilos de tipografía avanzados, **`forms`** para estilos de formularios personalizados, entre otros.
 
-6.  Localiza el archivo de estilos principal de tu proyecto. Por lo general, se encuentra en la raíz del proyecto y se nombra **`styles.css`** o **`app.css`**. Puedes verificar el archivo que se importa en tu archivo principal de JavaScript (por ejemplo, **`index.js`** o **`main.js`**) para encontrar la ruta del archivo de estilos principal.
-    Aquí hay un ejemplo de cómo podría verse un archivo de estilos con las directivas de Tailwind CSS:
+    Es importante tener en cuenta que esta configuración no incluye opciones para las variantes de clases utilitarias. Si deseas habilitar o personalizar variantes como **`hover`**, **`focus`**, **`active`**, entre otras, debes agregarlas dentro de la sección **`variants`**.
+
+    Recuerda que esta configuración básica puede modificarse según tus necesidades específicas. Puedes personalizar y extender la sección **`theme`** con tus propias configuraciones, y también puedes agregar plugins a la sección **`plugins`** para agregar funcionalidades adicionales a Tailwind CSS.
+
+    Recuerda que el archivo **`tailwind.config.cjs`** es altamente personalizable y puedes ajustar estas opciones y añadir otras según tus requisitos específicos. Consulta la documentación oficial de Tailwind CSS para obtener más detalles y opciones avanzadas de configuración.
+
+6.  Localiza el archivo de estilos principal de tu proyecto. Por lo general, se encuentra en la raíz del proyecto y se nombra **`styles.css`** o **`app.css` o `index.css`**. Puedes verificar el archivo que se importa en tu archivo principal de JavaScript (por ejemplo, **`index.js`** o **`main.js`**) para encontrar la ruta del archivo de estilos principal.
+    Aquí hay un ejemplo de cómo podría verse un archivo de estilos con las directivas de Tailwind CSS donde añade sus clases:
         ```jsx
         /* styles.css */
 
