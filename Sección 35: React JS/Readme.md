@@ -229,8 +229,9 @@ Para instalar Tailwind CSS en un proyecto de React con Vite, puedes seguir estos
 
 6.  Localiza el archivo de estilos principal de tu proyecto. Por lo general, se encuentra en la raíz del proyecto y se nombra **`styles.css`** o **`app.css` o `index.css`**. Puedes verificar el archivo que se importa en tu archivo principal de JavaScript (por ejemplo, **`index.js`** o **`main.js`**) para encontrar la ruta del archivo de estilos principal.
     Aquí hay un ejemplo de cómo podría verse un archivo de estilos con las directivas de Tailwind CSS donde añade sus clases:
-        ```jsx
-        /* styles.css */
+
+    ````jsx
+    /_ styles.css _/
 
         @tailwind base;
         @tailwind components;
@@ -239,6 +240,9 @@ Para instalar Tailwind CSS en un proyecto de React con Vite, puedes seguir estos
         /* Tus estilos personalizados */
         /* ... */
         ```
+
+    ````
+
 7.  Abre el archivo **`src/main.jsx`** (o **`src/index.jsx`**, dependiendo de cómo se llame el archivo principal de tu aplicación) y agrega el siguiente código al principio del archivo:
 
     ```
@@ -254,3 +258,17 @@ Para instalar Tailwind CSS en un proyecto de React con Vite, puedes seguir estos
 Tailwind CSS está configurado y listo para usarse en tu proyecto de React con Vite. Puedes utilizar las clases utilitarias de Tailwind CSS en tus componentes para aplicar estilos personalizados de manera rápida y sencilla.
 
 Recuerda que, una vez instalado y configurado Tailwind CSS, puedes consultar la documentación oficial de Tailwind CSS para explorar las clases utilitarias disponibles y aprender a utilizarlas de manera efectiva para personalizar el diseño de tu aplicación.
+
+## 35.4. Extensiones útiles para trabajar con react y React Dev Tools
+
+Aquí tienes algunas de las mejores extensiones para trabajar con React:
+
+1. **ESLint -** [ESLint - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint): Una extensión para Visual Studio Code que ofrece soporte para ESLint, una herramienta de linting que te ayuda a mantener un código JavaScript limpio y libre de errores.
+2. **Prettier -** [Prettier - Code formatter - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Una extensión que formatea automáticamente tu código para seguir un estilo consistente. Prettier es especialmente útil para mantener la consistencia en proyectos de React con múltiples desarrolladores.
+3. **Tailwind CSS IntelliSense -** [Tailwind CSS IntelliSense - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss): Proporciona completado automático para las clases de Tailwind CSS en tus archivos de JSX.
+4. **ES7+ React/Redux/React-Native snippets -** [ES7+ React/Redux/React-Native snippets - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets): Ofrece una amplia variedad de snippets (fragmentos de código) para React, Redux y React Native, lo que agiliza la escritura de código repetitivo.
+5. **Simple React Snippets -** [Simple React Snippets - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=burkeholland.simple-react-snippets): Proporciona snippets útiles y rápidos para escribir código de React, como la creación de componentes, el uso de hooks, entre otros.
+
+En cuanto a las extensiones en navegadores, React Developer Tools ([React Developer Tools – React](https://react.dev/learn/react-developer-tools)) es la recomendada para inspeccionar y depurar componentes React directamente en el navegador. Puedes instalarla desde la tienda de extensiones de tu navegador favorito, como Chrome o Firefox.
+
+Recuerda que las extensiones pueden variar según tus preferencias y necesidades específicas. Puedes explorar la tienda de extensiones de Visual Studio Code y probar diferentes opciones para encontrar las que mejor se adapten a tu flujo de trabajo con React.
