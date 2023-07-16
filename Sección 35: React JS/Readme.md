@@ -362,7 +362,8 @@ Hay dos tipos principales de componentes en React:
 
 1.  **Componentes Funcionales (Functional Components)**:
     Los componentes funcionales son la forma más simple de crear componentes en React. Son funciones de JavaScript que reciben **`props`** (propiedades) como argumentos y devuelven elementos JSX. Hasta la versión 16.7 de React, los componentes funcionales no podían tener estado ni acceder a las características avanzadas de React (como el ciclo de vida y los hooks). Sin embargo, desde la versión 16.8, React introdujo los Hooks, lo que permitió que los componentes funcionales también tengan estado y utilicen características avanzadas de React. Hoy en día, los componentes funcionales son ampliamente utilizados debido a su simplicidad y porque los Hooks los hacen igualmente poderosos que los componentes de clase.
-    ```jsx
+
+    ````jsx
     import React from 'react';
 
         function MiComponente(props) {
@@ -372,9 +373,12 @@ Hay dos tipos principales de componentes en React:
         export default MiComponente;
         ```
 
+    ````
+
 2.  **Componentes de Clase (Class Components)**:
     Los componentes de clase son una forma más antigua de crear componentes en React. Son clases de JavaScript que extienden la clase **`React.Component`**. Estos componentes tienen un método **`render()`** obligatorio que devuelve elementos JSX. Los componentes de clase también pueden tener estado (**`state`**) y métodos de ciclo de vida. Los componentes de clase tienen un estado interno y pueden acceder a todas las características de React, como el ciclo de vida de los componentes y los métodos de ciclo de vida. Sin embargo, con la introducción de los Hooks en React, los componentes de clase han perdido popularidad en favor de los componentes funcionales con Hooks, ya que estos últimos son más simples y fáciles de mantener.
-    ```jsx
+
+    ````jsx
     import React, { Component } from 'react';
 
         class MiComponente extends Component {
@@ -385,6 +389,7 @@ Hay dos tipos principales de componentes en React:
 
         export default MiComponente;
         ```
+    ````
 
 En la actualidad, se recomienda utilizar componentes funcionales con Hooks en lugar de componentes de clase, a menos que tengas una razón específica para utilizar componentes de clase en proyectos heredados.
 
@@ -538,3 +543,83 @@ Administrar el estado en React es una parte crucial del desarrollo de aplicacion
 - **Redux o otros estados globales**: Si tu aplicación se vuelve más compleja y necesitas compartir estado entre múltiples componentes sin necesidad de pasarlo a través de props, puedes considerar el uso de bibliotecas de administración de estado como Redux o Mobx. Estas bibliotecas proporcionan un almacenamiento centralizado para el estado de la aplicación y permiten un flujo de datos más predecible y estructurado.
 
 Recuerda que la elección de cómo administrar el estado depende de la complejidad y las necesidades de tu aplicación. En general, comienza utilizando el hook **`useState`** para componentes funcionales y luego, a medida que la aplicación crece y se vuelve más compleja, considera otras opciones como levantar el estado, usar Context API o implementar una biblioteca de administración de estado como Redux.
+
+## 35.8. Que son los eventos en React
+
+En React, los eventos son acciones que ocurren dentro de los componentes y que pueden ser capturadas y manejadas por el código. Los eventos en React siguen una convención similar a la de los eventos en JavaScript estándar, pero con algunas diferencias sutiles.
+
+Convenciones para manejar eventos en React:
+
+1. En React, los nombres de eventos utilizan camelCase en lugar de minúsculas, como es común en JavaScript. Por ejemplo, en lugar de utilizar **`onclick`**, se utiliza **`onClick`**. Además, en lugar de pasar una cadena de código como manejador de eventos, se pasa una referencia a una función.
+2. **Asociación de eventos**: Para asociar un manejador de eventos a un elemento en React, se utiliza la sintaxis de JSX **`onNombreEvento={manejador}`.** Por ejemplo, puedes agregar un manejador de eventos al hacer referencia a la función en el atributo del elemento JSX, como **`onClick={handleClick}`**.
+3. **Manejadores de eventos**: Un manejador de eventos en React es una función que se ejecuta cuando ocurre un evento específico. Los manejadores de eventos se definen como métodos en los componentes de clase o como funciones en los componentes funcionales. Por ejemplo, un manejador de clic (**`onClick`**) será una función que se llame cuando se haga clic en un elemento.
+
+Ejemplo básico de manejo de eventos en React:
+
+#### Onclick
+
+```jsx
+import React, { useState } from "react";
+
+function Contador() {
+  const [contador, setContador] = useState(0);
+
+  const incrementar = () => {
+    setContador(contador + 1);
+  };
+
+  const resetear = () => {
+    setContador(0);
+  };
+
+  return (
+    <div>
+      <p>Contador: {contador}</p>
+      <button onClick={incrementar}>Incrementar</button>
+      <button onClick={resetear}>Resetear</button>
+    </div>
+  );
+}
+
+export default Contador;
+```
+
+En este ejemplo, hemos agregado dos botones: uno para incrementar el contador y otro para resetearlo a cero. Hemos definido dos manejadores de eventos, **`incrementar`** y **`resetear`**, que se ejecutarán cuando se hagan clic en los botones correspondientes. Cada manejador de eventos actualiza el estado del contador utilizando **`setContador`**, lo que provoca que React actualice el componente y vuelva a renderizar la interfaz de usuario con el nuevo valor del contador.
+
+#### onChange
+
+aquí tienes un ejemplo de cómo utilizar el evento **`onChange`** en React. En este ejemplo, crearemos un componente funcional que muestra un campo de entrada (input) y una etiqueta (label) que se actualiza dinámicamente cuando el usuario escribe en el campo de entrada:
+
+```jsx
+import React, { useState } from "react";
+
+function InputConEtiqueta() {
+  const [texto, setTexto] = useState("");
+
+  const handleChange = (event) => {
+    setTexto(event.target.value);
+  };
+
+  return (
+    <div>
+      <label>Ingrese su texto:</label>
+      <input type="text" value={texto} onChange={handleChange} />
+      <p>Texto ingresado: {texto}</p>
+    </div>
+  );
+}
+
+export default InputConEtiqueta;
+```
+
+En este ejemplo, hemos creado el componente funcional **`InputConEtiqueta`**. Definimos un estado llamado **`texto`** utilizando el hook **`useState`**, y le damos un valor inicial de una cadena vacía.
+
+Luego, hemos creado una función llamada **`handleChange`**, que es el manejador del evento **`onChange`**. Cuando el usuario escribe en el campo de entrada, esta función se ejecuta y actualiza el estado **`texto`** con el valor del campo de entrada utilizando **`setTexto`**.
+
+Finalmente, en el bloque de retorno, mostramos una etiqueta, un campo de entrada y un párrafo que muestra el texto ingresado. El campo de entrada tiene su valor vinculado al estado **`texto`**, por lo que siempre mostrará el valor actual del estado. Cada vez que el usuario escribe en el campo de entrada, el evento **`onChange`** se activa y llama a la función **`handleChange`**, lo que actualiza el estado **`texto`** y muestra el texto ingresado en tiempo real.
+
+Este es solo un ejemplo simple de cómo usar el evento **`onChange`** en React. Puedes utilizar este evento para manejar cualquier cambio en el contenido de los campos de entrada, deslizadores, selectores, etc., y realizar acciones en función de esos cambios.
+
+Recuerda que los eventos en React pueden manejar diferentes tipos de interacciones, como clics, cambios de entrada, cambios de enfoque, envíos de formularios, entre otros. Puedes utilizar eventos como **`onClick`**, **`onChange`**, **`onSubmit`**, **`onFocus`**, entre otros, según tus necesidades.
+
+Es importante tener en cuenta las convenciones de nombres de eventos en React y asociar correctamente los manejadores de eventos a los elementos de la interfaz de usuario para garantizar que tu aplicación responda a las interacciones del usuario de manera esperada.
