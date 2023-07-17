@@ -623,3 +623,64 @@ Este es solo un ejemplo simple de cómo usar el evento **`onChange`** en React. 
 Recuerda que los eventos en React pueden manejar diferentes tipos de interacciones, como clics, cambios de entrada, cambios de enfoque, envíos de formularios, entre otros. Puedes utilizar eventos como **`onClick`**, **`onChange`**, **`onSubmit`**, **`onFocus`**, entre otros, según tus necesidades.
 
 Es importante tener en cuenta las convenciones de nombres de eventos en React y asociar correctamente los manejadores de eventos a los elementos de la interfaz de usuario para garantizar que tu aplicación responda a las interacciones del usuario de manera esperada.
+
+## 35.9. Componentes con Props
+
+### Props
+
+Los componentes en React pueden recibir datos desde el componente padre utilizando props. Las props son una forma de pasar datos de un componente padre a un componente hijo, lo que permite que los componentes sean más reutilizables y configurables.
+
+Aquí tienes un ejemplo de un componente funcional en React que recibe y utiliza props:
+
+```jsx
+import React from "react";
+
+function Saludo(props) {
+  return <p>Hola, {props.nombre}!</p>;
+}
+
+export default Saludo;
+```
+
+En este ejemplo, el componente **`Saludo`** recibe una prop **`nombre`** a través del objeto **`props`**. Luego, utiliza la prop **`nombre`** para mostrar un saludo personalizado en el elemento de párrafo.
+
+Para utilizar este componente y pasar la prop **`nombre`**, puedes hacerlo desde su componente padre:
+
+```jsx
+import React from "react";
+import Saludo from "./Saludo";
+
+function App() {
+  return <Saludo nombre="Juan" />;
+}
+
+export default App;
+```
+
+En este caso, el componente **`App`** utiliza el componente **`Saludo`** y le pasa la prop **`nombre`** con el valor "Juan". El componente **`Saludo`** recibe esa prop a través de **`props`** y muestra el saludo personalizado.
+
+Las props pueden ser cualquier tipo de dato, como cadenas de texto, números, booleanos, objetos o incluso funciones. Puedes pasar múltiples props a un componente separándolas por comas. Además, puedes utilizar expresiones de JavaScript dentro de las llaves para calcular o manipular los valores de las props.
+
+Aquí tienes un ejemplo que muestra cómo utilizar múltiples props y una expresión de JavaScript dentro de una prop:
+
+```jsx
+import React from "react";
+
+function Producto(props) {
+  return (
+    <div>
+      <h2>{props.nombre}</h2>
+      <p>Precio: ${props.precio}</p>
+      <button onClick={props.onComprar}>Comprar</button>
+    </div>
+  );
+}
+
+export default Producto;
+```
+
+En este ejemplo, el componente **`Producto`** recibe tres props: **`nombre`**, **`precio`** y **`onComprar`**. Las utiliza para mostrar el nombre y precio del producto, así como un botón de compra. El evento **`onClick`** del botón está vinculado a la prop **`onComprar`**, que se espera que sea una función proporcionada desde el componente padre.
+
+Recuerda que las props son de solo lectura, lo que significa que no se deben modificar directamente dentro del componente. Si necesitas mantener un estado interno en un componente, puedes utilizar el hook **`useState`** o el estado de un componente de clase para manejarlo. Los **`props`** son una forma de comunicación unidireccional, donde los datos fluyen desde el componente padre al componente hijo, y si necesitas actualizar los datos, debes hacerlo desde el componente padre y pasarlos nuevamente a través de los **`props`**.
+
+El uso de props en React es una forma efectiva de pasar datos y configuraciones entre componentes, lo que hace que tu código sea más modular y fácil de mantener. Puedes utilizar props para personalizar la apariencia y el comportamiento de tus componentes, así como para reutilizarlos en diferentes partes de tu aplicación.
