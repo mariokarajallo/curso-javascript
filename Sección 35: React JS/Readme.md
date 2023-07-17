@@ -857,3 +857,27 @@ Usos comunes de **`useEffect`**:
 Es importante tener en cuenta que el uso incorrecto de **`useEffect`** puede provocar efectos secundarios no deseados o ciclos de renderizado infinitos. Asegúrate de entender cómo funciona y de utilizarlo de manera adecuada según tus necesidades específicas.
 
 Recuerda leer la documentación oficial de React para obtener más detalles sobre cómo utilizar **`useEffect`** y cómo manejar casos de uso más avanzados.
+
+## 35.12. Deployment
+
+### Desplegar (deployment) un proyecto en react
+
+Para desplegar un proyecto de React, hay varios enfoques y opciones disponibles. A continuación, te proporcionaré una guía básica para desplegar una aplicación de React en un servidor web.
+
+1. **Generar la versión de producción**: Antes de desplegar la aplicación, es recomendable generar la versión de producción. Esto optimiza y comprime los archivos para un rendimiento óptimo en producción. Ejecuta el siguiente comando en la terminal dentro del directorio de tu proyecto de React:
+
+   ```
+   npm run build
+   ```
+
+   Este comando creará una carpeta **`build`** en el directorio del proyecto que contiene los archivos optimizados listos para ser desplegados.
+
+2. **Seleccionar un servicio de hosting**: Necesitarás un servidor web para alojar tu aplicación de React y hacerla accesible a los usuarios. Puedes utilizar diferentes servicios de hosting, como Netlify, Vercel, GitHub Pages, Firebase Hosting, Amazon S3, entre otros. Cada servicio tiene sus propias instrucciones de despliegue que deberás seguir.
+3. **Desplegar la aplicación**: Transfiere los archivos generados en la carpeta **`build`** al servidor web configurado. Esto puede implicar subir los archivos mediante FTP, clonar un repositorio Git, utilizar herramientas de implementación continua (CI/CD) u otras formas de transferencia de archivos según el servidor o servicio de alojamiento que estés utilizando.
+4. **Esperar a que se complete el despliegue**: El servicio de hosting tomará tu código, construirá la versión de producción y lo desplegará en un servidor web. Una vez que se complete el proceso, recibirás una URL pública para acceder a tu aplicación.
+5. **Configurar rutas**: Si tu aplicación utiliza rutas o enrutamiento basado en el navegador (por ejemplo, utilizando React Router), es posible que necesites configurar reglas de reescritura o redirección en el servidor web para que todas las rutas de la aplicación sean manejadas correctamente.
+6. **Verificar el despliegue**: Una vez que los archivos estén desplegados y el servidor web esté configurado, puedes acceder a tu aplicación de React en la dirección web proporcionada por el servidor o servicio de alojamiento. Verifica que la aplicación funcione correctamente y que todas las funcionalidades estén disponibles.
+
+Recuerda que este es solo un proceso básico para desplegar una aplicación de React. Dependiendo de tus necesidades y requisitos específicos, es posible que necesites considerar otras configuraciones y pasos adicionales, como configurar variables de entorno, agregar SSL, gestionar el rendimiento, entre otros.
+
+Además, si deseas utilizar servicios de alojamiento web específicos para React, te recomiendo explorar opciones populares como Netlify, Vercel o GitHub Pages, ya que ofrecen una configuración simplificada y optimizada para aplicaciones de React.
