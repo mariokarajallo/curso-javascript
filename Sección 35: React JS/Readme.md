@@ -707,3 +707,153 @@ Es importante tener en cuenta que los helpers en React no son parte de la biblio
 Mantener una buena estructura de helpers puede hacer que tu código sea más mantenible y escalable, ya que permite aislar la lógica específica en funciones reutilizables, lo que facilita las futuras modificaciones y mejoras de tu aplicación.
 
 Recuerda que los helpers son solo una herramienta adicional para facilitar el desarrollo en React y ayudarte a escribir código más limpio y organizado. No son una parte esencial de React y su uso depende de las necesidades y preferencias de tu proyecto.
+
+## 35.11. ¿Qué es useEffect? y como se utiliza
+
+### useEffect
+
+**`useEffect`** es otro hook importante en React que permite realizar efectos secundarios en componentes funcionales. Los efectos secundarios son acciones que ocurren fuera del flujo de renderizado normal, como llamadas a API, suscripciones a eventos, manipulación del DOM y más. **`useEffect`** te permite ejecutar código relacionado con estos efectos secundarios de manera controlada y segura en tus componentes.
+
+La sintaxis básica de **`useEffect`** es la siguiente:
+
+```jsx
+import React, { useEffect } from "react";
+
+function MiComponente() {
+  useEffect(() => {
+    // Código a ejecutar en el efecto secundario
+    // (se ejecuta después de cada renderizado)
+
+    return () => {
+      // Código de limpieza del efecto (opcional)
+    };
+  }, [dependencias]); // Dependencias (opcional)
+
+  return <div>Contenido del componente</div>;
+}
+
+export default MiComponente;
+```
+
+Explicación de los argumentos de **`useEffect`**:
+
+1. **`useEffect(() => { ... }, []);`**: **`useEffect`** recibe dos argumentos. El primer argumento es una función que contiene el código del efecto secundario a ejecutar. El segundo argumento es un array opcional de dependencias que especifica cuándo debe ejecutarse el efecto secundario. Si el array de dependencias está vacío (**`[]`**), el efecto secundario se ejecutará solo una vez después del primer renderizado.
+2. **`return () => { ... };`**: Dentro de la función del efecto secundario, puedes devolver una función de limpieza opcional. Esta función se ejecutará antes de que el componente sea eliminado o antes de que se ejecute el efecto secundario nuevamente si alguna de las dependencias cambia. Puedes utilizar la función de limpieza para cancelar suscripciones, limpiar temporizadores u otras tareas de limpieza necesarias.
+3. Dependencias: El array de dependencias (**`[]`** en el ejemplo) especifica qué variables o propiedades deben cambiar para que el efecto secundario se vuelva a ejecutar. Si alguna de las dependencias cambia, el efecto secundario se ejecutará nuevamente. Si omites el array de dependencias, el efecto secundario se ejecutará en cada renderizado. Si este array está vacío, el efecto se ejecutará solo una vez, después del primer renderizado. Si contiene elementos, el efecto se ejecutará cada vez que alguno de los elementos en el array cambie de valor.
+
+Ejemplo de uso de **`useEffect`**:
+
+```jsx
+import React, { useEffect, useState } from "react";
+
+function Contador() {
+  const [contador, setContador] = useState(0);
+
+  useEffect(() => {
+    console.log("El componente se montó o fue actualizado.");
+    return () => {
+      console.log("El componente se desmontó.");
+    };
+  }, [contador]);
+
+  const incrementar = () => {
+    setContador(contador + 1);
+  };
+
+  return (
+    <div>
+      <p>Contador: {contador}</p>
+      <button onClick={incrementar}>Incrementar</button>
+    </div>
+  );
+}
+
+export default Contador;
+```
+
+En este ejemplo, **`useEffect`** se utiliza para mostrar mensajes en la consola cuando el componente se monta, se actualiza o se desmonta. La función de efecto se ejecuta después de cada renderizado porque estamos pasando **`[contador]`** como dependencia.
+
+Aquí tienes la documentación detallada de cada paso del ejemplo:
+
+1. **Importar las dependencias necesarias**:
+
+   ```jsx
+   import React, { useEffect, useState } from "react";
+   ```
+
+   En esta línea, importamos las dependencias necesarias para crear componentes en React y utilizar el hook **`useEffect`** y el hook **`useState`**. **`useEffect`** se utiliza para realizar efectos secundarios, mientras que **`useState`** se utiliza para agregar estado a nuestro componente.
+
+2. **Definir el componente `Contador`**:
+
+   ```jsx
+   function Contador() {
+     // ...
+   }
+   ```
+
+   Aquí definimos el componente **`Contador`** como una función de React. Este componente será reutilizable y podrá mostrar y manejar un contador en la interfaz de usuario.
+
+3. **Agregar estado al componente utilizando el hook `useState`**:
+
+   ```jsx
+   const [contador, setContador] = useState(0);
+   ```
+
+   Con esta línea de código, utilizamos el hook **`useState`** para agregar estado al componente. Creamos una variable de estado llamada **`contador`** y una función **`setContador`** para actualizar ese estado. El valor inicial del contador se establece en **`0`**.
+
+4. **Utilizar el hook `useEffect` para definir el efecto secundario**:
+
+   ```jsx
+   useEffect(() => {
+     console.log("El componente se montó o fue actualizado.");
+     return () => {
+       console.log("El componente se desmontó.");
+     };
+   }, [contador]);
+   ```
+
+   Aquí utilizamos el hook **`useEffect`** para definir un efecto secundario. El efecto secundario es una función que se ejecutará después de que el componente se monte y cada vez que **`contador`** cambie.
+
+   Dentro del efecto secundario, se muestra un mensaje en la consola utilizando **`console.log()`**. El mensaje "El componente se montó o fue actualizado." se muestra después de que el componente se renderiza, y el mensaje "El componente se desmontó." se muestra justo antes de que el componente sea eliminado.
+
+   Además, el efecto secundario devuelve una función de limpieza (cleanup function) que se ejecutará antes de que el componente se desmonte. En este ejemplo, no se utiliza para ninguna limpieza específica, pero en casos más complejos, esta función puede usarse para cancelar suscripciones, detener temporizadores o limpiar recursos antes de que el componente sea eliminado.
+
+   La dependencia **`[contador]`** especifica que el efecto secundario solo se ejecutará nuevamente si el valor de **`contador`** cambia.
+
+5. **Definir la función `incrementar` para actualizar el estado del contador**:
+
+   ```jsx
+   const incrementar = () => {
+     setContador(contador + 1);
+   };
+   ```
+
+   Aquí definimos la función **`incrementar`** que se llamará cuando se haga clic en el botón "Incrementar". Esta función utiliza la función **`setContador`** para actualizar el estado del contador, incrementándolo en uno.
+
+6. **Renderizar la interfaz de usuario del componente**:
+
+   ```jsx
+   return (
+     <div>
+       <p>Contador: {contador}</p>
+       <button onClick={incrementar}>Incrementar</button>
+     </div>
+   );
+   ```
+
+   En esta parte del código, utilizamos el operador **`return`** para renderizar la interfaz de usuario del componente. El valor actual del contador se muestra en un párrafo, y se crea un botón que llama a la función **`incrementar`** cuando se hace clic en él.
+
+Con esta estructura, el componente **`Contador`** es funcional y se renderizará en la interfaz de usuario. Cuando hagas clic en el botón "Incrementar", el estado del contador se actualizará y se ejecutará el efecto secundario asociado al cambio del contador.
+
+Usos comunes de **`useEffect`**:
+
+- Obtener datos de una API.
+- Suscribirse a eventos del navegador.
+- Realizar operaciones de limpieza.
+- Manipular el DOM.
+- Actualizar el título de la página.
+- Gestionar animaciones y transiciones.
+
+Es importante tener en cuenta que el uso incorrecto de **`useEffect`** puede provocar efectos secundarios no deseados o ciclos de renderizado infinitos. Asegúrate de entender cómo funciona y de utilizarlo de manera adecuada según tus necesidades específicas.
+
+Recuerda leer la documentación oficial de React para obtener más detalles sobre cómo utilizar **`useEffect`** y cómo manejar casos de uso más avanzados.
