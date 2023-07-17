@@ -684,3 +684,26 @@ En este ejemplo, el componente **`Producto`** recibe tres props: **`nombre`**, *
 Recuerda que las props son de solo lectura, lo que significa que no se deben modificar directamente dentro del componente. Si necesitas mantener un estado interno en un componente, puedes utilizar el hook **`useState`** o el estado de un componente de clase para manejarlo. Los **`props`** son una forma de comunicación unidireccional, donde los datos fluyen desde el componente padre al componente hijo, y si necesitas actualizar los datos, debes hacerlo desde el componente padre y pasarlos nuevamente a través de los **`props`**.
 
 El uso de props en React es una forma efectiva de pasar datos y configuraciones entre componentes, lo que hace que tu código sea más modular y fácil de mantener. Puedes utilizar props para personalizar la apariencia y el comportamiento de tus componentes, así como para reutilizarlos en diferentes partes de tu aplicación.
+
+## 35.10 Helpers
+
+### Helpers
+
+En el contexto de React, los "helpers" son funciones o utilidades que se utilizan para realizar tareas específicas y facilitar el desarrollo de componentes y aplicaciones. Estas funciones auxiliares no están vinculadas directamente a la lógica del componente, sino que se utilizan para mejorar la legibilidad, reusabilidad y eficiencia del código.
+
+Los helpers en React pueden abordar diferentes aspectos, como la manipulación de datos, el formateo de contenido, la validación, el cálculo, el manejo de eventos, entre otros. Al organizar estas funciones en helpers, se pueden utilizar en múltiples lugares de la aplicación y mantener un código más limpio y modular.
+
+Aquí tienes algunos ejemplos de helpers comunes en React:
+
+1. **Formateo de fechas**: Un helper que toma una fecha en formato de objeto o cadena y devuelve la fecha formateada en una presentación más legible, como "dd/mm/aaaa" o "hh:mm AM/PM".
+2. **Validación de formularios**: Un helper que se utiliza para verificar la validez de los datos ingresados en un formulario y devolver mensajes de error cuando es necesario.
+3. **Cálculos matemáticos**: Un helper que realiza cálculos matemáticos complejos o fórmulas específicas que se utilizan en varios componentes.
+4. **Manejo de eventos**: Un helper que encapsula el manejo de eventos comunes, como el debouncing (retardo) o throttling (limitación) de eventos para mejorar el rendimiento.
+5. **Filtrado y búsqueda de datos**: Un helper que realiza filtrado y búsqueda de datos en listas o arreglos, según criterios específicos. Los helpers pueden ser utilizados para encapsular las llamadas a API y gestionar la comunicación con servicios externos. Esto ayuda a mantener separada la lógica de acceso a datos de los componentes de presentación.
+6. **API requests**: Un helper que encapsula las llamadas a API y gestiona la respuesta y el manejo de errores de manera consistente. Los helpers pueden ser utilizados para encapsular las llamadas a API y gestionar la comunicación con servicios externos. Esto ayuda a mantener separada la lógica de acceso a datos de los componentes de presentación.
+
+Es importante tener en cuenta que los helpers en React no son parte de la biblioteca de React en sí, sino que son funciones o utilidades adicionales creadas por los desarrolladores para mejorar la organización y la reutilización del código. Puedes organizar los helpers en archivos separados y luego importarlos en los componentes donde los necesites.
+
+Mantener una buena estructura de helpers puede hacer que tu código sea más mantenible y escalable, ya que permite aislar la lógica específica en funciones reutilizables, lo que facilita las futuras modificaciones y mejoras de tu aplicación.
+
+Recuerda que los helpers son solo una herramienta adicional para facilitar el desarrollo en React y ayudarte a escribir código más limpio y organizado. No son una parte esencial de React y su uso depende de las necesidades y preferencias de tu proyecto.
