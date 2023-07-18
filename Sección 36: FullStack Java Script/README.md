@@ -45,3 +45,36 @@ En un entorno full stack con JavaScript, el backend se construye utilizando tecn
 En resumen, el backend full stack con JavaScript es la parte de la aplicación que se ejecuta en el servidor y se encarga de la lógica de negocio, la gestión de datos y la exposición de servicios a través de una API. Se construye utilizando Node.js y otras herramientas basadas en JavaScript para proporcionar un entorno completo en el desarrollo de aplicaciones web.
 
 Tener habilidades en ambos lados de la pila (front-end y back-end) permite a los desarrolladores full stack de JavaScript crear aplicaciones completas y funcionales desde el inicio hasta el despliegue, lo que puede ser especialmente útil en proyectos más pequeños o en empresas emergentes donde los recursos pueden ser limitados. También les permite tener una visión más completa de cómo funciona una aplicación en su conjunto. Sin embargo, es importante tener en cuenta que el desarrollo full stack puede ser un campo amplio y en constante evolución, por lo que los desarrolladores full stack suelen estar en constante aprendizaje para mantenerse al día con las últimas tecnologías y prácticas.
+
+## 36.2. Herramientas FullStack
+
+Para desarrollar proyectos full stack, es necesario contar con un conjunto de herramientas que abarquen tanto el frontend como el backend de la aplicación. A continuación, te presento una lista de herramientas esenciales para proyectos full stack:
+
+**Frontend:**
+
+1. **Editor de código**: Un buen editor de código es fundamental para el desarrollo frontend. Algunas opciones populares son Visual Studio Code, Sublime Text o Atom.
+2. **HTML, CSS y JavaScript**: Estas son las tecnologías básicas para construir la interfaz de usuario y la lógica interactiva en el frontend.
+3. **Framework JavaScript**: Utilizar un framework como React, Angular o Vue.js puede ayudar a agilizar el desarrollo, proporcionar estructura y mejorar el rendimiento de la aplicación.
+4. **Gestor de paquetes**: Herramientas como npm (Node Package Manager) o Yarn se utilizan para gestionar las dependencias y paquetes de JavaScript necesarios para el proyecto.
+5. **Sistema de control de versiones**: Utilizar Git para realizar un seguimiento de los cambios en el código y colaborar con otros desarrolladores.
+6. **Diseño responsivo**: Frameworks CSS como Bootstrap o Material-UI pueden facilitar el diseño responsivo y la creación de interfaces atractivas.
+7. **Pruebas y depuración**: Herramientas como Jest, Enzyme o React Testing Library pueden ser útiles para realizar pruebas unitarias y de integración en el frontend.
+
+**Backend:**
+
+1. **Node.js**: Como mencionamos anteriormente, Node.js es una plataforma esencial para ejecutar código JavaScript en el servidor.
+2. **Framework web**: Utilizar un framework como Express.js puede ayudar a crear servidores web y API RESTful de forma más rápida y sencilla.
+3. **Base de datos**: Seleccionar una base de datos adecuada para el proyecto, como MySQL, PostgreSQL, MongoDB u otras bases de datos NoSQL.
+4. **ORM (Object-Relational Mapping)** o ODM (Object-Document Mapping): Estas herramientas facilitan la interacción con la base de datos mediante el uso de objetos y clases en lugar de consultas SQL directas. Ejemplos incluyen Sequelize para bases de datos relacionales o Mongoose para MongoDB.
+5. **Autenticación y seguridad**: Bibliotecas como Passport.js pueden ayudar a implementar la autenticación de usuarios y otras medidas de seguridad.
+6. **Middleware**: Utilizar middleware para procesar solicitudes y respuestas en el servidor y realizar tareas como la autenticación, el registro de errores, etc.
+7. **Pruebas automatizadas**: Herramientas como Mocha, Chai o Jest se utilizan para realizar pruebas unitarias y de integración en el backend.
+
+**Despliegue y gestión:**
+
+1. **Servidor web**: Un servidor como Nginx o Apache para alojar la aplicación en producción.
+2. **Plataforma en la nube**: Servicios como AWS, Google Cloud Platform o Microsoft Azure para desplegar la aplicación en la nube.
+3. **Contenedores**: Utilizar Docker para crear y gestionar contenedores, lo que facilita el despliegue y la escalabilidad.
+4. **Gestor de procesos**: Utilizar herramientas como PM2 para gestionar y supervisar los procesos de Node.js en producción.
+
+Estas son algunas de las herramientas fundamentales que un desarrollador necesita para proyectos full stack con JavaScript. Es importante tener en cuenta que la elección de herramientas puede variar según el tipo de proyecto, los requisitos específicos y las preferencias del equipo de desarrollo.
