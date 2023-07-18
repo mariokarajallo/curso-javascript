@@ -78,3 +78,85 @@ Para desarrollar proyectos full stack, es necesario contar con un conjunto de he
 4. **Gestor de procesos**: Utilizar herramientas como PM2 para gestionar y supervisar los procesos de Node.js en producción.
 
 Estas son algunas de las herramientas fundamentales que un desarrollador necesita para proyectos full stack con JavaScript. Es importante tener en cuenta que la elección de herramientas puede variar según el tipo de proyecto, los requisitos específicos y las preferencias del equipo de desarrollo.
+
+## 36.3. Creando y Conectando Base de datos para el backend
+
+### Mongo DB Atlas & Mongo DB Compass
+
+#### **MongoDB Atlas:**
+
+MongoDB Atlas es un servicio de base de datos gestionado en la nube proporcionado por MongoDB, Inc. Es una plataforma en la nube que te permite crear, configurar y escalar clústeres de bases de datos MongoDB sin la necesidad de gestionar la infraestructura subyacente. Con MongoDB Atlas, puedes implementar y alojar tus bases de datos MongoDB en la nube de diferentes proveedores, como AWS, Google Cloud o Azure.
+
+#### **MongoDB Compass:**
+
+MongoDB Compass es una interfaz gráfica de usuario (GUI) que te permite interactuar y administrar bases de datos MongoDB de manera más visual y sencilla. Es una herramienta de escritorio que se instala en tu máquina local y te permite explorar, consultar y visualizar los datos almacenados en tus bases de datos MongoDB.
+
+MongoDB Compass se utiliza generalmente durante el desarrollo y la administración de bases de datos MongoDB en tu entorno local o en una red local. Puedes utilizarlo para realizar consultas, insertar, actualizar y eliminar datos, analizar la estructura de las colecciones y obtener información sobre el rendimiento de las consultas.
+
+**Para empezar a utilizar MongoDB Atlas y conectar con nuestro gestor de base de datos Mongo DB compass, sigue estos pasos:**
+
+**Paso 1: Crear una cuenta en MongoDB Atlas**
+Accede al sitio web de MongoDB Atlas en https://www.mongodb.com/cloud/atlas y crea una cuenta si aún no tienes una. Puedes registrarte utilizando tu correo electrónico u otras opciones de inicio de sesión.
+
+**Paso 2: Crear un clúster**
+Una vez que hayas iniciado sesión en MongoDB Atlas, puedes crear un nuevo clúster. Un clúster es un conjunto de servidores de bases de datos que trabajan juntos para proporcionar alta disponibilidad, escalabilidad y replicación de datos.
+
+- Haz clic en el botón "Create a New Cluster" o "Build a Cluster".
+
+  ![create a new cluster](img/section-36-0.png)
+
+- Selecciona una opción del proveedor de la nube (como AWS, Google Cloud o Azure) y la región geográfica donde deseas que se hospede el clúster.
+
+  ![select aws](img/section-36-1.png)
+
+- Configura las opciones del clúster, como el tamaño de las instancias, la versión de MongoDB y las opciones de seguridad.
+
+**Paso 3: Configurar la seguridad**
+Es esencial asegurar tu clúster de MongoDB Atlas. Configura las opciones de seguridad, como agregar direcciones IP a la lista de acceso, crear usuarios y contraseñas, y habilitar la autenticación y el cifrado de datos.
+
+![configurar seguridad cluster](img/section-36-2.png)
+
+Recuerda que MongoDB Atlas es un servicio en la nube, lo que significa que deberás pagar por el uso del clúster según el plan que elijas (free hasta 500 mb). Puedes encontrar más detalles sobre los precios y las opciones de configuración en el sitio web de MongoDB Atlas.
+
+**Paso 4: Conectarse a la base de datos**
+Una vez que el clúster está configurado y en funcionamiento, puedes conectar con el gestor mongo db compass a la base de datos de MongoDB Atlas utilizando la cadena de conexión proporcionada en la consola de administración de MongoDB Atlas.
+
+Obtener la cadena de conexión de MongoDB Atlas
+En el panel de MongoDB Atlas, selecciona tu clúster y haz clic en el botón "Connect" (Conectar). A continuación, elige la opción que puedas utilizar la herramienta compass.
+
+Esto te mostrará la cadena de conexión que debes utilizar para conectarte a tu clúster desde una aplicación cliente como MongoDB Compass, no olvides tener instalado la aplicacion en tu sistema.
+
+![conectar a mongo db compass 1](img/section-36-3.png)
+
+![conectar a mongo db compass 2](img/section-36-4.png)
+
+![conectar a mongo db compass 3](img/section-36-5.png)
+
+**Paso 5: Copiar la cadena de conexión**
+
+Haz clic en el botón "Copy" (Copiar) junto a la cadena de conexión para copiarla al portapapeles.
+
+**Paso 6: Abrir MongoDB Compass**
+Abre MongoDB Compass en tu máquina local si aún no lo has hecho.
+
+**Paso 7: Conectar con MongoDB Compass**
+
+- Al abrir MongoDB Compass, selecciona la opción "Connect" (Conectar) en la pantalla principal.
+
+  ![conectar nuevo cluster a mongo db compass](img/section-36-6.png)
+
+- En la ventana emergente "New Connection" (Nueva conexión), selecciona la pestaña "Connect using MongoDB URI" (Conectar utilizando URI de MongoDB).
+- Pega la cadena de conexión que copiaste en el paso 5 en el campo "MongoDB Connection URI".
+- Haz clic en el botón "Connect" (Conectar) para establecer la conexión con tu clúster de MongoDB Atlas.
+
+  ![crear nueva conexion de base de datos](img/section-36-7.png)
+
+**Paso 8: Ingresar credenciales (si es necesario)**
+Si tu clúster de MongoDB Atlas está configurado con autenticación, MongoDB Compass te pedirá ingresar las credenciales (usuario y contraseña) antes de establecer la conexión.
+
+Paso 9: Seleccionar la base de datos
+Una vez conectado, MongoDB Compass te mostrará una lista de todas las bases de datos disponibles en tu clúster. Selecciona o crea la base de datos con la que deseas trabajar haciendo clic en su nombre, por defecto al iniciar aparecerá la base de datos admin y local.
+
+![seleccionar y crear base de datos](img/section-36-8.png)
+
+¡Listo! Ahora estás conectado a tu clúster de MongoDB Atlas desde MongoDB Compass, y puedes explorar, consultar y administrar tus bases de datos de manera más visual y amigable utilizando la interfaz gráfica de MongoDB Compass.
